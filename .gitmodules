@@ -4,3 +4,6 @@
 [submodule "Frameworks/RestKit"]
 	path = Frameworks/RestKit
 	url = https://github.com/RestKit/RestKit.git
+[submodule "Frameworks/RestKit+Blocks"]
+	path = Frameworks/RestKit+Blocks
+	url = git://gist.github.com/1000954.git
