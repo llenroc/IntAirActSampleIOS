@@ -1,3 +1,6 @@
 [submodule "Frameworks/RoutingHTTPServer"]
 	path = Frameworks/RoutingHTTPServer
 	url = https://github.com/mattstevens/RoutingHTTPServer.git
+[submodule "Frameworks/RestKit"]
+	path = Frameworks/RestKit
+	url = https://github.com/RestKit/RestKit.git
