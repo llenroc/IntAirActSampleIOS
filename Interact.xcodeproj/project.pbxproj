@@ -47,6 +47,9 @@
 		2779AB831517A9F700AE4EE6 /* RouteResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2779AB7B1517A9F700AE4EE6 /* RouteResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2779AB841517A9F700AE4EE6 /* RoutingConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2779AB7D1517A9F700AE4EE6 /* RoutingConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2779AB851517A9F700AE4EE6 /* RoutingHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2779AB7F1517A9F700AE4EE6 /* RoutingHTTPServer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		2779AB9A1517ACD100AE4EE6 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB911517AC7200AE4EE6 /* libRestKit.a */; };
+		2779AB9C1517ACDE00AE4EE6 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9B1517ACDE00AE4EE6 /* libxml2.dylib */; };
+		2779AB9E1517ACE400AE4EE6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9D1517ACE400AE4EE6 /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +59,41 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2779AAF01517A8B200AE4EE6;
 			remoteInfo = Interact;
+		};
+		2779AB901517AC7200AE4EE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2779AB861517AC7100AE4EE6 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160D1614564E810060A5C5;
+			remoteInfo = RestKit;
+		};
+		2779AB921517AC7200AE4EE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2779AB861517AC7100AE4EE6 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160D2614564E820060A5C5;
+			remoteInfo = RestKitTests;
+		};
+		2779AB941517AC7200AE4EE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2779AB861517AC7100AE4EE6 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160E62145651060060A5C5;
+			remoteInfo = RestKitFramework;
+		};
+		2779AB961517AC7200AE4EE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2779AB861517AC7100AE4EE6 /* RestKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25160E78145651060060A5C5;
+			remoteInfo = RestKitFrameworkTests;
+		};
+		2779AB981517ACC900AE4EE6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2779AB861517AC7100AE4EE6 /* RestKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 25160D1514564E810060A5C5;
+			remoteInfo = RestKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -135,6 +173,9 @@
 		2779AB7D1517A9F700AE4EE6 /* RoutingConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoutingConnection.m; sourceTree = "<group>"; };
 		2779AB7E1517A9F700AE4EE6 /* RoutingHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoutingHTTPServer.h; sourceTree = "<group>"; };
 		2779AB7F1517A9F700AE4EE6 /* RoutingHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoutingHTTPServer.m; sourceTree = "<group>"; };
+		2779AB861517AC7100AE4EE6 /* RestKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RestKit.xcodeproj; path = Frameworks/RestKit/RestKit.xcodeproj; sourceTree = "<group>"; };
+		2779AB9B1517ACDE00AE4EE6 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		2779AB9D1517ACE400AE4EE6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,9 +184,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2779AB721517A9AE00AE4EE6 /* CFNetwork.framework in Frameworks */,
-				2779AAF61517A8B200AE4EE6 /* UIKit.framework in Frameworks */,
-				2779AAF81517A8B200AE4EE6 /* Foundation.framework in Frameworks */,
+				2779AB9E1517ACE400AE4EE6 /* CoreData.framework in Frameworks */,
 				2779AAFA1517A8B200AE4EE6 /* CoreGraphics.framework in Frameworks */,
+				2779AAF81517A8B200AE4EE6 /* Foundation.framework in Frameworks */,
+				2779AB9A1517ACD100AE4EE6 /* libRestKit.a in Frameworks */,
+				2779AB9C1517ACDE00AE4EE6 /* libxml2.dylib in Frameworks */,
+				2779AAF61517A8B200AE4EE6 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,8 +232,11 @@
 				2779AB2D1517A99D00AE4EE6 /* CocoaAsyncSocket */,
 				2779AB451517A9A300AE4EE6 /* CocoaHTTPServer */,
 				2779AB311517A99D00AE4EE6 /* CocoaLumberjack */,
+				2779AB9D1517ACE400AE4EE6 /* CoreData.framework */,
 				2779AAF91517A8B200AE4EE6 /* CoreGraphics.framework */,
 				2779AAF71517A8B200AE4EE6 /* Foundation.framework */,
+				2779AB9B1517ACDE00AE4EE6 /* libxml2.dylib */,
+				2779AB861517AC7100AE4EE6 /* RestKit.xcodeproj */,
 				2779AB731517A9F700AE4EE6 /* RoutingHTTPServer */,
 				2779AB161517A8B200AE4EE6 /* SenTestingKit.framework */,
 				2779AAF51517A8B200AE4EE6 /* UIKit.framework */,
@@ -343,6 +390,17 @@
 			path = Frameworks/RoutingHTTPServer/Source;
 			sourceTree = "<group>";
 		};
+		2779AB871517AC7100AE4EE6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2779AB911517AC7200AE4EE6 /* libRestKit.a */,
+				2779AB931517AC7200AE4EE6 /* RestKitTests.octest */,
+				2779AB951517AC7200AE4EE6 /* RestKit.framework */,
+				2779AB971517AC7200AE4EE6 /* RestKitFrameworkTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -357,6 +415,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				2779AB991517ACC900AE4EE6 /* PBXTargetDependency */,
 			);
 			name = Interact;
 			productName = Interact;
@@ -402,6 +461,12 @@
 			mainGroup = 2779AAE61517A8B200AE4EE6;
 			productRefGroup = 2779AAF21517A8B200AE4EE6 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 2779AB871517AC7100AE4EE6 /* Products */;
+					ProjectRef = 2779AB861517AC7100AE4EE6 /* RestKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				2779AAF01517A8B200AE4EE6 /* Interact */,
@@ -409,6 +474,37 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		2779AB911517AC7200AE4EE6 /* libRestKit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRestKit.a;
+			remoteRef = 2779AB901517AC7200AE4EE6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2779AB931517AC7200AE4EE6 /* RestKitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RestKitTests.octest;
+			remoteRef = 2779AB921517AC7200AE4EE6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2779AB951517AC7200AE4EE6 /* RestKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = RestKit.framework;
+			remoteRef = 2779AB941517AC7200AE4EE6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2779AB971517AC7200AE4EE6 /* RestKitFrameworkTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RestKitFrameworkTests.octest;
+			remoteRef = 2779AB961517AC7200AE4EE6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2779AAEF1517A8B200AE4EE6 /* Resources */ = {
@@ -498,6 +594,11 @@
 			isa = PBXTargetDependency;
 			target = 2779AAF01517A8B200AE4EE6 /* Interact */;
 			targetProxy = 2779AB1A1517A8B200AE4EE6 /* PBXContainerItemProxy */;
+		};
+		2779AB991517ACC900AE4EE6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RestKit;
+			targetProxy = 2779AB981517ACC900AE4EE6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
