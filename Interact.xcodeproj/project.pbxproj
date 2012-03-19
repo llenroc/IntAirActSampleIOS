@@ -760,6 +760,7 @@
 				2779AB291517A8B200AE4EE6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2779AB2A1517A8B200AE4EE6 /* Build configuration list for PBXNativeTarget "InteractTests" */ = {
 			isa = XCConfigurationList;
@@ -768,6 +769,7 @@
 				2779AB2C1517A8B200AE4EE6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
