@@ -38,21 +38,21 @@
 		2779AAF51517A8B200AE4EE6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2779AAF71517A8B200AE4EE6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2779AAF91517A8B200AE4EE6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		2779AAFD1517A8B200AE4EE6 /* Interact-Info.plist */ = {isa = PBXFileReference; path = "Interact-Info.plist"; sourceTree = "<group>"; };
+		2779AAFD1517A8B200AE4EE6 /* Interact-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Interact-Info.plist"; sourceTree = "<group>"; };
 		2779AAFF1517A8B200AE4EE6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2779AB011517A8B200AE4EE6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2779AB031517A8B200AE4EE6 /* Interact-Prefix.pch */ = {isa = PBXFileReference; path = "Interact-Prefix.pch"; sourceTree = "<group>"; };
-		2779AB041517A8B200AE4EE6 /* IAAppDelegate.h */ = {isa = PBXFileReference; path = IAAppDelegate.h; sourceTree = "<group>"; };
+		2779AB031517A8B200AE4EE6 /* Interact-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Interact-Prefix.pch"; sourceTree = "<group>"; };
+		2779AB041517A8B200AE4EE6 /* IAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IAAppDelegate.h; sourceTree = "<group>"; };
 		2779AB051517A8B200AE4EE6 /* IAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IAAppDelegate.m; sourceTree = "<group>"; };
 		2779AB081517A8B200AE4EE6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		2779AB0B1517A8B200AE4EE6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		2779AB0D1517A8B200AE4EE6 /* IAViewController.h */ = {isa = PBXFileReference; path = IAViewController.h; sourceTree = "<group>"; };
+		2779AB0D1517A8B200AE4EE6 /* IAViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IAViewController.h; sourceTree = "<group>"; };
 		2779AB0E1517A8B200AE4EE6 /* IAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IAViewController.m; sourceTree = "<group>"; };
 		2779AB151517A8B200AE4EE6 /* InteractTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InteractTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2779AB161517A8B200AE4EE6 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		2779AB1E1517A8B200AE4EE6 /* InteractTests-Info.plist */ = {isa = PBXFileReference; path = "InteractTests-Info.plist"; sourceTree = "<group>"; };
+		2779AB1E1517A8B200AE4EE6 /* InteractTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "InteractTests-Info.plist"; sourceTree = "<group>"; };
 		2779AB201517A8B200AE4EE6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2779AB221517A8B200AE4EE6 /* InteractTests.h */ = {isa = PBXFileReference; path = InteractTests.h; sourceTree = "<group>"; };
+		2779AB221517A8B200AE4EE6 /* InteractTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InteractTests.h; sourceTree = "<group>"; };
 		2779AB231517A8B200AE4EE6 /* InteractTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InteractTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
