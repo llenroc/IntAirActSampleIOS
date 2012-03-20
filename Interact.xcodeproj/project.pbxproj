@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		2719BE931518EDCF00B12461 /* IAImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BE921518EDCF00B12461 /* IAImage.m */; };
 		2719BE961518EEEA00B12461 /* IAImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BE951518EEEA00B12461 /* IAImageViewController.m */; };
-		2719BEA31518F14300B12461 /* InteractImageServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BEA01518F14300B12461 /* InteractImageServer.m */; };
-		2719BEA41518F14300B12461 /* InteractImageServerMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BEA21518F14300B12461 /* InteractImageServerMapper.m */; };
+		2719BEA31518F14300B12461 /* IAImageServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BEA01518F14300B12461 /* IAImageServer.m */; };
+		2719BEA41518F14300B12461 /* IAImageServerMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BEA21518F14300B12461 /* IAImageServerMapper.m */; };
 		273166011517BD14005439AE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166001517BD14005439AE /* MobileCoreServices.framework */; };
 		273166031517BD1F005439AE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166021517BD1F005439AE /* SystemConfiguration.framework */; };
 		273166051517BD2F005439AE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166041517BD2F005439AE /* Security.framework */; };
@@ -111,10 +111,10 @@
 		2719BE921518EDCF00B12461 /* IAImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImage.m; sourceTree = "<group>"; };
 		2719BE941518EEEA00B12461 /* IAImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageViewController.h; sourceTree = "<group>"; };
 		2719BE951518EEEA00B12461 /* IAImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageViewController.m; sourceTree = "<group>"; };
-		2719BE9F1518F14300B12461 /* InteractImageServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractImageServer.h; sourceTree = "<group>"; };
-		2719BEA01518F14300B12461 /* InteractImageServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractImageServer.m; sourceTree = "<group>"; };
-		2719BEA11518F14300B12461 /* InteractImageServerMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractImageServerMapper.h; sourceTree = "<group>"; };
-		2719BEA21518F14300B12461 /* InteractImageServerMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractImageServerMapper.m; sourceTree = "<group>"; };
+		2719BE9F1518F14300B12461 /* IAImageServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageServer.h; sourceTree = "<group>"; };
+		2719BEA01518F14300B12461 /* IAImageServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageServer.m; sourceTree = "<group>"; };
+		2719BEA11518F14300B12461 /* IAImageServerMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; path = IAImageServerMapper.h; sourceTree = "<group>"; };
+		2719BEA21518F14300B12461 /* IAImageServerMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageServerMapper.m; sourceTree = "<group>"; };
 		273166001517BD14005439AE /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		273166021517BD1F005439AE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		273166041517BD2F005439AE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -262,10 +262,10 @@
 		2719BEA71518F1AA00B12461 /* Server */ = {
 			isa = PBXGroup;
 			children = (
-				2719BE9F1518F14300B12461 /* InteractImageServer.h */,
-				2719BEA01518F14300B12461 /* InteractImageServer.m */,
-				2719BEA11518F14300B12461 /* InteractImageServerMapper.h */,
-				2719BEA21518F14300B12461 /* InteractImageServerMapper.m */,
+				2719BE9F1518F14300B12461 /* IAImageServer.h */,
+				2719BEA01518F14300B12461 /* IAImageServer.m */,
+				2719BEA11518F14300B12461 /* IAImageServerMapper.h */,
+				2719BEA21518F14300B12461 /* IAImageServerMapper.m */,
 			);
 			name = Server;
 			sourceTree = "<group>";
@@ -646,8 +646,8 @@
 				273166331517D07A005439AE /* IADevice.m in Sources */,
 				2719BE931518EDCF00B12461 /* IAImage.m in Sources */,
 				2719BE961518EEEA00B12461 /* IAImageViewController.m in Sources */,
-				2719BEA31518F14300B12461 /* InteractImageServer.m in Sources */,
-				2719BEA41518F14300B12461 /* InteractImageServerMapper.m in Sources */,
+				2719BEA31518F14300B12461 /* IAImageServer.m in Sources */,
+				2719BEA41518F14300B12461 /* IAImageServerMapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
