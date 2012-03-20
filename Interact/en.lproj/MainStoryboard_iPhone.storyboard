@@ -104,17 +104,26 @@
             </objects>
             <point key="canvasLocation" x="1189" y="-109"/>
         </scene>
-        <!--View Controller-->
+        <!--Image View Controller-->
         <scene sceneID="op2-2Z-LsH">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V82-W4-r3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="gN0-cx-H8O" sceneMemberID="viewController">
+                <viewController id="gN0-cx-H8O" customClass="IAImageViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WEV-dk-Q8a">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="Pr7-M5-8lf">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="166-y1-lyu"/>
+                    <connections>
+                        <outlet property="imageView" destination="Pr7-M5-8lf" id="lwl-wp-c9Y"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="1657" y="-109"/>
@@ -138,6 +147,20 @@
             <point key="canvasLocation" x="109" y="-109"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="IADeviceTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IADeviceTableViewController.h"/>
+        </class>
+        <class className="IAImageTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IAImageTableViewController.h"/>
+        </class>
+        <class className="IAImageViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IAImageViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
