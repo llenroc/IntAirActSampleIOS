@@ -269,13 +269,13 @@
 				2779AB051517A8B200AE4EE6 /* IAAppDelegate.m */,
 				2779AB071517A8B200AE4EE6 /* MainStoryboard_iPhone.storyboard */,
 				2779AB0A1517A8B200AE4EE6 /* MainStoryboard_iPad.storyboard */,
-				2779AAFC1517A8B200AE4EE6 /* Supporting Files */,
 				2731662B1517CFF4005439AE /* IADeviceTableViewController.h */,
 				2731662C1517CFF4005439AE /* IADeviceTableViewController.m */,
 				2731662E1517D03C005439AE /* IAImageTableViewController.h */,
 				2731662F1517D03C005439AE /* IAImageTableViewController.m */,
 				273166311517D07A005439AE /* IADevice.h */,
 				273166321517D07A005439AE /* IADevice.m */,
+				2779AAFC1517A8B200AE4EE6 /* Supporting Files */,
 			);
 			path = Interact;
 			sourceTree = "<group>";
