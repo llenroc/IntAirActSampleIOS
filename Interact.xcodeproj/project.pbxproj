@@ -10,6 +10,9 @@
 		273166011517BD14005439AE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166001517BD14005439AE /* MobileCoreServices.framework */; };
 		273166031517BD1F005439AE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166021517BD1F005439AE /* SystemConfiguration.framework */; };
 		273166051517BD2F005439AE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166041517BD2F005439AE /* Security.framework */; };
+		2731662D1517CFF4005439AE /* IADeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2731662C1517CFF4005439AE /* IADeviceTableViewController.m */; };
+		273166301517D03C005439AE /* IAImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2731662F1517D03C005439AE /* IAImageTableViewController.m */; };
+		273166331517D07A005439AE /* IADevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 273166321517D07A005439AE /* IADevice.m */; };
 		2779AAF61517A8B200AE4EE6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AAF51517A8B200AE4EE6 /* UIKit.framework */; };
 		2779AAF81517A8B200AE4EE6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AAF71517A8B200AE4EE6 /* Foundation.framework */; };
 		2779AAFA1517A8B200AE4EE6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AAF91517A8B200AE4EE6 /* CoreGraphics.framework */; };
@@ -103,6 +106,12 @@
 		273166001517BD14005439AE /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		273166021517BD1F005439AE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		273166041517BD2F005439AE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		2731662B1517CFF4005439AE /* IADeviceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IADeviceTableViewController.h; sourceTree = "<group>"; };
+		2731662C1517CFF4005439AE /* IADeviceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IADeviceTableViewController.m; sourceTree = "<group>"; };
+		2731662E1517D03C005439AE /* IAImageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageTableViewController.h; sourceTree = "<group>"; };
+		2731662F1517D03C005439AE /* IAImageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageTableViewController.m; sourceTree = "<group>"; };
+		273166311517D07A005439AE /* IADevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IADevice.h; sourceTree = "<group>"; };
+		273166321517D07A005439AE /* IADevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IADevice.m; sourceTree = "<group>"; };
 		2779AAF11517A8B200AE4EE6 /* Interact.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Interact.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2779AAF51517A8B200AE4EE6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2779AAF71517A8B200AE4EE6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -261,6 +270,12 @@
 				2779AB071517A8B200AE4EE6 /* MainStoryboard_iPhone.storyboard */,
 				2779AB0A1517A8B200AE4EE6 /* MainStoryboard_iPad.storyboard */,
 				2779AAFC1517A8B200AE4EE6 /* Supporting Files */,
+				2731662B1517CFF4005439AE /* IADeviceTableViewController.h */,
+				2731662C1517CFF4005439AE /* IADeviceTableViewController.m */,
+				2731662E1517D03C005439AE /* IAImageTableViewController.h */,
+				2731662F1517D03C005439AE /* IAImageTableViewController.m */,
+				273166311517D07A005439AE /* IADevice.h */,
+				273166321517D07A005439AE /* IADevice.m */,
 			);
 			path = Interact;
 			sourceTree = "<group>";
@@ -582,6 +597,9 @@
 				2779AB831517A9F700AE4EE6 /* RouteResponse.m in Sources */,
 				2779AB841517A9F700AE4EE6 /* RoutingConnection.m in Sources */,
 				2779AB851517A9F700AE4EE6 /* RoutingHTTPServer.m in Sources */,
+				2731662D1517CFF4005439AE /* IADeviceTableViewController.m in Sources */,
+				273166301517D03C005439AE /* IAImageTableViewController.m in Sources */,
+				273166331517D07A005439AE /* IADevice.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
