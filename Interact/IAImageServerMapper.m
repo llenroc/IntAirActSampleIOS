@@ -9,7 +9,7 @@
 #import "IAImageServerMapper.h"
 #import "RoutingHTTPServer.h"
 
-@interface InteractImageServerMapper() {
+@interface IAImageServerMapper() {
     RoutingHTTPServer *httpServer;
 }
 
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation InteractImageServerMapper
+@implementation IAImageServerMapper
 
 @synthesize imageServer = _imageServer;
 @synthesize serializationMapping = _serializationMapping;
@@ -61,32 +61,32 @@
 	[httpServer setDocumentRoot:webPath];
     
     [httpServer handleMethod:@"GET" withPath:@"/images" block:^(RouteRequest *request, RouteResponse *response) {
-        DDLogInfo(@"%@", request);
+        DDLogVerbose(@"%@", request);
         [response setHeader:@"Content-Type" value:@"application/json"];
         response.statusCode = 200;
         [response respondWithString:@"{\"images\":[{\"id\": 1,\"name\": \"image\",\"src\": \"https://encrypted.google.com/images/srpr/logo3w.png\"}]}"];
     }];
     
     [httpServer handleMethod:@"POST" withPath:@"/images" block:^(RouteRequest *request, RouteResponse *response) {
-        DDLogInfo(@"%@", request);
+        DDLogVerbose(@"%@", request);
         [response setHeader:@"Content-Type" value:@"application/json"];
         response.statusCode = 201;
     }];
     
     [httpServer handleMethod:@"PUT" withPath:@"/images/:id" block:^(RouteRequest *request, RouteResponse *response) {
-        DDLogInfo(@"%@", request);
+        DDLogVerbose(@"%@", request);
         [response setHeader:@"Content-Type" value:@"application/json"];
         response.statusCode = 201;
     }];
     
     [httpServer handleMethod:@"DELETE" withPath:@"/images/:id" block:^(RouteRequest *request, RouteResponse *response) {
-        DDLogInfo(@"%@", request);
+        DDLogVerbose(@"%@", request);
         [response setHeader:@"Content-Type" value:@"application/json"];
         response.statusCode = 200;
     }];
     
     [httpServer handleMethod:@"GET" withPath:@"/images/:id" block:^(RouteRequest *request, RouteResponse *response) {
-        // DDLogInfo(@"%@", request);
+        DDLogVerbose(@"%@", request);
         [response setHeader:@"Content-Type" value:@"application/json"];
         response.statusCode = 200;
         
@@ -108,7 +108,7 @@
     }];
     
     [httpServer handleMethod:@"PUT" withPath:@"/images/:id/display" block:^(RouteRequest *request, RouteResponse *response) {
-        DDLogInfo(@"%@", request);
+        DDLogVerbose(@"%@", request);
         [response setHeader:@"Content-Type" value:@"application/json"];
         response.statusCode = 201;
     }];

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "IAImage.h"
 
-@interface InteractImageServer : NSObject
+@interface IAImageServer : NSObject
 - (NSArray*)getImages;
 - (IAImage*)getImage: (NSNumber*) identifier;
 @end

@@ -10,9 +10,9 @@
 #import <RestKit/RestKit.h>
 #import "IAImageServer.h"
 
-@interface InteractImageServerMapper : NSObject
+@interface IAImageServerMapper : NSObject
 
-@property (strong, nonatomic) InteractImageServer* imageServer;
+@property (strong, nonatomic) IAImageServer* imageServer;
 
 - (void)startServer;
 

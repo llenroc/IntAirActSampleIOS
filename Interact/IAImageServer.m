@@ -8,7 +8,7 @@
 
 #import "IAImageServer.h"
 
-@implementation InteractImageServer
+@implementation IAImageServer
 
 - (NSArray*)getImages {
     NSMutableArray* images = [[NSMutableArray init] alloc];

@@ -7,6 +7,13 @@
 //
 
 #import "IAAppDelegate.h"
+#import "IAImageServerMapper.h"
+
+@interface IAAppDelegate() {
+    IAImageServerMapper *imageServerMapper;
+}
+
+@end
 
 @implementation IAAppDelegate
 
@@ -14,7 +21,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    imageServerMapper = [[IAImageServerMapper alloc] init];
+    [imageServerMapper startServer];
+    imageServerMapper.imageServer = [[IAImageServer alloc] init];
     
     // Override point for customization after application launch.
     return YES;
