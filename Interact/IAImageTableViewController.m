@@ -8,6 +8,7 @@
 
 #import "IAImageTableViewController.h"
 #import "IAImage.h"
+#import "IAImageLoader.h"
 
 @interface IAImageTableViewController ()
 
@@ -69,6 +70,19 @@
 {
     _device = device;
     self.title = device.name;
+    [IAImageLoader getImages:^(NSArray * images) {
+        DDLogInfo(@"Loaded it %@", images);
+        self.images = images;
+    } fromDevice:device];
+}
+
+- (void)setImages:(NSArray *)images
+{
+    if (_images != images) {
+        _images = images;
+        // Model changed, so update our View (the table)
+        if (self.tableView.window) [self.tableView reloadData];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -85,18 +99,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-#warning Adding a standard image as a fallback
-    if(!self.images) {
-        IAImage * image = [[IAImage alloc] init];
-        image.name = @"Name";
-        image.location = [NSURL URLWithString:@"https://a248.e.akamai.net/assets.github.com/images/modules/about_page/github_logo.png?1315937507"];
-        NSArray * images = [[NSArray alloc] initWithObjects:image, nil];
-        self.images = images;
-    }
-    
+    [super viewWillAppear:animated];    
 }
-
 
 @end
