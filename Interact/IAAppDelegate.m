@@ -10,7 +10,7 @@
 #import "IAImageServerMapper.h"
 
 @interface IAAppDelegate() {
-    IAImageServerMapper *imageServerMapper;
+    IAImageServerMapper * imageServerMapper;
 }
 
 @end
@@ -21,9 +21,29 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    imageServerMapper = [[IAImageServerMapper alloc] init];
-    [imageServerMapper startServer];
+    // Configure our logging framework.
+	// To keep things simple and fast, we're just going to log to the Xcode console.
+	[DDLog addLogger:[DDTTYLogger sharedInstance]];
+    
+    //RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
+
+    RKObjectMapping* imageMapping = [RKObjectMapping mappingForClass:[IAImage class]];
+    imageMapping.rootKeyPath = @"images";
+
+    [imageMapping mapKeyPath:@"id" toAttribute:@"identifier"];
+    [imageMapping mapKeyPath:@"name" toAttribute:@"name"];
+    [imageMapping mapKeyPath:@"src" toAttribute:@"location"];
+    
+    RKObjectMapping* imageSerialization = [imageMapping inverseMapping];
+    imageSerialization.rootKeyPath = @"images";
+    
+    RKObjectMappingProvider * objectMappingProvider = [[RKObjectMappingProvider alloc] init];    
+    [objectMappingProvider setMapping:imageMapping forKeyPath:@"images"];
+    [objectMappingProvider setSerializationMapping:imageSerialization forClass:[IAImage class]];
+
+    imageServerMapper = [[IAImageServerMapper alloc] initWithObjectMappingProvider:objectMappingProvider];
     imageServerMapper.imageServer = [[IAImageServer alloc] init];
+    [imageServerMapper startServer];
     
     // Override point for customization after application launch.
     return YES;

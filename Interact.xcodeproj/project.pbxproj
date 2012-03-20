@@ -10,7 +10,6 @@
 		270EDCCF1518F6A500888B25 /* NSObject+AssociatedObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EDCCA1518F6A500888B25 /* NSObject+AssociatedObjects.m */; };
 		270EDCD01518F6A500888B25 /* RKClient+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EDCCC1518F6A500888B25 /* RKClient+Blocks.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		270EDCD11518F6A500888B25 /* RKObjectManager+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EDCCE1518F6A500888B25 /* RKObjectManager+Blocks.m */; };
-		270EDCDB1519087D00888B25 /* IAImageClientMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EDCDA1519087D00888B25 /* IAImageClientMapper.m */; };
 		2719BE931518EDCF00B12461 /* IAImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BE921518EDCF00B12461 /* IAImage.m */; };
 		2719BE961518EEEA00B12461 /* IAImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BE951518EEEA00B12461 /* IAImageViewController.m */; };
 		2719BEA31518F14300B12461 /* IAImageServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BEA01518F14300B12461 /* IAImageServer.m */; };
@@ -118,8 +117,6 @@
 		270EDCCC1518F6A500888B25 /* RKClient+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RKClient+Blocks.m"; sourceTree = "<group>"; };
 		270EDCCD1518F6A500888B25 /* RKObjectManager+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RKObjectManager+Blocks.h"; sourceTree = "<group>"; };
 		270EDCCE1518F6A500888B25 /* RKObjectManager+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RKObjectManager+Blocks.m"; sourceTree = "<group>"; };
-		270EDCD91519087D00888B25 /* IAImageClientMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageClientMapper.h; sourceTree = "<group>"; };
-		270EDCDA1519087D00888B25 /* IAImageClientMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageClientMapper.m; sourceTree = "<group>"; };
 		2719BE911518EDCF00B12461 /* IAImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImage.h; sourceTree = "<group>"; };
 		2719BE921518EDCF00B12461 /* IAImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImage.m; sourceTree = "<group>"; };
 		2719BE941518EEEA00B12461 /* IAImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageViewController.h; sourceTree = "<group>"; };
@@ -286,8 +283,6 @@
 				2719BE951518EEEA00B12461 /* IAImageViewController.m */,
 				2719BEAC1518F53100B12461 /* IAImageLoader.h */,
 				2719BEAD1518F53100B12461 /* IAImageLoader.m */,
-				270EDCD91519087D00888B25 /* IAImageClientMapper.h */,
-				270EDCDA1519087D00888B25 /* IAImageClientMapper.m */,
 			);
 			name = Client;
 			sourceTree = "<group>";
@@ -686,7 +681,6 @@
 				270EDCCF1518F6A500888B25 /* NSObject+AssociatedObjects.m in Sources */,
 				270EDCD01518F6A500888B25 /* RKClient+Blocks.m in Sources */,
 				270EDCD11518F6A500888B25 /* RKObjectManager+Blocks.m in Sources */,
-				270EDCDB1519087D00888B25 /* IAImageClientMapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -770,10 +764,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -794,10 +785,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-all_load",
-				);
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

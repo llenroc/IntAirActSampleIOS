@@ -13,7 +13,9 @@
 @interface IAImageServerMapper : NSObject
 
 @property (strong, nonatomic) IAImageServer* imageServer;
+@property (strong, nonatomic) RKObjectMappingProvider* objectMappingProvider;
 
+- (id)initWithObjectMappingProvider:(RKObjectMappingProvider *)objectMappingProvider;
 - (void)startServer;
 
 @end

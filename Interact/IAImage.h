@@ -12,6 +12,6 @@
 
 @property (nonatomic, strong) NSNumber * identifier;
 @property (nonatomic, strong) NSString * name;
-@property (nonatomic, strong) NSURL * location;
+@property (nonatomic, strong) NSString * location;
 
 @end

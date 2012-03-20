@@ -11,7 +11,7 @@
 @implementation IAImageServer
 
 - (NSArray*)getImages {
-    NSMutableArray* images = [[NSMutableArray init] alloc];
+    NSMutableArray* images = [[NSMutableArray alloc] init];
     [images addObject:[self getImage:[NSNumber numberWithInt:1]]];
     [images addObject:[self getImage:[NSNumber numberWithInt:2]]];
     [images addObject:[self getImage:[NSNumber numberWithInt:3]]];
@@ -21,9 +21,9 @@
 
 - (IAImage*)getImage: (NSNumber*) identifier{
     IAImage* image = [IAImage new];
+    image.identifier = identifier;
     image.name = @"image";
-    image.location = [NSURL URLWithString:@"https://encrypted.google.com/images/srpr/logo3w.png"];
-    
+    image.location = @"https://encrypted.google.com/images/srpr/logo3w.png";
     return image;
 }
 

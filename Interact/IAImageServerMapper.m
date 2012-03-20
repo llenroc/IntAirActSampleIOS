@@ -13,32 +13,23 @@
     RoutingHTTPServer *httpServer;
 }
 
-@property (strong, nonatomic) RKObjectMapping  *serializationMapping;
-
 @end
 
 @implementation IAImageServerMapper
 
 @synthesize imageServer = _imageServer;
-@synthesize serializationMapping = _serializationMapping;
+@synthesize objectMappingProvider = _objectMappingProvider;
 
-- (RKObjectMapping *) serializationMapping {
-    if(!_serializationMapping) {
-        RKObjectMapping* imageMapping = [RKObjectMapping mappingForClass:[IAImage class]];
-        [imageMapping mapKeyPath:@"id" toAttribute:@"identifier"];
-        [imageMapping mapKeyPath:@"name" toAttribute:@"name"];
-        [imageMapping mapKeyPath:@"src" toAttribute:@"source"];
-
-        _serializationMapping = [imageMapping inverseMapping];
+- (id)initWithObjectMappingProvider:(RKObjectMappingProvider *)objectMappingProvider
+{
+    self = [super init];
+    if (self) {
+        self.objectMappingProvider = objectMappingProvider;
     }
-    return _serializationMapping;
+    return self;
 }
 
 - (void)startServer{
-    // Configure our logging framework.
-	// To keep things simple and fast, we're just going to log to the Xcode console.
-	[DDLog addLogger:[DDTTYLogger sharedInstance]];
-	
 	// Create server using our custom MyHTTPServer class
 	httpServer = [[RoutingHTTPServer alloc] init];
     
@@ -64,7 +55,24 @@
         DDLogVerbose(@"%@", request);
         [response setHeader:@"Content-Type" value:@"application/json"];
         response.statusCode = 200;
-        [response respondWithString:@"{\"images\":[{\"id\": 1,\"name\": \"image\",\"src\": \"https://encrypted.google.com/images/srpr/logo3w.png\"}]}"];
+        
+        NSArray * images = self.imageServer.getImages;
+        
+#warning find out why the mapping is done so weirdly
+        
+        RKObjectMapping * mapping = [self.objectMappingProvider serializationMappingForClass:[images class]];
+        RKObjectSerializer* serializer = [RKObjectSerializer serializerWithObject:images mapping:mapping];
+        
+        NSError* error = nil;
+        id params = [serializer serializationForMIMEType:RKMIMETypeJSON error:&error];
+        
+        if (error) {
+            DDLogError(@"Serializing failed for source object %@ to MIME Type %@: %@", images, RKMIMETypeJSON, [error localizedDescription]);
+        } else {
+            NSString* data = [[NSString alloc] initWithData:[params data] encoding:NSUTF8StringEncoding];
+            NSString *fullResponse = [[@"{\"images\":" stringByAppendingString:data] stringByAppendingString:@"}"];
+            [response respondWithString:fullResponse];
+        }
     }];
     
     [httpServer handleMethod:@"POST" withPath:@"/images" block:^(RouteRequest *request, RouteResponse *response) {
@@ -93,7 +101,8 @@
         NSNumber* number = [NSNumber numberWithInt:[[request param:@"id"] intValue]];
         IAImage* image = [self.imageServer getImage:number];
         
-        RKObjectSerializer* serializer = [RKObjectSerializer serializerWithObject:image mapping:self.serializationMapping];
+        RKObjectMapping * mapping = [self.objectMappingProvider serializationMappingForClass:[IAImage class]];
+        RKObjectSerializer* serializer = [RKObjectSerializer serializerWithObject:image mapping:mapping];
         
         NSError* error = nil;
         id params = [serializer serializationForMIMEType:RKMIMETypeJSON error:&error];
@@ -102,8 +111,8 @@
             DDLogError(@"Serializing failed for source object %@ to MIME Type %@: %@", image, RKMIMETypeJSON, [error localizedDescription]);
         } else {
             NSString* data = [[NSString alloc] initWithData:[params data] encoding:NSUTF8StringEncoding];
-            NSString *fullResponse = [[@"{\"images\":" stringByAppendingString:data] stringByAppendingString:@"}"];
-            [response respondWithString:fullResponse];
+            DDLogInfo(@"%@", data);
+            [response respondWithData:[params data]];
         }
     }];
     
