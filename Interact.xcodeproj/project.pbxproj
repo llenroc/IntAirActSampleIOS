@@ -21,6 +21,7 @@
 		2731662D1517CFF4005439AE /* IADeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2731662C1517CFF4005439AE /* IADeviceTableViewController.m */; };
 		273166301517D03C005439AE /* IAImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2731662F1517D03C005439AE /* IAImageTableViewController.m */; };
 		273166331517D07A005439AE /* IADevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 273166321517D07A005439AE /* IADevice.m */; };
+		275332BD1523D493002B0E6E /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E4893315212D82000ECE3E /* CocoaLumberjack.framework */; };
 		2779AAF61517A8B200AE4EE6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AAF51517A8B200AE4EE6 /* UIKit.framework */; };
 		2779AAF81517A8B200AE4EE6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AAF71517A8B200AE4EE6 /* Foundation.framework */; };
 		2779AAFA1517A8B200AE4EE6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AAF91517A8B200AE4EE6 /* CoreGraphics.framework */; };
@@ -151,6 +152,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27E4893515212D82000ECE3E /* CocoaAsyncSocket.framework in Frameworks */,
+				27E4893615212D82000ECE3E /* CocoaHTTPServer.framework in Frameworks */,
+				27E4893715212D82000ECE3E /* CocoaLumberjack.framework in Frameworks */,
 				2779AB721517A9AE00AE4EE6 /* CFNetwork.framework in Frameworks */,
 				2779AB9E1517ACE400AE4EE6 /* CoreData.framework in Frameworks */,
 				2779AAFA1517A8B200AE4EE6 /* CoreGraphics.framework in Frameworks */,
@@ -158,13 +162,10 @@
 				2779AB9A1517ACD100AE4EE6 /* libRestKit.a in Frameworks */,
 				2779AB9C1517ACDE00AE4EE6 /* libxml2.dylib in Frameworks */,
 				273166011517BD14005439AE /* MobileCoreServices.framework in Frameworks */,
+				27E4893815212D82000ECE3E /* RoutingHTTPServer.framework in Frameworks */,
 				273166051517BD2F005439AE /* Security.framework in Frameworks */,
 				273166031517BD1F005439AE /* SystemConfiguration.framework in Frameworks */,
 				2779AAF61517A8B200AE4EE6 /* UIKit.framework in Frameworks */,
-				27E4893515212D82000ECE3E /* CocoaAsyncSocket.framework in Frameworks */,
-				27E4893615212D82000ECE3E /* CocoaHTTPServer.framework in Frameworks */,
-				27E4893715212D82000ECE3E /* CocoaLumberjack.framework in Frameworks */,
-				27E4893815212D82000ECE3E /* RoutingHTTPServer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,9 +173,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				275332BD1523D493002B0E6E /* CocoaLumberjack.framework in Frameworks */,
+				2779AB191517A8B200AE4EE6 /* Foundation.framework in Frameworks */,
 				2779AB171517A8B200AE4EE6 /* SenTestingKit.framework in Frameworks */,
 				2779AB181517A8B200AE4EE6 /* UIKit.framework in Frameworks */,
-				2779AB191517A8B200AE4EE6 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,7 +263,6 @@
 				27E4893115212D82000ECE3E /* CocoaAsyncSocket.framework */,
 				27E4893215212D82000ECE3E /* CocoaHTTPServer.framework */,
 				27E4893315212D82000ECE3E /* CocoaLumberjack.framework */,
-				27E4893415212D82000ECE3E /* RoutingHTTPServer.framework */,
 				2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */,
 				2779AB9D1517ACE400AE4EE6 /* CoreData.framework */,
 				2779AAF91517A8B200AE4EE6 /* CoreGraphics.framework */,
@@ -270,6 +271,7 @@
 				273166001517BD14005439AE /* MobileCoreServices.framework */,
 				2779AB861517AC7100AE4EE6 /* RestKit.xcodeproj */,
 				270EDCC81518F6A500888B25 /* RestKit+Blocks */,
+				27E4893415212D82000ECE3E /* RoutingHTTPServer.framework */,
 				273166041517BD2F005439AE /* Security.framework */,
 				273166021517BD1F005439AE /* SystemConfiguration.framework */,
 				2779AB161517A8B200AE4EE6 /* SenTestingKit.framework */,
@@ -641,12 +643,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)/../Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Interact/Interact-Prefix.pch";
 				INFOPLIST_FILE = "InteractTests/InteractTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
+				TEST_AFTER_BUILD = YES;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -658,12 +661,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)/../Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Interact/Interact-Prefix.pch";
 				INFOPLIST_FILE = "InteractTests/InteractTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
+				TEST_AFTER_BUILD = YES;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
