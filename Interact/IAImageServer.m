@@ -8,6 +8,7 @@
 
 #import "IAImageServer.h"
 
+#import <RestKit/RestKit.h>
 #import <RoutingHTTPServer/RoutingHTTPServer.h>
 
 #import "IAInteract.h"

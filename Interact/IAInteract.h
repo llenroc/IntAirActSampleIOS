@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-#import <RestKit/RestKit.h>
-#import <RoutingHTTPServer/RoutingHTTPServer.h>
-
-#import "IAServer.h"
+@class RKObjectSerializer;
+@class RKObjectManager;
+@class RKObjectMappingProvider;
+@class RKObjectRouter;
+@class RoutingHTTPServer;
 
 @class IADevice;
+@protocol IAServer;
 
 @interface IAInteract : NSObject <NSNetServiceBrowserDelegate, NSNetServiceDelegate>
 

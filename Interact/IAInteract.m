@@ -8,18 +8,18 @@
 
 #import "IAInteract.h"
 
+#import <RestKit/RestKit.h>
+#import <RoutingHTTPServer/RoutingHTTPServer.h>
+
 #import "IADevice.h" 
 #import "IAImageServer.h"
 
-@interface IAInteract () {
-    NSNetServiceBrowser * netServiceBrowser;
-	NSNetService *serverService;
-	NSMutableArray *serverAddresses;
-}
+@interface IAInteract ()
 
 @property (strong, nonatomic) NSMutableDictionary * objectManagers;
 @property (strong, nonatomic) NSMutableArray * servers;
 @property (strong) NSMutableArray * services;
+@property (strong, nonatomic) NSNetServiceBrowser * netServiceBrowser;
 
 @end
 
@@ -32,6 +32,7 @@
 @synthesize objectManagers = _objectManagers;
 @synthesize servers = _servers;
 @synthesize services = _services;
+@synthesize netServiceBrowser = _netServiceBrowser;
 
 - (id)init
 {
@@ -43,16 +44,17 @@
         self.servers = [[NSMutableArray alloc] init];
         self.services = [[NSMutableArray alloc] init];
         
-        netServiceBrowser = [[NSNetServiceBrowser alloc] init];
+        self.netServiceBrowser = [[NSNetServiceBrowser alloc] init];
         
-        [netServiceBrowser setDelegate:self];
-        [netServiceBrowser searchForServicesOfType:@"_interact._tcp." inDomain:@"local."];
+        [self.netServiceBrowser setDelegate:self];
+        [self.netServiceBrowser searchForServicesOfType:@"_interact._tcp." inDomain:@"local."];
 
     }
     return self;
 }
 
-- (RKObjectManager *)objectManagerForDevice:(IADevice *)device {
+- (RKObjectManager *)objectManagerForDevice:(IADevice *)device
+{
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
     RKObjectManager * manager = [self.objectManagers objectForKey:device.hostAndPort];
@@ -77,7 +79,8 @@
     return manager;
 }
 
-- (NSString*)resourcePathFor:(NSObject*)resource withAction:(NSString*)action forObjectManager:(RKObjectManager *)manager{
+- (NSString *)resourcePathFor:(NSObject *)resource withAction:(NSString *)action forObjectManager:(RKObjectManager *)manager
+{
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     NSString* path = [manager.router resourcePathForObject:resource method:RKRequestMethodPUT];
     path = [path stringByAppendingString:@"/"];
@@ -85,7 +88,7 @@
     return path;
 }
 
--(RoutingHTTPServer *)httpServer
+- (RoutingHTTPServer *)httpServer
 {
     if(!_httpServer) {
         // Create server using our custom MyHTTPServer class
@@ -125,7 +128,7 @@
     [self.servers addObject:server];
 }
 
-- (RKObjectSerializer *)serializerForObject:(id) object
+- (RKObjectSerializer *)serializerForObject:(id)object
 {
     RKObjectMapping * mapping = [self.objectMappingProvider serializationMappingForClass:[object class]];
     return [RKObjectSerializer serializerWithObject:object mapping:mapping];
@@ -153,6 +156,7 @@
 {
 	DDLogVerbose(@"DidRemoveService: %@", [netService name]);
     [self.services removeObject:netService];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceUpdate" object:self];
 }
 
 - (void)netServiceBrowserDidStopSearch:(NSNetServiceBrowser *)sender
@@ -185,6 +189,12 @@
         }
     }
     return devices;
+}
+
+- (void)dealloc
+{
+    [self.netServiceBrowser stop];
+    [self.httpServer stop];
 }
 
 @end
