@@ -142,20 +142,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				2779AB721517A9AE00AE4EE6 /* CFNetwork.framework in Frameworks */,
+				275332DF1523DFE5002B0E6E /* CocoaAsyncSocket.framework in Frameworks */,
+				275332E01523DFE5002B0E6E /* CocoaHTTPServer.framework in Frameworks */,
+				275332E11523DFE5002B0E6E /* CocoaLumberjack.framework in Frameworks */,
 				2779AB9E1517ACE400AE4EE6 /* CoreData.framework in Frameworks */,
 				2779AAFA1517A8B200AE4EE6 /* CoreGraphics.framework in Frameworks */,
 				2779AAF81517A8B200AE4EE6 /* Foundation.framework in Frameworks */,
 				2779AB9A1517ACD100AE4EE6 /* libRestKit.a in Frameworks */,
 				2779AB9C1517ACDE00AE4EE6 /* libxml2.dylib in Frameworks */,
 				273166011517BD14005439AE /* MobileCoreServices.framework in Frameworks */,
+				275332E41523E006002B0E6E /* RestKit+Blocks.framework in Frameworks */,
+				275332E51523E006002B0E6E /* RoutingHTTPServer.framework in Frameworks */,
 				273166051517BD2F005439AE /* Security.framework in Frameworks */,
 				273166031517BD1F005439AE /* SystemConfiguration.framework in Frameworks */,
 				2779AAF61517A8B200AE4EE6 /* UIKit.framework in Frameworks */,
-				275332DF1523DFE5002B0E6E /* CocoaAsyncSocket.framework in Frameworks */,
-				275332E01523DFE5002B0E6E /* CocoaHTTPServer.framework in Frameworks */,
-				275332E11523DFE5002B0E6E /* CocoaLumberjack.framework in Frameworks */,
-				275332E41523E006002B0E6E /* RestKit+Blocks.framework in Frameworks */,
-				275332E51523E006002B0E6E /* RoutingHTTPServer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
