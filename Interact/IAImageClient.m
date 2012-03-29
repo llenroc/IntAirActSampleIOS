@@ -25,6 +25,8 @@
 
 + (void) setupMapping:(IAInteract *)interact
 {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+
     RKObjectMapping* imageMapping = [RKObjectMapping mappingForClass:[IAImage class]];
     imageMapping.rootKeyPath = @"images";
     
@@ -62,6 +64,7 @@
 
 - (void) getImages:(void (^)(NSArray *))block fromDevice:(IADevice *)device {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    
     dispatch_queue_t downloadQueue = dispatch_queue_create("interact image loader", NULL);
     dispatch_async(downloadQueue, ^{
         RKObjectManager * manager = [self.interact objectManagerForDevice:device];
@@ -80,7 +83,8 @@
 
 - (void) displayImage: (IAImage *) image onDevice: (IADevice *) device {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    dispatch_queue_t downloadQueue = dispatch_queue_create("interact image loader", NULL);
+    
+    dispatch_queue_t downloadQueue = dispatch_queue_create("interact image displayer", NULL);
     dispatch_async(downloadQueue, ^{
         RKObjectManager * manager = [self.interact objectManagerForDevice:device];
         RKClient * client = manager.client;
