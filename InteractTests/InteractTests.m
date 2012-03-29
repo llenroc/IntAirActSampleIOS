@@ -6,7 +6,11 @@
 //  Copyright (c) 2012 Fachhochschule Gelsenkirchen Abt. Bocholt. All rights reserved.
 //
 
-#import "InteractTests.h"
+#import <SenTestingKit/SenTestingKit.h>
+
+@interface InteractTests : SenTestCase
+
+@end
 
 #import <RestKit/RestKit.h>
 #import <RestKit+Blocks/RestKit+Blocks.h>
