@@ -8,13 +8,20 @@
 
 #import "IADeviceTableViewController.h"
 #import "IADevice.h"
+#import "IAImageServerMapper.h"
+#import "IAImages.h"
+#import "IAInteract.h"
 
 @interface IADeviceTableViewController ()
+
+@property (nonatomic, strong) IAInteract * interact;
+@property (nonatomic, strong) NSArray *devices;
 
 @end
 
 @implementation IADeviceTableViewController
 
+@synthesize interact = _interact;
 @synthesize devices = _devices;
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -66,11 +73,15 @@
     NSIndexPath * indexPath = [self.tableView indexPathForCell:sender];
     IADevice * device = [self.devices objectAtIndex:indexPath.row];
     
+    
     // be somewhat generic here (slightly advanced usage)
     // we'll segue to ANY view controller that has a device @property
-    if ([segue.destinationViewController respondsToSelector:@selector(setDevice:)]) {
+    if ([segue.destinationViewController respondsToSelector:@selector(setInteract:)]) {
         // use performSelector:withObject: to send without compiler checking
         // (which is acceptable here because we used introspection to be sure this is okay)
+        [segue.destinationViewController performSelector:@selector(setInteract:) withObject:self.interact];
+    }
+    if ([segue.destinationViewController respondsToSelector:@selector(setDevice:)]) {
         [segue.destinationViewController performSelector:@selector(setDevice:) withObject:device];
     }
 }
@@ -87,6 +98,13 @@
         self.devices = devices;
     }
     
+}
+
+- (IAInteract *)interact {
+    if(!_interact) {
+        _interact = [[IAInteract alloc] init];
+    }
+    return _interact;
 }
 
 @end

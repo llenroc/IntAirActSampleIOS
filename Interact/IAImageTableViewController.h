@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "IADevice.h"
+#import "IAInteract.h"
 
 @interface IAImageTableViewController : UITableViewController
 
 @property (nonatomic, strong) IADevice * device;
+@property (nonatomic, strong) IAInteract * interact;
 
 @end

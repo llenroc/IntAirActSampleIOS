@@ -10,6 +10,4 @@
 
 @interface IADeviceTableViewController : UITableViewController
 
-@property (nonatomic, strong) NSArray *devices;
-
 @end

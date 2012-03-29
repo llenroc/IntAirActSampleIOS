@@ -8,18 +8,22 @@
 
 #import "IAImageTableViewController.h"
 #import "IAImage.h"
-#import "IAImageLoader.h"
+#import "IAImageClient.h"
 
 @interface IAImageTableViewController ()
 
 @property (nonatomic, strong) NSArray * images;
+@property (nonatomic, strong) IAImageClient * imageClient;
 
 @end
 
 @implementation IAImageTableViewController
 
 @synthesize device = _device;
+@synthesize interact = _interact;
+
 @synthesize images = _images;
+@synthesize imageClient = _imageClient;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -66,26 +70,8 @@
     return cell;
 }
 
-- (void)setDevice:(IADevice *)device
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    _device = device;
-    self.title = device.name;
-    [IAImageLoader getImages:^(NSArray * images) {
-        DDLogInfo(@"Loaded it %@", images);
-        self.images = images;
-    } fromDevice:device];
-}
-
-- (void)setImages:(NSArray *)images
-{
-    if (_images != images) {
-        _images = images;
-        // Model changed, so update our View (the table)
-        if (self.tableView.window) [self.tableView reloadData];
-    }
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     NSIndexPath * indexPath = [self.tableView indexPathForCell:sender];
     IAImage * image = [self.images objectAtIndex:indexPath.row];
     
@@ -99,8 +85,45 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];    
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self loadImages];
+}
+
+- (void)setDevice:(IADevice *)device
+{
+    _device = device;
+    self.title = device.name;
+}
+
+- (void)setImages:(NSArray *)images
+{
+    if (_images != images) {
+        _images = images;
+        // Model changed, so update our View (the table)
+        if (self.tableView.window) [self.tableView reloadData];
+    }
+}
+
+- (IAImageClient *)imageClient
+{
+    if (!_imageClient) {
+        _imageClient = [[IAImageClient alloc] initWithInteract:self.interact];
+    }
+    return _imageClient;
+}
+
+- (void)loadImages
+{
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    if(self.interact && self.device) {
+        [self.imageClient getImages:^(NSArray * images) {
+            DDLogInfo(@"Loaded the following images: %@", images);
+            self.images = images;
+        } fromDevice:self.device];
+        
+    }
 }
 
 @end

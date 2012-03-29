@@ -11,7 +11,7 @@
 		2719BE961518EEEA00B12461 /* IAImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BE951518EEEA00B12461 /* IAImageViewController.m */; };
 		2719BEA31518F14300B12461 /* IAImageServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BEA01518F14300B12461 /* IAImageServer.m */; };
 		2719BEA41518F14300B12461 /* IAImageServerMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BEA21518F14300B12461 /* IAImageServerMapper.m */; };
-		2719BEAE1518F53100B12461 /* IAImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BEAD1518F53100B12461 /* IAImageLoader.m */; };
+		2719BEAE1518F53100B12461 /* IAImageClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BEAD1518F53100B12461 /* IAImageClient.m */; };
 		273166011517BD14005439AE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166001517BD14005439AE /* MobileCoreServices.framework */; };
 		273166031517BD1F005439AE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166021517BD1F005439AE /* SystemConfiguration.framework */; };
 		273166051517BD2F005439AE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166041517BD2F005439AE /* Security.framework */; };
@@ -40,6 +40,7 @@
 		2779AB9C1517ACDE00AE4EE6 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9B1517ACDE00AE4EE6 /* libxml2.dylib */; };
 		2779AB9E1517ACE400AE4EE6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9D1517ACE400AE4EE6 /* CoreData.framework */; };
 		27BB876C15240AF0002112F2 /* IAImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BB876B15240AF0002112F2 /* IAImages.m */; };
+		27BB87701524175A002112F2 /* IAInteract.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BB876F1524175A002112F2 /* IAInteract.m */; };
 		27DAC3A91523EC0B00622A50 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */; };
 		27DAC3AB1523EC1300622A50 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166041517BD2F005439AE /* Security.framework */; };
 		27DAC3AC1523EC1800622A50 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9D1517ACE400AE4EE6 /* CoreData.framework */; };
@@ -74,8 +75,8 @@
 		2719BEA01518F14300B12461 /* IAImageServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageServer.m; sourceTree = "<group>"; };
 		2719BEA11518F14300B12461 /* IAImageServerMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageServerMapper.h; sourceTree = "<group>"; };
 		2719BEA21518F14300B12461 /* IAImageServerMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageServerMapper.m; sourceTree = "<group>"; };
-		2719BEAC1518F53100B12461 /* IAImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageLoader.h; sourceTree = "<group>"; };
-		2719BEAD1518F53100B12461 /* IAImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageLoader.m; sourceTree = "<group>"; };
+		2719BEAC1518F53100B12461 /* IAImageClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageClient.h; sourceTree = "<group>"; };
+		2719BEAD1518F53100B12461 /* IAImageClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageClient.m; sourceTree = "<group>"; };
 		273166001517BD14005439AE /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		273166021517BD1F005439AE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		273166041517BD2F005439AE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -112,6 +113,8 @@
 		2779AB9D1517ACE400AE4EE6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		27BB876A15240AF0002112F2 /* IAImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImages.h; sourceTree = "<group>"; };
 		27BB876B15240AF0002112F2 /* IAImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImages.m; sourceTree = "<group>"; };
+		27BB876E1524175A002112F2 /* IAInteract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAInteract.h; sourceTree = "<group>"; };
+		27BB876F1524175A002112F2 /* IAInteract.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAInteract.m; sourceTree = "<group>"; };
 		27DAC3C31523EF6900622A50 /* RestKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RestKit.framework; path = Frameworks/RestKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -187,8 +190,8 @@
 				2731662F1517D03C005439AE /* IAImageTableViewController.m */,
 				2719BE941518EEEA00B12461 /* IAImageViewController.h */,
 				2719BE951518EEEA00B12461 /* IAImageViewController.m */,
-				2719BEAC1518F53100B12461 /* IAImageLoader.h */,
-				2719BEAD1518F53100B12461 /* IAImageLoader.m */,
+				2719BEAC1518F53100B12461 /* IAImageClient.h */,
+				2719BEAD1518F53100B12461 /* IAImageClient.m */,
 			);
 			name = Client;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 		2779AAFB1517A8B200AE4EE6 /* Interact */ = {
 			isa = PBXGroup;
 			children = (
+				27BB876D15241743002112F2 /* Shared */,
 				2719BEA61518F19F00B12461 /* Client */,
 				2719BEA71518F1AA00B12461 /* Server */,
 				2719BEA51518F18A00B12461 /* Model */,
@@ -286,6 +290,15 @@
 				2779AB1F1517A8B200AE4EE6 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		27BB876D15241743002112F2 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				27BB876E1524175A002112F2 /* IAInteract.h */,
+				27BB876F1524175A002112F2 /* IAInteract.m */,
+			);
+			name = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -406,8 +419,9 @@
 				2719BE961518EEEA00B12461 /* IAImageViewController.m in Sources */,
 				2719BEA31518F14300B12461 /* IAImageServer.m in Sources */,
 				2719BEA41518F14300B12461 /* IAImageServerMapper.m in Sources */,
-				2719BEAE1518F53100B12461 /* IAImageLoader.m in Sources */,
+				2719BEAE1518F53100B12461 /* IAImageClient.m in Sources */,
 				27BB876C15240AF0002112F2 /* IAImages.m in Sources */,
+				27BB87701524175A002112F2 /* IAInteract.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

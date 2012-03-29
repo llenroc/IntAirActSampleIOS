@@ -40,7 +40,6 @@
 
 - (void)setImageURL:(NSURL *)imageURL
 {
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     if (![_imageURL isEqual:imageURL]) {
         _imageURL = imageURL;
         if (self.imageView.window) {    // we're on screen, so update the image
