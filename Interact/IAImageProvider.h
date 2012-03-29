@@ -1,5 +1,5 @@
 //
-//  InteractImageServerMapper.h
+//  InteractImageServer.h
 //  Interact
 //
 //  Created by O'Keeffe Arlo Louis on 12-03-08.
@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-#import "IAServer.h"
+@class IAImage;
 
-@interface IAImageServer : NSObject <IAServer>
+@interface IAImageProvider : NSObject
+
+- (NSArray*)getImages;
+- (IAImage*)getImage: (NSNumber*) identifier;
 
 @end

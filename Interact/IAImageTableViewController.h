@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IADevice.h"
-#import "IAInteract.h"
+
+@class IADevice;
+@class IAInteract;
 
 @interface IAImageTableViewController : UITableViewController
 

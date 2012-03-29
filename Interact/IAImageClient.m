@@ -7,10 +7,13 @@
 //
 
 #import "IAImageClient.h"
-#import "IAImage.h"
 
 #import <RestKit+Blocks/RKObjectManager+Blocks.h>
 #import <RestKit+Blocks/RKClient+Blocks.h>
+
+#import "IAInteract.h"
+#import "IAImages.h"
+#import "IAImage.h"
 
 @interface IAImageClient ()
 
@@ -19,6 +22,32 @@
 @end
 
 @implementation IAImageClient
+
++ (void) setupMapping:(IAInteract *)interact
+{
+    RKObjectMapping* imageMapping = [RKObjectMapping mappingForClass:[IAImage class]];
+    imageMapping.rootKeyPath = @"images";
+    
+    [imageMapping mapKeyPath:@"id" toAttribute:@"identifier"];
+    [imageMapping mapKeyPath:@"name" toAttribute:@"name"];
+    [imageMapping mapKeyPath:@"src" toAttribute:@"location"];
+    
+    RKObjectMapping* imageSerialization = [imageMapping inverseMapping];
+    imageSerialization.rootKeyPath = @"images";
+    
+    [interact.objectMappingProvider setMapping:imageMapping forKeyPath:@"images"];
+    [interact.objectMappingProvider setSerializationMapping:imageSerialization forClass:[IAImage class]];
+    
+    RKObjectMapping* imagesMapping = [RKObjectMapping mappingForClass:[IAImages class]];
+    [imagesMapping hasMany:@"images" withMapping:imageMapping];
+    RKObjectMapping* imagesSerialization = [imagesMapping inverseMapping];
+    [interact.objectMappingProvider setSerializationMapping:imagesSerialization forClass:[IAImages class]];
+    
+    // setup routes
+    [interact.router routeClass:[IAImage class] toResourcePath:@"/images" forMethod:RKRequestMethodPOST];
+    [interact.router routeClass:[IAImage class] toResourcePath:@"/images/(identifier)"];
+
+}
 
 @synthesize interact = _interact;
 

@@ -8,9 +8,10 @@
 
 #import "IADeviceTableViewController.h"
 #import "IADevice.h"
-#import "IAImageServerMapper.h"
+#import "IAImageServer.h"
 #import "IAImages.h"
 #import "IAInteract.h"
+#import "IAImageClient.h"
 
 @interface IADeviceTableViewController ()
 
@@ -103,6 +104,8 @@
 - (IAInteract *)interact {
     if(!_interact) {
         _interact = [[IAInteract alloc] init];
+        [IAImageClient setupMapping:_interact];
+        [_interact registerServer:[[IAImageServer alloc] initWithInteract:_interact]];
     }
     return _interact;
 }

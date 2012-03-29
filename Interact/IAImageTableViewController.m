@@ -9,6 +9,7 @@
 #import "IAImageTableViewController.h"
 #import "IAImage.h"
 #import "IAImageClient.h"
+#import "IADevice.h"
 
 @interface IAImageTableViewController ()
 

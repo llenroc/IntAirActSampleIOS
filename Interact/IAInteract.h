@@ -9,12 +9,21 @@
 #import <Foundation/Foundation.h>
 
 #import <RestKit/RestKit.h>
+#import <RoutingHTTPServer/RoutingHTTPServer.h>
 
-#import "IADevice.h"
+#import "IAServer.h"
+
+@class IADevice;
 
 @interface IAInteract : NSObject
 
+@property (strong, nonatomic) RKObjectMappingProvider * objectMappingProvider;
+@property (strong, nonatomic) RKObjectRouter * router;
+@property (strong, nonatomic) RoutingHTTPServer * httpServer;
+
 - (RKObjectManager *)objectManagerForDevice:(IADevice *)device;
 - (NSString*)resourcePathFor:(NSObject*)resource withAction:(NSString*)action forObjectManager:(RKObjectManager *)manager;
+- (void) registerServer:(id<IAServer>) server;
+- (RKObjectSerializer *)serializerForObject:(id) object;
 
 @end

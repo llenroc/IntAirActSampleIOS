@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <RestKit/RestKit.h>
 
-#import "IAImage.h"
-#import "IADevice.h"
-#import "IAInteract.h"
+@class IAImage;
+@class IADevice;
+@class IAInteract;
 
 @interface IAImageClient : NSObject
+
++ (void) setupMapping:(IAInteract *)interact;
 
 - (id) initWithInteract:(IAInteract *)interact;
 
