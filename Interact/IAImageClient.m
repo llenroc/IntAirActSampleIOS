@@ -66,9 +66,6 @@
     dispatch_async(downloadQueue, ^{
         RKObjectManager * manager = [self.interact objectManagerForDevice:device];
         [manager loadObjectsAtResourcePath:@"/images" handler:^(RKObjectLoader *loader, NSError *error) {
-#warning find out why i have to use manager inside block to keep manager object "alive"
-            // i know why but I have to read on block pointers to resolve this properly
-            DDLogVerbose(@"%@", manager);
             if(!error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     block([[loader result] asCollection]);
@@ -88,8 +85,6 @@
         RKObjectManager * manager = [self.interact objectManagerForDevice:device];
         RKClient * client = manager.client;
         [client put:[self.interact resourcePathFor:image withAction:@"display" forObjectManager:manager] params:nil withCompletionHandler:^(RKResponse *response, NSError *error) {
-            // somehow I have to resolve this unnecessary output
-            DDLogVerbose(@"%@", manager);
             if(!error) {
                 DDLogInfo(@"%@", response);
             } else {
