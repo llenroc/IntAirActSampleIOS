@@ -74,7 +74,6 @@
     NSIndexPath * indexPath = [self.tableView indexPathForCell:sender];
     IADevice * device = [self.devices objectAtIndex:indexPath.row];
     
-    
     // be somewhat generic here (slightly advanced usage)
     // we'll segue to ANY view controller that has a device @property
     if ([segue.destinationViewController respondsToSelector:@selector(setInteract:)]) {
@@ -89,18 +88,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-#warning Adding a standard device as a fallback
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:@"DeviceUpdate" object:nil];    
+
     if(!self.devices) {
-        IADevice * device1 = [[IADevice alloc] init];
-        device1.name = @"Arlo's iPhone";
-        device1.hostAndPort = @"http://arlos-iphone.local.:12345";
-        
-        IADevice * device2 = [IADevice new];
-        device2.name = @"Arlo's MacBook";
-        device2.hostAndPort = @"http://arlos-mbp.local.:12345/";
-        
-        self.devices = [[NSArray alloc] initWithObjects:device1, device2, nil];;
+        self.devices = self.interact.getDevices;
     }
     
 }
@@ -112,6 +103,21 @@
         [_interact registerServer:[[IAImageServer alloc] initWithInteract:_interact]];
     }
     return _interact;
+}
+
+- (void)refresh:(NSNotification*)note {
+    NSLog(@"Got notified: %@", note);
+    self.devices = self.interact.getDevices;
+}
+
+-(void)setDevices:(NSArray *)devices
+{
+    if (_devices != devices) {
+        _devices = devices;
+        // Model changed, so update our View (the table)
+        if (self.tableView.window) [self.tableView reloadData];
+    }
+
 }
 
 @end
