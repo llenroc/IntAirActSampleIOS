@@ -8,6 +8,7 @@
 
 #import "IAAppDelegate.h"
 #import "IAImageServerMapper.h"
+#import "IAImages.h"
 
 @interface IAAppDelegate() {
     IAImageServerMapper * imageServerMapper;
@@ -40,6 +41,11 @@
     RKObjectMappingProvider * objectMappingProvider = [[RKObjectMappingProvider alloc] init];    
     [objectMappingProvider setMapping:imageMapping forKeyPath:@"images"];
     [objectMappingProvider setSerializationMapping:imageSerialization forClass:[IAImage class]];
+    
+    RKObjectMapping* imagesMapping = [RKObjectMapping mappingForClass:[IAImages class]];
+    [imagesMapping hasMany:@"images" withMapping:imageMapping];
+    RKObjectMapping* imagesSerialization = [imagesMapping inverseMapping];
+    [objectMappingProvider setSerializationMapping:imagesSerialization forClass:[IAImages class]];
 
     imageServerMapper = [[IAImageServerMapper alloc] initWithObjectMappingProvider:objectMappingProvider];
     imageServerMapper.imageServer = [[IAImageServer alloc] init];

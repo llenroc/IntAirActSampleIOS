@@ -8,6 +8,7 @@
 
 #import "IAImageServerMapper.h"
 #import <RoutingHTTPServer/RoutingHTTPServer.h>
+#import "IAImages.h"
 
 @interface IAImageServerMapper() {
     RoutingHTTPServer *httpServer;
@@ -56,12 +57,12 @@
         [response setHeader:@"Content-Type" value:@"application/json"];
         response.statusCode = 200;
         
-        NSArray * images = self.imageServer.getImages;
+        IAImages * images = [IAImages new];
+        images.images = self.imageServer.getImages;
         
-#warning find out why the mapping is done so weirdly
-        
-        RKObjectMapping * mapping = [self.objectMappingProvider serializationMappingForClass:[IAImage class]];
-        RKObjectSerializer* serializer = [RKObjectSerializer serializerWithObject:images mapping:mapping];
+        id serialize = images;
+        RKObjectMapping * mapping = [self.objectMappingProvider serializationMappingForClass:[serialize class]];
+        RKObjectSerializer* serializer = [RKObjectSerializer serializerWithObject:serialize mapping:mapping];
         
         NSError* error = nil;
         id params = [serializer serializationForMIMEType:RKMIMETypeJSON error:&error];
@@ -69,9 +70,10 @@
         if (error) {
             DDLogError(@"Serializing failed for source object %@ to MIME Type %@: %@", images, RKMIMETypeJSON, [error localizedDescription]);
         } else {
+            [response respondWithData:[params data]];
             NSString* data = [[NSString alloc] initWithData:[params data] encoding:NSUTF8StringEncoding];
-            NSString *fullResponse = [[@"{\"images\":" stringByAppendingString:data] stringByAppendingString:@"}"];
-            [response respondWithString:fullResponse];
+            DDLogVerbose(@"%@", data);
+            //[response respondWithString:data];
         }
     }];
     

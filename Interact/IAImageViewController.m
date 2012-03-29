@@ -21,11 +21,12 @@
 
 - (void)loadImage
 {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     if (self.imageView) {
         if (self.imageURL) {
             dispatch_queue_t imageDownloadQ = dispatch_queue_create("Interact Image Downloader", NULL);
             dispatch_async(imageDownloadQ, ^{
-                UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:self.imageURL]];
+                UIImage * image = [UIImage imageWithData:[NSData dataWithContentsOfURL:self.imageURL]];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.imageView.image = image;
                 });
@@ -39,7 +40,7 @@
 
 - (void)setImageURL:(NSURL *)imageURL
 {
-    DDLogInfo(@"I'm here");
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     if (![_imageURL isEqual:imageURL]) {
         _imageURL = imageURL;
         if (self.imageView.window) {    // we're on screen, so update the image

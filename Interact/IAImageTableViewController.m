@@ -94,7 +94,8 @@
     if ([segue.destinationViewController respondsToSelector:@selector(setImageURL:)]) {
         // use performSelector:withObject: to send without compiler checking
         // (which is acceptable here because we used introspection to be sure this is okay)
-        [segue.destinationViewController performSelector:@selector(setImageURL:) withObject:image.location];
+        NSURL * url = [NSURL URLWithString:image.location];
+        [segue.destinationViewController performSelector:@selector(setImageURL:) withObject:url];
     }
 }
 

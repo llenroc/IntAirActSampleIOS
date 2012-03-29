@@ -16,5 +16,5 @@
     #import <CocoaLumberjack/DDTTYLogger.h>
 
     // Log levels : off, error, warn, info, verbose
-    static const int ddLogLevel = LOG_LEVEL_INFO;
+    static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 #endif
