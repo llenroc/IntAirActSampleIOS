@@ -7,7 +7,7 @@
 //
 
 #import "IAImageServerMapper.h"
-#import "RoutingHTTPServer.h"
+#import <RoutingHTTPServer/RoutingHTTPServer.h>
 
 @interface IAImageServerMapper() {
     RoutingHTTPServer *httpServer;
@@ -60,7 +60,7 @@
         
 #warning find out why the mapping is done so weirdly
         
-        RKObjectMapping * mapping = [self.objectMappingProvider serializationMappingForClass:[images class]];
+        RKObjectMapping * mapping = [self.objectMappingProvider serializationMappingForClass:[IAImage class]];
         RKObjectSerializer* serializer = [RKObjectSerializer serializerWithObject:images mapping:mapping];
         
         NSError* error = nil;

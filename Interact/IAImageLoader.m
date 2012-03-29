@@ -9,8 +9,8 @@
 #import "IAImageLoader.h"
 #import "IAImage.h"
 
-#import "RKObjectManager+Blocks.h"
-#import "RKClient+Blocks.h"
+#import <RestKit+Blocks/RKObjectManager+Blocks.h>
+#import <RestKit+Blocks/RKClient+Blocks.h>
 
 @implementation IAImageLoader
 
@@ -48,6 +48,7 @@
         RKObjectManager * manager = [self objectManagerForDevice:device];
         [manager loadObjectsAtResourcePath:@"/images" handler:^(RKObjectLoader *loader, NSError *error) {
 #warning find out why i have to use manager inside block to keep manager object "alive"
+            DDLogInfo(@"%@", manager);
             dispatch_async(dispatch_get_main_queue(), ^{
                 block([[loader result] asCollection]);
             });
