@@ -95,8 +95,12 @@
         IADevice * device1 = [[IADevice alloc] init];
         device1.name = @"Arlo's iPhone";
         device1.hostAndPort = @"http://arlos-iphone.local.:12345";
-        NSArray * devices = [[NSArray alloc] initWithObjects:device1, nil];
-        self.devices = devices;
+        
+        IADevice * device2 = [IADevice new];
+        device2.name = @"Arlo's MacBook";
+        device2.hostAndPort = @"http://arlos-mbp.local.:12345/";
+        
+        self.devices = [[NSArray alloc] initWithObjects:device1, device2, nil];;
     }
     
 }
