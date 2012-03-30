@@ -85,7 +85,7 @@
         }
     }];
     
-    [httpServer handleMethod:@"PUT" withPath:@"/images/:id/display" block:^(RouteRequest *request, RouteResponse *response) {
+    [httpServer handleMethod:@"PUT" withPath:@"/images/action" block:^(RouteRequest *request, RouteResponse *response) {
         DDLogVerbose(@"%@", request);
         [response setHeader:@"Content-Type" value:RKMIMETypeJSON];
         response.statusCode = 201;

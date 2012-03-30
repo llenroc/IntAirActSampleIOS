@@ -14,6 +14,7 @@
 #import "IAInteract.h"
 #import "IAImages.h"
 #import "IAImage.h"
+#import "IAImageAction.h"
 
 @interface IAImageClient ()
 
@@ -29,15 +30,13 @@
 
     RKObjectMapping* imageMapping = [RKObjectMapping mappingForClass:[IAImage class]];
     imageMapping.rootKeyPath = @"images";
-    
     [imageMapping mapKeyPath:@"id" toAttribute:@"identifier"];
     [imageMapping mapKeyPath:@"name" toAttribute:@"name"];
     [imageMapping mapKeyPath:@"src" toAttribute:@"location"];
+    [interact.objectMappingProvider setMapping:imageMapping forKeyPath:@"images"];
     
     RKObjectMapping* imageSerialization = [imageMapping inverseMapping];
     imageSerialization.rootKeyPath = @"images";
-    
-    [interact.objectMappingProvider setMapping:imageMapping forKeyPath:@"images"];
     [interact.objectMappingProvider setSerializationMapping:imageSerialization forClass:[IAImage class]];
     
     RKObjectMapping* imagesMapping = [RKObjectMapping mappingForClass:[IAImages class]];
@@ -45,10 +44,20 @@
     RKObjectMapping* imagesSerialization = [imagesMapping inverseMapping];
     [interact.objectMappingProvider setSerializationMapping:imagesSerialization forClass:[IAImages class]];
     
+    RKObjectMapping * actionMapping = [RKObjectMapping mappingForClass:[IAImageAction class]];
+    actionMapping.rootKeyPath = @"actions";
+    [actionMapping mapKeyPath:@"action" toAttribute:@"action"];
+    [actionMapping hasOne:@"image" withMapping:imageMapping];
+    [interact.objectMappingProvider setMapping:actionMapping forKeyPath:@"actions"];
+    
+    RKObjectMapping * actionSerialization = [actionMapping inverseMapping];
+    actionSerialization.rootKeyPath = @"actions";
+    [interact.objectMappingProvider setSerializationMapping:actionSerialization forClass:[IAImageAction class]];
+    
     // setup routes
     [interact.router routeClass:[IAImage class] toResourcePath:@"/images" forMethod:RKRequestMethodPOST];
     [interact.router routeClass:[IAImage class] toResourcePath:@"/images/(identifier)"];
-
+    [interact.router routeClass:[IAImageAction class] toResourcePath:@"/images/action" forMethod:RKRequestMethodPUT];
 }
 
 @synthesize interact = _interact;
@@ -87,14 +96,10 @@
     dispatch_queue_t downloadQueue = dispatch_queue_create("interact image displayer", NULL);
     dispatch_async(downloadQueue, ^{
         RKObjectManager * manager = [self.interact objectManagerForDevice:device];
-        RKClient * client = manager.client;
-        [client put:[self.interact resourcePathFor:image withAction:@"display" forObjectManager:manager] params:nil withCompletionHandler:^(RKResponse *response, NSError *error) {
-            if(!error) {
-                DDLogInfo(@"%@", response);
-            } else {
-                DDLogError(@"%@", error);
-            }
-        }];
+        IAImageAction * displayAction = [IAImageAction new];
+        displayAction.action = @"display";
+        displayAction.image = image;
+        [manager putObject:displayAction delegate:nil];
     });
     dispatch_release(downloadQueue);
 }

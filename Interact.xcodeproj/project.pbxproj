@@ -39,6 +39,7 @@
 		2779AB721517A9AE00AE4EE6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */; };
 		2779AB9C1517ACDE00AE4EE6 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9B1517ACDE00AE4EE6 /* libxml2.dylib */; };
 		2779AB9E1517ACE400AE4EE6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9D1517ACE400AE4EE6 /* CoreData.framework */; };
+		27954C8115265C9400C98D3E /* IAImageAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 27954C8015265C9400C98D3E /* IAImageAction.m */; };
 		27BB876C15240AF0002112F2 /* IAImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BB876B15240AF0002112F2 /* IAImages.m */; };
 		27BB87701524175A002112F2 /* IAInteract.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BB876F1524175A002112F2 /* IAInteract.m */; };
 		27DAC3A91523EC0B00622A50 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */; };
@@ -111,6 +112,8 @@
 		2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		2779AB9B1517ACDE00AE4EE6 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		2779AB9D1517ACE400AE4EE6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		27954C7F15265C9400C98D3E /* IAImageAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageAction.h; sourceTree = "<group>"; };
+		27954C8015265C9400C98D3E /* IAImageAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageAction.m; sourceTree = "<group>"; };
 		27A66B171524D144001D04B8 /* IAServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAServer.h; sourceTree = "<group>"; };
 		27BB876A15240AF0002112F2 /* IAImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImages.h; sourceTree = "<group>"; };
 		27BB876B15240AF0002112F2 /* IAImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImages.m; sourceTree = "<group>"; };
@@ -176,6 +179,8 @@
 				2719BE921518EDCF00B12461 /* IAImage.m */,
 				27BB876A15240AF0002112F2 /* IAImages.h */,
 				27BB876B15240AF0002112F2 /* IAImages.m */,
+				27954C7F15265C9400C98D3E /* IAImageAction.h */,
+				27954C8015265C9400C98D3E /* IAImageAction.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -424,6 +429,7 @@
 				2719BEAE1518F53100B12461 /* IAImageClient.m in Sources */,
 				27BB876C15240AF0002112F2 /* IAImages.m in Sources */,
 				27BB87701524175A002112F2 /* IAInteract.m in Sources */,
+				27954C8115265C9400C98D3E /* IAImageAction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -92,7 +92,7 @@
 
 - (IBAction)handleSwipe:(UISwipeGestureRecognizer *)sender {
     DDLogVerbose(@"Recognized swipe %i", [sender direction]);
-    [self.imageClient displayImage:self.image onDevice:[[self.interact getDevices] objectAtIndex:1]];
+    [self.imageClient displayImage:self.image onDevice:[[self.interact getDevices] lastObject]];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
