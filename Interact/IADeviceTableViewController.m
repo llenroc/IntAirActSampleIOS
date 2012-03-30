@@ -7,26 +7,25 @@
 //
 
 #import "IADeviceTableViewController.h"
+
 #import "IADevice.h"
-#import "IAImageServer.h"
-#import "IAImages.h"
 #import "IAInteract.h"
-#import "IAImageClient.h"
 
 @interface IADeviceTableViewController ()
 
-@property (nonatomic, strong) IAInteract * interact;
-@property (nonatomic, strong) NSArray *devices;
+@property (nonatomic, strong) NSArray * devices;
 
 @end
 
 @implementation IADeviceTableViewController
 
 @synthesize interact = _interact;
+
 @synthesize devices = _devices;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
@@ -36,11 +35,13 @@
 
 - (void)viewDidLoad
 {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     [super viewDidLoad];
 }
 
 - (void)viewDidUnload
 {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     [super viewDidUnload];
 }
 
@@ -71,6 +72,7 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     NSIndexPath * indexPath = [self.tableView indexPathForCell:sender];
     IADevice * device = [self.devices objectAtIndex:indexPath.row];
     
@@ -87,31 +89,21 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:@"DeviceUpdate" object:nil];    
-
-    if(!self.devices) {
-        self.devices = self.interact.getDevices;
-    }
-    
-}
-
-- (IAInteract *)interact {
-    if(!_interact) {
-        _interact = [[IAInteract alloc] init];
-        [IAImageClient setupMapping:_interact];
-        [_interact registerServer:[[IAImageServer alloc] initWithInteract:_interact]];
-    }
-    return _interact;
+    [self refresh:nil];
+    [self.tableView reloadData];
 }
 
 - (void)refresh:(NSNotification*)note {
-    NSLog(@"Got notified: %@", note);
+    DDLogVerbose(@"%@: %@, note: %@", THIS_FILE, THIS_METHOD, note);
     self.devices = self.interact.getDevices;
 }
 
 -(void)setDevices:(NSArray *)devices
 {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     if (_devices != devices) {
         _devices = devices;
         // Model changed, so update our View (the table)

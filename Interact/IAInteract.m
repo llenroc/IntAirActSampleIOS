@@ -11,8 +11,7 @@
 #import <RestKit/RestKit.h>
 #import <RoutingHTTPServer/RoutingHTTPServer.h>
 
-#import "IADevice.h" 
-#import "IAImageServer.h"
+#import "IADevice.h"
 
 @interface IAInteract ()
 
@@ -36,6 +35,7 @@
 
 - (id)init
 {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     self = [super init];
     if (self) {
         self.objectMappingProvider = [[RKObjectMappingProvider alloc] init];
@@ -43,12 +43,9 @@
         self.objectManagers = [[NSMutableDictionary alloc] init];
         self.servers = [[NSMutableArray alloc] init];
         self.services = [[NSMutableArray alloc] init];
-        
-        self.netServiceBrowser = [[NSNetServiceBrowser alloc] init];
-        
-        [self.netServiceBrowser setDelegate:self];
-        [self.netServiceBrowser searchForServicesOfType:@"_interact._tcp." inDomain:@"local."];
 
+        self.netServiceBrowser = [[NSNetServiceBrowser alloc] init];
+        [self.netServiceBrowser setDelegate:self];
     }
     return self;
 }
@@ -90,6 +87,7 @@
 
 - (RoutingHTTPServer *)httpServer
 {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     if(!_httpServer) {
         // Create server using our custom MyHTTPServer class
         _httpServer = [RoutingHTTPServer new];
@@ -111,14 +109,6 @@
         DDLogInfo(@"Setting document root: %@", webPath);
         
         [_httpServer setDocumentRoot:webPath];
-        
-        // Start the server (and check for problems)
-        
-        NSError *error;
-        if(![_httpServer start:&error])
-        {
-            DDLogError(@"Error starting HTTP Server: %@", error);
-        }
     }
     return _httpServer;
 }
@@ -136,6 +126,7 @@
 
 - (void)netServiceBrowser:(NSNetServiceBrowser *)sender didNotSearch:(NSDictionary *)errorInfo
 {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 	DDLogError(@"DidNotSearch: %@", errorInfo);
 }
 
@@ -143,8 +134,7 @@
            didFindService:(NSNetService *)netService
                moreComing:(BOOL)moreServicesComing
 {
-	DDLogVerbose(@"DidFindService: %@", [netService name]);
-    
+    DDLogVerbose(@"%@: %@, service: %@", THIS_FILE, THIS_METHOD, [netService name]);
     [self.services addObject:netService];
     [netService setDelegate:self];
     [netService resolveWithTimeout:0.0];
@@ -161,11 +151,12 @@
 
 - (void)netServiceBrowserDidStopSearch:(NSNetServiceBrowser *)sender
 {
-	DDLogInfo(@"DidStopSearch");
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 }
 
 - (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict
 {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 	DDLogError(@"DidNotResolve");
     [self.services removeObject:sender];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceUpdate" object:self];
@@ -173,12 +164,14 @@
 
 - (void)netServiceDidResolveAddress:(NSNetService *)sender
 {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 	DDLogInfo(@"DidResolve: %@:%i", [sender hostName], [sender port]);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceUpdate" object:self];
 }
 
 - (NSArray *)getDevices
 {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     NSMutableArray * devices = [[NSMutableArray alloc] init];
     for(NSNetService * service in self.services) {
         if(service.hostName && service.port) {
@@ -191,10 +184,34 @@
     return devices;
 }
 
+- (BOOL)start:(NSError **)errPtr;
+{
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    
+    // Start the server (and check for problems)
+    NSError * error;
+    if(![_httpServer start:&error])
+    {
+        DDLogError(@"Error starting HTTP Server: %@", error);
+        if (errPtr)
+            *errPtr = error;
+        return NO;
+    }
+    [self.netServiceBrowser searchForServicesOfType:@"_interact._tcp." inDomain:@"local."];
+    return YES;
+}
+
+- (void) stop
+{
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    [self.httpServer stop];
+    [self.netServiceBrowser stop];
+    [self.services removeAllObjects];
+}
+
 - (void)dealloc
 {
-    [self.netServiceBrowser stop];
-    [self.httpServer stop];
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 }
 
 @end

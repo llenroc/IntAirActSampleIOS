@@ -28,5 +28,7 @@
 - (void) registerServer:(id<IAServer>) server;
 - (RKObjectSerializer *)serializerForObject:(id) object;
 - (NSArray *)getDevices;
+- (BOOL)start:(NSError **)errPtr;
+- (void) stop;
 
 @end
