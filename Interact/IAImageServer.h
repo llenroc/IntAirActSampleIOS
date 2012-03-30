@@ -12,4 +12,6 @@
 
 @interface IAImageServer : NSObject <IAServer>
 
+@property (weak, nonatomic) UINavigationController * navigationController;
+
 @end

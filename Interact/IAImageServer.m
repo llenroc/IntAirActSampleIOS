@@ -14,6 +14,8 @@
 #import "IAInteract.h"
 #import "IAImages.h"
 #import "IAImageProvider.h"
+#import "IAImageAction.h"
+#import "IAImageViewController.h"
 
 @interface IAImageServer ()
 
@@ -23,6 +25,8 @@
 @end
 
 @implementation IAImageServer
+
+@synthesize navigationController = _navigationController;
 
 @synthesize interact = _interact;
 @synthesize imageProvider = _imageProvider;
@@ -49,6 +53,43 @@
         DDLogVerbose(@"%@", request);
         [response setHeader:@"Content-Type" value:RKMIMETypeJSON];
         response.statusCode = 201;
+    }];
+    
+    [httpServer handleMethod:@"PUT" withPath:@"/images/action" block:^(RouteRequest *request, RouteResponse *response) {
+        DDLogVerbose(@"PUT /images/action");
+        [response setHeader:@"Content-Type" value:RKMIMETypeJSON];
+        response.statusCode = 201;
+        NSData * body = [request body];
+        NSString * bodyAsString = [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding];
+
+        NSError* error = nil;
+        id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
+        id parsedData = [parser objectFromString:bodyAsString error:&error];
+        
+        if (parsedData == nil && error) {
+            // Parser error...
+        } else {
+            RKObjectMappingProvider* mappingProvider = self.interact.objectMappingProvider;
+            RKObjectMapper* mapper = [RKObjectMapper mapperWithObject:parsedData mappingProvider:mappingProvider];
+            RKObjectMappingResult* result = [mapper performMapping];
+            if (result) {
+                IAImageAction * action = [result asObject];
+                DDLogVerbose(@"%@", action.image);
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"UIMainStoryboardFile"] bundle: nil];
+                IAImageViewController *t = [storyboard instantiateViewControllerWithIdentifier:@"ImageViewController"];
+                t.interact = self.interact;
+                t.image = action.image;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.navigationController pushViewController:t animated:YES];
+                });
+                /*
+                UIViewController * c = [self.navigationController.childViewControllers lastObject];
+                if([c respondsToSelector:@selector(setImage:)]) {
+                    [c performSelector:@selector(setImage:) withObject:action.image];
+                }
+                 */
+            }
+        }
     }];
     
     [httpServer handleMethod:@"PUT" withPath:@"/images/:id" block:^(RouteRequest *request, RouteResponse *response) {
@@ -83,12 +124,6 @@
             [response respondWithData:[params data]];
             DDLogInfo(@"%@", [[NSString alloc] initWithData:[params data] encoding:NSUTF8StringEncoding]);
         }
-    }];
-    
-    [httpServer handleMethod:@"PUT" withPath:@"/images/action" block:^(RouteRequest *request, RouteResponse *response) {
-        DDLogVerbose(@"%@", request);
-        [response setHeader:@"Content-Type" value:RKMIMETypeJSON];
-        response.statusCode = 201;
     }];
 }
 

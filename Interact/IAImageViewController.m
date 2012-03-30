@@ -15,7 +15,6 @@
 @interface IAImageViewController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (nonatomic, strong) IAImageClient * imageClient;
 
 @end
 
@@ -23,9 +22,9 @@
 
 @synthesize interact = _interact;
 @synthesize image = _image;
+@synthesize imageClient = _imageClient;
 
 @synthesize imageView = _imageView;
-@synthesize imageClient = _imageClient;
 
 - (void)loadImage
 {
@@ -51,6 +50,7 @@
 {
     if (![_image isEqual:image]) {
         _image = image;
+        self.title = image.name;
         if (self.imageView.window) {    // we're on screen, so update the image
             [self loadImage];           
         } else {                        // we're not on screen, so no need to loadImage (it will happen next viewWillAppear:)
@@ -87,7 +87,9 @@
     [self.view addGestureRecognizer:swipeRight];
     [self.view addGestureRecognizer:swipeLeft];
 
-    if (!self.imageView.image && self.image) [self loadImage];
+    if (!self.imageView.image && self.image) {
+        [self loadImage];
+    }
 }
 
 - (IBAction)handleSwipe:(UISwipeGestureRecognizer *)sender {

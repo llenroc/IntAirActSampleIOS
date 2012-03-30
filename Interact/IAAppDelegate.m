@@ -36,7 +36,8 @@
     // setup and start Interact
     self.interact = [IAInteract new];
     [IAImageClient setupMapping:_interact];
-    [_interact registerServer:[[IAImageServer alloc] initWithInteract:_interact]];
+    IAImageServer * imageServer = [[IAImageServer alloc] initWithInteract:_interact];
+    [_interact registerServer:imageServer];
     
     NSError * error;
     if(![self.interact start:&error]) {
@@ -45,6 +46,7 @@
     
     // set interact property of the first active ViewController
     UINavigationController * navigationController = (UINavigationController*) self.window.rootViewController;
+    imageServer.navigationController = navigationController;
     UIViewController * firstViewController = [[navigationController viewControllers] objectAtIndex:0];
     if([firstViewController respondsToSelector:@selector(setInteract:)]) {
         [firstViewController performSelector:@selector(setInteract:) withObject:self.interact];
