@@ -78,11 +78,16 @@
     
     // be somewhat generic here (slightly advanced usage)
     // we'll segue to ANY view controller that has a device @property
-    if ([segue.destinationViewController respondsToSelector:@selector(setImageURL:)]) {
+    if ([segue.destinationViewController respondsToSelector:@selector(setInteract:)]) {
         // use performSelector:withObject: to send without compiler checking
         // (which is acceptable here because we used introspection to be sure this is okay)
-        NSURL * url = [NSURL URLWithString:image.location];
-        [segue.destinationViewController performSelector:@selector(setImageURL:) withObject:url];
+        [segue.destinationViewController performSelector:@selector(setInteract:) withObject:self.interact];
+    }
+    if ([segue.destinationViewController respondsToSelector:@selector(setImageClient:)]) {
+        [segue.destinationViewController performSelector:@selector(setImageClient:) withObject:self.imageClient];
+    }
+    if ([segue.destinationViewController respondsToSelector:@selector(setImage:)]) {
+        [segue.destinationViewController performSelector:@selector(setImage:) withObject:image];
     }
 }
 

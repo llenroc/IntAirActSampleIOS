@@ -8,25 +8,34 @@
 
 #import "IAImageViewController.h"
 
+#import "IAInteract.h"
+#import "IAImage.h"
+#import "IAImageClient.h"
+
 @interface IAImageViewController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) IAImageClient * imageClient;
 
 @end
 
 @implementation IAImageViewController
 
-@synthesize imageURL = _imageURL;
+@synthesize interact = _interact;
+@synthesize image = _image;
+
 @synthesize imageView = _imageView;
+@synthesize imageClient = _imageClient;
 
 - (void)loadImage
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     if (self.imageView) {
-        if (self.imageURL) {
+        if (self.image) {
             dispatch_queue_t imageDownloadQ = dispatch_queue_create("Interact Image Downloader", NULL);
             dispatch_async(imageDownloadQ, ^{
-                UIImage * image = [UIImage imageWithData:[NSData dataWithContentsOfURL:self.imageURL]];
+                NSURL * url = [NSURL URLWithString:self.image.location];
+                UIImage * image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.imageView.image = image;
                 });
@@ -38,10 +47,10 @@
     }
 }
 
-- (void)setImageURL:(NSURL *)imageURL
+- (void)setImage:(IAImage *)image
 {
-    if (![_imageURL isEqual:imageURL]) {
-        _imageURL = imageURL;
+    if (![_image isEqual:image]) {
+        _image = image;
         if (self.imageView.window) {    // we're on screen, so update the image
             [self loadImage];           
         } else {                        // we're not on screen, so no need to loadImage (it will happen next viewWillAppear:)
@@ -52,8 +61,38 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     [super viewWillAppear:animated];
-    if (!self.imageView.image && self.imageURL) [self loadImage];
+    
+    int numberOfTouches = 1;
+    
+    UISwipeGestureRecognizer * swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
+    swipeUp.numberOfTouchesRequired = numberOfTouches;
+    
+    UISwipeGestureRecognizer * swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
+    swipeDown.numberOfTouchesRequired = numberOfTouches;
+    
+    UISwipeGestureRecognizer * swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
+    swipeRight.numberOfTouchesRequired = numberOfTouches;
+    
+    UISwipeGestureRecognizer * swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
+    swipeLeft.numberOfTouchesRequired = numberOfTouches;
+    
+    [self.view addGestureRecognizer:swipeUp];
+    [self.view addGestureRecognizer:swipeDown];
+    [self.view addGestureRecognizer:swipeRight];
+    [self.view addGestureRecognizer:swipeLeft];
+
+    if (!self.imageView.image && self.image) [self loadImage];
+}
+
+- (IBAction)handleSwipe:(UISwipeGestureRecognizer *)sender {
+    DDLogVerbose(@"Recognized swipe %i", [sender direction]);
+    [self.imageClient displayImage:self.image onDevice:[[self.interact getDevices] objectAtIndex:1]];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -65,6 +104,14 @@
 {
     self.imageView = nil;
     [super viewDidUnload];
+}
+
+- (IAImageClient *)imageClient
+{
+    if (!_imageClient) {
+        _imageClient = [[IAImageClient alloc] initWithInteract:self.interact];
+    }
+    return _imageClient;
 }
 
 @end

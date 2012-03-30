@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class IAInteract;
+@class IAImage;
+
 @interface IAImageViewController : UIViewController
 
-@property (nonatomic, strong) NSURL *imageURL;
+@property (nonatomic, strong) IAInteract * interact;
+@property (nonatomic, strong) IAImage * image;
 
 @end
