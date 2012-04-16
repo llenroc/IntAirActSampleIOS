@@ -125,7 +125,7 @@
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     if(self.interact && self.device) {
         [self.imageClient getImages:^(NSArray * images) {
-            DDLogInfo(@"Loaded the following images: %@", images);
+            DDLogVerbose(@"Loaded images: %@ from device: %@", images, self.device);
             self.images = images;
         } fromDevice:self.device];
         

@@ -201,7 +201,7 @@
     return YES;
 }
 
-- (void) stop
+- (void)stop
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     [self.httpServer stop];

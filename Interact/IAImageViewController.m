@@ -92,7 +92,8 @@
     }
 }
 
-- (IBAction)handleSwipe:(UISwipeGestureRecognizer *)sender {
+- (IBAction)handleSwipe:(UISwipeGestureRecognizer *)sender
+{
     DDLogVerbose(@"Recognized swipe %i", [sender direction]);
     [self.imageClient displayImage:self.image onDevice:[[self.interact getDevices] lastObject]];
 }

@@ -25,10 +25,10 @@
 
 - (RKObjectManager *)objectManagerForDevice:(IADevice *)device;
 - (NSString *)resourcePathFor:(NSObject*)resource withAction:(NSString*)action forObjectManager:(RKObjectManager *)manager;
-- (void) registerServer:(id<IAServer>) server;
-- (RKObjectSerializer *)serializerForObject:(id) object;
+- (void)registerServer:(id<IAServer>)server;
+- (RKObjectSerializer *)serializerForObject:(id)object;
 - (NSArray *)getDevices;
 - (BOOL)start:(NSError **)errPtr;
-- (void) stop;
+- (void)stop;
 
 @end

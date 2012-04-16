@@ -91,7 +91,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:@"DeviceUpdate" object:nil];    
+
+    // Listens for DeviceUpdate notifications, Interact calls this notification
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:@"DeviceUpdate" object:nil];
+
     [self refresh:nil];
     [self.tableView reloadData];
 }
