@@ -12,7 +12,9 @@
 
 @interface IAImageProvider : NSObject
 
--(NSArray*)getImages;
--(IAImage*)getImage:(NSNumber*)identifier;
+@property (nonatomic) NSArray * images;
+
+-(IAImage*)image:(NSNumber*)identifier;
+-(NSData*)imageAsData:(NSNumber*)identifier;
 
 @end

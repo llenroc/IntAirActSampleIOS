@@ -18,6 +18,7 @@
 		2731662D1517CFF4005439AE /* IADeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2731662C1517CFF4005439AE /* IADeviceTableViewController.m */; };
 		273166301517D03C005439AE /* IAImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2731662F1517D03C005439AE /* IAImageTableViewController.m */; };
 		273166331517D07A005439AE /* IADevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 273166321517D07A005439AE /* IADevice.m */; };
+		27442C38153CC65E0017C744 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27442C37153CC65E0017C744 /* AssetsLibrary.framework */; };
 		275332DF1523DFE5002B0E6E /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 275332DC1523DFE5002B0E6E /* CocoaAsyncSocket.framework */; };
 		275332E01523DFE5002B0E6E /* CocoaHTTPServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 275332DD1523DFE5002B0E6E /* CocoaHTTPServer.framework */; };
 		275332E11523DFE5002B0E6E /* CocoaLumberjack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 275332DE1523DFE5002B0E6E /* CocoaLumberjack.framework */; };
@@ -88,6 +89,7 @@
 		2731662F1517D03C005439AE /* IAImageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageTableViewController.m; sourceTree = "<group>"; };
 		273166311517D07A005439AE /* IADevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IADevice.h; sourceTree = "<group>"; };
 		273166321517D07A005439AE /* IADevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IADevice.m; sourceTree = "<group>"; };
+		27442C37153CC65E0017C744 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		275332DC1523DFE5002B0E6E /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Frameworks/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
 		275332DD1523DFE5002B0E6E /* CocoaHTTPServer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaHTTPServer.framework; path = Frameworks/CocoaHTTPServer.framework; sourceTree = "<group>"; };
 		275332DE1523DFE5002B0E6E /* CocoaLumberjack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaLumberjack.framework; path = Frameworks/CocoaLumberjack.framework; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27442C38153CC65E0017C744 /* AssetsLibrary.framework in Frameworks */,
 				2779AAFA1517A8B200AE4EE6 /* CoreGraphics.framework in Frameworks */,
 				2779AB721517A9AE00AE4EE6 /* CFNetwork.framework in Frameworks */,
 				275332DF1523DFE5002B0E6E /* CocoaAsyncSocket.framework in Frameworks */,
@@ -241,10 +244,11 @@
 			children = (
 				2779AAF91517A8B200AE4EE6 /* CoreGraphics.framework */,
 				2779AB161517A8B200AE4EE6 /* SenTestingKit.framework */,
+				27442C37153CC65E0017C744 /* AssetsLibrary.framework */,
+				2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */,
 				275332DC1523DFE5002B0E6E /* CocoaAsyncSocket.framework */,
 				275332DD1523DFE5002B0E6E /* CocoaHTTPServer.framework */,
 				275332DE1523DFE5002B0E6E /* CocoaLumberjack.framework */,
-				2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */,
 				2779AB9D1517ACE400AE4EE6 /* CoreData.framework */,
 				2779AAF71517A8B200AE4EE6 /* Foundation.framework */,
 				2779AB9B1517ACDE00AE4EE6 /* libxml2.dylib */,

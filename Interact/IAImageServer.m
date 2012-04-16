@@ -104,12 +104,28 @@
         response.statusCode = 200;
     }];
     
+    [httpServer handleMethod:@"GET" withPath:@"/images/:id.:type" block:^(RouteRequest *request, RouteResponse *response) {
+        DDLogVerbose(@"%@", request);
+        [response setHeader:@"Content-Type" value:@"image/jpeg"];
+        
+        NSNumber* number = [NSNumber numberWithInt:[[request param:@"id"] intValue]];
+        NSData * data = [self.imageProvider imageAsData:number];
+        if (!data) {
+            response.statusCode = 500;
+            DDLogError(@"An error ocurred.");
+        } else {
+            response.statusCode = 200;
+            [response respondWithData:data];
+            DDLogInfo(@"Responded with image");
+        }
+    }];
+    
     [httpServer handleMethod:@"GET" withPath:@"/images/:id" block:^(RouteRequest *request, RouteResponse *response) {
         DDLogVerbose(@"%@", request);
         [response setHeader:@"Content-Type" value:RKMIMETypeJSON];
         
         NSNumber* number = [NSNumber numberWithInt:[[request param:@"id"] intValue]];
-        IAImage* image = [self.imageProvider getImage:number];
+        IAImage* image = [self.imageProvider image:number];
         
         RKObjectSerializer* serializer = [self.interact serializerForObject:image];
         
@@ -132,7 +148,7 @@
     [response setHeader:@"Content-Type" value:RKMIMETypeJSON];
     
     IAImages * images = [IAImages new];
-    images.images = self.imageProvider.getImages;
+    images.images = self.imageProvider.images;
 
     RKObjectSerializer* serializer = [self.interact serializerForObject:images];
     
