@@ -20,7 +20,7 @@
 
 @synthesize images = _images;
 
-- (NSArray*)getImages
+-(NSArray*)getImages
 {
     if(!self.images) {
         NSMutableArray* images = [[NSMutableArray alloc] init];
@@ -33,7 +33,7 @@
     return self.images;
 }
 
-- (IAImage*)getImage:(NSNumber*)identifier
+-(IAImage*)getImage:(NSNumber*)identifier
 {
     IAImage* image = [IAImage new];
     image.identifier = identifier;

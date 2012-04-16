@@ -24,7 +24,7 @@
 
 @implementation IAImageClient
 
-+ (void)setupMapping:(IAInteract *)interact
++(void)setupMapping:(IAInteract *)interact
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 
@@ -62,7 +62,7 @@
 
 @synthesize interact = _interact;
 
-- (id)initWithInteract:(IAInteract *)interact
+-(id)initWithInteract:(IAInteract *)interact
 {
     self = [super init];
     if (self) {
@@ -71,7 +71,7 @@
     return self;
 }
 
-- (void)getImages:(void (^)(NSArray *))block fromDevice:(IADevice *)device
+-(void)getImages:(void (^)(NSArray *))block fromDevice:(IADevice *)device
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
@@ -91,7 +91,7 @@
     dispatch_release(downloadQueue);
 }
 
-- (void)displayImage:(IAImage *)image onDevice:(IADevice *)device
+-(void)displayImage:(IAImage *)image onDevice:(IADevice *)device
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     

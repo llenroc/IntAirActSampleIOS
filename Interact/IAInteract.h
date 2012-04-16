@@ -23,12 +23,12 @@
 @property (strong, nonatomic) RKObjectRouter * router;
 @property (strong, nonatomic) RoutingHTTPServer * httpServer;
 
-- (RKObjectManager *)objectManagerForDevice:(IADevice *)device;
-- (NSString *)resourcePathFor:(NSObject*)resource withAction:(NSString*)action forObjectManager:(RKObjectManager *)manager;
-- (void)registerServer:(id<IAServer>)server;
-- (RKObjectSerializer *)serializerForObject:(id)object;
-- (NSArray *)getDevices;
-- (BOOL)start:(NSError **)errPtr;
-- (void)stop;
+-(RKObjectManager *)objectManagerForDevice:(IADevice *)device;
+-(NSString *)resourcePathFor:(NSObject*)resource withAction:(NSString*)action forObjectManager:(RKObjectManager *)manager;
+-(void)registerServer:(id<IAServer>)server;
+-(RKObjectSerializer *)serializerForObject:(id)object;
+-(NSArray *)getDevices;
+-(BOOL)start:(NSError **)errPtr;
+-(void)stop;
 
 @end

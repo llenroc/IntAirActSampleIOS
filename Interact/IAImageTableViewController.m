@@ -26,7 +26,7 @@
 @synthesize images = _images;
 @synthesize imageClient = _imageClient;
 
-- (id)initWithStyle:(UITableViewStyle)style
+-(id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
@@ -35,30 +35,30 @@
     return self;
 }
 
-- (void)viewDidLoad
+-(void)viewDidLoad
 {
     [super viewDidLoad];
 }
 
-- (void)viewDidUnload
+-(void)viewDidUnload
 {
     [super viewDidUnload];;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
     return self.images.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Image";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -71,7 +71,7 @@
     return cell;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSIndexPath * indexPath = [self.tableView indexPathForCell:sender];
     IAImage * image = [self.images objectAtIndex:indexPath.row];
@@ -91,19 +91,19 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated
+-(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self loadImages];
 }
 
-- (void)setDevice:(IADevice *)device
+-(void)setDevice:(IADevice *)device
 {
     _device = device;
     self.title = device.name;
 }
 
-- (void)setImages:(NSArray *)images
+-(void)setImages:(NSArray *)images
 {
     if (_images != images) {
         _images = images;
@@ -112,7 +112,7 @@
     }
 }
 
-- (IAImageClient *)imageClient
+-(IAImageClient *)imageClient
 {
     if (!_imageClient) {
         _imageClient = [[IAImageClient alloc] initWithInteract:self.interact];
@@ -120,7 +120,7 @@
     return _imageClient;
 }
 
-- (void)loadImages
+-(void)loadImages
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     if(self.interact && self.device) {

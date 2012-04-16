@@ -33,7 +33,7 @@
 @synthesize services = _services;
 @synthesize netServiceBrowser = _netServiceBrowser;
 
-- (id)init
+-(id)init
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     self = [super init];
@@ -50,7 +50,7 @@
     return self;
 }
 
-- (RKObjectManager *)objectManagerForDevice:(IADevice *)device
+-(RKObjectManager *)objectManagerForDevice:(IADevice *)device
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
@@ -76,7 +76,7 @@
     return manager;
 }
 
-- (NSString *)resourcePathFor:(NSObject *)resource withAction:(NSString *)action forObjectManager:(RKObjectManager *)manager
+-(NSString *)resourcePathFor:(NSObject *)resource withAction:(NSString *)action forObjectManager:(RKObjectManager *)manager
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     NSString* path = [manager.router resourcePathForObject:resource method:RKRequestMethodPUT];
@@ -85,7 +85,7 @@
     return path;
 }
 
-- (RoutingHTTPServer *)httpServer
+-(RoutingHTTPServer *)httpServer
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     if(!_httpServer) {
@@ -113,24 +113,24 @@
     return _httpServer;
 }
 
-- (void)registerServer:(id<IAServer>)server
+-(void)registerServer:(id<IAServer>)server
 {
     [self.servers addObject:server];
 }
 
-- (RKObjectSerializer *)serializerForObject:(id)object
+-(RKObjectSerializer *)serializerForObject:(id)object
 {
     RKObjectMapping * mapping = [self.objectMappingProvider serializationMappingForClass:[object class]];
     return [RKObjectSerializer serializerWithObject:object mapping:mapping];
 }
 
-- (void)netServiceBrowser:(NSNetServiceBrowser *)sender didNotSearch:(NSDictionary *)errorInfo
+-(void)netServiceBrowser:(NSNetServiceBrowser *)sender didNotSearch:(NSDictionary *)errorInfo
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 	DDLogError(@"DidNotSearch: %@", errorInfo);
 }
 
-- (void)netServiceBrowser:(NSNetServiceBrowser *)sender
+-(void)netServiceBrowser:(NSNetServiceBrowser *)sender
            didFindService:(NSNetService *)netService
                moreComing:(BOOL)moreServicesComing
 {
@@ -140,7 +140,7 @@
     [netService resolveWithTimeout:0.0];
 }
 
-- (void)netServiceBrowser:(NSNetServiceBrowser *)sender
+-(void)netServiceBrowser:(NSNetServiceBrowser *)sender
          didRemoveService:(NSNetService *)netService
                moreComing:(BOOL)moreServicesComing
 {
@@ -149,12 +149,12 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceUpdate" object:self];
 }
 
-- (void)netServiceBrowserDidStopSearch:(NSNetServiceBrowser *)sender
+-(void)netServiceBrowserDidStopSearch:(NSNetServiceBrowser *)sender
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 }
 
-- (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict
+-(void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 	DDLogError(@"DidNotResolve");
@@ -162,14 +162,14 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceUpdate" object:self];
 }
 
-- (void)netServiceDidResolveAddress:(NSNetService *)sender
+-(void)netServiceDidResolveAddress:(NSNetService *)sender
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 	DDLogInfo(@"DidResolve: %@:%i", [sender hostName], [sender port]);
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceUpdate" object:self];
 }
 
-- (NSArray *)getDevices
+-(NSArray *)getDevices
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     NSMutableArray * devices = [[NSMutableArray alloc] init];
@@ -184,7 +184,7 @@
     return devices;
 }
 
-- (BOOL)start:(NSError **)errPtr;
+-(BOOL)start:(NSError **)errPtr;
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
@@ -201,7 +201,7 @@
     return YES;
 }
 
-- (void)stop
+-(void)stop
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     [self.httpServer stop];
@@ -209,7 +209,7 @@
     [self.services removeAllObjects];
 }
 
-- (void)dealloc
+-(void)dealloc
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 }

@@ -12,6 +12,6 @@
 
 @protocol IAServer <NSObject>
 
-- (id)initWithInteract:(IAInteract *)interact;
+-(id)initWithInteract:(IAInteract *)interact;
 
 @end

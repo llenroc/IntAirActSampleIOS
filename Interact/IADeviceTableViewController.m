@@ -23,7 +23,7 @@
 
 @synthesize devices = _devices;
 
-- (id)initWithStyle:(UITableViewStyle)style
+-(id)initWithStyle:(UITableViewStyle)style
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     self = [super initWithStyle:style];
@@ -33,32 +33,32 @@
     return self;
 }
 
-- (void)viewDidLoad
+-(void)viewDidLoad
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     [super viewDidLoad];
 }
 
-- (void)viewDidUnload
+-(void)viewDidUnload
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
     return self.devices.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Device";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -71,7 +71,7 @@
     return cell;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     NSIndexPath * indexPath = [self.tableView indexPathForCell:sender];
     IADevice * device = [self.devices objectAtIndex:indexPath.row];
@@ -88,7 +88,7 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+-(void)viewWillAppear:(BOOL)animated {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     [super viewWillAppear:animated];
 
@@ -99,7 +99,7 @@
     [self.tableView reloadData];
 }
 
-- (void)refresh:(NSNotification*)note {
+-(void)refresh:(NSNotification*)note {
     DDLogVerbose(@"%@: %@, note: %@", THIS_FILE, THIS_METHOD, note);
     self.devices = self.interact.getDevices;
 }

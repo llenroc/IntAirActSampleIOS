@@ -31,7 +31,7 @@
 @synthesize interact = _interact;
 @synthesize imageProvider = _imageProvider;
 
-- (id)initWithInteract:(IAInteract *)interact
+-(id)initWithInteract:(IAInteract *)interact
 {
     self = [super init];
     if (self) {
@@ -46,7 +46,7 @@
     return @"images";
 }
 
-- (void)registerServer:(RoutingHTTPServer *)httpServer {
+-(void)registerServer:(RoutingHTTPServer *)httpServer {
     [httpServer handleMethod:@"GET" withPath:@"/images" target:self selector:@selector(getImages:withResponse:)];
 
     [httpServer handleMethod:@"POST" withPath:@"/images" block:^(RouteRequest *request, RouteResponse *response) {
@@ -127,7 +127,7 @@
     }];
 }
 
-- (void)getImages:(RouteRequest *)request withResponse:(RouteResponse *)response {
+-(void)getImages:(RouteRequest *)request withResponse:(RouteResponse *)response {
     DDLogVerbose(@"%@", request);
     [response setHeader:@"Content-Type" value:RKMIMETypeJSON];
     

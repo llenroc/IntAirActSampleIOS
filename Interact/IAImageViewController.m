@@ -26,7 +26,7 @@
 
 @synthesize imageView = _imageView;
 
-- (void)loadImage
+-(void)loadImage
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     if (self.imageView) {
@@ -46,7 +46,7 @@
     }
 }
 
-- (void)setImage:(IAImage *)image
+-(void)setImage:(IAImage *)image
 {
     if (![_image isEqual:image]) {
         _image = image;
@@ -59,7 +59,7 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated
+-(void)viewWillAppear:(BOOL)animated
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     [super viewWillAppear:animated];
@@ -92,24 +92,24 @@
     }
 }
 
-- (IBAction)handleSwipe:(UISwipeGestureRecognizer *)sender
+-(IBAction)handleSwipe:(UISwipeGestureRecognizer *)sender
 {
     DDLogVerbose(@"Recognized swipe %i", [sender direction]);
     [self.imageClient displayImage:self.image onDevice:[[self.interact getDevices] lastObject]];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
 }
 
-- (void)viewDidUnload
+-(void)viewDidUnload
 {
     self.imageView = nil;
     [super viewDidUnload];
 }
 
-- (IAImageClient *)imageClient
+-(IAImageClient *)imageClient
 {
     if (!_imageClient) {
         _imageClient = [[IAImageClient alloc] initWithInteract:self.interact];

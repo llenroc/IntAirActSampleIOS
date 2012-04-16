@@ -12,7 +12,7 @@
 
 @interface IAImageProvider : NSObject
 
-- (NSArray*)getImages;
-- (IAImage*)getImage:(NSNumber*)identifier;
+-(NSArray*)getImages;
+-(IAImage*)getImage:(NSNumber*)identifier;
 
 @end
