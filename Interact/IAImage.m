@@ -16,7 +16,7 @@
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"IAImage<%@, %@%, %@>", self.identifier, self.name
+    return [NSString stringWithFormat:@"IAImage[identifier: %@, name: %@%, location: %@]", self.identifier, self.name
             , self.location];
 }
 

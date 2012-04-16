@@ -16,7 +16,7 @@
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"Device: %@, %@, %@", self.identifier, self.name, self.hostAndPort];
+    return [NSString stringWithFormat:@"Device[identifier: %@, name: %@, hostAndPort: %@]", self.identifier, self.name, self.hostAndPort];
 }
 
 @end

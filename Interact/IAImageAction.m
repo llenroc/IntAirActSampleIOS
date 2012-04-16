@@ -13,4 +13,10 @@
 @synthesize action = _action;
 @synthesize image = _image;
 
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"IAImageAction[action: %@, image: %@%]", self.action, self.image];
+}
+
+
 @end
