@@ -71,12 +71,12 @@
     return self;
 }
 
--(void)getImages:(void (^)(NSArray *))block fromDevice:(IADevice *)device
+-(void)getImages:(void(^)(NSArray *))block fromDevice:(IADevice *)device
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
-    dispatch_queue_t downloadQueue = dispatch_queue_create("interact image loader", NULL);
-    dispatch_async(downloadQueue, ^{
+    dispatch_queue_t queue = dispatch_queue_create("IAImageClient getImages", NULL);
+    dispatch_async(queue, ^{
         RKObjectManager * manager = [self.interact objectManagerForDevice:device];
         [manager loadObjectsAtResourcePath:@"/images" handler:^(RKObjectLoader *loader, NSError *error) {
             if(!error) {
@@ -84,26 +84,26 @@
                     block([[loader result] asCollection]);
                 });
             } else {
-                DDLogError(@"%@", error);
+                DDLogError(@"An error ocurred while getting images:%@", error);
             }
         }];
     });
-    dispatch_release(downloadQueue);
+    dispatch_release(queue);
 }
 
 -(void)displayImage:(IAImage *)image onDevice:(IADevice *)device
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
-    dispatch_queue_t downloadQueue = dispatch_queue_create("interact image displayer", NULL);
-    dispatch_async(downloadQueue, ^{
+    dispatch_queue_t queue = dispatch_queue_create("IAImageClient displayImage", NULL);
+    dispatch_async(queue, ^{
         RKObjectManager * manager = [self.interact objectManagerForDevice:device];
-        IAImageAction * displayAction = [IAImageAction new];
-        displayAction.action = @"display";
-        displayAction.image = image;
-        [manager putObject:displayAction delegate:nil];
+        IAImageAction * action = [IAImageAction new];
+        action.action = @"display";
+        action.image = image;
+        [manager putObject:action delegate:nil];
     });
-    dispatch_release(downloadQueue);
+    dispatch_release(queue);
 }
 
 @end
