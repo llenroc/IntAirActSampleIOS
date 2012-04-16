@@ -14,4 +14,9 @@
 @synthesize name = _name;
 @synthesize hostAndPort = _hostAndPort;
 
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"Device: %@, %@, %@", self.identifier, self.name, self.hostAndPort];
+}
+
 @end

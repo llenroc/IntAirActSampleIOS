@@ -10,16 +10,26 @@
 #import "IAImage.h"
 #include <stdlib.h>
 
+@interface IAImageProvider ()
+
+@property (nonatomic) NSArray * images;
+
+@end
 
 @implementation IAImageProvider
 
+@synthesize images = _images;
+
 - (NSArray*)getImages {
-    NSMutableArray* images = [[NSMutableArray alloc] init];
-    [images addObject:[self getImage:[NSNumber numberWithInt:1]]];
-    [images addObject:[self getImage:[NSNumber numberWithInt:2]]];
-    [images addObject:[self getImage:[NSNumber numberWithInt:3]]];
-    [images addObject:[self getImage:[NSNumber numberWithInt:4]]];
-    return images;
+    if(!self.images) {
+        NSMutableArray* images = [[NSMutableArray alloc] init];
+        [images addObject:[self getImage:[NSNumber numberWithInt:1]]];
+        [images addObject:[self getImage:[NSNumber numberWithInt:2]]];
+        [images addObject:[self getImage:[NSNumber numberWithInt:3]]];
+        [images addObject:[self getImage:[NSNumber numberWithInt:4]]];
+        self.images = images;
+    }
+    return self.images;
 }
 
 - (IAImage*)getImage: (NSNumber*) identifier{
