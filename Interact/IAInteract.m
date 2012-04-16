@@ -57,7 +57,7 @@
     RKObjectManager * manager = [self.objectManagers objectForKey:device.hostAndPort];
     
     if(!manager) {
-        manager = [[RKObjectManager alloc] initWithBaseURL:device.hostAndPort];
+        manager = [[RKObjectManager alloc] initWithBaseURL:[RKURL URLWithBaseURLString:device.hostAndPort]];
         
         // Ask for & generate JSON
         manager.acceptMIMEType = RKMIMETypeJSON;

@@ -55,6 +55,7 @@
 		27DAC3B41523EC9E00622A50 /* RoutingHTTPServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 275332E31523E006002B0E6E /* RoutingHTTPServer.framework */; };
 		27DAC3C41523EF6900622A50 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27DAC3C31523EF6900622A50 /* RestKit.framework */; };
 		27DAC3C51523EF6900622A50 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27DAC3C31523EF6900622A50 /* RestKit.framework */; };
+		27FCB5E4153CACD1004BBA84 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FCB5E3153CACD1004BBA84 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +121,7 @@
 		27BB876E1524175A002112F2 /* IAInteract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAInteract.h; sourceTree = "<group>"; };
 		27BB876F1524175A002112F2 /* IAInteract.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAInteract.m; sourceTree = "<group>"; };
 		27DAC3C31523EF6900622A50 /* RestKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RestKit.framework; path = Frameworks/RestKit.framework; sourceTree = "<group>"; };
+		27FCB5E3153CACD1004BBA84 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 				2779AAF81517A8B200AE4EE6 /* Foundation.framework in Frameworks */,
 				2779AB9C1517ACDE00AE4EE6 /* libxml2.dylib in Frameworks */,
 				273166011517BD14005439AE /* MobileCoreServices.framework in Frameworks */,
+				27FCB5E4153CACD1004BBA84 /* QuartzCore.framework in Frameworks */,
 				27DAC3C41523EF6900622A50 /* RestKit.framework in Frameworks */,
 				275332E41523E006002B0E6E /* RestKit+Blocks.framework in Frameworks */,
 				275332E51523E006002B0E6E /* RoutingHTTPServer.framework in Frameworks */,
@@ -246,6 +249,7 @@
 				2779AAF71517A8B200AE4EE6 /* Foundation.framework */,
 				2779AB9B1517ACDE00AE4EE6 /* libxml2.dylib */,
 				273166001517BD14005439AE /* MobileCoreServices.framework */,
+				27FCB5E3153CACD1004BBA84 /* QuartzCore.framework */,
 				27DAC3C31523EF6900622A50 /* RestKit.framework */,
 				275332E21523E006002B0E6E /* RestKit+Blocks.framework */,
 				275332E31523E006002B0E6E /* RoutingHTTPServer.framework */,
