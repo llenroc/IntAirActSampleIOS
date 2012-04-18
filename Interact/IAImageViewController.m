@@ -17,6 +17,7 @@
 @interface IAImageViewController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activity;
 
 @end
 
@@ -28,12 +29,14 @@
 @synthesize imageClient = _imageClient;
 
 @synthesize imageView = _imageView;
+@synthesize activity = _activity;
 
 -(void)loadImage
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     if (self.imageView) {
         if (self.image && self.device) {
+            [self.activity startAnimating];
             dispatch_queue_t imageDownloadQ = dispatch_queue_create("Interact Image Downloader", NULL);
             dispatch_async(imageDownloadQ, ^{
                 RKObjectManager * om = [self.interact objectManagerForDevice:self.device];
@@ -43,6 +46,7 @@
                 UIImage * image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.imageView.image = image;
+                    [self.activity stopAnimating];
                 });
             });
             dispatch_release(imageDownloadQ);
@@ -112,6 +116,7 @@
 -(void)viewDidUnload
 {
     self.imageView = nil;
+    self.activity = nil;
     [super viewDidUnload];
 }
 

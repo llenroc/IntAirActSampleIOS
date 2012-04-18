@@ -116,13 +116,17 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="Pr7-M5-8lf">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                             </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="gray" id="M4d-u1-2Se">
+                                <rect key="frame" x="150" y="198" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="166-y1-lyu"/>
                     <connections>
+                        <outlet property="activity" destination="M4d-u1-2Se" id="PzJ-OG-cY5"/>
                         <outlet property="imageView" destination="Pr7-M5-8lf" id="ehg-VU-Be3"/>
                     </connections>
                 </viewController>
@@ -148,20 +152,6 @@
             <point key="canvasLocation" x="109" y="-109"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="IADeviceTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IADeviceTableViewController.h"/>
-        </class>
-        <class className="IAImageTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IAImageTableViewController.h"/>
-        </class>
-        <class className="IAImageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IAImageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
