@@ -20,6 +20,7 @@
 @implementation IAImageProvider
 
 @synthesize images = _images;
+
 @synthesize idToImages = _idToImages;
 
 +(ALAssetsLibrary *)defaultAssetsLibrary
@@ -27,7 +28,7 @@
     static dispatch_once_t pred = 0;
     static ALAssetsLibrary * library = nil;
     dispatch_once(&pred, ^{
-        library = [[ALAssetsLibrary alloc] init];
+        library = [ALAssetsLibrary new];
     });
     return library; 
 }
@@ -43,6 +44,7 @@
 
 -(void)loadImages
 {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     // collect the photos
     NSMutableArray * collector = [[NSMutableArray alloc] initWithCapacity:0];
     NSMutableDictionary * dictionary = [NSMutableDictionary new];
@@ -59,8 +61,7 @@
                         IAImage * image = [IAImage new];
                         image.identifier = [NSNumber numberWithInt:i];
                         image.name = [NSString stringWithFormat:@"Image %i", index];
-#warning implement this
-                        image.location = [NSString stringWithFormat:@"http://arlos-iphone.local.:12345/images/%i.jpg", index];
+                        image.location = [NSString stringWithFormat:@"images/%i.jpg", index];
                         [collector addObject:image];
                         [dictionary setObject:asset forKey:image.identifier];
                         i++;
@@ -72,8 +73,8 @@
         self.images = collector;
         self.idToImages = dictionary;
         DDLogVerbose(@"%@", collector);
-    } failureBlock:^(NSError *error) {
-        NSLog(@"Boom!!!");
+    } failureBlock:^(NSError * error) {
+        DDLogError(@"Couldn't load assets: %@", error);
     }];
     
 }
@@ -97,7 +98,7 @@
     NSError* error=nil;
     [ass.defaultRepresentation getBytes:bufferPointer fromOffset:0 length:byteArraySize error:&error];
     if (error) {
-        DDLogError(@"%@",error);
+        DDLogError(@"Couldn't copy bytes: %@",error);
     }
     
     rawData = [NSMutableData dataWithBytes:bufferPointer length:byteArraySize];

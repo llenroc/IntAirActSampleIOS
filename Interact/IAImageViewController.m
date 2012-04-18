@@ -8,6 +8,8 @@
 
 #import "IAImageViewController.h"
 
+#import <RestKit/RestKit.h>
+
 #import "IAInteract.h"
 #import "IAImage.h"
 #import "IAImageClient.h"
@@ -22,6 +24,7 @@
 
 @synthesize interact = _interact;
 @synthesize image = _image;
+@synthesize device = _device;
 @synthesize imageClient = _imageClient;
 
 @synthesize imageView = _imageView;
@@ -30,10 +33,13 @@
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     if (self.imageView) {
-        if (self.image) {
+        if (self.image && self.device) {
             dispatch_queue_t imageDownloadQ = dispatch_queue_create("Interact Image Downloader", NULL);
             dispatch_async(imageDownloadQ, ^{
-                NSURL * url = [NSURL URLWithString:self.image.location];
+                RKObjectManager * om = [self.interact objectManagerForDevice:self.device];
+                NSString * loc = [self.interact resourcePathFor:self.image forObjectManager:om];
+                loc = [loc stringByAppendingString:@".jpg"];
+                RKURL * url = [om.baseURL URLByAppendingResourcePath:loc];
                 UIImage * image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     self.imageView.image = image;

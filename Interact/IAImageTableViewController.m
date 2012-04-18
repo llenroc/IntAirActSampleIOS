@@ -89,6 +89,9 @@
     if ([segue.destinationViewController respondsToSelector:@selector(setImage:)]) {
         [segue.destinationViewController performSelector:@selector(setImage:) withObject:image];
     }
+    if ([segue.destinationViewController respondsToSelector:@selector(setDevice:)]) {
+        [segue.destinationViewController performSelector:@selector(setDevice:) withObject:self.device];
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated

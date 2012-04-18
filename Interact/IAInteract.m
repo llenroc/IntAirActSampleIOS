@@ -38,13 +38,13 @@
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     self = [super init];
     if (self) {
-        self.objectMappingProvider = [[RKObjectMappingProvider alloc] init];
+        self.objectMappingProvider = [RKObjectMappingProvider new];
         self.router = [RKObjectRouter new];
-        self.objectManagers = [[NSMutableDictionary alloc] init];
-        self.servers = [[NSMutableArray alloc] init];
-        self.services = [[NSMutableArray alloc] init];
+        self.objectManagers = [NSMutableDictionary new];
+        self.servers = [NSMutableArray new];
+        self.services = [NSMutableArray new];
 
-        self.netServiceBrowser = [[NSNetServiceBrowser alloc] init];
+        self.netServiceBrowser = [NSNetServiceBrowser new];
         [self.netServiceBrowser setDelegate:self];
     }
     return self;
@@ -76,13 +76,10 @@
     return manager;
 }
 
--(NSString *)resourcePathFor:(NSObject *)resource withAction:(NSString *)action forObjectManager:(RKObjectManager *)manager
+-(NSString *)resourcePathFor:(NSObject *)resource forObjectManager:(RKObjectManager *)manager
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    NSString* path = [manager.router resourcePathForObject:resource method:RKRequestMethodPUT];
-    path = [path stringByAppendingString:@"/"];
-    path = [path stringByAppendingString:action];
-    return path;
+    return [manager.router resourcePathForObject:resource method:RKRequestMethodPUT];
 }
 
 -(RoutingHTTPServer *)httpServer
@@ -102,7 +99,7 @@
         // Normally there's no need to run our server on any specific port.
         // Technologies like Bonjour allow clients to dynamically discover the server's port at runtime.
         // However, for easy testing you may want force a certain port so you can just hit the refresh button.
-        [_httpServer setPort:12345];
+        //[_httpServer setPort:12345];
         
         // Serve files from our embedded Web folder
         NSString *webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];
@@ -172,7 +169,7 @@
 -(NSArray *)getDevices
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    NSMutableArray * devices = [[NSMutableArray alloc] init];
+    NSMutableArray * devices = [NSMutableArray new];
     for(NSNetService * service in self.services) {
         if(service.hostName && service.port) {
             IADevice * device = [IADevice new];
@@ -190,7 +187,7 @@
     
     // Start the server (and check for problems)
     NSError * error;
-    if(![_httpServer start:&error])
+    if(![self.httpServer start:&error])
     {
         DDLogError(@"Error starting HTTP Server: %@", error);
         if (errPtr)

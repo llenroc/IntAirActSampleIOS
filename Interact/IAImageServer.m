@@ -16,6 +16,7 @@
 #import "IAImageProvider.h"
 #import "IAImageAction.h"
 #import "IAImageViewController.h"
+#import "RouteResponse+Serializer.h"
 
 @interface IAImageServer ()
 
@@ -42,126 +43,82 @@
     return self;
 }
 
--(NSString *)key {
-    return @"images";
-}
-
--(void)registerServer:(RoutingHTTPServer *)httpServer {
-    [httpServer handleMethod:@"GET" withPath:@"/images" target:self selector:@selector(getImages:withResponse:)];
-
-    [httpServer handleMethod:@"POST" withPath:@"/images" block:^(RouteRequest *request, RouteResponse *response) {
-        DDLogVerbose(@"%@", request);
-        [response setHeader:@"Content-Type" value:RKMIMETypeJSON];
-        response.statusCode = 201;
+-(void)registerServer:(RoutingHTTPServer *)app {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    
+    [app setDefaultHeader:@"Content-Type" value:RKMIMETypeJSON];
+    
+    [app get:@"/images" withBlock:^(RouteRequest *request, RouteResponse *response) {
+        DDLogVerbose(@"GET /images");
+        IAImages * images = [IAImages new];
+        images.images = self.imageProvider.images;
+        [response respondWith:images withInteract:self.interact];
     }];
     
-    [httpServer handleMethod:@"PUT" withPath:@"/images/action" block:^(RouteRequest *request, RouteResponse *response) {
+    [app put:@"/images/action" withBlock:^(RouteRequest *request, RouteResponse *response) {
         DDLogVerbose(@"PUT /images/action");
-        [response setHeader:@"Content-Type" value:RKMIMETypeJSON];
-        response.statusCode = 201;
-        NSData * body = [request body];
-        NSString * bodyAsString = [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding];
-
-        NSError* error = nil;
-        id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
-        id parsedData = [parser objectFromString:bodyAsString error:&error];
-        
-        if (parsedData == nil && error) {
-            // Parser error...
+        RKObjectMappingResult * result = [self parseObject:[request body]];
+        if(!result) {
+            response.statusCode = 500;
         } else {
-            RKObjectMappingProvider* mappingProvider = self.interact.objectMappingProvider;
-            RKObjectMapper* mapper = [RKObjectMapper mapperWithObject:parsedData mappingProvider:mappingProvider];
-            RKObjectMappingResult* result = [mapper performMapping];
-            if (result) {
-                IAImageAction * action = [result asObject];
-                DDLogVerbose(@"%@", action.image);
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"UIMainStoryboardFile"] bundle: nil];
-                IAImageViewController *t = [storyboard instantiateViewControllerWithIdentifier:@"ImageViewController"];
-                t.interact = self.interact;
-                t.image = action.image;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.navigationController pushViewController:t animated:YES];
-                });
-                /*
-                UIViewController * c = [self.navigationController.childViewControllers lastObject];
-                if([c respondsToSelector:@selector(setImage:)]) {
-                    [c performSelector:@selector(setImage:) withObject:action.image];
-                }
-                 */
-            }
+            response.statusCode = 201;
+            IAImageAction * action = [result asObject];
+            DDLogVerbose(@"%@", action.image);
+            
+            // Show image
+            UIStoryboard * storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"UIMainStoryboardFile"] bundle: nil];
+            IAImageViewController * t = [storyboard instantiateViewControllerWithIdentifier:@"ImageViewController"];
+            t.interact = self.interact;
+            t.image = action.image;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.navigationController pushViewController:t animated:YES];
+            });
         }
     }];
     
-    [httpServer handleMethod:@"PUT" withPath:@"/images/:id" block:^(RouteRequest *request, RouteResponse *response) {
-        DDLogVerbose(@"%@", request);
-        [response setHeader:@"Content-Type" value:RKMIMETypeJSON];
-        response.statusCode = 201;
-    }];
-    
-    [httpServer handleMethod:@"DELETE" withPath:@"/images/:id" block:^(RouteRequest *request, RouteResponse *response) {
-        DDLogVerbose(@"%@", request);
-        [response setHeader:@"Content-Type" value:RKMIMETypeJSON];
-        response.statusCode = 200;
-    }];
-    
-    [httpServer handleMethod:@"GET" withPath:@"/images/:id.:type" block:^(RouteRequest *request, RouteResponse *response) {
-        DDLogVerbose(@"%@", request);
-        [response setHeader:@"Content-Type" value:@"image/jpeg"];
+    [app get:@"/images/:id.:type" withBlock:^(RouteRequest *request, RouteResponse *response) {
+        DDLogVerbose(@"GET /images/%@.%@", [request param:@"id"], [request param:@"type"]);
         
         NSNumber* number = [NSNumber numberWithInt:[[request param:@"id"] intValue]];
         NSData * data = [self.imageProvider imageAsData:number];
         if (!data) {
-            response.statusCode = 500;
             DDLogError(@"An error ocurred.");
+            response.statusCode = 500;
         } else {
             response.statusCode = 200;
+            [response setHeader:@"Content-Type" value:@"image/jpeg"];
             [response respondWithData:data];
-            DDLogInfo(@"Responded with image");
         }
     }];
     
-    [httpServer handleMethod:@"GET" withPath:@"/images/:id" block:^(RouteRequest *request, RouteResponse *response) {
-        DDLogVerbose(@"%@", request);
-        [response setHeader:@"Content-Type" value:RKMIMETypeJSON];
+    [app get:@"/images/:id" withBlock:^(RouteRequest *request, RouteResponse *response) {
+        DDLogVerbose(@"GET /images/%@", [request param:@"id"]);
         
         NSNumber* number = [NSNumber numberWithInt:[[request param:@"id"] intValue]];
         IAImage* image = [self.imageProvider image:number];
-        
-        RKObjectSerializer* serializer = [self.interact serializerForObject:image];
-        
-        NSError* error = nil;
-        id params = [serializer serializationForMIMEType:RKMIMETypeJSON error:&error];
-        
-        if (error) {
-            response.statusCode = 500;
-            DDLogError(@"Serializing failed for source object %@ to MIME Type %@: %@", image, RKMIMETypeJSON, [error localizedDescription]);
-        } else {
-            response.statusCode = 200;
-            [response respondWithData:[params data]];
-            DDLogInfo(@"%@", [[NSString alloc] initWithData:[params data] encoding:NSUTF8StringEncoding]);
-        }
+        [response respondWith:image withInteract:self.interact];
     }];
 }
 
--(void)getImages:(RouteRequest *)request withResponse:(RouteResponse *)response {
-    DDLogVerbose(@"%@", request);
-    [response setHeader:@"Content-Type" value:RKMIMETypeJSON];
+-(RKObjectMappingResult*)parseObject:(NSData*)data
+{
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
-    IAImages * images = [IAImages new];
-    images.images = self.imageProvider.images;
-
-    RKObjectSerializer* serializer = [self.interact serializerForObject:images];
+    NSString * bodyAsString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
     NSError* error = nil;
-    id params = [serializer serializationForMIMEType:RKMIMETypeJSON error:&error];
+    id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
+    id parsedData = [parser objectFromString:bodyAsString error:&error];
     
-    if (error) {
-        response.statusCode = 500;
-        DDLogError(@"Serializing failed for source object %@ to MIME Type %@: %@", images, RKMIMETypeJSON, [error localizedDescription]);
+    if (parsedData == nil && error) {
+        // Parser error...
+        DDLogError(@"An error ocurred: %@", error);
+        return NULL;
     } else {
-        response.statusCode = 200;
-        [response respondWithData:[params data]];
-        DDLogInfo(@"%@", [[NSString alloc] initWithData:[params data] encoding:NSUTF8StringEncoding]);
+        RKObjectMappingProvider* mappingProvider = self.interact.objectMappingProvider;
+        RKObjectMapper* mapper = [RKObjectMapper mapperWithObject:parsedData mappingProvider:mappingProvider];
+        RKObjectMappingResult* result = [mapper performMapping];
+        return result;
     }
 }
 

@@ -56,7 +56,7 @@
     
     // setup routes
     [interact.router routeClass:[IAImage class] toResourcePath:@"/images" forMethod:RKRequestMethodPOST];
-    [interact.router routeClass:[IAImage class] toResourcePath:@"/images/(identifier)"];
+    [interact.router routeClass:[IAImage class] toResourcePath:@"/images/:identifier"];
     [interact.router routeClass:[IAImageAction class] toResourcePath:@"/images/action" forMethod:RKRequestMethodPUT];
 }
 
@@ -84,7 +84,7 @@
                     block([[loader result] asCollection]);
                 });
             } else {
-                DDLogError(@"An error ocurred while getting images:%@", error);
+                DDLogError(@"An error ocurred while getting images: %@", error);
             }
         }];
     });

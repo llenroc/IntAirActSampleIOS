@@ -41,6 +41,7 @@
 		2779AB9C1517ACDE00AE4EE6 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9B1517ACDE00AE4EE6 /* libxml2.dylib */; };
 		2779AB9E1517ACE400AE4EE6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9D1517ACE400AE4EE6 /* CoreData.framework */; };
 		27954C8115265C9400C98D3E /* IAImageAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 27954C8015265C9400C98D3E /* IAImageAction.m */; };
+		27A4387C153F18BA00E82728 /* RouteResponse+Serializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A4387B153F18BA00E82728 /* RouteResponse+Serializer.m */; };
 		27BB876C15240AF0002112F2 /* IAImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BB876B15240AF0002112F2 /* IAImages.m */; };
 		27BB87701524175A002112F2 /* IAInteract.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BB876F1524175A002112F2 /* IAInteract.m */; };
 		27DAC3A91523EC0B00622A50 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */; };
@@ -117,6 +118,8 @@
 		2779AB9D1517ACE400AE4EE6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		27954C7F15265C9400C98D3E /* IAImageAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageAction.h; sourceTree = "<group>"; };
 		27954C8015265C9400C98D3E /* IAImageAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageAction.m; sourceTree = "<group>"; };
+		27A4387A153F18BA00E82728 /* RouteResponse+Serializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RouteResponse+Serializer.h"; sourceTree = "<group>"; };
+		27A4387B153F18BA00E82728 /* RouteResponse+Serializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RouteResponse+Serializer.m"; sourceTree = "<group>"; };
 		27A66B171524D144001D04B8 /* IAServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAServer.h; sourceTree = "<group>"; };
 		27BB876A15240AF0002112F2 /* IAImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImages.h; sourceTree = "<group>"; };
 		27BB876B15240AF0002112F2 /* IAImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImages.m; sourceTree = "<group>"; };
@@ -216,6 +219,8 @@
 				2719BEA11518F14300B12461 /* IAImageServer.h */,
 				2719BEA21518F14300B12461 /* IAImageServer.m */,
 				27A66B171524D144001D04B8 /* IAServer.h */,
+				27A4387A153F18BA00E82728 /* RouteResponse+Serializer.h */,
+				27A4387B153F18BA00E82728 /* RouteResponse+Serializer.m */,
 			);
 			name = Server;
 			sourceTree = "<group>";
@@ -438,6 +443,7 @@
 				27BB876C15240AF0002112F2 /* IAImages.m in Sources */,
 				27BB87701524175A002112F2 /* IAInteract.m in Sources */,
 				27954C8115265C9400C98D3E /* IAImageAction.m in Sources */,
+				27A4387C153F18BA00E82728 /* RouteResponse+Serializer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -35,9 +35,9 @@
     
     // setup and start Interact
     self.interact = [IAInteract new];
-    [IAImageClient setupMapping:_interact];
-    IAImageServer * imageServer = [[IAImageServer alloc] initWithInteract:_interact];
-    [_interact registerServer:imageServer];
+    [IAImageClient setupMapping:self.interact];
+    IAImageServer * imageServer = [[IAImageServer alloc] initWithInteract:self.interact];
+    [self.interact registerServer:imageServer];
     
     NSError * error;
     if(![self.interact start:&error]) {

@@ -10,12 +10,14 @@
 
 @class IAInteract;
 @class IAImage;
+@class IADevice;
 @class IAImageClient;
 
 @interface IAImageViewController : UIViewController
 
 @property (nonatomic, strong) IAInteract * interact;
 @property (nonatomic, strong) IAImage * image;
+@property (nonatomic, strong) IADevice * device;
 @property (nonatomic, strong) IAImageClient * imageClient;
 
 @end

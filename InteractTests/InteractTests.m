@@ -35,7 +35,7 @@
 
 - (void)testBasicRestKit
 {
-    RKObjectManager * manager = [[RKObjectManager alloc] initWithBaseURL:@"http://localhost:4567"];
+    RKObjectManager * manager = [[RKObjectManager alloc] initWithBaseURL:[RKURL URLWithString:@"http://localhost:4567"]];
     STAssertNotNil(manager, @"The manager should not be NIL");
     
     __block int done=0;
@@ -67,7 +67,7 @@
     
     
     
-    RKObjectMappingProvider * objectMappingProvider = [[RKObjectMappingProvider alloc] init];    
+    RKObjectMappingProvider * objectMappingProvider = [RKObjectMappingProvider new];    
     [objectMappingProvider setMapping:imageMapping forKeyPath:@"images"];
     [objectMappingProvider setSerializationMapping:imageSerialization forClass:[IAImage class]];
     
@@ -86,11 +86,11 @@
     image2.name = @"image";
     image2.location = @"https://encrypted.google.com/images/srpr/logo3w.png";
     
-    NSMutableArray* imageArray = [[NSMutableArray alloc] init];
+    NSMutableArray* imageArray = [NSMutableArray new];
     [imageArray addObject:image];
     [imageArray addObject:image2];
     
-    IAImages * images = [[IAImages alloc] init];
+    IAImages * images = [IAImages new];
     images.images = imageArray;
     
     id serialize = images;
