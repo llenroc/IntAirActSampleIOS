@@ -204,7 +204,7 @@
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 }
 
--(RKObjectMappingResult*)parseObject:(NSData*)data
+-(RKObjectMappingResult*)deserializeObject:(NSData*)data
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     

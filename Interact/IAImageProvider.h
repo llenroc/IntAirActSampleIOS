@@ -14,7 +14,6 @@
 
 @property (nonatomic) NSArray * images;
 
--(IAImage*)image:(NSNumber*)identifier;
 -(NSData*)imageAsData:(NSNumber*)identifier;
 
 @end

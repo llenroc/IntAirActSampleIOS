@@ -65,9 +65,8 @@
     [interact.objectMappingProvider setSerializationMapping:actionSerialization forClass:[IAImageAction class]];
     
     // setup routes
-    [interact.router routeClass:[IAImage class] toResourcePath:@"/images" forMethod:RKRequestMethodPOST];
-    [interact.router routeClass:[IAImage class] toResourcePath:@"/images/:identifier"];
-    [interact.router routeClass:[IAImageAction class] toResourcePath:@"/images/action" forMethod:RKRequestMethodPUT];
+    [interact.router routeClass:[IAImage class] toResourcePath:@"/image/:identifier"];
+    [interact.router routeClass:[IAImageAction class] toResourcePath:@"/action" forMethod:RKRequestMethodPUT];
 }
 
 @synthesize interact = _interact;

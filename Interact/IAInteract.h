@@ -30,6 +30,6 @@
 -(NSArray *)getDevices;
 -(BOOL)start:(NSError **)errPtr;
 -(void)stop;
--(RKObjectMappingResult*)parseObject:(NSData*)data;
+-(RKObjectMappingResult*)deserializeObject:(NSData*)data;
 
 @end

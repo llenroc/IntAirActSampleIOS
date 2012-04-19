@@ -77,11 +77,6 @@
     
 }
 
--(IAImage*)image:(NSNumber*)identifier
-{
-    return [self.images objectAtIndex:[identifier integerValue]];
-}
-
 -(NSData *)imageAsData:(NSNumber*)identifier
 {
     ALAsset * ass = [self.idToImages objectForKey:identifier];

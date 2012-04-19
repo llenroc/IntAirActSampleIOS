@@ -50,14 +50,16 @@
     
     [app get:@"/images" withBlock:^(RouteRequest *request, RouteResponse *response) {
         DDLogVerbose(@"GET /images");
+
         IAImages * images = [IAImages new];
         images.images = self.imageProvider.images;
         [response respondWith:images withInteract:self.interact];
     }];
     
-    [app put:@"/images/action" withBlock:^(RouteRequest *request, RouteResponse *response) {
-        DDLogVerbose(@"PUT /images/action");
-        RKObjectMappingResult * result = [self.interact parseObject:[request body]];
+    [app put:@"/action" withBlock:^(RouteRequest *request, RouteResponse *response) {
+        DDLogVerbose(@"PUT /action");
+
+        RKObjectMappingResult * result = [self.interact deserializeObject:[request body]];
         if(!result && [[result asObject] isKindOfClass:[IAImageAction class]]) {
             DDLogError(@"Could not parse request body: %@", [request body]);
             response.statusCode = 500;
@@ -78,8 +80,8 @@
         }
     }];
     
-    [app get:@"/images/:id.jpg" withBlock:^(RouteRequest *request, RouteResponse *response) {
-        DDLogVerbose(@"GET /images/%@.jpg", [request param:@"id"]);
+    [app get:@"/image/:id.jpg" withBlock:^(RouteRequest *request, RouteResponse *response) {
+        DDLogVerbose(@"GET /image/%@.jpg", [request param:@"id"]);
         
         NSNumber* number = [NSNumber numberWithInt:[[request param:@"id"] intValue]];
         NSData * data = [self.imageProvider imageAsData:number];
@@ -91,14 +93,6 @@
             [response setHeader:@"Content-Type" value:@"image/jpeg"];
             [response respondWithData:data];
         }
-    }];
-    
-    [app get:@"/images/:id" withBlock:^(RouteRequest *request, RouteResponse *response) {
-        DDLogVerbose(@"GET /images/%@", [request param:@"id"]);
-        
-        NSNumber * number = [NSNumber numberWithInt:[[request param:@"id"] intValue]];
-        IAImage * image = [self.imageProvider image:number];
-        [response respondWith:image withInteract:self.interact];
     }];
 }
 
