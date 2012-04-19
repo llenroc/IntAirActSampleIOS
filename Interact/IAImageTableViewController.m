@@ -65,8 +65,8 @@
     
     // Configure the cell...
     IAImage * image = [self.images objectAtIndex:indexPath.row];
-    cell.textLabel.text = image.name;
-    cell.detailTextLabel.text = image.location.description;
+    cell.textLabel.text = [NSString stringWithFormat:@"Image %i", [image.identifier intValue]];
+    cell.detailTextLabel.text = @"Detailed description";
     
     return cell;
 }

@@ -15,6 +15,7 @@
 @interface IAAppDelegate ()
 
 @property (nonatomic, strong) IAInteract * interact;
+@property (nonatomic, strong) IAImageServer * imageServer;
 
 @end
 
@@ -23,6 +24,7 @@
 @synthesize window = _window;
 
 @synthesize interact = _interact;
+@synthesize imageServer = _imageServer;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -36,17 +38,19 @@
     // setup and start Interact
     self.interact = [IAInteract new];
     [IAImageClient setupMapping:self.interact];
-    IAImageServer * imageServer = [[IAImageServer alloc] initWithInteract:self.interact];
-    [self.interact registerServer:imageServer];
+    self.imageServer = [[IAImageServer alloc] initWithInteract:self.interact];
     
     NSError * error;
     if(![self.interact start:&error]) {
         DDLogError(@"Error starting Interact: %@", error);
     }
     
-    // set interact property of the first active ViewController
     UINavigationController * navigationController = (UINavigationController*) self.window.rootViewController;
-    imageServer.navigationController = navigationController;
+    
+    // the imageServer requires the navigationController to open up a new view on a display action
+    self.imageServer.navigationController = navigationController;
+    
+    // set interact property of the first active ViewController
     UIViewController * firstViewController = [[navigationController viewControllers] objectAtIndex:0];
     if([firstViewController respondsToSelector:@selector(setInteract:)]) {
         [firstViewController performSelector:@selector(setInteract:) withObject:self.interact];

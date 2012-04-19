@@ -12,23 +12,24 @@
 @class RKObjectManager;
 @class RKObjectMappingProvider;
 @class RKObjectRouter;
+@class RKObjectMappingResult;
 @class RoutingHTTPServer;
 
 @class IADevice;
-@protocol IAServer;
 
 @interface IAInteract : NSObject <NSNetServiceBrowserDelegate, NSNetServiceDelegate>
 
 @property (strong, nonatomic) RKObjectMappingProvider * objectMappingProvider;
 @property (strong, nonatomic) RKObjectRouter * router;
 @property (strong, nonatomic) RoutingHTTPServer * httpServer;
+@property (strong, nonatomic) IADevice * ownDevice;
 
 -(RKObjectManager *)objectManagerForDevice:(IADevice *)device;
 -(NSString *)resourcePathFor:(NSObject *)resource forObjectManager:(RKObjectManager *)manager;
--(void)registerServer:(id<IAServer>)server;
 -(RKObjectSerializer *)serializerForObject:(id)object;
 -(NSArray *)getDevices;
 -(BOOL)start:(NSError **)errPtr;
 -(void)stop;
+-(RKObjectMappingResult*)parseObject:(NSData*)data;
 
 @end

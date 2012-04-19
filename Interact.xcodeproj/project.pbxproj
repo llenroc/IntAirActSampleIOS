@@ -42,6 +42,9 @@
 		2779AB9E1517ACE400AE4EE6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9D1517ACE400AE4EE6 /* CoreData.framework */; };
 		27954C8115265C9400C98D3E /* IAImageAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 27954C8015265C9400C98D3E /* IAImageAction.m */; };
 		27A4387C153F18BA00E82728 /* RouteResponse+Serializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A4387B153F18BA00E82728 /* RouteResponse+Serializer.m */; };
+		27A4387E153F3BD400E82728 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27442C37153CC65E0017C744 /* AssetsLibrary.framework */; };
+		27A43880153F3C3400E82728 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FCB5E3153CACD1004BBA84 /* QuartzCore.framework */; };
+		27A43881153F3C4600E82728 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AAF91517A8B200AE4EE6 /* CoreGraphics.framework */; };
 		27BB876C15240AF0002112F2 /* IAImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BB876B15240AF0002112F2 /* IAImages.m */; };
 		27BB87701524175A002112F2 /* IAInteract.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BB876F1524175A002112F2 /* IAInteract.m */; };
 		27DAC3A91523EC0B00622A50 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */; };
@@ -120,7 +123,6 @@
 		27954C8015265C9400C98D3E /* IAImageAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageAction.m; sourceTree = "<group>"; };
 		27A4387A153F18BA00E82728 /* RouteResponse+Serializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RouteResponse+Serializer.h"; sourceTree = "<group>"; };
 		27A4387B153F18BA00E82728 /* RouteResponse+Serializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RouteResponse+Serializer.m"; sourceTree = "<group>"; };
-		27A66B171524D144001D04B8 /* IAServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAServer.h; sourceTree = "<group>"; };
 		27BB876A15240AF0002112F2 /* IAImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImages.h; sourceTree = "<group>"; };
 		27BB876B15240AF0002112F2 /* IAImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImages.m; sourceTree = "<group>"; };
 		27BB876E1524175A002112F2 /* IAInteract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAInteract.h; sourceTree = "<group>"; };
@@ -135,12 +137,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				27442C38153CC65E0017C744 /* AssetsLibrary.framework in Frameworks */,
-				2779AAFA1517A8B200AE4EE6 /* CoreGraphics.framework in Frameworks */,
 				2779AB721517A9AE00AE4EE6 /* CFNetwork.framework in Frameworks */,
 				275332DF1523DFE5002B0E6E /* CocoaAsyncSocket.framework in Frameworks */,
 				275332E01523DFE5002B0E6E /* CocoaHTTPServer.framework in Frameworks */,
 				275332E11523DFE5002B0E6E /* CocoaLumberjack.framework in Frameworks */,
 				2779AB9E1517ACE400AE4EE6 /* CoreData.framework in Frameworks */,
+				2779AAFA1517A8B200AE4EE6 /* CoreGraphics.framework in Frameworks */,
 				2779AAF81517A8B200AE4EE6 /* Foundation.framework in Frameworks */,
 				2779AB9C1517ACDE00AE4EE6 /* libxml2.dylib in Frameworks */,
 				273166011517BD14005439AE /* MobileCoreServices.framework in Frameworks */,
@@ -158,15 +160,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27A4387E153F3BD400E82728 /* AssetsLibrary.framework in Frameworks */,
 				2779AB171517A8B200AE4EE6 /* SenTestingKit.framework in Frameworks */,
+				27DAC3A91523EC0B00622A50 /* CFNetwork.framework in Frameworks */,
 				27DAC3B11523EC9A00622A50 /* CocoaAsyncSocket.framework in Frameworks */,
 				27DAC3B21523EC9A00622A50 /* CocoaHTTPServer.framework in Frameworks */,
 				27DAC3B31523EC9A00622A50 /* CocoaLumberjack.framework in Frameworks */,
-				27DAC3A91523EC0B00622A50 /* CFNetwork.framework in Frameworks */,
 				27DAC3AC1523EC1800622A50 /* CoreData.framework in Frameworks */,
+				27A43881153F3C4600E82728 /* CoreGraphics.framework in Frameworks */,
 				2779AB191517A8B200AE4EE6 /* Foundation.framework in Frameworks */,
 				27DAC3AF1523EC3800622A50 /* libxml2.dylib in Frameworks */,
 				27DAC3AD1523EC2300622A50 /* MobileCoreServices.framework in Frameworks */,
+				27A43880153F3C3400E82728 /* QuartzCore.framework in Frameworks */,
 				27DAC3C51523EF6900622A50 /* RestKit.framework in Frameworks */,
 				27DAC3B01523EC5F00622A50 /* RestKit+Blocks.framework in Frameworks */,
 				27DAC3B41523EC9E00622A50 /* RoutingHTTPServer.framework in Frameworks */,
@@ -218,7 +223,6 @@
 				2719BEA01518F14300B12461 /* IAImageProvider.m */,
 				2719BEA11518F14300B12461 /* IAImageServer.h */,
 				2719BEA21518F14300B12461 /* IAImageServer.m */,
-				27A66B171524D144001D04B8 /* IAServer.h */,
 				27A4387A153F18BA00E82728 /* RouteResponse+Serializer.h */,
 				27A4387B153F18BA00E82728 /* RouteResponse+Serializer.m */,
 			);
@@ -595,6 +599,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Interact/Interact-Prefix.pch";
 				INFOPLIST_FILE = "InteractTests/InteractTests-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_AFTER_BUILD = NO;
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -615,6 +620,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Interact/Interact-Prefix.pch";
 				INFOPLIST_FILE = "InteractTests/InteractTests-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_AFTER_BUILD = NO;
 				TEST_HOST = "$(BUNDLE_LOADER)";

@@ -60,8 +60,6 @@
                     if (rep) {
                         IAImage * image = [IAImage new];
                         image.identifier = [NSNumber numberWithInt:i];
-                        image.name = [NSString stringWithFormat:@"Image %i", index];
-                        image.location = [NSString stringWithFormat:@"images/%i.jpg", index];
                         [collector addObject:image];
                         [dictionary setObject:asset forKey:image.identifier];
                         i++;

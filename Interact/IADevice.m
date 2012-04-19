@@ -10,13 +10,12 @@
 
 @implementation IADevice
 
-@synthesize identifier = _identifier;
 @synthesize name = _name;
 @synthesize hostAndPort = _hostAndPort;
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"Device[identifier: %@, name: %@, hostAndPort: %@]", self.identifier, self.name, self.hostAndPort];
+    return [NSString stringWithFormat:@"Device[name: %@, hostAndPort: %@]", self.name, self.hostAndPort];
 }
 
 @end

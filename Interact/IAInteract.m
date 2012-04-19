@@ -16,7 +16,6 @@
 @interface IAInteract ()
 
 @property (strong, nonatomic) NSMutableDictionary * objectManagers;
-@property (strong, nonatomic) NSMutableArray * servers;
 @property (strong) NSMutableArray * services;
 @property (strong, nonatomic) NSNetServiceBrowser * netServiceBrowser;
 
@@ -27,9 +26,9 @@
 @synthesize objectMappingProvider = _objectMappingProvider;
 @synthesize router = _router;
 @synthesize httpServer = _httpServer;
+@synthesize ownDevice = _ownDevice;
 
 @synthesize objectManagers = _objectManagers;
-@synthesize servers = _servers;
 @synthesize services = _services;
 @synthesize netServiceBrowser = _netServiceBrowser;
 
@@ -41,7 +40,6 @@
         self.objectMappingProvider = [RKObjectMappingProvider new];
         self.router = [RKObjectRouter new];
         self.objectManagers = [NSMutableDictionary new];
-        self.servers = [NSMutableArray new];
         self.services = [NSMutableArray new];
 
         self.netServiceBrowser = [NSNetServiceBrowser new];
@@ -108,11 +106,6 @@
         [_httpServer setDocumentRoot:webPath];
     }
     return _httpServer;
-}
-
--(void)registerServer:(id<IAServer>)server
-{
-    [self.servers addObject:server];
 }
 
 -(RKObjectSerializer *)serializerForObject:(id)object
@@ -209,6 +202,46 @@
 -(void)dealloc
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+}
+
+-(RKObjectMappingResult*)parseObject:(NSData*)data
+{
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    
+    NSString * bodyAsString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    NSError* error = nil;
+    id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
+    id parsedData = [parser objectFromString:bodyAsString error:&error];
+    
+    if (parsedData == nil && error) {
+        // Parser error...
+        DDLogError(@"An error ocurred: %@", error);
+        return NULL;
+    } else {
+        RKObjectMapper* mapper = [RKObjectMapper mapperWithObject:parsedData mappingProvider:self.objectMappingProvider];
+        RKObjectMappingResult* result = [mapper performMapping];
+        return result;
+    }
+}
+
+-(IADevice *)ownDevice
+{
+#warning Implement this properly
+    if(!_ownDevice) {
+        DDLogInfo(@"%@", self.httpServer.publishedName);
+        for(NSNetService * service in self.services) {
+            if(service.hostName && service.port) {
+                if ([self.httpServer.publishedName isEqual:service.name]) {
+                    _ownDevice = [IADevice new];
+                    _ownDevice.name = service.name;
+                    _ownDevice.hostAndPort = [NSString stringWithFormat:@"http://%@:%i/", service.hostName, service.port];
+                    return _ownDevice;
+                }
+            }
+        }
+    }
+    return _ownDevice;
 }
 
 @end

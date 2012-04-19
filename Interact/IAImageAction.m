@@ -12,10 +12,11 @@
 
 @synthesize action = _action;
 @synthesize image = _image;
+@synthesize device = _device;
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"IAImageAction[action: %@, image: %@%]", self.action, self.image];
+    return [NSString stringWithFormat:@"IAImageAction[action: %@, image: %@%, device: %@]", self.action, self.image, self.device];
 }
 
 

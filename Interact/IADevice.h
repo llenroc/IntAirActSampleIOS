@@ -10,7 +10,6 @@
 
 @interface IADevice : NSObject
 
-@property (nonatomic, retain) NSNumber* identifier;
 @property (nonatomic, retain) NSString* name;
 @property (nonatomic, retain) NSString* hostAndPort;
 

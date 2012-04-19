@@ -11,13 +11,10 @@
 @implementation IAImage
 
 @synthesize identifier = _identifier;
-@synthesize name = _name;
-@synthesize location = _location;
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"IAImage[identifier: %@, name: %@%, location: %@]", self.identifier, self.name
-            , self.location];
+    return [NSString stringWithFormat:@"IAImage[identifier: %@]", self.identifier];
 }
 
 @end

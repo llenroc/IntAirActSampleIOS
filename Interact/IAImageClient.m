@@ -14,6 +14,7 @@
 #import "IAInteract.h"
 #import "IAImages.h"
 #import "IAImage.h"
+#import "IADevice.h"
 #import "IAImageAction.h"
 
 @interface IAImageClient ()
@@ -28,26 +29,35 @@
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 
-    RKObjectMapping* imageMapping = [RKObjectMapping mappingForClass:[IAImage class]];
+    RKObjectMapping * imageMapping = [RKObjectMapping mappingForClass:[IAImage class]];
     imageMapping.rootKeyPath = @"images";
     [imageMapping mapKeyPath:@"id" toAttribute:@"identifier"];
-    [imageMapping mapKeyPath:@"name" toAttribute:@"name"];
-    [imageMapping mapKeyPath:@"src" toAttribute:@"location"];
     [interact.objectMappingProvider setMapping:imageMapping forKeyPath:@"images"];
     
-    RKObjectMapping* imageSerialization = [imageMapping inverseMapping];
+    RKObjectMapping * imageSerialization = [imageMapping inverseMapping];
     imageSerialization.rootKeyPath = @"images";
     [interact.objectMappingProvider setSerializationMapping:imageSerialization forClass:[IAImage class]];
     
-    RKObjectMapping* imagesMapping = [RKObjectMapping mappingForClass:[IAImages class]];
+    RKObjectMapping * imagesMapping = [RKObjectMapping mappingForClass:[IAImages class]];
     [imagesMapping hasMany:@"images" withMapping:imageMapping];
-    RKObjectMapping* imagesSerialization = [imagesMapping inverseMapping];
+    RKObjectMapping * imagesSerialization = [imagesMapping inverseMapping];
     [interact.objectMappingProvider setSerializationMapping:imagesSerialization forClass:[IAImages class]];
+    
+    RKObjectMapping * deviceMapping = [RKObjectMapping mappingForClass:[IADevice class]];
+    deviceMapping.rootKeyPath = @"devices";
+    [deviceMapping mapKeyPath:@"hostAndPort" toAttribute:@"hostAndPort"];
+    [deviceMapping mapKeyPath:@"name" toAttribute:@"name"];
+    [interact.objectMappingProvider setMapping:deviceMapping forKeyPath:@"devices"];
+    
+    RKObjectMapping * deviceSerialization = [deviceMapping inverseMapping];
+    deviceSerialization.rootKeyPath = @"devices";
+    [interact.objectMappingProvider setSerializationMapping:deviceSerialization forClass:[IADevice class]];
     
     RKObjectMapping * actionMapping = [RKObjectMapping mappingForClass:[IAImageAction class]];
     actionMapping.rootKeyPath = @"actions";
     [actionMapping mapKeyPath:@"action" toAttribute:@"action"];
     [actionMapping hasOne:@"image" withMapping:imageMapping];
+    [actionMapping hasOne:@"device" withMapping:deviceMapping];
     [interact.objectMappingProvider setMapping:actionMapping forKeyPath:@"actions"];
     
     RKObjectMapping * actionSerialization = [actionMapping inverseMapping];
@@ -101,6 +111,7 @@
         IAImageAction * action = [IAImageAction new];
         action.action = @"display";
         action.image = image;
+        action.device = self.interact.ownDevice;
         [manager putObject:action delegate:nil];
     });
     dispatch_release(queue);

@@ -60,7 +60,7 @@
 {
     if (![_image isEqual:image]) {
         _image = image;
-        self.title = image.name;
+        self.title = [NSString stringWithFormat:@"Image %i", [image.identifier intValue]];
         if (self.imageView.window) {    // we're on screen, so update the image
             [self loadImage];           
         } else {                        // we're not on screen, so no need to loadImage (it will happen next viewWillAppear:)

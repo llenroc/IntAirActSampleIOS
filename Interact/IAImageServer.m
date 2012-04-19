@@ -57,18 +57,20 @@
     
     [app put:@"/images/action" withBlock:^(RouteRequest *request, RouteResponse *response) {
         DDLogVerbose(@"PUT /images/action");
-        RKObjectMappingResult * result = [self parseObject:[request body]];
-        if(!result) {
+        RKObjectMappingResult * result = [self.interact parseObject:[request body]];
+        if(!result && [[result asObject] isKindOfClass:[IAImageAction class]]) {
+            DDLogError(@"Could not parse request body: %@", [request body]);
             response.statusCode = 500;
         } else {
             response.statusCode = 201;
             IAImageAction * action = [result asObject];
-            DDLogVerbose(@"%@", action.image);
+            DDLogVerbose(@"%@", action);
             
             // Show image
             UIStoryboard * storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"UIMainStoryboardFile"] bundle: nil];
             IAImageViewController * t = [storyboard instantiateViewControllerWithIdentifier:@"ImageViewController"];
             t.interact = self.interact;
+            t.device = action.device;
             t.image = action.image;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.navigationController pushViewController:t animated:YES];
@@ -76,8 +78,8 @@
         }
     }];
     
-    [app get:@"/images/:id.:type" withBlock:^(RouteRequest *request, RouteResponse *response) {
-        DDLogVerbose(@"GET /images/%@.%@", [request param:@"id"], [request param:@"type"]);
+    [app get:@"/images/:id.jpg" withBlock:^(RouteRequest *request, RouteResponse *response) {
+        DDLogVerbose(@"GET /images/%@.jpg", [request param:@"id"]);
         
         NSNumber* number = [NSNumber numberWithInt:[[request param:@"id"] intValue]];
         NSData * data = [self.imageProvider imageAsData:number];
@@ -94,32 +96,10 @@
     [app get:@"/images/:id" withBlock:^(RouteRequest *request, RouteResponse *response) {
         DDLogVerbose(@"GET /images/%@", [request param:@"id"]);
         
-        NSNumber* number = [NSNumber numberWithInt:[[request param:@"id"] intValue]];
-        IAImage* image = [self.imageProvider image:number];
+        NSNumber * number = [NSNumber numberWithInt:[[request param:@"id"] intValue]];
+        IAImage * image = [self.imageProvider image:number];
         [response respondWith:image withInteract:self.interact];
     }];
-}
-
--(RKObjectMappingResult*)parseObject:(NSData*)data
-{
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    
-    NSString * bodyAsString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    
-    NSError* error = nil;
-    id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
-    id parsedData = [parser objectFromString:bodyAsString error:&error];
-    
-    if (parsedData == nil && error) {
-        // Parser error...
-        DDLogError(@"An error ocurred: %@", error);
-        return NULL;
-    } else {
-        RKObjectMappingProvider* mappingProvider = self.interact.objectMappingProvider;
-        RKObjectMapper* mapper = [RKObjectMapper mapperWithObject:parsedData mappingProvider:mappingProvider];
-        RKObjectMappingResult* result = [mapper performMapping];
-        return result;
-    }
 }
 
 @end

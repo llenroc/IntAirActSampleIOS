@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-#import "IAServer.h"
+@class IAInteract;
 
-@interface IAImageServer : NSObject <IAServer>
+@interface IAImageServer : NSObject
 
 @property (weak, nonatomic) UINavigationController * navigationController;
+
+-(id)initWithInteract:(IAInteract*)interact;
 
 @end
