@@ -2,6 +2,7 @@
 
 #import <RestKit/RestKit.h>
 
+#import "IADevice.h"
 #import "IAInteract.h"
 #import "IAImage.h"
 #import "IAImageClient.h"
@@ -98,7 +99,15 @@
 -(IBAction)handleSwipe:(UISwipeGestureRecognizer *)sender
 {
     DDLogVerbose(@"Recognized swipe %i", [sender direction]);
-    [self.imageClient displayImage:self.image ofDevice:self.device onDevice:[self.interact.devices lastObject]];
+    if([self.interact.devices count] == 1) {
+        [self.imageClient displayImage:self.image ofDevice:self.device onDevice:[self.interact.devices lastObject]];
+    } else {
+        for(IADevice * dev in self.interact.devices) {
+            if(![dev isEqual:self.interact.ownDevice]) {
+                [self.imageClient displayImage:self.image ofDevice:self.device onDevice:dev];
+            }
+        }
+    }
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
