@@ -95,7 +95,7 @@
 
 -(void)refresh:(NSNotification *)note {
     DDLogVerbose(@"%@: %@, note: %@", THIS_FILE, THIS_METHOD, note);
-    self.devices = self.interact.getDevices;
+    self.devices = self.interact.devices;
 }
 
 -(void)setDevices:(NSArray *)devices

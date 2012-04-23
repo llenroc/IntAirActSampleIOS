@@ -9,9 +9,11 @@
 
 @property (nonatomic, strong) NSMutableDictionary * actions;
 @property (nonatomic, strong) NSMutableDictionary * actionParameters;
+@property (strong) NSMutableDictionary * deviceList;
 @property (nonatomic, strong) NSNetServiceBrowser * netServiceBrowser;
 @property (nonatomic, strong) NSMutableDictionary * objectManagers;
-@property (strong) NSMutableArray * services;
+@property (strong) IADevice * selfDevice;
+@property (strong) NSMutableSet * services;
 
 @end
 
@@ -19,13 +21,14 @@
 
 @synthesize httpServer = _httpServer;
 @synthesize objectMappingProvider = _objectMappingProvider;
-@synthesize ownDevice = _ownDevice;
 @synthesize router = _router;
 
 @synthesize actions = _actions;
 @synthesize actionParameters = _actionParameters;
+@synthesize deviceList = _deviceList;
 @synthesize netServiceBrowser = _netServiceBrowser;
 @synthesize objectManagers = _objectManagers;
+@synthesize selfDevice = _selfDevice;
 @synthesize services = _services;
 
 -(id)init
@@ -35,11 +38,12 @@
     if (self) {
         self.objectMappingProvider = [RKObjectMappingProvider new];
         self.router = [RKObjectRouter new];
-        self.objectManagers = [NSMutableDictionary new];
-        self.services = [NSMutableArray new];
-
+        
+        self.deviceList = [NSMutableDictionary new];
         self.netServiceBrowser = [NSNetServiceBrowser new];
         [self.netServiceBrowser setDelegate:self];
+        self.objectManagers = [NSMutableDictionary new];
+        self.services = [NSMutableSet new];
     }
     return self;
 }
@@ -112,8 +116,7 @@
 
 -(void)netServiceBrowser:(NSNetServiceBrowser *)sender didNotSearch:(NSDictionary *)errorInfo
 {
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-	DDLogError(@"DidNotSearch: %@", errorInfo);
+    DDLogError(@"%@: %@, sender: %@, error: %@", THIS_FILE, THIS_METHOD, sender, errorInfo);
 }
 
 -(void)netServiceBrowser:(NSNetServiceBrowser *)sender
@@ -132,6 +135,7 @@
 {
 	DDLogVerbose(@"DidRemoveService: %@", [netService name]);
     [self.services removeObject:netService];
+    [self.deviceList removeObjectForKey:netService.name];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceUpdate" object:self];
 }
 
@@ -145,6 +149,8 @@
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 	DDLogError(@"DidNotResolve");
     [self.services removeObject:sender];
+    [self.deviceList removeObjectForKey:sender.name];
+
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceUpdate" object:self];
 }
 
@@ -152,25 +158,15 @@
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 	DDLogInfo(@"DidResolve: %@:%i", [sender hostName], [sender port]);
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceUpdate" object:self];
-}
-
--(NSArray *)getDevices
-{
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    NSMutableArray * devices = [NSMutableArray new];
-    for(NSNetService * service in self.services) {
-        if(service.hostName && service.port) {
-            IADevice * device = [IADevice new];
-            device.name = service.name;
-            device.hostAndPort = [NSString stringWithFormat:@"http://%@:%i/", service.hostName, service.port];
-            [devices addObject:device];
-            if ([self.httpServer.publishedName isEqual:service.name]) {
-                self.ownDevice = device;    
-            }
-        }
+    IADevice * device = [IADevice new];
+    device.name = sender.name;
+    device.hostAndPort = [NSString stringWithFormat:@"http://%@:%i/", sender.hostName, sender.port];
+    [self.deviceList setObject:device forKey:device.name];
+    if ([self.httpServer.publishedName isEqual:device.name]) {
+        self.selfDevice = device;
     }
-    return devices;
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceUpdate" object:self];
 }
 
 -(BOOL)start:(NSError **)errPtr;
@@ -228,6 +224,16 @@
     
     RKObjectMapper* mapper = [RKObjectMapper mapperWithObject:dictionary mappingProvider:self.objectMappingProvider];
     return [mapper performMapping];
+}
+
+-(IADevice *)ownDevice
+{
+    return self.selfDevice;
+}
+
+-(NSArray *)devices
+{
+    return [self.deviceList allValues];
 }
 
 @end
