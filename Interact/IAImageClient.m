@@ -87,17 +87,18 @@
     dispatch_release(queue);
 }
 
--(void)displayImage:(IAImage *)image onDevice:(IADevice *)device
+-(void)displayImage:(IAImage *)image ofDevice:(IADevice *)source onDevice:(IADevice *)target
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
     dispatch_queue_t queue = dispatch_queue_create("IAImageClient displayImage", NULL);
     dispatch_async(queue, ^{
-        RKObjectManager * manager = [self.interact objectManagerForDevice:device];
+        RKObjectManager * manager = [self.interact objectManagerForDevice:target];
         IAAction * action = [IAAction new];
         action.action = @"displayImage";
         NSDictionary * imageData = [[self.interact serializerForObject:image] serializedObject:nil];
-        action.parameters = [NSDictionary dictionaryWithKeysAndObjects:@"image", imageData, nil];
+        NSDictionary * sourceDeviceData = [[self.interact serializerForObject:source] serializedObject:nil];
+        action.parameters = [NSDictionary dictionaryWithKeysAndObjects:@"image", imageData, @"device", sourceDeviceData, nil];
         [manager putObject:action delegate:nil];
     });
     dispatch_release(queue);

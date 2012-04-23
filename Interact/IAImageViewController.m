@@ -16,6 +16,7 @@
 
 @implementation IAImageViewController
 
+@synthesize device = _device;
 @synthesize image = _image;
 @synthesize imageClient = _imageClient;
 @synthesize interact = _interact;
@@ -31,7 +32,7 @@
             [self.activity startAnimating];
             dispatch_queue_t imageDownloadQ = dispatch_queue_create("Interact Image Downloader", NULL);
             dispatch_async(imageDownloadQ, ^{
-                RKObjectManager * om = [self.interact objectManagerForDevice:self.image.device];
+                RKObjectManager * om = [self.interact objectManagerForDevice:self.device];
                 NSString * loc = [self.interact resourcePathFor:self.image forObjectManager:om];
                 loc = [loc stringByAppendingString:@".jpg"];
                 RKURL * url = [om.baseURL URLByAppendingResourcePath:loc];
@@ -97,7 +98,7 @@
 -(IBAction)handleSwipe:(UISwipeGestureRecognizer *)sender
 {
     DDLogVerbose(@"Recognized swipe %i", [sender direction]);
-    [self.imageClient displayImage:self.image onDevice:[self.interact.devices lastObject]];
+    [self.imageClient displayImage:self.image ofDevice:self.device onDevice:[self.interact.devices lastObject]];
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

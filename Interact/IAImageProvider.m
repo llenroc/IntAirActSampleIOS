@@ -7,7 +7,6 @@
 
 @interface IAImageProvider ()
 
-@property (nonatomic, strong) IADevice * device;
 @property (nonatomic, strong) NSDictionary * idToImages;
 
 @end
@@ -16,7 +15,6 @@
 
 @synthesize images = _images;
 
-@synthesize device = _device;
 @synthesize idToImages = _idToImages;
 
 +(ALAssetsLibrary *)defaultAssetsLibrary
@@ -29,11 +27,10 @@
     return library; 
 }
 
--(id)initWithDevice:(IADevice*)device
+-(id)init
 {
     self = [super init];
     if (self) {
-        self.device = device;
         [self loadImages];
     }
     return self;
@@ -57,7 +54,6 @@
                     if (rep) {
                         IAImage * image = [IAImage new];
                         image.identifier = [NSNumber numberWithInt:i];
-                        image.device = self.device;
                         [collector addObject:image];
                         [dictionary setObject:asset forKey:image.identifier];
                         i++;

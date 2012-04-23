@@ -29,7 +29,7 @@
     self = [super init];
     if (self) {
         self.interact = interact;
-        self.imageProvider = [[IAImageProvider alloc] initWithDevice:interact.ownDevice];
+        self.imageProvider = [IAImageProvider new];
         [self registerServer:interact.httpServer];
     }
     return self;
@@ -80,6 +80,7 @@
             IAImageViewController * t = [storyboard instantiateViewControllerWithIdentifier:@"ImageViewController"];
             t.interact = self.interact;
             t.image = [[self.interact deserializeDictionary:[action.parameters objectForKey:@"image"]] asObject];
+            t.device =[[self.interact deserializeDictionary:[action.parameters objectForKey:@"device"]] asObject]; 
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.navigationController pushViewController:t animated:YES];
             });
