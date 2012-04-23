@@ -7,8 +7,6 @@
 
 @interface IAInteract ()
 
-@property (nonatomic, strong) NSMutableDictionary * actions;
-@property (nonatomic, strong) NSMutableDictionary * actionParameters;
 @property (strong) NSMutableDictionary * deviceList;
 @property (nonatomic, strong) NSNetServiceBrowser * netServiceBrowser;
 @property (nonatomic, strong) NSMutableDictionary * objectManagers;
@@ -23,8 +21,6 @@
 @synthesize objectMappingProvider = _objectMappingProvider;
 @synthesize router = _router;
 
-@synthesize actions = _actions;
-@synthesize actionParameters = _actionParameters;
 @synthesize deviceList = _deviceList;
 @synthesize netServiceBrowser = _netServiceBrowser;
 @synthesize objectManagers = _objectManagers;
