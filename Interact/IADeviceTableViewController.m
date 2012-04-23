@@ -1,11 +1,3 @@
-//
-//  IADeviceTableViewController.m
-//  Interact
-//
-//  Created by O'Keeffe Arlo Louis on 12-03-19.
-//  Copyright (c) 2012 Fachhochschule Gelsenkirchen Abt. Bocholt. All rights reserved.
-//
-
 #import "IADeviceTableViewController.h"
 
 #import "IADevice.h"
@@ -25,7 +17,6 @@
 
 -(id)initWithStyle:(UITableViewStyle)style
 {
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
@@ -36,12 +27,14 @@
 -(void)viewDidLoad
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+
     [super viewDidLoad];
 }
 
 -(void)viewDidUnload
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+
     [super viewDidUnload];
 }
 
@@ -72,7 +65,8 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    DDLogVerbose(@"%@: %@, segue: %@, sender: %@", THIS_FILE, THIS_METHOD, segue, sender);
+    
     NSIndexPath * indexPath = [self.tableView indexPathForCell:sender];
     IADevice * device = [self.devices objectAtIndex:indexPath.row];
     
@@ -89,7 +83,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    DDLogVerbose(@"%@: %@, animated: %i", THIS_FILE, THIS_METHOD, animated);
     [super viewWillAppear:animated];
 
     // Listens for DeviceUpdate notifications, Interact calls this notification
@@ -99,14 +93,13 @@
     [self.tableView reloadData];
 }
 
--(void)refresh:(NSNotification*)note {
+-(void)refresh:(NSNotification *)note {
     DDLogVerbose(@"%@: %@, note: %@", THIS_FILE, THIS_METHOD, note);
     self.devices = self.interact.getDevices;
 }
 
 -(void)setDevices:(NSArray *)devices
 {
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     if (_devices != devices) {
         _devices = devices;
         // Model changed, so update our View (the table)

@@ -1,11 +1,3 @@
-//
-//  IAImageTableViewController.m
-//  Interact
-//
-//  Created by O'Keeffe Arlo Louis on 12-03-19.
-//  Copyright (c) 2012 Fachhochschule Gelsenkirchen Abt. Bocholt. All rights reserved.
-//
-
 #import "IAImageTableViewController.h"
 #import "IAImage.h"
 #import "IAImageClient.h"
@@ -13,8 +5,8 @@
 
 @interface IAImageTableViewController ()
 
-@property (nonatomic, strong) NSArray * images;
 @property (nonatomic, strong) IAImageClient * imageClient;
+@property (nonatomic, strong) NSArray * images;
 
 @end
 
@@ -23,8 +15,8 @@
 @synthesize device = _device;
 @synthesize interact = _interact;
 
-@synthesize images = _images;
 @synthesize imageClient = _imageClient;
+@synthesize images = _images;
 
 -(id)initWithStyle:(UITableViewStyle)style
 {

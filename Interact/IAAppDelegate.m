@@ -66,6 +66,7 @@
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    [self.interact stop];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -74,7 +75,6 @@
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    [self.interact stop];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -97,6 +97,7 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    
 }
 
 @end

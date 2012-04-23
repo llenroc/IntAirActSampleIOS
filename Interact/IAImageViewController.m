@@ -1,11 +1,3 @@
-//
-//  IAImageViewController.m
-//  Interact
-//
-//  Created by O'Keeffe Arlo Louis on 12-03-20.
-//  Copyright (c) 2012 Fachhochschule Gelsenkirchen Abt. Bocholt. All rights reserved.
-//
-
 #import "IAImageViewController.h"
 
 #import <RestKit/RestKit.h>
@@ -16,30 +8,30 @@
 
 @interface IAImageViewController ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activity;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView * activity;
+@property (nonatomic, weak) IBOutlet UIImageView * imageView;
+
 
 @end
 
 @implementation IAImageViewController
 
-@synthesize interact = _interact;
 @synthesize image = _image;
-@synthesize device = _device;
 @synthesize imageClient = _imageClient;
+@synthesize interact = _interact;
 
-@synthesize imageView = _imageView;
 @synthesize activity = _activity;
+@synthesize imageView = _imageView;
 
 -(void)loadImage
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     if (self.imageView) {
-        if (self.image && self.device) {
+        if (self.image) {
             [self.activity startAnimating];
             dispatch_queue_t imageDownloadQ = dispatch_queue_create("Interact Image Downloader", NULL);
             dispatch_async(imageDownloadQ, ^{
-                RKObjectManager * om = [self.interact objectManagerForDevice:self.device];
+                RKObjectManager * om = [self.interact objectManagerForDevice:self.image.device];
                 NSString * loc = [self.interact resourcePathFor:self.image forObjectManager:om];
                 loc = [loc stringByAppendingString:@".jpg"];
                 RKURL * url = [om.baseURL URLByAppendingResourcePath:loc];

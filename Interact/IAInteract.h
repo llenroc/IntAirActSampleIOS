@@ -1,35 +1,28 @@
-//
-//  IAInteract.h
-//  Interact
-//
-//  Created by O'Keeffe Arlo Louis on 12-03-28.
-//  Copyright (c) 2012 Fachhochschule Gelsenkirchen Abt. Bocholt. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 
-@class RKObjectSerializer;
 @class RKObjectManager;
 @class RKObjectMappingProvider;
-@class RKObjectRouter;
 @class RKObjectMappingResult;
+@class RKObjectRouter;
+@class RKObjectSerializer;
 @class RoutingHTTPServer;
 
 @class IADevice;
 
 @interface IAInteract : NSObject <NSNetServiceBrowserDelegate, NSNetServiceDelegate>
 
-@property (strong, nonatomic) RKObjectMappingProvider * objectMappingProvider;
-@property (strong, nonatomic) RKObjectRouter * router;
-@property (strong, nonatomic) RoutingHTTPServer * httpServer;
-@property (strong, nonatomic) IADevice * ownDevice;
+@property (nonatomic, strong) RoutingHTTPServer * httpServer;
+@property (nonatomic, strong) RKObjectMappingProvider * objectMappingProvider;
+@property (nonatomic, strong) IADevice * ownDevice;
+@property (nonatomic, strong) RKObjectRouter * router;
 
+-(BOOL)start:(NSError **)errPtr;
+-(void)stop;
 -(RKObjectManager *)objectManagerForDevice:(IADevice *)device;
 -(NSString *)resourcePathFor:(NSObject *)resource forObjectManager:(RKObjectManager *)manager;
 -(RKObjectSerializer *)serializerForObject:(id)object;
 -(NSArray *)getDevices;
--(BOOL)start:(NSError **)errPtr;
--(void)stop;
--(RKObjectMappingResult*)deserializeObject:(NSData*)data;
+-(RKObjectMappingResult *)deserializeObject:(NSData *)data;
+-(RKObjectMappingResult *)deserializeDictionary:(NSDictionary *)dictionary;
 
 @end

@@ -1,11 +1,3 @@
-//
-//  RouteResponse+Serializer.m
-//  Interact
-//
-//  Created by O'Keeffe Arlo Louis on 2012-04-18.
-//  Copyright (c) 2012 Fachhochschule Gelsenkirchen Abt. Bocholt. All rights reserved.
-//
-
 #import "RouteResponse+Serializer.h"
 
 #import <RestKit/RestKit.h>
@@ -18,7 +10,7 @@
 {
     RKObjectSerializer* serializer = [interact serializerForObject:data];
     
-    NSError* error = nil;
+    NSError * error = nil;
     id params = [serializer serializationForMIMEType:RKMIMETypeJSON error:&error];
     
     if (error) {

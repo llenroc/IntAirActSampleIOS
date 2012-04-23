@@ -1,19 +1,14 @@
-//
-//  InteractImageServer.m
-//  Interact
-//
-//  Created by O'Keeffe Arlo Louis on 12-03-08.
-//  Copyright (c) 2012 Fachhochschule Gelsenkirchen Abt. Bocholt. All rights reserved.
-//
-
 #import "IAImageProvider.h"
-#import "IAImage.h"
-#include <stdlib.h>
+
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <stdlib.h>
+
+#import "IAImage.h"
 
 @interface IAImageProvider ()
 
-@property (nonatomic) NSDictionary * idToImages;
+@property (nonatomic, strong) IADevice * device;
+@property (nonatomic, strong) NSDictionary * idToImages;
 
 @end
 
@@ -21,6 +16,7 @@
 
 @synthesize images = _images;
 
+@synthesize device = _device;
 @synthesize idToImages = _idToImages;
 
 +(ALAssetsLibrary *)defaultAssetsLibrary
@@ -33,10 +29,11 @@
     return library; 
 }
 
--(id)init
+-(id)initWithDevice:(IADevice*)device
 {
     self = [super init];
     if (self) {
+        self.device = device;
         [self loadImages];
     }
     return self;
@@ -60,6 +57,7 @@
                     if (rep) {
                         IAImage * image = [IAImage new];
                         image.identifier = [NSNumber numberWithInt:i];
+                        image.device = self.device;
                         [collector addObject:image];
                         [dictionary setObject:asset forKey:image.identifier];
                         i++;
@@ -70,7 +68,6 @@
         
         self.images = collector;
         self.idToImages = dictionary;
-        DDLogVerbose(@"%@", collector);
     } failureBlock:^(NSError * error) {
         DDLogError(@"Couldn't load assets: %@", error);
     }];
