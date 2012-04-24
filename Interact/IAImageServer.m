@@ -67,15 +67,13 @@
         DDLogVerbose(@"PUT /action/displayImage");
         
         RKObjectMappingResult * result = [self.interact deserializeObject:[request body]];
-        DDLogVerbose(@"Mapping result as Object: %@", [result asObject]);
         if(!result && [[result asObject] isKindOfClass:[IAAction class]]) {
             DDLogError(@"Could not parse request body: %@", [request bodyAsString]);
             response.statusCode = 500;
         } else {
             response.statusCode = 201;
             IAAction * action = [result asObject];
-            DDLogVerbose(@"%@", action);
-            
+
             // Show image
             UIStoryboard * storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"UIMainStoryboardFile"] bundle: nil];
             IAImageViewController * t = [storyboard instantiateViewControllerWithIdentifier:@"ImageViewController"];

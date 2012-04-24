@@ -10,5 +10,6 @@
 -(CLLocation *)currentLocation;
 -(UIInterfaceOrientation)currentOrientation;
 -(CMDeviceMotion *)deviceMotion;
+-(float)realAngle:(float)angle;
 
 @end

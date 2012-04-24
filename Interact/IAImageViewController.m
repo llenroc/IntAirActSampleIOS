@@ -100,64 +100,8 @@
 
 -(IBAction)handleSwipe:(IASwipeGestureRecognizer *)sender
 {
-    // this is the swipe direction, it is in [-pi,pi]
-    float angle = [sender touchAngle];
+    float angle = [self.interact.locator realAngle:[sender touchAngle]];
     //DDLogVerbose(@"Angle: %f", angle);
-    
-    // change the angle to be from [0,2*pi]
-    if (angle < 0) {
-        angle += M_PI * 2;
-    }
-    //DDLogVerbose(@"Angle: %f", angle);
-    
-    // rotate it by 90 to the left so that a swipe up is 0
-    angle -= M_PI_2;
-    //DDLogVerbose(@"Angle: %f", angle);
-    
-    // if the angle is less than zero make it that its in [0,2*pi] again
-    if (angle < 0) {
-        angle += M_PI * 2;
-    }
-    //DDLogVerbose(@"Angle: %f", angle);
-
-    float heading = [self.interact.locator currentHeading] / 180 * M_PI;
-    //DDLogVerbose(@"Heading: %f", heading);
-    
-    // subtract the heading to make the angle point north
-    angle -= heading;
-    //DDLogVerbose(@"Angle: %f", angle);
-    
-    // if the angle is less than zero make it that its in [0,2*pi] again
-    if (angle < 0) {
-        angle += M_PI * 2;
-    }
-    //DDLogVerbose(@"Angle: %f", angle);
-    
-    // account for device orientation
-    switch([self.interact.locator currentOrientation]) {
-        case UIInterfaceOrientationPortrait:
-            break;
-        case UIInterfaceOrientationLandscapeLeft:
-            // the device has been rotated to the right, thus the interface has been rotated to the left
-            angle -= M_PI_2 * 3;
-            break;
-        case UIInterfaceOrientationPortraitUpsideDown:
-            angle -= M_PI;
-            break;
-        case UIInterfaceOrientationLandscapeRight:
-            angle -= M_PI_2;
-            // the device has been rotated to the left, thus the interface has been rotated to the right
-            break;
-    }
-    //DDLogVerbose(@"Angle: %f", angle);
-    
-    // if the angle is less than zero make it that its in [0,2*pi] again
-    if (angle < 0) {
-        angle += M_PI * 2;
-    }
-    //DDLogVerbose(@"Angle: %f", angle);
-    
-    //DDLogVerbose(@"You swiped at %f", angle * 180 / M_PI);
     
     if([self.interact.devices count] == 1) {
         [self.imageClient displayImage:self.image ofDevice:self.device onDevice:[self.interact.devices lastObject]];
@@ -178,13 +122,6 @@
         if (dev) {
             [self.imageClient displayImage:self.image ofDevice:self.device onDevice:dev];
         }
-        /*
-        for(IADevice * dev in self.interact.devices) {
-            if(![dev isEqual:self.interact.ownDevice]) {
-                [self.imageClient displayImage:self.image ofDevice:self.device onDevice:dev];
-            }
-        }
-         */
     }
 }
 

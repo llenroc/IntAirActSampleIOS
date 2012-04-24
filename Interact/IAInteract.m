@@ -2,6 +2,7 @@
 
 #import <RestKit/RestKit.h>
 #import <RoutingHTTPServer/RoutingHTTPServer.h>
+#import <RestKit+Blocks/RKObjectManager+Blocks.h>
 
 #import "IAAction.h"
 #import "IADevice.h"
@@ -301,6 +302,26 @@
 -(IALocator *)locator
 {
     return self.privLocator;
+}
+
+-(void)callAction:(IAAction *)action onDevice:(IADevice *)device
+{
+    dispatch_queue_t queue = dispatch_queue_create("IAInteract callAction", NULL);
+    dispatch_async(queue, ^{
+        RKObjectManager * manager = [self objectManagerForDevice:device];
+        [manager putObject:action delegate:nil];
+    });
+    dispatch_release(queue);
+}
+
+-(void)loadObjectsAtResourcePath:(NSString *)resourcePath fromDevice:(IADevice *)device handler:(void (^)(RKObjectLoader *, NSError *))handler
+{
+    dispatch_queue_t queue = dispatch_queue_create("IAImageClient getImages", NULL);
+    dispatch_async(queue, ^{
+        RKObjectManager * manager = [self objectManagerForDevice:device];
+        [manager loadObjectsAtResourcePath:@"/images" handler:handler];
+    });
+    dispatch_release(queue);
 }
 
 @end

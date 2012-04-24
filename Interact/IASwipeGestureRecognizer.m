@@ -43,7 +43,16 @@
 
 -(float)touchAngle
 {
-    return atan2(-(endPoint.y - startPoint.y), endPoint.x - startPoint.x);
+    // this is the swipe direction, it is in [-pi,pi]
+    float angle = atan2(-(endPoint.y - startPoint.y), endPoint.x - startPoint.x);
+    
+    // change the angle to be from [0,2*pi]
+    if (angle < 0) {
+        angle += M_PI * 2;
+    }
+    //DDLogVerbose(@"Angle: %f", angle);
+
+    return angle;
 }
 
 @end

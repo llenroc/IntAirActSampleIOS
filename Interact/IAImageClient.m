@@ -1,7 +1,6 @@
 #import "IAImageClient.h"
 
-#import <RestKit+Blocks/RKObjectManager+Blocks.h>
-#import <RestKit+Blocks/RKClient+Blocks.h>
+#import <RestKit/RestKit.h>
 
 #import "IAInteract.h"
 #import "IAAction.h"
@@ -53,35 +52,25 @@
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
-    dispatch_queue_t queue = dispatch_queue_create("IAImageClient getImages", NULL);
-    dispatch_async(queue, ^{
-        RKObjectManager * manager = [self.interact objectManagerForDevice:device];
-        [manager loadObjectsAtResourcePath:@"/images" handler:^(RKObjectLoader *loader, NSError *error) {
-            if(!error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    block([[loader result] asCollection]);
-                });
-            } else {
-                DDLogError(@"An error ocurred while getting images: %@", error);
-            }
-        }];
-    });
-    dispatch_release(queue);
+    [self.interact loadObjectsAtResourcePath:@"/images" fromDevice:device handler:^(RKObjectLoader *loader, NSError *error) {
+        if(!error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                block([[loader result] asCollection]);
+            });
+        } else {
+            DDLogError(@"An error ocurred while getting images: %@", error);
+        }
+    }];
 }
 
 -(void)displayImage:(IAImage *)image ofDevice:(IADevice *)source onDevice:(IADevice *)target
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
-    dispatch_queue_t queue = dispatch_queue_create("IAImageClient displayImage", NULL);
-    dispatch_async(queue, ^{
-        RKObjectManager * manager = [self.interact objectManagerForDevice:target];
-        IAAction * action = [IAAction new];
-        action.action = @"displayImage";
-        action.parameters = [NSDictionary dictionaryWithKeysAndObjects:@"image", image, @"device", source, nil];
-        [manager putObject:action delegate:nil];
-    });
-    dispatch_release(queue);
+    IAAction * action = [IAAction new];
+    action.action = @"displayImage";
+    action.parameters = [NSDictionary dictionaryWithObjectsAndKeys:image, @"image", source, @"device", nil];
+    [self.interact callAction:action onDevice:target];
 }
 
 @end

@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 
+@class RKObjectLoader;
 @class RKObjectManager;
 @class RKObjectMappingProvider;
 @class RKObjectMappingResult;
@@ -7,6 +8,7 @@
 @class RKObjectSerializer;
 @class RoutingHTTPServer;
 
+@class IAAction;
 @class IADevice;
 @class IALocator;
 
@@ -26,5 +28,7 @@
 -(RKObjectMappingResult *)deserializeDictionary:(NSDictionary *)dictionary;
 -(IADevice *)ownDevice;
 -(IALocator *)locator;
+-(void)callAction:(IAAction *)action onDevice:(IADevice *)device;
+-(void)loadObjectsAtResourcePath:(NSString*)resourcePath fromDevice:(IADevice *)device handler:(void (^)(RKObjectLoader *loader, NSError *error))handler;
 
 @end
