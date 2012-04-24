@@ -7,7 +7,7 @@
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"Device[name: %@, hostAndPort: %@]", self.name, self.hostAndPort];
+    return [NSString stringWithFormat:@"IADevice[name: %@, hostAndPort: %@]", self.name, self.hostAndPort];
 }
 
 -(BOOL)isEqual:(id)object

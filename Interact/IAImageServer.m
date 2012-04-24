@@ -67,6 +67,7 @@
         DDLogVerbose(@"PUT /action/displayImage");
         
         RKObjectMappingResult * result = [self.interact deserializeObject:[request body]];
+        DDLogVerbose(@"Mapping result as Object: %@", [result asObject]);
         if(!result && [[result asObject] isKindOfClass:[IAAction class]]) {
             DDLogError(@"Could not parse request body: %@", [request bodyAsString]);
             response.statusCode = 500;
@@ -79,8 +80,8 @@
             UIStoryboard * storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"UIMainStoryboardFile"] bundle: nil];
             IAImageViewController * t = [storyboard instantiateViewControllerWithIdentifier:@"ImageViewController"];
             t.interact = self.interact;
-            t.image = [[self.interact deserializeDictionary:[action.parameters objectForKey:@"image"]] asObject];
-            t.device =[[self.interact deserializeDictionary:[action.parameters objectForKey:@"device"]] asObject]; 
+            t.image = [action.parameters objectForKey:@"image"];
+            t.device =[action.parameters objectForKey:@"device"];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.navigationController pushViewController:t animated:YES];
             });

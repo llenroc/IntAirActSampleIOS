@@ -3,6 +3,7 @@
 #import <RestKit/RestKit.h>
 #import <RoutingHTTPServer/RoutingHTTPServer.h>
 
+#import "IAAction.h"
 #import "IADevice.h"
 #import "IALocator.h"
 
@@ -44,8 +45,59 @@
         self.objectManagers = [NSMutableDictionary new];
         self.privLocator = [IALocator new];
         self.services = [NSMutableSet new];
+        
+        [self setup];
     }
     return self;
+}
+
+-(void)setup
+{
+    RKObjectMapping * deviceMapping = [RKObjectMapping mappingForClass:[IADevice class]];
+    [deviceMapping mapAttributes:@"name", @"hostAndPort", nil];
+    [self.objectMappingProvider setMapping:deviceMapping forKeyPath:@"devices"];
+    
+    RKObjectMapping * deviceSerialization = [deviceMapping inverseMapping];
+    deviceSerialization.rootKeyPath = @"devices";
+    [self.objectMappingProvider setSerializationMapping:deviceSerialization forClass:[IADevice class]];
+    
+    RKObjectMapping * actionSerialization = [RKObjectMapping mappingForClass:[NSDictionary class]];
+    actionSerialization.rootKeyPath = @"actions";
+    [actionSerialization mapAttributes:@"action", @"parameters", nil];
+    [self.objectMappingProvider setSerializationMapping:actionSerialization forClass:[IAAction class]];
+    
+    RKObjectMapping * actionMapping = [RKObjectMapping mappingForClass:[IAAction class]];
+    [actionMapping mapAttributes:@"action", nil];
+    RKDynamicObjectMapping * parametersMapping = [RKDynamicObjectMapping dynamicMappingUsingBlock:^(RKDynamicObjectMapping *dynamicMapping) {
+        dynamicMapping.objectMappingForDataBlock = ^ RKObjectMapping* (id mappableData) {
+            NSDictionary * allRegisteredMappings = [self.objectMappingProvider mappingsByKeyPath];
+            RKObjectMapping * mapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
+            for(NSString * parameterName in [mappableData allKeys]) {
+                NSDictionary * parameterDic = [mappableData valueForKey:parameterName];
+                if(!parameterDic || ![parameterDic allKeys] || [[parameterDic allKeys] count] != 1) {
+                    continue;
+                }
+                NSString * rootKeyPath = [[parameterDic allKeys] objectAtIndex:0];
+                if (!rootKeyPath) {
+                    continue;
+                }
+                RKObjectMapping * originalMapping = [allRegisteredMappings valueForKey:rootKeyPath];
+                if(!originalMapping) {
+                    continue;
+                }
+                RKObjectMapping * nestedMapping = [RKObjectMapping mappingForClass:originalMapping.objectClass];
+                for(RKObjectAttributeMapping * attributeMapping in originalMapping.attributeMappings) {
+                    [nestedMapping mapKeyPath:[rootKeyPath stringByAppendingFormat:@".%@", attributeMapping.sourceKeyPath] toAttribute:attributeMapping.destinationKeyPath];
+                }
+                [mapping hasOne:parameterName withMapping:nestedMapping];
+            }
+            return mapping;
+        };
+    }];
+    [actionMapping hasMany:@"parameters" withMapping:parametersMapping];
+    [self.objectMappingProvider setMapping:actionMapping forKeyPath:@"actions"];
+    
+    [self.router routeClass:[IAAction class] toResourcePath:@"/action/:action" forMethod:RKRequestMethodPUT];
 }
 
 -(RKObjectManager *)objectManagerForDevice:(IADevice *)device

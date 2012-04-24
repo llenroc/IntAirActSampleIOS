@@ -8,6 +8,8 @@
 
 #import "IAAppDelegate.h"
 
+#import <RestKit/RestKit.h>
+
 #import "IAInteract.h"
 #import "IAImageClient.h"
 #import "IAImageServer.h"

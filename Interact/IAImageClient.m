@@ -31,31 +31,13 @@
     imageSerialization.rootKeyPath = @"images";
     [interact.objectMappingProvider setSerializationMapping:imageSerialization forClass:[IAImage class]];
     
-    // This is a workaround for serializing arrays of images
-    RKObjectMapping * imagesMapping = [RKObjectMapping mappingForClass:[IAImages class]];
-    [imagesMapping hasMany:@"images" withMapping:imageMapping];
-    RKObjectMapping * imagesSerialization = [imagesMapping inverseMapping];
+    // This is a workaround for serializing arrays of images, see https://github.com/RestKit/RestKit/issues/398
+    RKObjectMapping * imagesSerialization = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
+    [imagesSerialization hasMany:@"images" withMapping:imageSerialization];
     [interact.objectMappingProvider setSerializationMapping:imagesSerialization forClass:[IAImages class]];
-    
-    RKObjectMapping * deviceMapping = [RKObjectMapping mappingForClass:[IADevice class]];
-    [deviceMapping mapAttributes:@"name", @"hostAndPort", nil];
-    [interact.objectMappingProvider setMapping:deviceMapping forKeyPath:@"devices"];
-    
-    RKObjectMapping * deviceSerialization = [deviceMapping inverseMapping];
-    deviceSerialization.rootKeyPath = @"devices";
-    [interact.objectMappingProvider setSerializationMapping:deviceSerialization forClass:[IADevice class]];
-    
-    RKObjectMapping * actionMapping = [RKObjectMapping mappingForClass:[IAAction class]];
-    [actionMapping mapAttributes:@"action", @"parameters", nil];
-    [interact.objectMappingProvider setMapping:actionMapping forKeyPath:@"actions"];
-    
-    RKObjectMapping * actionSerialization = [actionMapping inverseMapping];
-    actionSerialization.rootKeyPath = @"actions";
-    [interact.objectMappingProvider setSerializationMapping:actionSerialization forClass:[IAAction class]];
     
     // setup routes
     [interact.router routeClass:[IAImage class] toResourcePath:@"/image/:identifier"];
-    [interact.router routeClass:[IAAction class] toResourcePath:@"/action/:action" forMethod:RKRequestMethodPUT];
 }
 
 -(id)initWithInteract:(IAInteract *)interact

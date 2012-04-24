@@ -64,6 +64,7 @@
         
         self.images = collector;
         self.idToImages = dictionary;
+        DDLogVerbose(@"Loaded images");
     } failureBlock:^(NSError * error) {
         DDLogError(@"Couldn't load assets: %@", error);
     }];
