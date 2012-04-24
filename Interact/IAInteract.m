@@ -4,12 +4,14 @@
 #import <RoutingHTTPServer/RoutingHTTPServer.h>
 
 #import "IADevice.h"
+#import "IALocator.h"
 
 @interface IAInteract ()
 
 @property (strong) NSMutableDictionary * deviceList;
 @property (nonatomic, strong) NSNetServiceBrowser * netServiceBrowser;
 @property (nonatomic, strong) NSMutableDictionary * objectManagers;
+@property (nonatomic, strong) IALocator * privLocator;
 @property (strong) IADevice * selfDevice;
 @property (strong) NSMutableSet * services;
 
@@ -22,6 +24,7 @@
 @synthesize router = _router;
 
 @synthesize deviceList = _deviceList;
+@synthesize privLocator = _privLocator;
 @synthesize netServiceBrowser = _netServiceBrowser;
 @synthesize objectManagers = _objectManagers;
 @synthesize selfDevice = _selfDevice;
@@ -39,6 +42,7 @@
         self.netServiceBrowser = [NSNetServiceBrowser new];
         [self.netServiceBrowser setDelegate:self];
         self.objectManagers = [NSMutableDictionary new];
+        self.privLocator = [IALocator new];
         self.services = [NSMutableSet new];
     }
     return self;
@@ -178,6 +182,7 @@
             *errPtr = error;
         return NO;
     }
+    [self.locator startTracking];
     [self.netServiceBrowser searchForServicesOfType:@"_interact._tcp." inDomain:@"local."];
     return YES;
 }
@@ -230,6 +235,11 @@
 -(NSArray *)devices
 {
     return [self.deviceList allValues];
+}
+
+-(IALocator *)locator
+{
+    return self.privLocator;
 }
 
 @end

@@ -8,6 +8,7 @@
 @class RoutingHTTPServer;
 
 @class IADevice;
+@class IALocator;
 
 @interface IAInteract : NSObject <NSNetServiceBrowserDelegate, NSNetServiceDelegate>
 
@@ -24,5 +25,6 @@
 -(RKObjectMappingResult *)deserializeObject:(NSData *)data;
 -(RKObjectMappingResult *)deserializeDictionary:(NSDictionary *)dictionary;
 -(IADevice *)ownDevice;
+-(IALocator *)locator;
 
 @end

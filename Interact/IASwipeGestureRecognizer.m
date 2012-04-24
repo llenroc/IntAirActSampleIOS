@@ -1,7 +1,5 @@
 #import "IASwipeGestureRecognizer.h"
 
-#import <math.h>
-
 @interface IASwipeGestureRecognizer () {
     CGPoint startPoint;
     CGPoint endPoint;
@@ -45,7 +43,7 @@
 
 -(float)touchAngle
 {
-    return atan2(endPoint.y - startPoint.y, endPoint.x - startPoint.x);
+    return atan2(-(endPoint.y - startPoint.y), endPoint.x - startPoint.x);
 }
 
 @end

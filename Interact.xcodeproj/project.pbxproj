@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		270EAA291545C81000880DFD /* RouteRequest+BodyAsString.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EAA281545C81000880DFD /* RouteRequest+BodyAsString.m */; };
 		270EAA821546170900880DFD /* IASwipeGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EAA811546170900880DFD /* IASwipeGestureRecognizer.m */; };
+		270EAA85154628F600880DFD /* IALocator.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EAA84154628F600880DFD /* IALocator.m */; };
+		270EAA8715462A5500880DFD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270EAA8615462A5400880DFD /* CoreLocation.framework */; };
+		270EAA8815462B4900880DFD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270EAA8615462A5400880DFD /* CoreLocation.framework */; };
 		2719BE931518EDCF00B12461 /* IAImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BE921518EDCF00B12461 /* IAImage.m */; };
 		2719BE961518EEEA00B12461 /* IAImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BE951518EEEA00B12461 /* IAImageViewController.m */; };
 		2719BEA31518F14300B12461 /* IAImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BEA01518F14300B12461 /* IAImageProvider.m */; };
@@ -62,6 +65,7 @@
 		27DAC3B41523EC9E00622A50 /* RoutingHTTPServer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 275332E31523E006002B0E6E /* RoutingHTTPServer.framework */; };
 		27DAC3C41523EF6900622A50 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27DAC3C31523EF6900622A50 /* RestKit.framework */; };
 		27DAC3C51523EF6900622A50 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27DAC3C31523EF6900622A50 /* RestKit.framework */; };
+		27E468081546353A009B342E /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E468071546353A009B342E /* CoreMotion.framework */; };
 		27FCB5E4153CACD1004BBA84 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FCB5E3153CACD1004BBA84 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +84,9 @@
 		270EAA281545C81000880DFD /* RouteRequest+BodyAsString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RouteRequest+BodyAsString.m"; sourceTree = "<group>"; };
 		270EAA801546170800880DFD /* IASwipeGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASwipeGestureRecognizer.h; sourceTree = "<group>"; };
 		270EAA811546170900880DFD /* IASwipeGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASwipeGestureRecognizer.m; sourceTree = "<group>"; };
+		270EAA83154628F600880DFD /* IALocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IALocator.h; sourceTree = "<group>"; };
+		270EAA84154628F600880DFD /* IALocator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IALocator.m; sourceTree = "<group>"; };
+		270EAA8615462A5400880DFD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2719BE911518EDCF00B12461 /* IAImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImage.h; sourceTree = "<group>"; };
 		2719BE921518EDCF00B12461 /* IAImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImage.m; sourceTree = "<group>"; };
 		2719BE941518EEEA00B12461 /* IAImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageViewController.h; sourceTree = "<group>"; };
@@ -134,6 +141,7 @@
 		27BB876E1524175A002112F2 /* IAInteract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAInteract.h; sourceTree = "<group>"; };
 		27BB876F1524175A002112F2 /* IAInteract.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAInteract.m; sourceTree = "<group>"; };
 		27DAC3C31523EF6900622A50 /* RestKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RestKit.framework; path = Frameworks/RestKit.framework; sourceTree = "<group>"; };
+		27E468071546353A009B342E /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		27FCB5E3153CACD1004BBA84 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -149,6 +157,8 @@
 				275332E11523DFE5002B0E6E /* CocoaLumberjack.framework in Frameworks */,
 				2779AB9E1517ACE400AE4EE6 /* CoreData.framework in Frameworks */,
 				2779AAFA1517A8B200AE4EE6 /* CoreGraphics.framework in Frameworks */,
+				270EAA8815462B4900880DFD /* CoreLocation.framework in Frameworks */,
+				27E468081546353A009B342E /* CoreMotion.framework in Frameworks */,
 				2779AAF81517A8B200AE4EE6 /* Foundation.framework in Frameworks */,
 				2779AB9C1517ACDE00AE4EE6 /* libxml2.dylib in Frameworks */,
 				273166011517BD14005439AE /* MobileCoreServices.framework in Frameworks */,
@@ -174,6 +184,7 @@
 				27DAC3B31523EC9A00622A50 /* CocoaLumberjack.framework in Frameworks */,
 				27DAC3AC1523EC1800622A50 /* CoreData.framework in Frameworks */,
 				27A43881153F3C4600E82728 /* CoreGraphics.framework in Frameworks */,
+				270EAA8715462A5500880DFD /* CoreLocation.framework in Frameworks */,
 				2779AB191517A8B200AE4EE6 /* Foundation.framework in Frameworks */,
 				27DAC3AF1523EC3800622A50 /* libxml2.dylib in Frameworks */,
 				27DAC3AD1523EC2300622A50 /* MobileCoreServices.framework in Frameworks */,
@@ -268,6 +279,8 @@
 				275332DE1523DFE5002B0E6E /* CocoaLumberjack.framework */,
 				2779AB9D1517ACE400AE4EE6 /* CoreData.framework */,
 				2779AAF91517A8B200AE4EE6 /* CoreGraphics.framework */,
+				270EAA8615462A5400880DFD /* CoreLocation.framework */,
+				27E468071546353A009B342E /* CoreMotion.framework */,
 				2779AAF71517A8B200AE4EE6 /* Foundation.framework */,
 				2779AB9B1517ACDE00AE4EE6 /* libxml2.dylib */,
 				273166001517BD14005439AE /* MobileCoreServices.framework */,
@@ -331,6 +344,8 @@
 			children = (
 				27BB876E1524175A002112F2 /* IAInteract.h */,
 				27BB876F1524175A002112F2 /* IAInteract.m */,
+				270EAA83154628F600880DFD /* IALocator.h */,
+				270EAA84154628F600880DFD /* IALocator.m */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -460,6 +475,7 @@
 				27A4387C153F18BA00E82728 /* RouteResponse+Serializer.m in Sources */,
 				270EAA291545C81000880DFD /* RouteRequest+BodyAsString.m in Sources */,
 				270EAA821546170900880DFD /* IASwipeGestureRecognizer.m in Sources */,
+				270EAA85154628F600880DFD /* IALocator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
