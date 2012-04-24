@@ -78,9 +78,7 @@
         RKObjectManager * manager = [self.interact objectManagerForDevice:target];
         IAAction * action = [IAAction new];
         action.action = @"displayImage";
-        NSDictionary * imageData = [[self.interact serializerForObject:image] serializedObject:nil];
-        NSDictionary * sourceDeviceData = [[self.interact serializerForObject:source] serializedObject:nil];
-        action.parameters = [NSDictionary dictionaryWithKeysAndObjects:@"image", imageData, @"device", sourceDeviceData, nil];
+        action.parameters = [NSDictionary dictionaryWithKeysAndObjects:@"image", image, @"device", source, nil];
         [manager putObject:action delegate:nil];
     });
     dispatch_release(queue);

@@ -63,7 +63,19 @@
     
     RKObjectMapping * actionSerialization = [RKObjectMapping mappingForClass:[NSDictionary class]];
     actionSerialization.rootKeyPath = @"actions";
-    [actionSerialization mapAttributes:@"action", @"parameters", nil];
+    [actionSerialization mapAttributes:@"action", nil];
+    RKDynamicObjectMapping * parametersSerialization = [RKDynamicObjectMapping dynamicMappingUsingBlock:^(RKDynamicObjectMapping *dynamicMapping) {
+        dynamicMapping.objectMappingForDataBlock = ^ RKObjectMapping* (id mappableData) {
+            RKObjectMapping * mapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
+            for(NSString * parameterName in [mappableData allKeys]) {
+                id value = [mappableData valueForKey:parameterName];
+                RKObjectMapping * serializationMapping = [self.objectMappingProvider serializationMappingForClass:[value class]];
+                [mapping mapKeyPath:parameterName toRelationship:[serializationMapping.rootKeyPath stringByAppendingFormat:@"-%@", parameterName] withMapping:serializationMapping];
+            }
+            return mapping;
+        };
+    }];
+    [actionSerialization hasMany:@"parameters" withMapping:parametersSerialization];
     [self.objectMappingProvider setSerializationMapping:actionSerialization forClass:[IAAction class]];
     
     RKObjectMapping * actionMapping = [RKObjectMapping mappingForClass:[IAAction class]];
@@ -72,24 +84,21 @@
         dynamicMapping.objectMappingForDataBlock = ^ RKObjectMapping* (id mappableData) {
             NSDictionary * allRegisteredMappings = [self.objectMappingProvider mappingsByKeyPath];
             RKObjectMapping * mapping = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
-            for(NSString * parameterName in [mappableData allKeys]) {
-                NSDictionary * parameterDic = [mappableData valueForKey:parameterName];
-                if(!parameterDic || ![parameterDic allKeys] || [[parameterDic allKeys] count] != 1) {
+            for(NSString * key in [mappableData allKeys]) {
+                NSArray * keyComponents = [key componentsSeparatedByString:@"-"];
+                NSString * rootKeyPath = [keyComponents objectAtIndex:0];
+                if (!rootKeyPath) {
                     continue;
                 }
-                NSString * rootKeyPath = [[parameterDic allKeys] objectAtIndex:0];
-                if (!rootKeyPath) {
+                NSString * parameterName = [keyComponents objectAtIndex:1];
+                if (!parameterName) {
                     continue;
                 }
                 RKObjectMapping * originalMapping = [allRegisteredMappings valueForKey:rootKeyPath];
                 if(!originalMapping) {
                     continue;
                 }
-                RKObjectMapping * nestedMapping = [RKObjectMapping mappingForClass:originalMapping.objectClass];
-                for(RKObjectAttributeMapping * attributeMapping in originalMapping.attributeMappings) {
-                    [nestedMapping mapKeyPath:[rootKeyPath stringByAppendingFormat:@".%@", attributeMapping.sourceKeyPath] toAttribute:attributeMapping.destinationKeyPath];
-                }
-                [mapping hasOne:parameterName withMapping:nestedMapping];
+                [mapping mapKeyPath:key toRelationship:parameterName withMapping:originalMapping];
             }
             return mapping;
         };
