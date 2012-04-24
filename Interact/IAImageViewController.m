@@ -6,6 +6,7 @@
 #import "IAInteract.h"
 #import "IAImage.h"
 #import "IAImageClient.h"
+#import "IASwipeGestureRecognizer.h"
 
 @interface IAImageViewController ()
 
@@ -29,7 +30,7 @@
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     if (self.imageView) {
-        if (self.image) {
+        if (self.image && self.device) {
             [self.activity startAnimating];
             dispatch_queue_t imageDownloadQ = dispatch_queue_create("Interact Image Downloader", NULL);
             dispatch_async(imageDownloadQ, ^{
@@ -70,19 +71,19 @@
     
     int numberOfTouches = 1;
     
-    UISwipeGestureRecognizer * swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    IASwipeGestureRecognizer * swipeUp = [[IASwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     swipeUp.direction = UISwipeGestureRecognizerDirectionUp;
     swipeUp.numberOfTouchesRequired = numberOfTouches;
     
-    UISwipeGestureRecognizer * swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    IASwipeGestureRecognizer * swipeDown = [[IASwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     swipeDown.direction = UISwipeGestureRecognizerDirectionDown;
     swipeDown.numberOfTouchesRequired = numberOfTouches;
     
-    UISwipeGestureRecognizer * swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    IASwipeGestureRecognizer * swipeRight = [[IASwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     swipeRight.direction = UISwipeGestureRecognizerDirectionRight;
     swipeRight.numberOfTouchesRequired = numberOfTouches;
     
-    UISwipeGestureRecognizer * swipeLeft = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    IASwipeGestureRecognizer * swipeLeft = [[IASwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
     swipeLeft.direction = UISwipeGestureRecognizerDirectionLeft;
     swipeLeft.numberOfTouchesRequired = numberOfTouches;
     
@@ -96,9 +97,10 @@
     }
 }
 
--(IBAction)handleSwipe:(UISwipeGestureRecognizer *)sender
+-(IBAction)handleSwipe:(IASwipeGestureRecognizer *)sender
 {
     DDLogVerbose(@"Recognized swipe %i", [sender direction]);
+    DDLogVerbose(@"%f", [sender touchAngle]);
     if([self.interact.devices count] == 1) {
         [self.imageClient displayImage:self.image ofDevice:self.device onDevice:[self.interact.devices lastObject]];
     } else {
@@ -117,8 +119,8 @@
 
 -(void)viewDidUnload
 {
-    self.imageView = nil;
     self.activity = nil;
+    self.imageView = nil;
     [super viewDidUnload];
 }
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		270EAA291545C81000880DFD /* RouteRequest+BodyAsString.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EAA281545C81000880DFD /* RouteRequest+BodyAsString.m */; };
+		270EAA821546170900880DFD /* IASwipeGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EAA811546170900880DFD /* IASwipeGestureRecognizer.m */; };
 		2719BE931518EDCF00B12461 /* IAImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BE921518EDCF00B12461 /* IAImage.m */; };
 		2719BE961518EEEA00B12461 /* IAImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BE951518EEEA00B12461 /* IAImageViewController.m */; };
 		2719BEA31518F14300B12461 /* IAImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BEA01518F14300B12461 /* IAImageProvider.m */; };
@@ -77,6 +78,8 @@
 /* Begin PBXFileReference section */
 		270EAA271545C81000880DFD /* RouteRequest+BodyAsString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RouteRequest+BodyAsString.h"; sourceTree = "<group>"; };
 		270EAA281545C81000880DFD /* RouteRequest+BodyAsString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RouteRequest+BodyAsString.m"; sourceTree = "<group>"; };
+		270EAA801546170800880DFD /* IASwipeGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASwipeGestureRecognizer.h; sourceTree = "<group>"; };
+		270EAA811546170900880DFD /* IASwipeGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASwipeGestureRecognizer.m; sourceTree = "<group>"; };
 		2719BE911518EDCF00B12461 /* IAImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImage.h; sourceTree = "<group>"; };
 		2719BE921518EDCF00B12461 /* IAImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImage.m; sourceTree = "<group>"; };
 		2719BE941518EEEA00B12461 /* IAImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageViewController.h; sourceTree = "<group>"; };
@@ -215,6 +218,8 @@
 				2719BE951518EEEA00B12461 /* IAImageViewController.m */,
 				2719BEAC1518F53100B12461 /* IAImageClient.h */,
 				2719BEAD1518F53100B12461 /* IAImageClient.m */,
+				270EAA801546170800880DFD /* IASwipeGestureRecognizer.h */,
+				270EAA811546170900880DFD /* IASwipeGestureRecognizer.m */,
 			);
 			name = Client;
 			sourceTree = "<group>";
@@ -454,6 +459,7 @@
 				27954C8115265C9400C98D3E /* IAAction.m in Sources */,
 				27A4387C153F18BA00E82728 /* RouteResponse+Serializer.m in Sources */,
 				270EAA291545C81000880DFD /* RouteRequest+BodyAsString.m in Sources */,
+				270EAA821546170900880DFD /* IASwipeGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
