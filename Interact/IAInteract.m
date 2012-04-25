@@ -199,15 +199,6 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
     });
 }
 
--(void)setDefaultMimeType:(NSString *)value
-{
-    IALogTrace();
-    
-    dispatch_async(serverQueue, ^{
-        defaultMimeType = value;
-    });
-}
-
 -(NSString *)defaultMimeType
 {
     __block NSString * result;
@@ -217,6 +208,15 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
 	});
 	
 	return result;
+}
+
+-(void)setDefaultMimeType:(NSString *)value
+{
+    IALogTrace();
+    
+    dispatch_async(serverQueue, ^{
+        defaultMimeType = value;
+    });
 }
 
 -(void)startBonjour
