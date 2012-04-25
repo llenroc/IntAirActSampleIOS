@@ -39,10 +39,10 @@
 -(BOOL)isRunning;
 
 -(void)setServer:(BOOL)server;
--(BOOL)isServer;
+-(BOOL)server;
 
 -(void)setClient:(BOOL)client;
--(BOOL)isClient;
+-(BOOL)client;
 
 -(void)setDefaultMimeType:(NSString *)defaultMimeType;
 -(NSString *)defaultMimeType;

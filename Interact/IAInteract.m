@@ -159,7 +159,7 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
     }});
 }
 
--(BOOL)isServer
+-(BOOL)server
 {
     __block BOOL result;
 	
@@ -179,7 +179,7 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
     });
 }
 
--(BOOL)isClient
+-(BOOL)client
 {
     __block BOOL result;
 	
