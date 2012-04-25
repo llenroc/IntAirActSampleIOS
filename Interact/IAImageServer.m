@@ -42,8 +42,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 -(void)registerServer:(RoutingHTTPServer *)app {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
-    [app setDefaultHeader:@"Content-Type" value:RKMIMETypeJSON];
-    
     [app get:@"/images" withBlock:^(RouteRequest * request, RouteResponse * response) {
         DDLogVerbose(@"GET /images");
 

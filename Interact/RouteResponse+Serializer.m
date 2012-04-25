@@ -16,11 +16,11 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
     RKObjectSerializer* serializer = [interact serializerForObject:data];
     
     NSError * error = nil;
-    id params = [serializer serializationForMIMEType:RKMIMETypeJSON error:&error];
+    id params = [serializer serializationForMIMEType:interact.defaultMimeType error:&error];
     
     if (error) {
         self.statusCode = 500;
-        IALogError(@"Serializing failed for source object %@ to MIME Type %@: %@", data, RKMIMETypeJSON, [error localizedDescription]);
+        IALogError(@"Serializing failed for source object %@: %@", data, [error localizedDescription]);
     } else {
         self.statusCode = 200;
         [self respondWithData:[params data]];

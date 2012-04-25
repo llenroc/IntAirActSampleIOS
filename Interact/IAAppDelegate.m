@@ -66,15 +66,13 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 -(void)setupMappings
 {
     // setup mappings for client and server side
-    RKObjectMapping * imageMapping = [RKObjectMapping mappingForClass:[IAImage class]];
-    [imageMapping mapAttributes:@"identifier", nil];
-    [self.interact.objectMappingProvider setMapping:imageMapping forKeyPath:@"images"];
-    
-    RKObjectMapping * imageSerialization = [imageMapping inverseMapping];
-    imageSerialization.rootKeyPath = @"images";
-    [self.interact.objectMappingProvider setSerializationMapping:imageSerialization forClass:[IAImage class]];
-    
+    [self.interact addMappingForClass:[IAImage class] withKeypath:@"images" withAttributes:@"identifier", nil];
+
     // This is a workaround for serializing arrays of images, see https://github.com/RestKit/RestKit/issues/398
+    RKObjectMapping * imageSerialization = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
+    imageSerialization.rootKeyPath = @"images";
+    [imageSerialization mapAttributes:@"identifier", nil];
+
     RKObjectMapping * imagesSerialization = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     [imagesSerialization hasMany:@"images" withMapping:imageSerialization];
     [self.interact.objectMappingProvider setSerializationMapping:imagesSerialization forClass:[IAImages class]];

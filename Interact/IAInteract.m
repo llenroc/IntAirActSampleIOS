@@ -15,6 +15,9 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
 
 @interface IAInteract () {
     dispatch_queue_t serverQueue;
+    dispatch_queue_t clientQueue;
+    
+    NSString * defaultMimeType;
     
     BOOL isServer;
     BOOL isClient;
@@ -27,6 +30,12 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
 @property (nonatomic, strong) IALocator * privLocator;
 @property (strong) IADevice * selfDevice;
 @property (strong) NSMutableSet * services;
+
+-(void)startBonjour;
+-(void)stopBonjour;
+
++(void)startBonjourThreadIfNeeded;
++(void)performBonjourBlock:(dispatch_block_t)block;
 
 @end
 
@@ -53,14 +62,14 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
     if (self) {
         IALogTrace();
         
-        serverQueue = dispatch_queue_create("Interact", NULL);
+        serverQueue = dispatch_queue_create("InteractServer", NULL);
+        clientQueue = dispatch_queue_create("InteractClient", NULL);
 
         self.objectMappingProvider = [RKObjectMappingProvider new];
         self.router = [RKObjectRouter new];
         
         self.deviceList = [NSMutableDictionary new];
-        self.netServiceBrowser = [NSNetServiceBrowser new];
-        [self.netServiceBrowser setDelegate:self];
+        self.defaultMimeType = RKMIMETypeJSON;
         self.objectManagers = [NSMutableDictionary new];
         self.privLocator = [IALocator new];
         self.services = [NSMutableSet new];
@@ -82,10 +91,10 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
 {
     IALogTrace();
     
-    // Stop the server if it's running
 	[self stop];
     
     dispatch_release(serverQueue);
+    dispatch_release(clientQueue);
 }
 
 -(BOOL)start:(NSError **)errPtr;
@@ -104,7 +113,7 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
                 
                 if(isClient) {
                     [self.locator startTracking];
-                    [self.netServiceBrowser searchForServicesOfType:@"_interact._tcp." inDomain:@"local."];
+                    [self startBonjour];
                 }
                 isRunning = YES;
             } else {
@@ -113,7 +122,7 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
         } else if (isClient) {
             IALogInfo(@"%@: Started Interact.", THIS_FILE);
             [self.locator startTracking];
-            [self.netServiceBrowser searchForServicesOfType:@"_interact._tcp." inDomain:@"local."];
+            [self startBonjour];
         }
 	}});
 	
@@ -190,6 +199,220 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
     });
 }
 
+-(void)setDefaultMimeType:(NSString *)value
+{
+    IALogTrace();
+    
+    dispatch_async(serverQueue, ^{
+        defaultMimeType = value;
+    });
+}
+
+-(NSString *)defaultMimeType
+{
+    __block NSString * result;
+	
+	dispatch_sync(serverQueue, ^{
+		result = defaultMimeType;
+	});
+	
+	return result;
+}
+
+-(void)startBonjour
+{
+	IALogTrace();
+	
+	NSAssert(dispatch_get_current_queue() == serverQueue, @"Invalid queue");
+	
+    self.netServiceBrowser = [NSNetServiceBrowser new];
+    [self.netServiceBrowser setDelegate:self];
+    
+    NSNetServiceBrowser *theNetServiceBrowser = self.netServiceBrowser;
+    
+    dispatch_block_t bonjourBlock = ^{
+        [theNetServiceBrowser removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+        [theNetServiceBrowser scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+        [theNetServiceBrowser searchForServicesOfType:@"_interact._tcp." inDomain:@"local."];
+        IALogInfo(@"Bonjour search started.");
+    };
+    
+    [[self class] startBonjourThreadIfNeeded];
+    [[self class] performBonjourBlock:bonjourBlock];
+}
+
+-(void)stopBonjour
+{
+	IALogTrace();
+	
+	NSAssert(dispatch_get_current_queue() == serverQueue, @"Invalid queue");
+	
+	if (self.netServiceBrowser)
+	{
+		NSNetServiceBrowser *theNetServiceBrowser = self.netServiceBrowser;
+		
+		dispatch_block_t bonjourBlock = ^{
+			
+			[theNetServiceBrowser stop];
+		};
+		
+		[[self class] performBonjourBlock:bonjourBlock];
+		
+		self.netServiceBrowser = nil;
+	}
+}
+
+-(void)netServiceBrowser:(NSNetServiceBrowser *)sender didNotSearch:(NSDictionary *)errorInfo
+{
+    IALogError(@"Bonjour could not search: %@", errorInfo);
+}
+
+-(void)netServiceBrowser:(NSNetServiceBrowser *)sender
+          didFindService:(NSNetService *)ns
+              moreComing:(BOOL)moreServicesComing
+{
+    IALogTrace2(@"Bonjour Service found: domain(%@) type(%@) name(%@)", [ns domain], [ns type], [ns name]);
+    [self.services addObject:ns];
+    [ns setDelegate:self];
+    [ns resolveWithTimeout:0.0];
+}
+
+-(void)netServiceBrowser:(NSNetServiceBrowser *)sender
+        didRemoveService:(NSNetService *)ns
+              moreComing:(BOOL)moreServicesComing
+{
+    IALogTrace2(@"Bonjour Service went away: domain(%@) type(%@) name(%@)", [ns domain], [ns type], [ns name]);
+    [self.services removeObject:ns];
+    [self.deviceList removeObjectForKey:ns.name];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceUpdate" object:self];
+}
+
+-(void)netServiceBrowserDidStopSearch:(NSNetServiceBrowser *)sender
+{
+    IALogTrace();
+}
+
+-(void)netService:(NSNetService *)ns didNotResolve:(NSDictionary *)errorDict
+{
+    IALogWarn(@"Could not resolve Bonjour Service: domain(%@) type(%@) name(%@)", [ns domain], [ns type], [ns name]);
+
+    [self.services removeObject:ns];
+    [self.deviceList removeObjectForKey:ns];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceUpdate" object:self];
+}
+
+-(void)netServiceDidResolveAddress:(NSNetService *)sender
+{
+	IALogTrace2(@"Bonjour Service resolved: %@:%i", [sender hostName], [sender port]);
+
+    IADevice * device = [IADevice new];
+    device.name = sender.name;
+    device.hostAndPort = [NSString stringWithFormat:@"http://%@:%i/", sender.hostName, sender.port];
+    [self.deviceList setObject:device forKey:device.name];
+    if ([self.httpServer.publishedName isEqual:device.name]) {
+        self.selfDevice = device;
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceUpdate" object:self];
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark Bonjour Thread
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * NSNetService is runloop based, so it requires a thread with a runloop.
+ * This gives us two options:
+ * 
+ * - Use the main thread
+ * - Setup our own dedicated thread
+ * 
+ * Since we have various blocks of code that need to synchronously access the netservice objects,
+ * using the main thread becomes troublesome and a potential for deadlock.
+ **/
+
+static NSThread *bonjourThread;
+
++ (void)startBonjourThreadIfNeeded
+{
+	IALogTrace();
+	
+	static dispatch_once_t predicate;
+	dispatch_once(&predicate, ^{
+		
+		IALogVerbose(@"%@: Starting bonjour thread...", THIS_FILE);
+		
+		bonjourThread = [[NSThread alloc] initWithTarget:self
+		                                        selector:@selector(bonjourThread)
+		                                          object:nil];
+		[bonjourThread start];
+	});
+}
+
++ (void)bonjourThread
+{
+	@autoreleasepool {
+        
+		IALogVerbose(@"%@: BonjourThread: Started", THIS_FILE);
+		
+		// We can't run the run loop unless it has an associated input source or a timer.
+		// So we'll just create a timer that will never fire - unless the server runs for 10,000 years.
+		
+		[NSTimer scheduledTimerWithTimeInterval:[[NSDate distantFuture] timeIntervalSinceNow]
+		                                 target:self
+		                               selector:@selector(donothingatall:)
+		                               userInfo:nil
+		                                repeats:YES];
+		
+		[[NSRunLoop currentRunLoop] run];
+		
+		IALogVerbose(@"%@: BonjourThread: Aborted", THIS_FILE);
+        
+	}
+}
+
++ (void)executeBonjourBlock:(dispatch_block_t)block
+{
+	IALogTrace();
+	
+	NSAssert([NSThread currentThread] == bonjourThread, @"Executed on incorrect thread");
+	
+	block();
+}
+
++ (void)performBonjourBlock:(dispatch_block_t)block
+{
+	IALogTrace();
+	
+	[self performSelector:@selector(executeBonjourBlock:)
+	             onThread:bonjourThread
+	           withObject:block
+	        waitUntilDone:YES];
+}
+
+
+-(void)addMappingForClass:(Class)className withKeypath:(NSString *)keyPath withAttributes:(NSString *)attributeKeyPath, ...
+{
+    va_list args;
+    va_start(args, attributeKeyPath);
+    NSMutableSet* attributeKeyPaths = [NSMutableSet set];
+    
+    for (NSString* keyPath = attributeKeyPath; keyPath != nil; keyPath = va_arg(args, NSString*)) {
+        [attributeKeyPaths addObject:keyPath];
+    }
+    
+    va_end(args);
+    
+    RKObjectMapping * mapping = [RKObjectMapping mappingForClass:className];
+    [mapping mapAttributesFromSet:attributeKeyPaths];
+    [self.objectMappingProvider setMapping:mapping forKeyPath:keyPath];
+    
+    RKObjectMapping * serialization = [mapping inverseMapping];
+    serialization.rootKeyPath = keyPath;
+    [self.objectMappingProvider setSerializationMapping:serialization forClass:className];
+}
+
 -(RKObjectMappingResult*)deserializeObject:(NSData*)data
 {
     IALogTrace();
@@ -197,7 +420,7 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
     NSString * bodyAsString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
     NSError* error = nil;
-    id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
+    id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:self.defaultMimeType];
     id parsedData = [parser objectFromString:bodyAsString error:&error];
     
     if (parsedData == nil && error) {
@@ -234,26 +457,24 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
 
 -(void)callAction:(IAAction *)action onDevice:(IADevice *)device
 {
-    dispatch_queue_t queue = dispatch_queue_create("IAInteract callAction", NULL);
-    dispatch_async(queue, ^{
+    dispatch_async(clientQueue, ^{
         RKObjectManager * manager = [self objectManagerForDevice:device];
         [manager putObject:action delegate:nil];
     });
-    dispatch_release(queue);
 }
 
 -(void)loadObjectsAtResourcePath:(NSString *)resourcePath fromDevice:(IADevice *)device handler:(void (^)(RKObjectLoader *, NSError *))handler
 {
-    dispatch_queue_t queue = dispatch_queue_create("IAImageClient getImages", NULL);
-    dispatch_async(queue, ^{
+    dispatch_async(clientQueue, ^{
         RKObjectManager * manager = [self objectManagerForDevice:device];
         [manager loadObjectsAtResourcePath:@"/images" handler:handler];
     });
-    dispatch_release(queue);
 }
 
 -(void)setup
 {
+    [self.httpServer setDefaultHeader:@"Content-Type" value:self.defaultMimeType];
+    
     RKObjectMapping * deviceMapping = [RKObjectMapping mappingForClass:[IADevice class]];
     [deviceMapping mapAttributes:@"name", @"hostAndPort", nil];
     [self.objectMappingProvider setMapping:deviceMapping forKeyPath:@"devices"];
@@ -320,8 +541,8 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
         manager = [[RKObjectManager alloc] initWithBaseURL:[RKURL URLWithBaseURLString:device.hostAndPort]];
         
         // Ask for & generate JSON
-        manager.acceptMIMEType = RKMIMETypeJSON;
-        manager.serializationMIMEType = RKMIMETypeJSON;
+        manager.acceptMIMEType = self.defaultMimeType;
+        manager.serializationMIMEType = self.defaultMimeType;
         
         manager.mappingProvider = self.objectMappingProvider;
         
@@ -374,63 +595,6 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
 {
     RKObjectMapping * mapping = [self.objectMappingProvider serializationMappingForClass:[object class]];
     return [RKObjectSerializer serializerWithObject:object mapping:mapping];
-}
-
--(void)netServiceBrowser:(NSNetServiceBrowser *)sender didNotSearch:(NSDictionary *)errorInfo
-{
-    IALogError(@"%@: %@, sender: %@, error: %@", THIS_FILE, THIS_METHOD, sender, errorInfo);
-}
-
--(void)netServiceBrowser:(NSNetServiceBrowser *)sender
-          didFindService:(NSNetService *)netService
-              moreComing:(BOOL)moreServicesComing
-{
-    IALogVerbose(@"%@: %@, service: %@", THIS_FILE, THIS_METHOD, [netService name]);
-    [self.services addObject:netService];
-    [netService setDelegate:self];
-    [netService resolveWithTimeout:0.0];
-}
-
--(void)netServiceBrowser:(NSNetServiceBrowser *)sender
-        didRemoveService:(NSNetService *)netService
-              moreComing:(BOOL)moreServicesComing
-{
-	IALogVerbose(@"%@: DidRemoveService: %@", THIS_FILE, [netService name]);
-    [self.services removeObject:netService];
-    [self.deviceList removeObjectForKey:netService.name];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceUpdate" object:self];
-}
-
--(void)netServiceBrowserDidStopSearch:(NSNetServiceBrowser *)sender
-{
-    IALogTrace();
-}
-
--(void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict
-{
-    IALogTrace();
-
-	IALogError(@"DidNotResolve");
-    [self.services removeObject:sender];
-    [self.deviceList removeObjectForKey:sender.name];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceUpdate" object:self];
-}
-
--(void)netServiceDidResolveAddress:(NSNetService *)sender
-{
-    IALogTrace();
-    
-	IALogInfo(@"%@: DidResolve: %@:%i", THIS_FILE, [sender hostName], [sender port]);
-    IADevice * device = [IADevice new];
-    device.name = sender.name;
-    device.hostAndPort = [NSString stringWithFormat:@"http://%@:%i/", sender.hostName, sender.port];
-    [self.deviceList setObject:device forKey:device.name];
-    if ([self.httpServer.publishedName isEqual:device.name]) {
-        self.selfDevice = device;
-    }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceUpdate" object:self];
 }
 
 @end

@@ -44,6 +44,11 @@
 -(void)setClient:(BOOL)client;
 -(BOOL)isClient;
 
+-(void)setDefaultMimeType:(NSString *)defaultMimeType;
+-(NSString *)defaultMimeType;
+
+-(void)addMappingForClass:(Class)className withKeypath:(NSString *)keyPath withAttributes:(NSString *)attributeKeyPath, ...  NS_REQUIRES_NIL_TERMINATION;
+
 -(RKObjectManager *)objectManagerForDevice:(IADevice *)device;
 -(NSString *)resourcePathFor:(NSObject *)resource forObjectManager:(RKObjectManager *)manager;
 -(RKObjectSerializer *)serializerForObject:(id)object;
