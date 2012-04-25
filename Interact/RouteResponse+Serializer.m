@@ -24,7 +24,7 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
     } else {
         self.statusCode = 200;
         [self respondWithData:[params data]];
-        IALogInfo(@"%@", [[NSString alloc] initWithData:[params data] encoding:NSUTF8StringEncoding]);
+        IALogInfo(@"%@: Serialization of data: %@", THIS_FILE, [[NSString alloc] initWithData:[params data] encoding:NSUTF8StringEncoding]);
     }
 }
 
