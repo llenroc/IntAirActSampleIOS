@@ -120,7 +120,7 @@
                             </imageView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" style="gray" id="T5A-P1-qEd">
                                 <rect key="frame" x="374" y="470" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
