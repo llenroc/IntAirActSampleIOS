@@ -7,8 +7,17 @@
 #import "IAAction.h"
 #import "IADevice.h"
 #import "IALocator.h"
+#import "IALogging.h"
 
-@interface IAInteract ()
+// Log levels: off, error, warn, info, verbose
+// Other flags: trace
+static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
+
+@interface IAInteract () {
+    dispatch_queue_t serverQueue;
+    
+    BOOL isRunning;
+}
 
 @property (strong) NSMutableDictionary * deviceList;
 @property (nonatomic, strong) NSNetServiceBrowser * netServiceBrowser;
@@ -32,11 +41,18 @@
 @synthesize selfDevice = _selfDevice;
 @synthesize services = _services;
 
+/**
+ * Standard Constructor.
+ * Instantiates Interact, but does not start it.
+ **/
 -(id)init
 {
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     self = [super init];
     if (self) {
+        IALogTrace();
+        
+        serverQueue = dispatch_queue_create("Interact", NULL);
+
         self.objectMappingProvider = [RKObjectMappingProvider new];
         self.router = [RKObjectRouter new];
         
@@ -48,8 +64,140 @@
         self.services = [NSMutableSet new];
         
         [self setup];
+        
+        isRunning = NO;
     }
     return self;
+}
+
+/**
+ * Standard Deconstructor.
+ * Stops the server, and clients, and releases any resources connected with this instance.
+ **/
+-(void)dealloc
+{
+    IALogTrace();
+    
+    // Stop the server if it's running
+	[self stop];
+    
+    dispatch_release(serverQueue);
+}
+
+-(BOOL)start:(NSError **)errPtr;
+{
+    IALogTrace();
+    
+    __block BOOL success = YES;
+	__block NSError *err = nil;
+    
+    dispatch_sync(serverQueue, ^{ @autoreleasepool {
+        
+        success = [self.httpServer start:&err];
+		if (success) {
+			IALogInfo(@"%@: Started Interact.", THIS_FILE);
+			
+            [self.locator startTracking];
+            [self.netServiceBrowser searchForServicesOfType:@"_interact._tcp." inDomain:@"local."];
+            isRunning = YES;
+		} else {
+			IALogError(@"%@: Failed to start Interact: %@", THIS_FILE, err);
+		}
+	}});
+	
+	if (errPtr) {
+		*errPtr = err;
+    }
+	
+	return success;
+}
+
+-(BOOL)isRunning
+{
+	__block BOOL result;
+	
+	dispatch_sync(serverQueue, ^{
+		result = isRunning;
+	});
+	
+	return result;
+}
+
+-(void)stop
+{
+    IALogTrace();
+    
+    dispatch_sync(serverQueue, ^{ @autoreleasepool {
+
+        [self.httpServer stop];
+        [self.netServiceBrowser stop];
+        [self.services removeAllObjects];
+        self.selfDevice = nil;
+
+        isRunning = NO;
+    }});
+}
+
+-(RKObjectMappingResult*)deserializeObject:(NSData*)data
+{
+    IALogTrace();
+    
+    NSString * bodyAsString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    NSError* error = nil;
+    id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
+    id parsedData = [parser objectFromString:bodyAsString error:&error];
+    
+    if (parsedData == nil && error) {
+        // Parser error...
+        IALogError(@"An error ocurred: %@", error);
+        return NULL;
+    } else {
+        return [self deserializeDictionary:parsedData];
+    }
+}
+
+-(RKObjectMappingResult*)deserializeDictionary:(NSDictionary*)dictionary
+{
+    IALogTrace();
+    
+    RKObjectMapper* mapper = [RKObjectMapper mapperWithObject:dictionary mappingProvider:self.objectMappingProvider];
+    return [mapper performMapping];
+}
+
+-(IADevice *)ownDevice
+{
+    return self.selfDevice;
+}
+
+-(NSArray *)devices
+{
+    return [self.deviceList allValues];
+}
+
+-(IALocator *)locator
+{
+    return self.privLocator;
+}
+
+-(void)callAction:(IAAction *)action onDevice:(IADevice *)device
+{
+    dispatch_queue_t queue = dispatch_queue_create("IAInteract callAction", NULL);
+    dispatch_async(queue, ^{
+        RKObjectManager * manager = [self objectManagerForDevice:device];
+        [manager putObject:action delegate:nil];
+    });
+    dispatch_release(queue);
+}
+
+-(void)loadObjectsAtResourcePath:(NSString *)resourcePath fromDevice:(IADevice *)device handler:(void (^)(RKObjectLoader *, NSError *))handler
+{
+    dispatch_queue_t queue = dispatch_queue_create("IAImageClient getImages", NULL);
+    dispatch_async(queue, ^{
+        RKObjectManager * manager = [self objectManagerForDevice:device];
+        [manager loadObjectsAtResourcePath:@"/images" handler:handler];
+    });
+    dispatch_release(queue);
 }
 
 -(void)setup
@@ -112,7 +260,7 @@
 
 -(RKObjectManager *)objectManagerForDevice:(IADevice *)device
 {
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    IALogTrace();
     
     RKObjectManager * manager = [self.objectManagers objectForKey:device.hostAndPort];
     
@@ -138,17 +286,17 @@
 
 -(NSString *)resourcePathFor:(NSObject *)resource forObjectManager:(RKObjectManager *)manager
 {
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    IALogTrace();
     return [manager.router resourcePathForObject:resource method:RKRequestMethodPUT];
 }
 
 -(RoutingHTTPServer *)httpServer
 {
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    IALogTrace();
+    
     if(!_httpServer) {
-        // Create server using our custom MyHTTPServer class
         _httpServer = [RoutingHTTPServer new];
-
+        
         // Tell server to use our custom MyHTTPConnection class.
         // [httpServer setConnectionClass:[RESTConnection class]];
         
@@ -163,7 +311,7 @@
         
         // Serve files from our embedded Web folder
         NSString *webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];
-        DDLogInfo(@"Setting document root: %@", webPath);
+        IALogInfo(@"Setting document root: %@", webPath);
         
         [_httpServer setDocumentRoot:webPath];
     }
@@ -178,24 +326,24 @@
 
 -(void)netServiceBrowser:(NSNetServiceBrowser *)sender didNotSearch:(NSDictionary *)errorInfo
 {
-    DDLogError(@"%@: %@, sender: %@, error: %@", THIS_FILE, THIS_METHOD, sender, errorInfo);
+    IALogError(@"%@: %@, sender: %@, error: %@", THIS_FILE, THIS_METHOD, sender, errorInfo);
 }
 
 -(void)netServiceBrowser:(NSNetServiceBrowser *)sender
-           didFindService:(NSNetService *)netService
-               moreComing:(BOOL)moreServicesComing
+          didFindService:(NSNetService *)netService
+              moreComing:(BOOL)moreServicesComing
 {
-    DDLogVerbose(@"%@: %@, service: %@", THIS_FILE, THIS_METHOD, [netService name]);
+    IALogVerbose(@"%@: %@, service: %@", THIS_FILE, THIS_METHOD, [netService name]);
     [self.services addObject:netService];
     [netService setDelegate:self];
     [netService resolveWithTimeout:0.0];
 }
 
 -(void)netServiceBrowser:(NSNetServiceBrowser *)sender
-         didRemoveService:(NSNetService *)netService
-               moreComing:(BOOL)moreServicesComing
+        didRemoveService:(NSNetService *)netService
+              moreComing:(BOOL)moreServicesComing
 {
-	DDLogVerbose(@"DidRemoveService: %@", [netService name]);
+	IALogVerbose(@"DidRemoveService: %@", [netService name]);
     [self.services removeObject:netService];
     [self.deviceList removeObjectForKey:netService.name];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceUpdate" object:self];
@@ -203,23 +351,23 @@
 
 -(void)netServiceBrowserDidStopSearch:(NSNetServiceBrowser *)sender
 {
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    IALogTrace();
 }
 
 -(void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict
 {
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-	DDLogError(@"DidNotResolve");
+    IALogTrace();
+	IALogError(@"DidNotResolve");
     [self.services removeObject:sender];
     [self.deviceList removeObjectForKey:sender.name];
-
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceUpdate" object:self];
 }
 
 -(void)netServiceDidResolveAddress:(NSNetService *)sender
 {
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-	DDLogInfo(@"DidResolve: %@:%i", [sender hostName], [sender port]);
+    IALogTrace();
+	IALogInfo(@"DidResolve: %@:%i", [sender hostName], [sender port]);
     IADevice * device = [IADevice new];
     device.name = sender.name;
     device.hostAndPort = [NSString stringWithFormat:@"http://%@:%i/", sender.hostName, sender.port];
@@ -227,101 +375,8 @@
     if ([self.httpServer.publishedName isEqual:device.name]) {
         self.selfDevice = device;
     }
-
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceUpdate" object:self];
-}
-
--(BOOL)start:(NSError **)errPtr;
-{
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    
-    // Start the server (and check for problems)
-    NSError * error;
-    if(![self.httpServer start:&error])
-    {
-        DDLogError(@"Error starting HTTP Server: %@", error);
-        if (errPtr)
-            *errPtr = error;
-        return NO;
-    }
-    [self.locator startTracking];
-    [self.netServiceBrowser searchForServicesOfType:@"_interact._tcp." inDomain:@"local."];
-    return YES;
-}
-
--(void)stop
-{
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    [self.httpServer stop];
-    [self.netServiceBrowser stop];
-    [self.services removeAllObjects];
-}
-
--(void)dealloc
-{
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-}
-
--(RKObjectMappingResult*)deserializeObject:(NSData*)data
-{
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    
-    NSString * bodyAsString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    
-    NSError* error = nil;
-    id<RKParser> parser = [[RKParserRegistry sharedRegistry] parserForMIMEType:RKMIMETypeJSON];
-    id parsedData = [parser objectFromString:bodyAsString error:&error];
-    
-    if (parsedData == nil && error) {
-        // Parser error...
-        DDLogError(@"An error ocurred: %@", error);
-        return NULL;
-    } else {
-        return [self deserializeDictionary:parsedData];
-    }
-}
-
--(RKObjectMappingResult*)deserializeDictionary:(NSDictionary*)dictionary
-{
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    
-    RKObjectMapper* mapper = [RKObjectMapper mapperWithObject:dictionary mappingProvider:self.objectMappingProvider];
-    return [mapper performMapping];
-}
-
--(IADevice *)ownDevice
-{
-    return self.selfDevice;
-}
-
--(NSArray *)devices
-{
-    return [self.deviceList allValues];
-}
-
--(IALocator *)locator
-{
-    return self.privLocator;
-}
-
--(void)callAction:(IAAction *)action onDevice:(IADevice *)device
-{
-    dispatch_queue_t queue = dispatch_queue_create("IAInteract callAction", NULL);
-    dispatch_async(queue, ^{
-        RKObjectManager * manager = [self objectManagerForDevice:device];
-        [manager putObject:action delegate:nil];
-    });
-    dispatch_release(queue);
-}
-
--(void)loadObjectsAtResourcePath:(NSString *)resourcePath fromDevice:(IADevice *)device handler:(void (^)(RKObjectLoader *, NSError *))handler
-{
-    dispatch_queue_t queue = dispatch_queue_create("IAImageClient getImages", NULL);
-    dispatch_async(queue, ^{
-        RKObjectManager * manager = [self objectManagerForDevice:device];
-        [manager loadObjectsAtResourcePath:@"/images" handler:handler];
-    });
-    dispatch_release(queue);
 }
 
 @end

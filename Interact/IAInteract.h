@@ -18,8 +18,25 @@
 @property (nonatomic, strong) RKObjectMappingProvider * objectMappingProvider;
 @property (nonatomic, strong) RKObjectRouter * router;
 
+/**
+ * Attempts to starts the server.
+ * 
+ * If an error occurs, this method returns NO and sets the errPtr (if given).
+ * Otherwise returns YES on success.
+ * 
+ * Code Example:
+ * 
+ * NSError *err = nil;
+ * if (![interact start:&err])
+ * {
+ *     NSLog(@"Error starting interact: %@", err);
+ * }
+ **/
 -(BOOL)start:(NSError **)errPtr;
+
 -(void)stop;
+
+-(BOOL)isRunning;
 -(RKObjectManager *)objectManagerForDevice:(IADevice *)device;
 -(NSString *)resourcePathFor:(NSObject *)resource forObjectManager:(RKObjectManager *)manager;
 -(RKObjectSerializer *)serializerForObject:(id)object;

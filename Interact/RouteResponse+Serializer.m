@@ -3,6 +3,11 @@
 #import <RestKit/RestKit.h>
 
 #import "IAInteract.h"
+#import "IALogging.h"
+
+// Log levels: off, error, warn, info, verbose
+// Other flags: trace
+static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
 
 @implementation RouteResponse (Serializer)
 
@@ -15,11 +20,11 @@
     
     if (error) {
         self.statusCode = 500;
-        DDLogError(@"Serializing failed for source object %@ to MIME Type %@: %@", data, RKMIMETypeJSON, [error localizedDescription]);
+        IALogError(@"Serializing failed for source object %@ to MIME Type %@: %@", data, RKMIMETypeJSON, [error localizedDescription]);
     } else {
         self.statusCode = 200;
         [self respondWithData:[params data]];
-        DDLogInfo(@"%@", [[NSString alloc] initWithData:[params data] encoding:NSUTF8StringEncoding]);
+        IALogInfo(@"%@", [[NSString alloc] initWithData:[params data] encoding:NSUTF8StringEncoding]);
     }
 }
 

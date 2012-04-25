@@ -8,6 +8,8 @@
 
 #import "IAAppDelegate.h"
 
+#import <CocoaHTTPServer/HTTPLogging.h>
+#import <CocoaLumberjack/DDTTYLogger.h>
 #import <RestKit/RestKit.h>
 
 #import "IAInteract.h"
@@ -43,6 +45,7 @@
     self.imageServer = [[IAImageServer alloc] initWithInteract:self.interact];
     
     NSError * error;
+    
     if(![self.interact start:&error]) {
         DDLogError(@"Error starting Interact: %@", error);
     }
@@ -68,6 +71,7 @@
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+
     [self.interact stop];
 }
 
@@ -84,7 +88,6 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    [self.interact start:nil];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -92,6 +95,13 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+
+    if(![self.interact isRunning]) {
+        NSError * err;
+        if(![self.interact start:&err]) {
+            DDLogError(@"Error starting Interact: %@", err);
+        }
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -100,6 +110,7 @@
     
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
+    [self.interact stop];
 }
 
 @end

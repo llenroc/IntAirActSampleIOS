@@ -1,5 +1,11 @@
 #import "IALocator.h"
 
+#import "IALogging.h"
+
+// Log levels: off, error, warn, info, verbose
+// Other flags: trace
+static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
+
 @interface IALocator ()
 
 @property CLLocationDirection currentHeading;
@@ -33,7 +39,7 @@
     if(self.motManager.deviceMotionAvailable) {
         [self.motManager startDeviceMotionUpdates];
     } else {
-        DDLogError(@"Device Motion not available");
+        IALogError(@"Device Motion not available");
     }
     
     // Start location services to get the true heading.
@@ -70,7 +76,7 @@
     NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
     if (abs(howRecent) < 15.0)
     {
-        NSLog(@"latitude %+.6f, longitude %+.6f\n",
+        IALogInfo(@"latitude %+.6f, longitude %+.6f\n",
               newLocation.coordinate.latitude,
               newLocation.coordinate.longitude);
     }
@@ -91,26 +97,26 @@
 {    
     // rotate it by 90 to the left so that a swipe up is 0
     angle -= M_PI_2;
-    //DDLogVerbose(@"Angle: %f", angle);
+    //IALogVerbose(@"Angle: %f", angle);
     
     // if the angle is less than zero make it that its in [0,2*pi] again
     if (angle < 0) {
         angle += M_PI * 2;
     }
-    //DDLogVerbose(@"Angle: %f", angle);
+    //IALogVerbose(@"Angle: %f", angle);
     
     float heading = [self currentHeading] / 180 * M_PI;
-    //DDLogVerbose(@"Heading: %f", heading);
+    //IALogVerbose(@"Heading: %f", heading);
     
     // subtract the heading to make the angle point north
     angle -= heading;
-    //DDLogVerbose(@"Angle: %f", angle);
+    //IALogVerbose(@"Angle: %f", angle);
     
     // if the angle is less than zero make it that its in [0,2*pi] again
     if (angle < 0) {
         angle += M_PI * 2;
     }
-    //DDLogVerbose(@"Angle: %f", angle);
+    //IALogVerbose(@"Angle: %f", angle);
     
     // account for device orientation
     switch([self currentOrientation]) {
@@ -128,15 +134,15 @@
             // the device has been rotated to the left, thus the interface has been rotated to the right
             break;
     }
-    //DDLogVerbose(@"Angle: %f", angle);
+    //IALogVerbose(@"Angle: %f", angle);
     
     // if the angle is less than zero make it that its in [0,2*pi] again
     if (angle < 0) {
         angle += M_PI * 2;
     }
-    //DDLogVerbose(@"Angle: %f", angle);
+    //IALogVerbose(@"Angle: %f", angle);
     
-    //DDLogVerbose(@"You swiped at %f", angle * 180 / M_PI);
+    //IALogVerbose(@"You swiped at %f", angle * 180 / M_PI);
     
     return angle;
 }
