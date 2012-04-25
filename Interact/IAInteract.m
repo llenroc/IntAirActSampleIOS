@@ -133,6 +133,21 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
 	return success;
 }
 
+-(void)stop
+{
+    IALogTrace();
+    
+    dispatch_sync(serverQueue, ^{ @autoreleasepool {
+        
+        [self.httpServer stop];
+        [self.netServiceBrowser stop];
+        [self.services removeAllObjects];
+        self.selfDevice = nil;
+        
+        isRunning = NO;
+    }});
+}
+
 -(BOOL)isRunning
 {
 	__block BOOL result;
@@ -142,21 +157,6 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
 	});
 	
 	return result;
-}
-
--(void)stop
-{
-    IALogTrace();
-    
-    dispatch_sync(serverQueue, ^{ @autoreleasepool {
-
-        [self.httpServer stop];
-        [self.netServiceBrowser stop];
-        [self.services removeAllObjects];
-        self.selfDevice = nil;
-
-        isRunning = NO;
-    }});
 }
 
 -(BOOL)server
