@@ -80,8 +80,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		270EAA271545C81000880DFD /* RouteRequest+BodyAsString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RouteRequest+BodyAsString.h"; sourceTree = "<group>"; };
-		270EAA281545C81000880DFD /* RouteRequest+BodyAsString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RouteRequest+BodyAsString.m"; sourceTree = "<group>"; };
+		270EAA271545C81000880DFD /* RouteRequest+BodyAsString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RouteRequest+BodyAsString.h"; path = "Interact/RouteRequest+BodyAsString.h"; sourceTree = "<group>"; };
+		270EAA281545C81000880DFD /* RouteRequest+BodyAsString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RouteRequest+BodyAsString.m"; path = "Interact/RouteRequest+BodyAsString.m"; sourceTree = "<group>"; };
 		270EAA801546170800880DFD /* IASwipeGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASwipeGestureRecognizer.h; sourceTree = "<group>"; };
 		270EAA811546170900880DFD /* IASwipeGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASwipeGestureRecognizer.m; sourceTree = "<group>"; };
 		270EAA83154628F600880DFD /* IALocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IALocator.h; sourceTree = "<group>"; };
@@ -104,8 +104,8 @@
 		2731662C1517CFF4005439AE /* IADeviceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IADeviceTableViewController.m; sourceTree = "<group>"; };
 		2731662E1517D03C005439AE /* IAImageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageTableViewController.h; sourceTree = "<group>"; };
 		2731662F1517D03C005439AE /* IAImageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageTableViewController.m; sourceTree = "<group>"; };
-		273166311517D07A005439AE /* IADevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IADevice.h; sourceTree = "<group>"; };
-		273166321517D07A005439AE /* IADevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IADevice.m; sourceTree = "<group>"; };
+		273166311517D07A005439AE /* IADevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IADevice.h; path = Interact/IADevice.h; sourceTree = "<group>"; };
+		273166321517D07A005439AE /* IADevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IADevice.m; path = Interact/IADevice.m; sourceTree = "<group>"; };
 		27442C37153CC65E0017C744 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		275332DC1523DFE5002B0E6E /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Frameworks/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
 		275332DD1523DFE5002B0E6E /* CocoaHTTPServer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaHTTPServer.framework; path = Frameworks/CocoaHTTPServer.framework; sourceTree = "<group>"; };
@@ -132,10 +132,10 @@
 		2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		2779AB9B1517ACDE00AE4EE6 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		2779AB9D1517ACE400AE4EE6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		27954C7F15265C9400C98D3E /* IAAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAAction.h; sourceTree = "<group>"; };
-		27954C8015265C9400C98D3E /* IAAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAAction.m; sourceTree = "<group>"; };
-		27A4387A153F18BA00E82728 /* RouteResponse+Serializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RouteResponse+Serializer.h"; sourceTree = "<group>"; };
-		27A4387B153F18BA00E82728 /* RouteResponse+Serializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RouteResponse+Serializer.m"; sourceTree = "<group>"; };
+		27954C7F15265C9400C98D3E /* IAAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IAAction.h; path = Interact/IAAction.h; sourceTree = "<group>"; };
+		27954C8015265C9400C98D3E /* IAAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IAAction.m; path = Interact/IAAction.m; sourceTree = "<group>"; };
+		27A4387A153F18BA00E82728 /* RouteResponse+Serializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "RouteResponse+Serializer.h"; path = "Interact/RouteResponse+Serializer.h"; sourceTree = "<group>"; };
+		27A4387B153F18BA00E82728 /* RouteResponse+Serializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "RouteResponse+Serializer.m"; path = "Interact/RouteResponse+Serializer.m"; sourceTree = "<group>"; };
 		27BB876A15240AF0002112F2 /* IAImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImages.h; sourceTree = "<group>"; };
 		27BB876B15240AF0002112F2 /* IAImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImages.m; sourceTree = "<group>"; };
 		27BB876E1524175A002112F2 /* IAInteract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAInteract.h; sourceTree = "<group>"; };
@@ -205,12 +205,8 @@
 		2719BEA51518F18A00B12461 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				273166311517D07A005439AE /* IADevice.h */,
-				273166321517D07A005439AE /* IADevice.m */,
 				2719BE911518EDCF00B12461 /* IAImage.h */,
 				2719BE921518EDCF00B12461 /* IAImage.m */,
-				27954C7F15265C9400C98D3E /* IAAction.h */,
-				27954C8015265C9400C98D3E /* IAAction.m */,
 				27BB876A15240AF0002112F2 /* IAImages.h */,
 				27BB876B15240AF0002112F2 /* IAImages.m */,
 			);
@@ -243,10 +239,6 @@
 				2719BEA01518F14300B12461 /* IAImageProvider.m */,
 				2719BEA11518F14300B12461 /* IAImageServer.h */,
 				2719BEA21518F14300B12461 /* IAImageServer.m */,
-				27A4387A153F18BA00E82728 /* RouteResponse+Serializer.h */,
-				27A4387B153F18BA00E82728 /* RouteResponse+Serializer.m */,
-				270EAA271545C81000880DFD /* RouteRequest+BodyAsString.h */,
-				270EAA281545C81000880DFD /* RouteRequest+BodyAsString.m */,
 			);
 			name = Server;
 			sourceTree = "<group>";
@@ -273,6 +265,7 @@
 		2779AAF41517A8B200AE4EE6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				27D249CC1547922500FD9434 /* Interact */,
 				27442C37153CC65E0017C744 /* AssetsLibrary.framework */,
 				2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */,
 				275332DC1523DFE5002B0E6E /* CocoaAsyncSocket.framework */,
@@ -300,7 +293,6 @@
 		2779AAFB1517A8B200AE4EE6 /* Interact */ = {
 			isa = PBXGroup;
 			children = (
-				27BB876D15241743002112F2 /* Shared */,
 				2719BEA61518F19F00B12461 /* Client */,
 				2719BEA71518F1AA00B12461 /* Server */,
 				2719BEA51518F18A00B12461 /* Model */,
@@ -350,6 +342,39 @@
 				27D249C51547794E00FD9434 /* IALogging.h */,
 			);
 			name = Shared;
+			path = Interact;
+			sourceTree = "<group>";
+		};
+		27D249CC1547922500FD9434 /* Interact */ = {
+			isa = PBXGroup;
+			children = (
+				27D249CF1547926A00FD9434 /* Server */,
+				27D249CE1547925900FD9434 /* Model */,
+				27BB876D15241743002112F2 /* Shared */,
+			);
+			name = Interact;
+			sourceTree = "<group>";
+		};
+		27D249CE1547925900FD9434 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				273166311517D07A005439AE /* IADevice.h */,
+				273166321517D07A005439AE /* IADevice.m */,
+				27954C7F15265C9400C98D3E /* IAAction.h */,
+				27954C8015265C9400C98D3E /* IAAction.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		27D249CF1547926A00FD9434 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				27A4387A153F18BA00E82728 /* RouteResponse+Serializer.h */,
+				27A4387B153F18BA00E82728 /* RouteResponse+Serializer.m */,
+				270EAA271545C81000880DFD /* RouteRequest+BodyAsString.h */,
+				270EAA281545C81000880DFD /* RouteRequest+BodyAsString.m */,
+			);
+			name = Server;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

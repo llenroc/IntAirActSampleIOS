@@ -6,6 +6,8 @@
 #import <RestKit/RestKit.h>
 
 #import "IAInteract.h"
+#import "IAImage.h"
+#import "IAImages.h"
 #import "IAImageClient.h"
 #import "IAImageServer.h"
 
@@ -35,15 +37,15 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     // Configure RestKit logging framework
     //RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
     
-    // setup and start Interact
+    // create, setup and start Interact
     self.interact = [IAInteract new];
-    [IAImageClient setupMapping:self.interact];
+    [self setupMappings];
     self.imageServer = [[IAImageServer alloc] initWithInteract:self.interact];
     
     NSError * error;
-    
     if(![self.interact start:&error]) {
         DDLogError(@"%@: Error starting Interact: %@", THIS_FILE, error);
+        return NO;
     }
     
     UINavigationController * navigationController = (UINavigationController*) self.window.rootViewController;
@@ -59,6 +61,26 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     
     // Override point for customization after application launch.
     return YES;
+}
+
+-(void)setupMappings
+{
+    // setup mappings for client and server side
+    RKObjectMapping * imageMapping = [RKObjectMapping mappingForClass:[IAImage class]];
+    [imageMapping mapAttributes:@"identifier", nil];
+    [self.interact.objectMappingProvider setMapping:imageMapping forKeyPath:@"images"];
+    
+    RKObjectMapping * imageSerialization = [imageMapping inverseMapping];
+    imageSerialization.rootKeyPath = @"images";
+    [self.interact.objectMappingProvider setSerializationMapping:imageSerialization forClass:[IAImage class]];
+    
+    // This is a workaround for serializing arrays of images, see https://github.com/RestKit/RestKit/issues/398
+    RKObjectMapping * imagesSerialization = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
+    [imagesSerialization hasMany:@"images" withMapping:imageSerialization];
+    [self.interact.objectMappingProvider setSerializationMapping:imagesSerialization forClass:[IAImages class]];
+    
+    // setup routes
+    [self.interact.router routeClass:[IAImage class] toResourcePath:@"/image/:identifier"];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

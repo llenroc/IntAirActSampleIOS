@@ -16,6 +16,8 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
 @interface IAInteract () {
     dispatch_queue_t serverQueue;
     
+    BOOL isServer;
+    BOOL isClient;
     BOOL isRunning;
 }
 
@@ -65,6 +67,8 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
         
         [self setup];
         
+        isServer = YES;
+        isClient = YES;
         isRunning = NO;
     }
     return self;
@@ -93,16 +97,24 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
     
     dispatch_sync(serverQueue, ^{ @autoreleasepool {
         
-        success = [self.httpServer start:&err];
-		if (success) {
-			IALogInfo(@"%@: Started Interact.", THIS_FILE);
-			
+        if(isServer) {
+            success = [self.httpServer start:&err];
+            if (success) {
+                IALogInfo(@"%@: Started Interact.", THIS_FILE);
+                
+                if(isClient) {
+                    [self.locator startTracking];
+                    [self.netServiceBrowser searchForServicesOfType:@"_interact._tcp." inDomain:@"local."];
+                }
+                isRunning = YES;
+            } else {
+                IALogError(@"%@: Failed to start Interact: %@", THIS_FILE, err);
+            }
+        } else if (isClient) {
+            IALogInfo(@"%@: Started Interact.", THIS_FILE);
             [self.locator startTracking];
             [self.netServiceBrowser searchForServicesOfType:@"_interact._tcp." inDomain:@"local."];
-            isRunning = YES;
-		} else {
-			IALogError(@"%@: Failed to start Interact: %@", THIS_FILE, err);
-		}
+        }
 	}});
 	
 	if (errPtr) {
@@ -138,6 +150,46 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
     }});
 }
 
+-(BOOL)isServer
+{
+    __block BOOL result;
+	
+	dispatch_sync(serverQueue, ^{
+		result = isServer;
+	});
+	
+	return result;
+}
+
+-(void)setServer:(BOOL)value
+{
+    IALogTrace();
+    
+    dispatch_async(serverQueue, ^{
+        isServer = value;
+    });
+}
+
+-(BOOL)isClient
+{
+    __block BOOL result;
+	
+	dispatch_sync(serverQueue, ^{
+		result = isClient;
+	});
+	
+	return result;
+}
+
+-(void)setClient:(BOOL)value
+{
+    IALogTrace();
+    
+    dispatch_async(serverQueue, ^{
+        isClient = value;
+    });
+}
+
 -(RKObjectMappingResult*)deserializeObject:(NSData*)data
 {
     IALogTrace();
@@ -151,7 +203,7 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
     if (parsedData == nil && error) {
         // Parser error...
         IALogError(@"%@: An error ocurred: %@", THIS_FILE, error);
-        return NULL;
+        return nil;
     } else {
         return [self deserializeDictionary:parsedData];
     }

@@ -22,27 +22,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @synthesize interact = _interact;
 
-+(void)setupMapping:(IAInteract *)interact
-{
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-
-    RKObjectMapping * imageMapping = [RKObjectMapping mappingForClass:[IAImage class]];
-    [imageMapping mapAttributes:@"identifier", nil];
-    [interact.objectMappingProvider setMapping:imageMapping forKeyPath:@"images"];
-    
-    RKObjectMapping * imageSerialization = [imageMapping inverseMapping];
-    imageSerialization.rootKeyPath = @"images";
-    [interact.objectMappingProvider setSerializationMapping:imageSerialization forClass:[IAImage class]];
-    
-    // This is a workaround for serializing arrays of images, see https://github.com/RestKit/RestKit/issues/398
-    RKObjectMapping * imagesSerialization = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
-    [imagesSerialization hasMany:@"images" withMapping:imageSerialization];
-    [interact.objectMappingProvider setSerializationMapping:imagesSerialization forClass:[IAImages class]];
-    
-    // setup routes
-    [interact.router routeClass:[IAImage class] toResourcePath:@"/image/:identifier"];
-}
-
 -(id)initWithInteract:(IAInteract *)interact
 {
     self = [super init];
@@ -62,7 +41,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
                 block([[loader result] asCollection]);
             });
         } else {
-            DDLogError(@"An error ocurred while getting images: %@", error);
+            DDLogError(@"%@: An error ocurred while getting images: %@", THIS_FILE, error);
         }
     }];
 }

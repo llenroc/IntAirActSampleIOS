@@ -38,6 +38,12 @@
 
 -(BOOL)isRunning;
 
+-(void)setServer:(BOOL)server;
+-(BOOL)isServer;
+
+-(void)setClient:(BOOL)client;
+-(BOOL)isClient;
+
 -(RKObjectManager *)objectManagerForDevice:(IADevice *)device;
 -(NSString *)resourcePathFor:(NSObject *)resource forObjectManager:(RKObjectManager *)manager;
 -(RKObjectSerializer *)serializerForObject:(id)object;
