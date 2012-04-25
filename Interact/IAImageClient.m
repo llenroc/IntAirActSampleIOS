@@ -1,5 +1,6 @@
 #import "IAImageClient.h"
 
+#import <CocoaLumberjack/DDLog.h>
 #import <RestKit/RestKit.h>
 
 #import "IAInteract.h"
@@ -7,6 +8,9 @@
 #import "IADevice.h"
 #import "IAImage.h"
 #import "IAImages.h"
+
+// Log levels : off, error, warn, info, verbose
+static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @interface IAImageClient ()
 

@@ -19,7 +19,7 @@
 @property (nonatomic, strong) RKObjectRouter * router;
 
 /**
- * Attempts to starts the server.
+ * Attempts to start the server.
  * 
  * If an error occurs, this method returns NO and sets the errPtr (if given).
  * Otherwise returns YES on success.
@@ -37,6 +37,7 @@
 -(void)stop;
 
 -(BOOL)isRunning;
+
 -(RKObjectManager *)objectManagerForDevice:(IADevice *)device;
 -(NSString *)resourcePathFor:(NSObject *)resource forObjectManager:(RKObjectManager *)manager;
 -(RKObjectSerializer *)serializerForObject:(id)object;

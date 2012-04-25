@@ -39,7 +39,7 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
     if(self.motManager.deviceMotionAvailable) {
         [self.motManager startDeviceMotionUpdates];
     } else {
-        IALogError(@"Device Motion not available");
+        IALogError(@"%@: Device Motion not available", THIS_FILE);
     }
     
     // Start location services to get the true heading.
@@ -76,9 +76,7 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
     NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
     if (abs(howRecent) < 15.0)
     {
-        IALogInfo(@"latitude %+.6f, longitude %+.6f\n",
-              newLocation.coordinate.latitude,
-              newLocation.coordinate.longitude);
+        IALogInfo(@"%@: latitude %+.6f, longitude %+.6f\n", THIS_FILE, newLocation.coordinate.latitude, newLocation.coordinate.longitude);
     }
     // else skip the event and process the next one.
 }
@@ -97,26 +95,26 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
 {    
     // rotate it by 90 to the left so that a swipe up is 0
     angle -= M_PI_2;
-    //IALogVerbose(@"Angle: %f", angle);
+    //IALogVerbose(@"%@: Angle: %f", THIS_FILE, angle);
     
     // if the angle is less than zero make it that its in [0,2*pi] again
     if (angle < 0) {
         angle += M_PI * 2;
     }
-    //IALogVerbose(@"Angle: %f", angle);
+    //IALogVerbose(@"%@: Angle: %f", THIS_FILE, angle);
     
     float heading = [self currentHeading] / 180 * M_PI;
-    //IALogVerbose(@"Heading: %f", heading);
+    //IALogVerbose(@"%@: Heading: %f", THIS_FILE, heading);
     
     // subtract the heading to make the angle point north
     angle -= heading;
-    //IALogVerbose(@"Angle: %f", angle);
+    //IALogVerbose(@"%@: Angle: %f", THIS_FILE, angle);
     
     // if the angle is less than zero make it that its in [0,2*pi] again
     if (angle < 0) {
         angle += M_PI * 2;
     }
-    //IALogVerbose(@"Angle: %f", angle);
+    //IALogVerbose(@"%@: Angle: %f", THIS_FILE, angle);
     
     // account for device orientation
     switch([self currentOrientation]) {
@@ -134,15 +132,15 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
             // the device has been rotated to the left, thus the interface has been rotated to the right
             break;
     }
-    //IALogVerbose(@"Angle: %f", angle);
+    //IALogVerbose(@"%@: Angle: %f", THIS_FILE, angle);
     
     // if the angle is less than zero make it that its in [0,2*pi] again
     if (angle < 0) {
         angle += M_PI * 2;
     }
-    //IALogVerbose(@"Angle: %f", angle);
+    //IALogVerbose(@"%@: Angle: %f", THIS_FILE, angle);
     
-    //IALogVerbose(@"You swiped at %f", angle * 180 / M_PI);
+    //IALogVerbose(@"%@: You swiped at %f", THIS_FILE, angle * 180 / M_PI);
     
     return angle;
 }

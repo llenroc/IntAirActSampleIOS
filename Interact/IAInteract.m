@@ -150,7 +150,7 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
     
     if (parsedData == nil && error) {
         // Parser error...
-        IALogError(@"An error ocurred: %@", error);
+        IALogError(@"%@: An error ocurred: %@", THIS_FILE, error);
         return NULL;
     } else {
         return [self deserializeDictionary:parsedData];
@@ -311,7 +311,7 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
         
         // Serve files from our embedded Web folder
         NSString *webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];
-        IALogInfo(@"Setting document root: %@", webPath);
+        IALogTrace2(@"%@: Setting document root: %@", THIS_FILE, webPath);
         
         [_httpServer setDocumentRoot:webPath];
     }
@@ -343,7 +343,7 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
         didRemoveService:(NSNetService *)netService
               moreComing:(BOOL)moreServicesComing
 {
-	IALogVerbose(@"DidRemoveService: %@", [netService name]);
+	IALogVerbose(@"%@: DidRemoveService: %@", THIS_FILE, [netService name]);
     [self.services removeObject:netService];
     [self.deviceList removeObjectForKey:netService.name];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"DeviceUpdate" object:self];
@@ -357,6 +357,7 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
 -(void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict
 {
     IALogTrace();
+
 	IALogError(@"DidNotResolve");
     [self.services removeObject:sender];
     [self.deviceList removeObjectForKey:sender.name];
@@ -367,7 +368,8 @@ static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
 -(void)netServiceDidResolveAddress:(NSNetService *)sender
 {
     IALogTrace();
-	IALogInfo(@"DidResolve: %@:%i", [sender hostName], [sender port]);
+    
+	IALogInfo(@"%@: DidResolve: %@:%i", THIS_FILE, [sender hostName], [sender port]);
     IADevice * device = [IADevice new];
     device.name = sender.name;
     device.hostAndPort = [NSString stringWithFormat:@"http://%@:%i/", sender.hostName, sender.port];

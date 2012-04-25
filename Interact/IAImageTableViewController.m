@@ -1,7 +1,13 @@
 #import "IAImageTableViewController.h"
+
+#import <CocoaLumberjack/DDLog.h>
+
+#import "IADevice.h"
 #import "IAImage.h"
 #import "IAImageClient.h"
-#import "IADevice.h"
+
+// Log levels : off, error, warn, info, verbose
+static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @interface IAImageTableViewController ()
 

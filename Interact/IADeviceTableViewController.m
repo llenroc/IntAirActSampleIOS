@@ -1,7 +1,12 @@
 #import "IADeviceTableViewController.h"
 
+#import <CocoaLumberjack/DDLog.h>
+
 #import "IADevice.h"
 #import "IAInteract.h"
+
+// Log levels : off, error, warn, info, verbose
+static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @interface IADeviceTableViewController ()
 

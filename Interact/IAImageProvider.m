@@ -1,9 +1,13 @@
 #import "IAImageProvider.h"
 
 #import <AssetsLibrary/AssetsLibrary.h>
+#import <CocoaLumberjack/DDLog.h>
 #import <stdlib.h>
 
 #import "IAImage.h"
+
+// Log levels : off, error, warn, info, verbose
+static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @interface IAImageProvider ()
 

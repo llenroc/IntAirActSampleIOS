@@ -1,20 +1,16 @@
-//
-//  IAAppDelegate.m
-//  Interact
-//
-//  Created by O'Keeffe Arlo Louis on 12-03-19.
-//  Copyright (c) 2012 Fachhochschule Gelsenkirchen Abt. Bocholt. All rights reserved.
-//
-
 #import "IAAppDelegate.h"
 
 #import <CocoaHTTPServer/HTTPLogging.h>
+#import <CocoaLumberjack/DDLog.h>
 #import <CocoaLumberjack/DDTTYLogger.h>
 #import <RestKit/RestKit.h>
 
 #import "IAInteract.h"
 #import "IAImageClient.h"
 #import "IAImageServer.h"
+
+// Log levels : off, error, warn, info, verbose
+static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @interface IAAppDelegate ()
 
@@ -47,7 +43,7 @@
     NSError * error;
     
     if(![self.interact start:&error]) {
-        DDLogError(@"Error starting Interact: %@", error);
+        DDLogError(@"%@: Error starting Interact: %@", THIS_FILE, error);
     }
     
     UINavigationController * navigationController = (UINavigationController*) self.window.rootViewController;
@@ -99,7 +95,7 @@
     if(![self.interact isRunning]) {
         NSError * err;
         if(![self.interact start:&err]) {
-            DDLogError(@"Error starting Interact: %@", err);
+            DDLogError(@"%@: Error starting Interact: %@", THIS_FILE, err);
         }
     }
 }
