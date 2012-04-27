@@ -2,10 +2,10 @@
 
 #import <CocoaLumberjack/DDLog.h>
 #import <RestKit/RestKit.h>
+#import <Interact/IAInteract.h>
+#import <Interact/IAAction.h>
+#import <Interact/IADevice.h>
 
-#import "IAInteract.h"
-#import "IAAction.h"
-#import "IADevice.h"
 #import "IAImage.h"
 #import "IAImages.h"
 

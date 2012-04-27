@@ -2,7 +2,8 @@
 
 #import <CocoaLumberjack/DDLog.h>
 
-#import "IADevice.h"
+#import <Interact/IADevice.h>
+
 #import "IAImage.h"
 #import "IAImageClient.h"
 

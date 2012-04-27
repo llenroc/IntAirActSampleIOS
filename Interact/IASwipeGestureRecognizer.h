@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 
-#import <UIKit/UIGestureRecognizerSubclass.h>
+@class UISwipeGestureRecognizer;
 
 @interface IASwipeGestureRecognizer : UISwipeGestureRecognizer
 

@@ -2,10 +2,10 @@
 
 #import <CocoaLumberjack/DDLog.h>
 #import <RestKit/RestKit.h>
+#import <Interact/IADevice.h>
+#import <Interact/IALocator.h>
+#import <Interact/IAInteract.h>
 
-#import "IADevice.h"
-#import "IALocator.h"
-#import "IAInteract.h"
 #import "IAImage.h"
 #import "IAImageClient.h"
 #import "IASwipeGestureRecognizer.h"

@@ -1,5 +1,7 @@
 #import "IASwipeGestureRecognizer.h"
 
+#import <UIKit/UIGestureRecognizerSubclass.h>
+
 @interface IASwipeGestureRecognizer () {
     CGPoint startPoint;
     CGPoint endPoint;

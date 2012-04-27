@@ -1,15 +1,15 @@
 #import "IAImageServer.h"
 
 #import <CocoaLumberjack/DDLog.h>
+#import <Interact/IAAction.h>
+#import <Interact/IAInteract.h>
+#import <Interact/IARouteRequest+BodyAsString.h>
+#import <Interact/IARouteResponse+Serializer.h>
 #import <RestKit/RestKit.h>
 
-#import "IAAction.h"
 #import "IAImageProvider.h"
 #import "IAImages.h"
 #import "IAImageViewController.h"
-#import "IAInteract.h"
-#import "RouteRequest+BodyAsString.h"
-#import "RouteResponse+Serializer.h"
 
 // Log levels : off, error, warn, info, verbose
 static const int ddLogLevel = LOG_LEVEL_WARN;
