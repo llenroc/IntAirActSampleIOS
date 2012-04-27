@@ -3,7 +3,6 @@
 #import <CocoaLumberjack/DDLog.h>
 #import <RestKit/RestKit.h>
 #import <Interact/IADevice.h>
-#import <Interact/IALocator.h>
 #import <Interact/IAInteract.h>
 
 #import "IAImage.h"
@@ -104,26 +103,13 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 -(IBAction)handleSwipe:(IASwipeGestureRecognizer *)sender
 {
-    float angle = [self.interact.locator realAngle:[sender touchAngle]];
-    //DDLogVerbose(@"Angle: %f", angle);
-    
     if([self.interact.devices count] == 1) {
         [self.imageClient displayImage:self.image ofDevice:self.device onDevice:[self.interact.devices lastObject]];
     } else {
         NSMutableArray * devices = [self.interact.devices mutableCopy];
         [devices removeObject:self.interact.ownDevice];
-
-        IADevice * dev;
-        if (angle < M_PI_2) {
-            dev = [devices objectAtIndex:0];
-        } else if (angle < M_PI && [devices count] > 0) {
-            dev = [devices objectAtIndex:1];
-        } else if (angle < M_PI_2 * 3 && [devices count] > 1) {
-            dev = [devices objectAtIndex:2];
-        } else if (angle < M_PI * 2 && [devices count] > 2) {
-            dev = [devices objectAtIndex:3];
-        }
-        if (dev) {
+        
+        for(IADevice * dev in devices) {
             [self.imageClient displayImage:self.image ofDevice:self.device onDevice:dev];
         }
     }

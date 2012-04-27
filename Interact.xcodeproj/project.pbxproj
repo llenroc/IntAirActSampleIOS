@@ -41,6 +41,7 @@
 		27A43880153F3C3400E82728 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FCB5E3153CACD1004BBA84 /* QuartzCore.framework */; };
 		27A43881153F3C4600E82728 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AAF91517A8B200AE4EE6 /* CoreGraphics.framework */; };
 		27BB876C15240AF0002112F2 /* IAImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BB876B15240AF0002112F2 /* IAImages.m */; };
+		27BE7FAA154B509B00D8A193 /* IALocator.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BE7FA9154B509B00D8A193 /* IALocator.m */; };
 		27DAC3A91523EC0B00622A50 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */; };
 		27DAC3AB1523EC1300622A50 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166041517BD2F005439AE /* Security.framework */; };
 		27DAC3AC1523EC1800622A50 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9D1517ACE400AE4EE6 /* CoreData.framework */; };
@@ -147,6 +148,8 @@
 		2779AB9D1517ACE400AE4EE6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		27BB876A15240AF0002112F2 /* IAImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImages.h; sourceTree = "<group>"; };
 		27BB876B15240AF0002112F2 /* IAImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImages.m; sourceTree = "<group>"; };
+		27BE7FA8154B509B00D8A193 /* IALocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IALocator.h; sourceTree = "<group>"; };
+		27BE7FA9154B509B00D8A193 /* IALocator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IALocator.m; sourceTree = "<group>"; };
 		27E468071546353A009B342E /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		27EF33C7154AA42F003D7F41 /* Interact.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Interact.xcodeproj; path = Frameworks/Interact/Interact.xcodeproj; sourceTree = "<group>"; };
 		27EF33F0154AA44E003D7F41 /* libCocoaAsyncSocket.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCocoaAsyncSocket.a; path = "Frameworks/Interact/Frameworks/RoutingHTTPServer/Frameworks/CocoaHTTPServer/Frameworks/CocoaAsyncSocket/build/Release-iphoneos/libCocoaAsyncSocket.a"; sourceTree = "<group>"; };
@@ -225,6 +228,8 @@
 			children = (
 				2779AB071517A8B200AE4EE6 /* MainStoryboard_iPhone.storyboard */,
 				2779AB0A1517A8B200AE4EE6 /* MainStoryboard_iPad.storyboard */,
+				27BE7FA8154B509B00D8A193 /* IALocator.h */,
+				27BE7FA9154B509B00D8A193 /* IALocator.m */,
 				2731662B1517CFF4005439AE /* IADeviceTableViewController.h */,
 				2731662C1517CFF4005439AE /* IADeviceTableViewController.m */,
 				2731662E1517D03C005439AE /* IAImageTableViewController.h */,
@@ -508,6 +513,7 @@
 				2719BEAE1518F53100B12461 /* IAImageClient.m in Sources */,
 				27BB876C15240AF0002112F2 /* IAImages.m in Sources */,
 				270EAA821546170900880DFD /* IASwipeGestureRecognizer.m in Sources */,
+				27BE7FAA154B509B00D8A193 /* IALocator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
