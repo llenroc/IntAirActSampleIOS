@@ -3,9 +3,9 @@
 #import <CocoaHTTPServer/HTTPLogging.h>
 #import <CocoaLumberjack/DDLog.h>
 #import <CocoaLumberjack/DDTTYLogger.h>
+#import <Interact/IAInteract.h>
 #import <RestKit/RestKit.h>
 
-#import "IAInteract.h"
 #import "IAImage.h"
 #import "IAImages.h"
 #import "IAImageClient.h"
