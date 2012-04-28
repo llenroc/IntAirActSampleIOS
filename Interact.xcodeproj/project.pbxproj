@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		270EAA821546170900880DFD /* IASwipeGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EAA811546170900880DFD /* IASwipeGestureRecognizer.m */; };
-		270EAA8715462A5500880DFD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270EAA8615462A5400880DFD /* CoreLocation.framework */; };
 		270EAA8815462B4900880DFD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270EAA8615462A5400880DFD /* CoreLocation.framework */; };
 		2719BE931518EDCF00B12461 /* IAImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BE921518EDCF00B12461 /* IAImage.m */; };
 		2719BE961518EEEA00B12461 /* IAImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BE951518EEEA00B12461 /* IAImageViewController.m */; };
@@ -29,25 +28,11 @@
 		2779AB061517A8B200AE4EE6 /* IAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2779AB051517A8B200AE4EE6 /* IAAppDelegate.m */; };
 		2779AB091517A8B200AE4EE6 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2779AB071517A8B200AE4EE6 /* MainStoryboard_iPhone.storyboard */; };
 		2779AB0C1517A8B200AE4EE6 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2779AB0A1517A8B200AE4EE6 /* MainStoryboard_iPad.storyboard */; };
-		2779AB171517A8B200AE4EE6 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB161517A8B200AE4EE6 /* SenTestingKit.framework */; };
-		2779AB181517A8B200AE4EE6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AAF51517A8B200AE4EE6 /* UIKit.framework */; };
-		2779AB191517A8B200AE4EE6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AAF71517A8B200AE4EE6 /* Foundation.framework */; };
-		2779AB211517A8B200AE4EE6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2779AB1F1517A8B200AE4EE6 /* InfoPlist.strings */; };
-		2779AB241517A8B200AE4EE6 /* InteractTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2779AB231517A8B200AE4EE6 /* InteractTests.m */; };
 		2779AB721517A9AE00AE4EE6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */; };
 		2779AB9C1517ACDE00AE4EE6 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9B1517ACDE00AE4EE6 /* libxml2.dylib */; };
 		2779AB9E1517ACE400AE4EE6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9D1517ACE400AE4EE6 /* CoreData.framework */; };
-		27A4387E153F3BD400E82728 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27442C37153CC65E0017C744 /* AssetsLibrary.framework */; };
-		27A43880153F3C3400E82728 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FCB5E3153CACD1004BBA84 /* QuartzCore.framework */; };
-		27A43881153F3C4600E82728 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AAF91517A8B200AE4EE6 /* CoreGraphics.framework */; };
 		27BB876C15240AF0002112F2 /* IAImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BB876B15240AF0002112F2 /* IAImages.m */; };
 		27BE7FAA154B509B00D8A193 /* IALocator.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BE7FA9154B509B00D8A193 /* IALocator.m */; };
-		27DAC3A91523EC0B00622A50 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */; };
-		27DAC3AB1523EC1300622A50 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166041517BD2F005439AE /* Security.framework */; };
-		27DAC3AC1523EC1800622A50 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9D1517ACE400AE4EE6 /* CoreData.framework */; };
-		27DAC3AD1523EC2300622A50 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166001517BD14005439AE /* MobileCoreServices.framework */; };
-		27DAC3AE1523EC2700622A50 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166021517BD1F005439AE /* SystemConfiguration.framework */; };
-		27DAC3AF1523EC3800622A50 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9B1517ACDE00AE4EE6 /* libxml2.dylib */; };
 		27E468081546353A009B342E /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E468071546353A009B342E /* CoreMotion.framework */; };
 		27EF33EF154AA44E003D7F41 /* libInteract.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27EF33E9154AA430003D7F41 /* libInteract.a */; };
 		27EF33F6154AA44E003D7F41 /* libCocoaAsyncSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27EF33F0154AA44E003D7F41 /* libCocoaAsyncSocket.a */; };
@@ -60,13 +45,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2779AB1A1517A8B200AE4EE6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2779AAE81517A8B200AE4EE6 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2779AAF01517A8B200AE4EE6;
-			remoteInfo = Interact;
-		};
 		278C8B43154B447D007D4542 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 27EF33C7154AA42F003D7F41 /* Interact.xcodeproj */;
@@ -138,11 +116,7 @@
 		2779AB051517A8B200AE4EE6 /* IAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IAAppDelegate.m; sourceTree = "<group>"; };
 		2779AB081517A8B200AE4EE6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		2779AB0B1517A8B200AE4EE6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		2779AB151517A8B200AE4EE6 /* InteractTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InteractTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2779AB161517A8B200AE4EE6 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		2779AB1E1517A8B200AE4EE6 /* InteractTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "InteractTests-Info.plist"; sourceTree = "<group>"; };
-		2779AB201517A8B200AE4EE6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2779AB231517A8B200AE4EE6 /* InteractTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InteractTests.m; sourceTree = "<group>"; };
 		2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		2779AB9B1517ACDE00AE4EE6 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		2779AB9D1517ACE400AE4EE6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -186,26 +160,6 @@
 				273166051517BD2F005439AE /* Security.framework in Frameworks */,
 				273166031517BD1F005439AE /* SystemConfiguration.framework in Frameworks */,
 				2779AAF61517A8B200AE4EE6 /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2779AB111517A8B200AE4EE6 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				27A4387E153F3BD400E82728 /* AssetsLibrary.framework in Frameworks */,
-				2779AB171517A8B200AE4EE6 /* SenTestingKit.framework in Frameworks */,
-				27DAC3A91523EC0B00622A50 /* CFNetwork.framework in Frameworks */,
-				27DAC3AC1523EC1800622A50 /* CoreData.framework in Frameworks */,
-				27A43881153F3C4600E82728 /* CoreGraphics.framework in Frameworks */,
-				270EAA8715462A5500880DFD /* CoreLocation.framework in Frameworks */,
-				2779AB191517A8B200AE4EE6 /* Foundation.framework in Frameworks */,
-				27DAC3AF1523EC3800622A50 /* libxml2.dylib in Frameworks */,
-				27DAC3AD1523EC2300622A50 /* MobileCoreServices.framework in Frameworks */,
-				27A43880153F3C3400E82728 /* QuartzCore.framework in Frameworks */,
-				27DAC3AB1523EC1300622A50 /* Security.framework in Frameworks */,
-				27DAC3AE1523EC2700622A50 /* SystemConfiguration.framework in Frameworks */,
-				2779AB181517A8B200AE4EE6 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,7 +213,6 @@
 			isa = PBXGroup;
 			children = (
 				2779AAFB1517A8B200AE4EE6 /* Interact */,
-				2779AB1C1517A8B200AE4EE6 /* InteractTests */,
 				2779AAF41517A8B200AE4EE6 /* Frameworks */,
 				2779AAF21517A8B200AE4EE6 /* Products */,
 			);
@@ -269,7 +222,6 @@
 			isa = PBXGroup;
 			children = (
 				2779AAF11517A8B200AE4EE6 /* Interact.app */,
-				2779AB151517A8B200AE4EE6 /* InteractTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -326,24 +278,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		2779AB1C1517A8B200AE4EE6 /* InteractTests */ = {
-			isa = PBXGroup;
-			children = (
-				2779AB231517A8B200AE4EE6 /* InteractTests.m */,
-				2779AB1D1517A8B200AE4EE6 /* Supporting Files */,
-			);
-			path = InteractTests;
-			sourceTree = "<group>";
-		};
-		2779AB1D1517A8B200AE4EE6 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				2779AB1E1517A8B200AE4EE6 /* InteractTests-Info.plist */,
-				2779AB1F1517A8B200AE4EE6 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		27EF33C8154AA42F003D7F41 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,25 +310,6 @@
 			productReference = 2779AAF11517A8B200AE4EE6 /* Interact.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2779AB141517A8B200AE4EE6 /* InteractTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2779AB2A1517A8B200AE4EE6 /* Build configuration list for PBXNativeTarget "InteractTests" */;
-			buildPhases = (
-				2779AB101517A8B200AE4EE6 /* Sources */,
-				2779AB111517A8B200AE4EE6 /* Frameworks */,
-				2779AB121517A8B200AE4EE6 /* Resources */,
-				2779AB131517A8B200AE4EE6 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2779AB1B1517A8B200AE4EE6 /* PBXTargetDependency */,
-			);
-			name = InteractTests;
-			productName = InteractTests;
-			productReference = 2779AB151517A8B200AE4EE6 /* InteractTests.octest */;
-			productType = "com.apple.product-type.bundle";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -424,7 +339,6 @@
 			projectRoot = "";
 			targets = (
 				2779AAF01517A8B200AE4EE6 /* Interact */,
-				2779AB141517A8B200AE4EE6 /* InteractTests */,
 			);
 		};
 /* End PBXProject section */
@@ -471,31 +385,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2779AB121517A8B200AE4EE6 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2779AB211517A8B200AE4EE6 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		2779AB131517A8B200AE4EE6 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2779AAED1517A8B200AE4EE6 /* Sources */ = {
@@ -517,22 +407,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2779AB101517A8B200AE4EE6 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2779AB241517A8B200AE4EE6 /* InteractTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2779AB1B1517A8B200AE4EE6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2779AAF01517A8B200AE4EE6 /* Interact */;
-			targetProxy = 2779AB1A1517A8B200AE4EE6 /* PBXContainerItemProxy */;
-		};
 		27EF33EE154AA43C003D7F41 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = InteractStaticIOS;
@@ -563,14 +440,6 @@
 				2779AB0B1517A8B200AE4EE6 /* en */,
 			);
 			name = MainStoryboard_iPad.storyboard;
-			sourceTree = "<group>";
-		};
-		2779AB1F1517A8B200AE4EE6 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2779AB201517A8B200AE4EE6 /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -655,48 +524,6 @@
 			};
 			name = Release;
 		};
-		2779AB2B1517A8B200AE4EE6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Interact.app/Interact";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
-					"\"$(SRCROOT)/../Frameworks\"",
-					"\"$(SRCROOT)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Interact/Interact-Prefix.pch";
-				INFOPLIST_FILE = "InteractTests/InteractTests-Info.plist";
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_AFTER_BUILD = NO;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Debug;
-		};
-		2779AB2C1517A8B200AE4EE6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Interact.app/Interact";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
-					"\"$(SRCROOT)/../Frameworks\"",
-					"\"$(SRCROOT)/Frameworks\"",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Interact/Interact-Prefix.pch";
-				INFOPLIST_FILE = "InteractTests/InteractTests-Info.plist";
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_AFTER_BUILD = NO;
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -714,15 +541,6 @@
 			buildConfigurations = (
 				2779AB281517A8B200AE4EE6 /* Debug */,
 				2779AB291517A8B200AE4EE6 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		2779AB2A1517A8B200AE4EE6 /* Build configuration list for PBXNativeTarget "InteractTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2779AB2B1517A8B200AE4EE6 /* Debug */,
-				2779AB2C1517A8B200AE4EE6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
