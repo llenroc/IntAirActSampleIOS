@@ -1,10 +1,11 @@
 #import "IAImageClient.h"
 
 #import <CocoaLumberjack/DDLog.h>
-#import <RestKit/RestKit.h>
-#import <Interact/IAInteract.h>
 #import <Interact/IAAction.h>
 #import <Interact/IADevice.h>
+#import <Interact/IAInteract.h>
+#import <RestKit/RestKit.h>
+#import <RestKit+Blocks/RKObjectManager+Blocks.h>
 
 #import "IAImage.h"
 #import "IAImages.h"
@@ -35,7 +36,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
-    [self.interact loadObjectsAtResourcePath:@"/images" fromDevice:device handler:^(RKObjectLoader *loader, NSError *error) {
+    RKObjectManager * manager = [self.interact objectManagerForDevice:device];
+    [manager loadObjectsAtResourcePath:@"/images" handler:^(RKObjectLoader *loader, NSError *error) {
         if(!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 block([[loader result] asCollection]);
