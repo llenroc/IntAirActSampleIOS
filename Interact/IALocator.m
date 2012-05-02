@@ -1,10 +1,10 @@
 #import "IALocator.h"
 
-#import <Interact/IALogging.h>
+#import <IntAirAct/IALogging.h>
 
 // Log levels: off, error, warn, info, verbose
 // Other flags: trace
-static const int interactLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
+static const int intAirActLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
 
 @interface IALocator ()
 

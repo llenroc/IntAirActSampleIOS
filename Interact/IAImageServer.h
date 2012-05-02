@@ -1,11 +1,11 @@
 #import <Foundation/Foundation.h>
 
-@class IAInteract;
+@class IAIntAirAct;
 
 @interface IAImageServer : NSObject
 
 @property (nonatomic, weak) UINavigationController * navigationController;
 
--(id)initWithInteract:(IAInteract*)interact;
+-(id)initWithIntAirAct:(IAIntAirAct*)intAirAct;
 
 @end

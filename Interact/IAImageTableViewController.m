@@ -1,8 +1,7 @@
 #import "IAImageTableViewController.h"
 
 #import <CocoaLumberjack/DDLog.h>
-
-#import <Interact/IADevice.h>
+#import <IntAirAct/IADevice.h>
 
 #import "IAImage.h"
 #import "IAImageClient.h"
@@ -20,7 +19,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 @implementation IAImageTableViewController
 
 @synthesize device = _device;
-@synthesize interact = _interact;
+@synthesize intAirAct = _intAirAct;
 
 @synthesize imageClient = _imageClient;
 @synthesize images = _images;
@@ -77,10 +76,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     
     // be somewhat generic here (slightly advanced usage)
     // we'll segue to ANY view controller that has a device @property
-    if ([segue.destinationViewController respondsToSelector:@selector(setInteract:)]) {
+    if ([segue.destinationViewController respondsToSelector:@selector(setIntAirAct:)]) {
         // use performSelector:withObject: to send without compiler checking
         // (which is acceptable here because we used introspection to be sure this is okay)
-        [segue.destinationViewController performSelector:@selector(setInteract:) withObject:self.interact];
+        [segue.destinationViewController performSelector:@selector(setIntAirAct:) withObject:self.intAirAct];
     }
     if ([segue.destinationViewController respondsToSelector:@selector(setImageClient:)]) {
         [segue.destinationViewController performSelector:@selector(setImageClient:) withObject:self.imageClient];
@@ -117,7 +116,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 -(IAImageClient *)imageClient
 {
     if (!_imageClient) {
-        _imageClient = [[IAImageClient alloc] initWithInteract:self.interact];
+        _imageClient = [[IAImageClient alloc] initWithIntAirAct:self.intAirAct];
     }
     return _imageClient;
 }
@@ -125,7 +124,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 -(void)loadImages
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    if(self.interact && self.device) {
+    if(self.intAirAct && self.device) {
         [self.imageClient getImages:^(NSArray * images) {
             DDLogVerbose(@"Loaded images: %@ from device: %@", images, self.device);
             self.images = images;

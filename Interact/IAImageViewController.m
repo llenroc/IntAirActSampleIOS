@@ -2,8 +2,8 @@
 
 #import <CocoaLumberjack/DDLog.h>
 #import <RestKit/RestKit.h>
-#import <Interact/IADevice.h>
-#import <Interact/IAInteract.h>
+#import <IntAirAct/IADevice.h>
+#import <IntAirAct/IAIntAirAct.h>
 
 #import "IAImage.h"
 #import "IAImageClient.h"
@@ -25,7 +25,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 @synthesize device = _device;
 @synthesize image = _image;
 @synthesize imageClient = _imageClient;
-@synthesize interact = _interact;
+@synthesize intAirAct = _intAirAct;
 
 @synthesize activity = _activity;
 @synthesize imageView = _imageView;
@@ -36,10 +36,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     if (self.imageView) {
         if (self.image && self.device) {
             [self.activity startAnimating];
-            dispatch_queue_t imageDownloadQ = dispatch_queue_create("Interact Image Downloader", NULL);
+            dispatch_queue_t imageDownloadQ = dispatch_queue_create("IntAirAct Image Downloader", NULL);
             dispatch_async(imageDownloadQ, ^{
-                RKObjectManager * om = [self.interact objectManagerForDevice:self.device];
-                NSString * loc = [self.interact resourcePathFor:self.image forObjectManager:om];
+                RKObjectManager * om = [self.intAirAct objectManagerForDevice:self.device];
+                NSString * loc = [self.intAirAct resourcePathFor:self.image forObjectManager:om];
                 loc = [loc stringByAppendingString:@".jpg"];
                 RKURL * url = [om.baseURL URLByAppendingResourcePath:loc];
                 UIImage * image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
@@ -103,11 +103,11 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 -(IBAction)handleSwipe:(IASwipeGestureRecognizer *)sender
 {
-    if([self.interact.devices count] == 1) {
-        [self.imageClient displayImage:self.image ofDevice:self.device onDevice:[self.interact.devices lastObject]];
+    if([self.intAirAct.devices count] == 1) {
+        [self.imageClient displayImage:self.image ofDevice:self.device onDevice:[self.intAirAct.devices lastObject]];
     } else {
-        NSMutableArray * devices = [self.interact.devices mutableCopy];
-        [devices removeObject:self.interact.ownDevice];
+        NSMutableArray * devices = [self.intAirAct.devices mutableCopy];
+        [devices removeObject:self.intAirAct.ownDevice];
         
         for(IADevice * dev in devices) {
             [self.imageClient displayImage:self.image ofDevice:self.device onDevice:dev];
@@ -130,7 +130,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 -(IAImageClient *)imageClient
 {
     if (!_imageClient) {
-        _imageClient = [[IAImageClient alloc] initWithInteract:self.interact];
+        _imageClient = [[IAImageClient alloc] initWithIntAirAct:self.intAirAct];
     }
     return _imageClient;
 }

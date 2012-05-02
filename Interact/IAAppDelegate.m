@@ -3,7 +3,7 @@
 #import <CocoaHTTPServer/HTTPLogging.h>
 #import <CocoaLumberjack/DDLog.h>
 #import <CocoaLumberjack/DDTTYLogger.h>
-#import <Interact/IAInteract.h>
+#import <IntAirAct/IAIntAirAct.h>
 #import <RestKit/RestKit.h>
 
 #import "IAImage.h"
@@ -16,7 +16,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @interface IAAppDelegate ()
 
-@property (nonatomic, strong) IAInteract * interact;
+@property (nonatomic, strong) IAIntAirAct * intAirAct;
 @property (nonatomic, strong) IAImageServer * imageServer;
 
 @end
@@ -25,7 +25,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @synthesize window = _window;
 
-@synthesize interact = _interact;
+@synthesize intAirAct = _intAirAct;
 @synthesize imageServer = _imageServer;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -37,14 +37,14 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     // Configure RestKit logging framework
     //RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
     
-    // create, setup and start Interact
-    self.interact = [IAInteract new];
+    // create, setup and start IntAirAct
+    self.intAirAct = [IAIntAirAct new];
     [self setupMappings];
-    self.imageServer = [[IAImageServer alloc] initWithInteract:self.interact];
+    self.imageServer = [[IAImageServer alloc] initWithIntAirAct:self.intAirAct];
     
     NSError * error;
-    if(![self.interact start:&error]) {
-        DDLogError(@"%@: Error starting Interact: %@", THIS_FILE, error);
+    if(![self.intAirAct start:&error]) {
+        DDLogError(@"%@: Error starting IntAirAct: %@", THIS_FILE, error);
         return NO;
     }
     
@@ -53,10 +53,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     // the imageServer requires the navigationController to open up a new view on a display action
     self.imageServer.navigationController = navigationController;
     
-    // set interact property of the first active ViewController
+    // set intAirAct property of the first active ViewController
     UIViewController * firstViewController = [[navigationController viewControllers] objectAtIndex:0];
-    if([firstViewController respondsToSelector:@selector(setInteract:)]) {
-        [firstViewController performSelector:@selector(setInteract:) withObject:self.interact];
+    if([firstViewController respondsToSelector:@selector(setIntAirAct:)]) {
+        [firstViewController performSelector:@selector(setIntAirAct:) withObject:self.intAirAct];
     }
     
     // Override point for customization after application launch.
@@ -66,7 +66,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 -(void)setupMappings
 {
     // setup mappings for client and server side
-    [self.interact addMappingForClass:[IAImage class] withKeypath:@"images" withAttributes:@"identifier", nil];
+    [self.intAirAct addMappingForClass:[IAImage class] withKeypath:@"images" withAttributes:@"identifier", nil];
 
     // This is a workaround for serializing arrays of images, see https://github.com/RestKit/RestKit/issues/398
     RKObjectMapping * imageSerialization = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
@@ -75,10 +75,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
     RKObjectMapping * imagesSerialization = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
     [imagesSerialization hasMany:@"images" withMapping:imageSerialization];
-    [self.interact.objectMappingProvider setSerializationMapping:imagesSerialization forClass:[IAImages class]];
+    [self.intAirAct.objectMappingProvider setSerializationMapping:imagesSerialization forClass:[IAImages class]];
     
     // setup routes
-    [self.interact.router routeClass:[IAImage class] toResourcePath:@"/image/:identifier"];
+    [self.intAirAct.router routeClass:[IAImage class] toResourcePath:@"/image/:identifier"];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -88,7 +88,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 
-    [self.interact stop];
+    [self.intAirAct stop];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -112,10 +112,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 
-    if(![self.interact isRunning]) {
+    if(![self.intAirAct isRunning]) {
         NSError * err;
-        if(![self.interact start:&err]) {
-            DDLogError(@"%@: Error starting Interact: %@", THIS_FILE, err);
+        if(![self.intAirAct start:&err]) {
+            DDLogError(@"%@: Error starting IntAirAct: %@", THIS_FILE, err);
         }
     }
 }
@@ -126,7 +126,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
-    [self.interact stop];
+    [self.intAirAct stop];
 }
 
 @end

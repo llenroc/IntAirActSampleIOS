@@ -1,10 +1,10 @@
 #import "IAImageServer.h"
 
 #import <CocoaLumberjack/DDLog.h>
-#import <Interact/IAAction.h>
-#import <Interact/IAInteract.h>
-#import <Interact/IARouteRequest+BodyAsString.h>
-#import <Interact/IARouteResponse+Serializer.h>
+#import <IntAirAct/IAAction.h>
+#import <IntAirAct/IAIntAirAct.h>
+#import <IntAirAct/IARouteRequest+BodyAsString.h>
+#import <IntAirAct/IARouteResponse+Serializer.h>
 #import <RestKit/RestKit.h>
 
 #import "IAImageProvider.h"
@@ -16,7 +16,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @interface IAImageServer ()
 
-@property (nonatomic, strong) IAInteract * interact;
+@property (nonatomic, strong) IAIntAirAct * intAirAct;
 @property (nonatomic, strong) IAImageProvider * imageProvider;
 
 @end
@@ -25,16 +25,16 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @synthesize navigationController = _navigationController;
 
-@synthesize interact = _interact;
+@synthesize intAirAct = _intAirAct;
 @synthesize imageProvider = _imageProvider;
 
--(id)initWithInteract:(IAInteract *)interact
+-(id)initWithIntAirAct:(IAIntAirAct *)intAirAct
 {
     self = [super init];
     if (self) {
-        self.interact = interact;
+        self.intAirAct = intAirAct;
         self.imageProvider = [IAImageProvider new];
-        [self registerServer:interact.httpServer];
+        [self registerServer:intAirAct.httpServer];
     }
     return self;
 }
@@ -47,7 +47,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
         IAImages * images = [IAImages new];
         images.images = self.imageProvider.images;
-        [response respondWith:images withInteract:self.interact];
+        [response respondWith:images withIntAirAct:self.intAirAct];
     }];
     
     [app get:@"/image/:id.jpg" withBlock:^(RouteRequest * request, RouteResponse * response) {
@@ -68,7 +68,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     [app put:@"/action/displayImage" withBlock:^(RouteRequest * request, RouteResponse * response) {
         DDLogVerbose(@"PUT /action/displayImage");
         
-        RKObjectMappingResult * result = [self.interact deserializeObject:[request body]];
+        RKObjectMappingResult * result = [self.intAirAct deserializeObject:[request body]];
         if(!result && [[result asObject] isKindOfClass:[IAAction class]]) {
             DDLogError(@"Could not parse request body: %@", [request bodyAsString]);
             response.statusCode = 500;
@@ -79,7 +79,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
             // Show image
             UIStoryboard * storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"UIMainStoryboardFile"] bundle: nil];
             IAImageViewController * t = [storyboard instantiateViewControllerWithIdentifier:@"ImageViewController"];
-            t.interact = self.interact;
+            t.intAirAct = self.intAirAct;
             t.image = [action.parameters objectForKey:@"image"];
             t.device =[action.parameters objectForKey:@"device"];
             dispatch_async(dispatch_get_main_queue(), ^{

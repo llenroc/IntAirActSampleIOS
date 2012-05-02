@@ -1,9 +1,9 @@
 #import "IAImageClient.h"
 
 #import <CocoaLumberjack/DDLog.h>
-#import <Interact/IAAction.h>
-#import <Interact/IADevice.h>
-#import <Interact/IAInteract.h>
+#import <IntAirAct/IAAction.h>
+#import <IntAirAct/IADevice.h>
+#import <IntAirAct/IAIntAirAct.h>
 #import <RestKit/RestKit.h>
 #import <RestKit+Blocks/RKObjectManager+Blocks.h>
 
@@ -15,19 +15,19 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @interface IAImageClient ()
 
-@property (nonatomic, strong) IAInteract * interact;
+@property (nonatomic, strong) IAIntAirAct * intAirAct;
 
 @end
 
 @implementation IAImageClient
 
-@synthesize interact = _interact;
+@synthesize intAirAct = _intAirAct;
 
--(id)initWithInteract:(IAInteract *)interact
+-(id)initWithIntAirAct:(IAIntAirAct *)intAirAct
 {
     self = [super init];
     if (self) {
-        self.interact = interact;
+        self.intAirAct = intAirAct;
     }
     return self;
 }
@@ -36,7 +36,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
-    RKObjectManager * manager = [self.interact objectManagerForDevice:device];
+    RKObjectManager * manager = [self.intAirAct objectManagerForDevice:device];
     [manager loadObjectsAtResourcePath:@"/images" handler:^(RKObjectLoader *loader, NSError *error) {
         if(!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -55,7 +55,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     IAAction * action = [IAAction new];
     action.action = @"displayImage";
     action.parameters = [NSDictionary dictionaryWithObjectsAndKeys:image, @"image", source, @"device", nil];
-    [self.interact callAction:action onDevice:target];
+    [self.intAirAct callAction:action onDevice:target];
 }
 
 @end

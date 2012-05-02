@@ -1,7 +1,7 @@
 #import <UIKit/UIKit.h>
 
 @class IADevice;
-@class IAInteract;
+@class IAIntAirAct;
 @class IAImage;
 @class IAImageClient;
 
@@ -10,6 +10,6 @@
 @property (nonatomic, strong) IADevice * device;
 @property (nonatomic, strong) IAImage * image;
 @property (nonatomic, strong) IAImageClient * imageClient;
-@property (nonatomic, strong) IAInteract * interact;
+@property (nonatomic, strong) IAIntAirAct * intAirAct;
 
 @end

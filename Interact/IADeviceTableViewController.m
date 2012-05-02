@@ -1,8 +1,8 @@
 #import "IADeviceTableViewController.h"
 
 #import <CocoaLumberjack/DDLog.h>
-#import <Interact/IADevice.h>
-#import <Interact/IAInteract.h>
+#import <IntAirAct/IADevice.h>
+#import <IntAirAct/IAIntAirAct.h>
 
 // Log levels : off, error, warn, info, verbose
 static const int ddLogLevel = LOG_LEVEL_WARN;
@@ -15,7 +15,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @implementation IADeviceTableViewController
 
-@synthesize interact = _interact;
+@synthesize intAirAct = _intAirAct;
 
 @synthesize devices = _devices;
 
@@ -76,10 +76,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     
     // be somewhat generic here (slightly advanced usage)
     // we'll segue to ANY view controller that has a device @property
-    if ([segue.destinationViewController respondsToSelector:@selector(setInteract:)]) {
+    if ([segue.destinationViewController respondsToSelector:@selector(setIntAirAct:)]) {
         // use performSelector:withObject: to send without compiler checking
         // (which is acceptable here because we used introspection to be sure this is okay)
-        [segue.destinationViewController performSelector:@selector(setInteract:) withObject:self.interact];
+        [segue.destinationViewController performSelector:@selector(setIntAirAct:) withObject:self.intAirAct];
     }
     if ([segue.destinationViewController respondsToSelector:@selector(setDevice:)]) {
         [segue.destinationViewController performSelector:@selector(setDevice:) withObject:device];
@@ -90,7 +90,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     DDLogVerbose(@"%@: %@, animated: %i", THIS_FILE, THIS_METHOD, animated);
     [super viewWillAppear:animated];
 
-    // Listens for DeviceUpdate notifications, Interact calls this notification
+    // Listens for DeviceUpdate notifications, IntAirAct calls this notification
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:@"DeviceUpdate" object:nil];
 
     [self refresh:nil];
@@ -99,7 +99,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 -(void)refresh:(NSNotification *)note {
     DDLogVerbose(@"%@: %@, note: %@", THIS_FILE, THIS_METHOD, note);
-    self.devices = self.interact.devices;
+    self.devices = self.intAirAct.devices;
 }
 
 -(void)setDevices:(NSArray *)devices

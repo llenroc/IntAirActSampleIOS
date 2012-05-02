@@ -1,9 +1,9 @@
 #import <UIKit/UIKit.h>
 
-@class IAInteract;
+@class IAIntAirAct;
 
 @interface IADeviceTableViewController : UITableViewController
 
-@property (nonatomic, strong) IAInteract * interact;
+@property (nonatomic, strong) IAIntAirAct * intAirAct;
 
 @end
