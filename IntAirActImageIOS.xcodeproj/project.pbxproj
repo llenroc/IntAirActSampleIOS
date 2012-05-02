@@ -25,6 +25,21 @@
 		27BFC7561550BCF900799E34 /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27BFC7501550BCF900799E34 /* libRestKit.a */; };
 		27BFC7571550BCF900799E34 /* libRestKit+Blocks.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27BFC7511550BCF900799E34 /* libRestKit+Blocks.a */; };
 		27BFC7581550BCF900799E34 /* libRoutingHTTPServer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27BFC7521550BCF900799E34 /* libRoutingHTTPServer.a */; };
+		27C49AE61550CD0E0044F61B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27C49AC71550CD0E0044F61B /* InfoPlist.strings */; };
+		27C49AE71550CD0E0044F61B /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27C49AC91550CD0E0044F61B /* MainStoryboard_iPad.storyboard */; };
+		27C49AE81550CD0E0044F61B /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27C49ACB1550CD0E0044F61B /* MainStoryboard_iPhone.storyboard */; };
+		27C49AE91550CD0E0044F61B /* IAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C49ACE1550CD0E0044F61B /* IAAppDelegate.m */; };
+		27C49AEA1550CD0E0044F61B /* IADeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C49AD01550CD0E0044F61B /* IADeviceTableViewController.m */; };
+		27C49AEB1550CD0E0044F61B /* IAImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C49AD21550CD0E0044F61B /* IAImage.m */; };
+		27C49AEC1550CD0E0044F61B /* IAImageClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C49AD41550CD0E0044F61B /* IAImageClient.m */; };
+		27C49AED1550CD0E0044F61B /* IAImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C49AD61550CD0E0044F61B /* IAImageProvider.m */; };
+		27C49AEE1550CD0E0044F61B /* IAImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C49AD81550CD0E0044F61B /* IAImages.m */; };
+		27C49AEF1550CD0E0044F61B /* IAImageServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C49ADA1550CD0E0044F61B /* IAImageServer.m */; };
+		27C49AF01550CD0E0044F61B /* IAImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C49ADC1550CD0E0044F61B /* IAImageTableViewController.m */; };
+		27C49AF11550CD0E0044F61B /* IAImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C49ADE1550CD0E0044F61B /* IAImageViewController.m */; };
+		27C49AF21550CD0E0044F61B /* IALocator.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C49AE01550CD0E0044F61B /* IALocator.m */; };
+		27C49AF31550CD0E0044F61B /* IASwipeGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C49AE21550CD0E0044F61B /* IASwipeGestureRecognizer.m */; };
+		27C49AF51550CD0E0044F61B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C49AE51550CD0E0044F61B /* main.m */; };
 		27E468081546353A009B342E /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27E468071546353A009B342E /* CoreMotion.framework */; };
 		27FCB5E4153CACD1004BBA84 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27FCB5E3153CACD1004BBA84 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
@@ -88,6 +103,34 @@
 		27BFC7501550BCF900799E34 /* libRestKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libRestKit.a; path = "Frameworks/IntAirAct/Frameworks/RestKitBlocks/Frameworks/RestKit/build/Release-iphoneos/libRestKit.a"; sourceTree = "<group>"; };
 		27BFC7511550BCF900799E34 /* libRestKit+Blocks.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libRestKit+Blocks.a"; path = "Frameworks/IntAirAct/Frameworks/RestKitBlocks/build/Release-iphoneos/libRestKit+Blocks.a"; sourceTree = "<group>"; };
 		27BFC7521550BCF900799E34 /* libRoutingHTTPServer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libRoutingHTTPServer.a; path = "Frameworks/IntAirAct/Frameworks/RoutingHTTPServer/build/Release-iphoneos/libRoutingHTTPServer.a"; sourceTree = "<group>"; };
+		27C49AC81550CD0E0044F61B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		27C49ACA1550CD0E0044F61B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		27C49ACC1550CD0E0044F61B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		27C49ACD1550CD0E0044F61B /* IAAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAAppDelegate.h; sourceTree = "<group>"; };
+		27C49ACE1550CD0E0044F61B /* IAAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAAppDelegate.m; sourceTree = "<group>"; };
+		27C49ACF1550CD0E0044F61B /* IADeviceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IADeviceTableViewController.h; sourceTree = "<group>"; };
+		27C49AD01550CD0E0044F61B /* IADeviceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IADeviceTableViewController.m; sourceTree = "<group>"; };
+		27C49AD11550CD0E0044F61B /* IAImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImage.h; sourceTree = "<group>"; };
+		27C49AD21550CD0E0044F61B /* IAImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImage.m; sourceTree = "<group>"; };
+		27C49AD31550CD0E0044F61B /* IAImageClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageClient.h; sourceTree = "<group>"; };
+		27C49AD41550CD0E0044F61B /* IAImageClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageClient.m; sourceTree = "<group>"; };
+		27C49AD51550CD0E0044F61B /* IAImageProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageProvider.h; sourceTree = "<group>"; };
+		27C49AD61550CD0E0044F61B /* IAImageProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageProvider.m; sourceTree = "<group>"; };
+		27C49AD71550CD0E0044F61B /* IAImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImages.h; sourceTree = "<group>"; };
+		27C49AD81550CD0E0044F61B /* IAImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImages.m; sourceTree = "<group>"; };
+		27C49AD91550CD0E0044F61B /* IAImageServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageServer.h; sourceTree = "<group>"; };
+		27C49ADA1550CD0E0044F61B /* IAImageServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageServer.m; sourceTree = "<group>"; };
+		27C49ADB1550CD0E0044F61B /* IAImageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageTableViewController.h; sourceTree = "<group>"; };
+		27C49ADC1550CD0E0044F61B /* IAImageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageTableViewController.m; sourceTree = "<group>"; };
+		27C49ADD1550CD0E0044F61B /* IAImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageViewController.h; sourceTree = "<group>"; };
+		27C49ADE1550CD0E0044F61B /* IAImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageViewController.m; sourceTree = "<group>"; };
+		27C49ADF1550CD0E0044F61B /* IALocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IALocator.h; sourceTree = "<group>"; };
+		27C49AE01550CD0E0044F61B /* IALocator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IALocator.m; sourceTree = "<group>"; };
+		27C49AE11550CD0E0044F61B /* IASwipeGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASwipeGestureRecognizer.h; sourceTree = "<group>"; };
+		27C49AE21550CD0E0044F61B /* IASwipeGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASwipeGestureRecognizer.m; sourceTree = "<group>"; };
+		27C49AE31550CD0E0044F61B /* IntAirActImageIOS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "IntAirActImageIOS-Info.plist"; sourceTree = "<group>"; };
+		27C49AE41550CD0E0044F61B /* IntAirActImageIOS-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IntAirActImageIOS-Prefix.pch"; sourceTree = "<group>"; };
+		27C49AE51550CD0E0044F61B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		27E468071546353A009B342E /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		27FCB5E3153CACD1004BBA84 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -126,6 +169,7 @@
 		2779AAE61517A8B200AE4EE6 = {
 			isa = PBXGroup;
 			children = (
+				27C49AC61550CD0E0044F61B /* IntAirActImageIOS */,
 				2779AAF41517A8B200AE4EE6 /* Frameworks */,
 				2779AAF21517A8B200AE4EE6 /* Products */,
 			);
@@ -176,6 +220,73 @@
 				27BFC7321550BB9B00799E34 /* IntAirActOSXTests.octest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		27C49AC61550CD0E0044F61B /* IntAirActImageIOS */ = {
+			isa = PBXGroup;
+			children = (
+				27C49AF71550CD280044F61B /* Client */,
+				27C49AF81550CD390044F61B /* Server */,
+				27C49AF91550CD4B0044F61B /* Model */,
+				27C49AF61550CD190044F61B /* Supporting Files */,
+			);
+			path = IntAirActImageIOS;
+			sourceTree = "<group>";
+		};
+		27C49AF61550CD190044F61B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				27C49ACD1550CD0E0044F61B /* IAAppDelegate.h */,
+				27C49ACE1550CD0E0044F61B /* IAAppDelegate.m */,
+				27C49AC71550CD0E0044F61B /* InfoPlist.strings */,
+				27C49AE31550CD0E0044F61B /* IntAirActImageIOS-Info.plist */,
+				27C49AE41550CD0E0044F61B /* IntAirActImageIOS-Prefix.pch */,
+				27C49AE51550CD0E0044F61B /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		27C49AF71550CD280044F61B /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				27C49ACF1550CD0E0044F61B /* IADeviceTableViewController.h */,
+				27C49AD01550CD0E0044F61B /* IADeviceTableViewController.m */,
+				27C49AD31550CD0E0044F61B /* IAImageClient.h */,
+				27C49AD41550CD0E0044F61B /* IAImageClient.m */,
+				27C49ADB1550CD0E0044F61B /* IAImageTableViewController.h */,
+				27C49ADC1550CD0E0044F61B /* IAImageTableViewController.m */,
+				27C49ADD1550CD0E0044F61B /* IAImageViewController.h */,
+				27C49ADE1550CD0E0044F61B /* IAImageViewController.m */,
+				27C49ADF1550CD0E0044F61B /* IALocator.h */,
+				27C49AE01550CD0E0044F61B /* IALocator.m */,
+				27C49AE11550CD0E0044F61B /* IASwipeGestureRecognizer.h */,
+				27C49AE21550CD0E0044F61B /* IASwipeGestureRecognizer.m */,
+				27C49AC91550CD0E0044F61B /* MainStoryboard_iPad.storyboard */,
+				27C49ACB1550CD0E0044F61B /* MainStoryboard_iPhone.storyboard */,
+			);
+			name = Client;
+			sourceTree = "<group>";
+		};
+		27C49AF81550CD390044F61B /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				27C49AD51550CD0E0044F61B /* IAImageProvider.h */,
+				27C49AD61550CD0E0044F61B /* IAImageProvider.m */,
+				27C49AD91550CD0E0044F61B /* IAImageServer.h */,
+				27C49ADA1550CD0E0044F61B /* IAImageServer.m */,
+			);
+			name = Server;
+			sourceTree = "<group>";
+		};
+		27C49AF91550CD4B0044F61B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				27C49AD11550CD0E0044F61B /* IAImage.h */,
+				27C49AD21550CD0E0044F61B /* IAImage.m */,
+				27C49AD71550CD0E0044F61B /* IAImages.h */,
+				27C49AD81550CD0E0044F61B /* IAImages.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -268,6 +379,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27C49AE61550CD0E0044F61B /* InfoPlist.strings in Resources */,
+				27C49AE71550CD0E0044F61B /* MainStoryboard_iPad.storyboard in Resources */,
+				27C49AE81550CD0E0044F61B /* MainStoryboard_iPhone.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +392,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27C49AE91550CD0E0044F61B /* IAAppDelegate.m in Sources */,
+				27C49AEA1550CD0E0044F61B /* IADeviceTableViewController.m in Sources */,
+				27C49AEB1550CD0E0044F61B /* IAImage.m in Sources */,
+				27C49AEC1550CD0E0044F61B /* IAImageClient.m in Sources */,
+				27C49AED1550CD0E0044F61B /* IAImageProvider.m in Sources */,
+				27C49AEE1550CD0E0044F61B /* IAImages.m in Sources */,
+				27C49AEF1550CD0E0044F61B /* IAImageServer.m in Sources */,
+				27C49AF01550CD0E0044F61B /* IAImageTableViewController.m in Sources */,
+				27C49AF11550CD0E0044F61B /* IAImageViewController.m in Sources */,
+				27C49AF21550CD0E0044F61B /* IALocator.m in Sources */,
+				27C49AF31550CD0E0044F61B /* IASwipeGestureRecognizer.m in Sources */,
+				27C49AF51550CD0E0044F61B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +416,33 @@
 			targetProxy = 27BFC7341550BBA700799E34 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		27C49AC71550CD0E0044F61B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27C49AC81550CD0E0044F61B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		27C49AC91550CD0E0044F61B /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27C49ACA1550CD0E0044F61B /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		27C49ACB1550CD0E0044F61B /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27C49ACC1550CD0E0044F61B /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		2779AB251517A8B200AE4EE6 /* Debug */ = {
@@ -347,8 +500,8 @@
 					"\"$(SRCROOT)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Interact/IntAirActImageIOS-Prefix.pch";
-				INFOPLIST_FILE = "Interact/IntAirActImageIOS-Info.plist";
+				GCC_PREFIX_HEADER = "IntAirActImageIOS/IntAirActImageIOS-Prefix.pch";
+				INFOPLIST_FILE = "IntAirActImageIOS/IntAirActImageIOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = IntAirActImageIOS;
@@ -364,8 +517,8 @@
 					"\"$(SRCROOT)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Interact/IntAirActImageIOS-Prefix.pch";
-				INFOPLIST_FILE = "Interact/IntAirActImageIOS-Info.plist";
+				GCC_PREFIX_HEADER = "IntAirActImageIOS/IntAirActImageIOS-Prefix.pch";
+				INFOPLIST_FILE = "IntAirActImageIOS/IntAirActImageIOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = IntAirActImageIOS;
