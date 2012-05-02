@@ -104,14 +104,14 @@
 		2731662E1517D03C005439AE /* IAImageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageTableViewController.h; sourceTree = "<group>"; };
 		2731662F1517D03C005439AE /* IAImageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageTableViewController.m; sourceTree = "<group>"; };
 		27442C37153CC65E0017C744 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
-		2779AAF11517A8B200AE4EE6 /* Interact.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Interact.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2779AAF11517A8B200AE4EE6 /* IntAirActImageIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntAirActImageIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2779AAF51517A8B200AE4EE6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2779AAF71517A8B200AE4EE6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2779AAF91517A8B200AE4EE6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		2779AAFD1517A8B200AE4EE6 /* Interact-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Interact-Info.plist"; sourceTree = "<group>"; };
+		2779AAFD1517A8B200AE4EE6 /* IntAirActImageIOS-Info.plist */ = {isa = PBXFileReference; path = "IntAirActImageIOS-Info.plist"; sourceTree = "<group>"; };
 		2779AAFF1517A8B200AE4EE6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2779AB011517A8B200AE4EE6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2779AB031517A8B200AE4EE6 /* Interact-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Interact-Prefix.pch"; sourceTree = "<group>"; };
+		2779AB031517A8B200AE4EE6 /* IntAirActImageIOS-Prefix.pch */ = {isa = PBXFileReference; path = "IntAirActImageIOS-Prefix.pch"; sourceTree = "<group>"; };
 		2779AB041517A8B200AE4EE6 /* IAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IAAppDelegate.h; sourceTree = "<group>"; };
 		2779AB051517A8B200AE4EE6 /* IAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IAAppDelegate.m; sourceTree = "<group>"; };
 		2779AB081517A8B200AE4EE6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
@@ -221,7 +221,7 @@
 		2779AAF21517A8B200AE4EE6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2779AAF11517A8B200AE4EE6 /* Interact.app */,
+				2779AAF11517A8B200AE4EE6 /* IntAirActImageIOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -268,10 +268,10 @@
 		2779AAFC1517A8B200AE4EE6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2779AB031517A8B200AE4EE6 /* Interact-Prefix.pch */,
+				2779AB031517A8B200AE4EE6 /* IntAirActImageIOS-Prefix.pch */,
 				2779AB041517A8B200AE4EE6 /* IAAppDelegate.h */,
 				2779AB051517A8B200AE4EE6 /* IAAppDelegate.m */,
-				2779AAFD1517A8B200AE4EE6 /* Interact-Info.plist */,
+				2779AAFD1517A8B200AE4EE6 /* IntAirActImageIOS-Info.plist */,
 				2779AAFE1517A8B200AE4EE6 /* InfoPlist.strings */,
 				2779AB011517A8B200AE4EE6 /* main.m */,
 			);
@@ -292,9 +292,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2779AAF01517A8B200AE4EE6 /* Interact */ = {
+		2779AAF01517A8B200AE4EE6 /* IntAirActImageIOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2779AB271517A8B200AE4EE6 /* Build configuration list for PBXNativeTarget "Interact" */;
+			buildConfigurationList = 2779AB271517A8B200AE4EE6 /* Build configuration list for PBXNativeTarget "IntAirActImageIOS" */;
 			buildPhases = (
 				2779AAED1517A8B200AE4EE6 /* Sources */,
 				2779AAEE1517A8B200AE4EE6 /* Frameworks */,
@@ -305,9 +305,9 @@
 			dependencies = (
 				27BFC7351550BBA700799E34 /* PBXTargetDependency */,
 			);
-			name = Interact;
+			name = IntAirActImageIOS;
 			productName = Interact;
-			productReference = 2779AAF11517A8B200AE4EE6 /* Interact.app */;
+			productReference = 2779AAF11517A8B200AE4EE6 /* IntAirActImageIOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -320,7 +320,7 @@
 				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = "Fachhochschule Gelsenkirchen Abt. Bocholt";
 			};
-			buildConfigurationList = 2779AAEB1517A8B200AE4EE6 /* Build configuration list for PBXProject "Interact" */;
+			buildConfigurationList = 2779AAEB1517A8B200AE4EE6 /* Build configuration list for PBXProject "IntAirActImageIOS" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -338,7 +338,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				2779AAF01517A8B200AE4EE6 /* Interact */,
+				2779AAF01517A8B200AE4EE6 /* IntAirActImageIOS */,
 			);
 		};
 /* End PBXProject section */
@@ -500,11 +500,11 @@
 					"\"$(SRCROOT)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Interact/Interact-Prefix.pch";
-				INFOPLIST_FILE = "Interact/Interact-Info.plist";
+				GCC_PREFIX_HEADER = "Interact/IntAirActImageIOS-Prefix.pch";
+				INFOPLIST_FILE = "Interact/IntAirActImageIOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = IntAirActImageIOS;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -517,11 +517,11 @@
 					"\"$(SRCROOT)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Interact/Interact-Prefix.pch";
-				INFOPLIST_FILE = "Interact/Interact-Info.plist";
+				GCC_PREFIX_HEADER = "Interact/IntAirActImageIOS-Prefix.pch";
+				INFOPLIST_FILE = "Interact/IntAirActImageIOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = IntAirActImageIOS;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -529,7 +529,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2779AAEB1517A8B200AE4EE6 /* Build configuration list for PBXProject "Interact" */ = {
+		2779AAEB1517A8B200AE4EE6 /* Build configuration list for PBXProject "IntAirActImageIOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2779AB251517A8B200AE4EE6 /* Debug */,
@@ -538,7 +538,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2779AB271517A8B200AE4EE6 /* Build configuration list for PBXNativeTarget "Interact" */ = {
+		2779AB271517A8B200AE4EE6 /* Build configuration list for PBXNativeTarget "IntAirActImageIOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2779AB281517A8B200AE4EE6 /* Debug */,
