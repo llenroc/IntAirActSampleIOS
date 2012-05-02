@@ -1,23 +1,30 @@
 #import "IAAppDelegate.h"
 
+#import <AssetsLibrary/AssetsLibrary.h>
 #import <CocoaHTTPServer/HTTPLogging.h>
 #import <CocoaLumberjack/DDLog.h>
 #import <CocoaLumberjack/DDTTYLogger.h>
+#import <IntAirAct/IAAction.h>
 #import <IntAirAct/IAIntAirAct.h>
+#import <IntAirAct/IARouteRequest+BodyAsString.h>
+#import <IntAirAct/IARouteResponse+Serializer.h>
 #import <RestKit/RestKit.h>
+#import <RoutingHTTPServer/RoutingHTTPServer.h>
 
 #import "IAImage.h"
 #import "IAImages.h"
 #import "IAImageClient.h"
-#import "IAImageServer.h"
+#import "IAImageViewController.h"
 
 // Log levels : off, error, warn, info, verbose
-static const int ddLogLevel = LOG_LEVEL_WARN;
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 @interface IAAppDelegate ()
 
+@property (nonatomic, strong) NSDictionary * idToImages;
+@property (nonatomic, strong) NSArray * images;
 @property (nonatomic, strong) IAIntAirAct * intAirAct;
-@property (nonatomic, strong) IAImageServer * imageServer;
+@property (nonatomic, weak) UINavigationController * navigationController;
 
 @end
 
@@ -25,8 +32,20 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @synthesize window = _window;
 
+@synthesize idToImages = _idToImages;
+@synthesize images = _images;
 @synthesize intAirAct = _intAirAct;
-@synthesize imageServer = _imageServer;
+@synthesize navigationController = _navigationController;
+
++(ALAssetsLibrary *)defaultAssetsLibrary
+{
+    static dispatch_once_t pred = 0;
+    static ALAssetsLibrary * library = nil;
+    dispatch_once(&pred, ^{
+        library = [ALAssetsLibrary new];
+    });
+    return library; 
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -39,8 +58,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     
     // create, setup and start IntAirAct
     self.intAirAct = [IAIntAirAct new];
-    [self setupMappings];
-    self.imageServer = [[IAImageServer alloc] initWithIntAirAct:self.intAirAct];
+    [self setup];
     
     NSError * error;
     if(![self.intAirAct start:&error]) {
@@ -48,13 +66,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
         return NO;
     }
     
-    UINavigationController * navigationController = (UINavigationController*) self.window.rootViewController;
-    
-    // the imageServer requires the navigationController to open up a new view on a display action
-    self.imageServer.navigationController = navigationController;
+    self.navigationController = (UINavigationController*) self.window.rootViewController;
     
     // set intAirAct property of the first active ViewController
-    UIViewController * firstViewController = [[navigationController viewControllers] objectAtIndex:0];
+    UIViewController * firstViewController = [[self.navigationController viewControllers] objectAtIndex:0];
     if([firstViewController respondsToSelector:@selector(setIntAirAct:)]) {
         [firstViewController performSelector:@selector(setIntAirAct:) withObject:self.intAirAct];
     }
@@ -63,8 +78,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     return YES;
 }
 
--(void)setupMappings
+-(void)setup
 {
+    [self loadImages];
+    
     // setup mappings for client and server side
     [self.intAirAct addMappingForClass:[IAImage class] withKeypath:@"images" withAttributes:@"identifier", nil];
 
@@ -79,7 +96,111 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     
     // setup routes
     [self.intAirAct.router routeClass:[IAImage class] toResourcePath:@"/image/:identifier"];
+    
+    [self.intAirAct.httpServer get:@"/images" withBlock:^(RouteRequest * request, RouteResponse * response) {
+        DDLogVerbose(@"GET /images");
+        
+        IAImages * images = [IAImages new];
+        images.images = self.images;
+        [response respondWith:images withIntAirAct:self.intAirAct];
+    }];
+    
+    [self.intAirAct.httpServer get:@"/image/:id.jpg" withBlock:^(RouteRequest * request, RouteResponse * response) {
+        DDLogVerbose(@"GET /image/%@.jpg", [request param:@"id"]);
+        
+        NSNumber * number = [NSNumber numberWithInt:[[request param:@"id"] intValue]];
+        NSData * data = [self imageAsData:number];
+        if (!data) {
+            DDLogError(@"An error ocurred.");
+            response.statusCode = 500;
+        } else {
+            response.statusCode = 200;
+            [response setHeader:@"Content-Type" value:@"image/jpeg"];
+            [response respondWithData:data];
+        }
+    }];
+    
+    [self.intAirAct.httpServer put:@"/action/displayImage" withBlock:^(RouteRequest * request, RouteResponse * response) {
+        DDLogVerbose(@"PUT /action/displayImage");
+        
+        RKObjectMappingResult * result = [self.intAirAct deserializeObject:[request body]];
+        if(!result && [[result asObject] isKindOfClass:[IAAction class]]) {
+            DDLogError(@"Could not parse request body: %@", [request bodyAsString]);
+            response.statusCode = 500;
+        } else {
+            response.statusCode = 201;
+            IAAction * action = [result asObject];
+            
+            // Show image
+            UIStoryboard * storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"UIMainStoryboardFile"] bundle: nil];
+            IAImageViewController * t = [storyboard instantiateViewControllerWithIdentifier:@"ImageViewController"];
+            t.intAirAct = self.intAirAct;
+            t.image = [action.parameters objectForKey:@"image"];
+            t.device =[action.parameters objectForKey:@"device"];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.navigationController pushViewController:t animated:YES];
+            });
+        }
+    }];
 }
+
+-(void)loadImages
+{
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    // collect the photos
+    NSMutableArray * collector = [[NSMutableArray alloc] initWithCapacity:0];
+    NSMutableDictionary * dictionary = [NSMutableDictionary new];
+    ALAssetsLibrary * al = [[self class] defaultAssetsLibrary];
+    
+    __block int i = 1;
+    [al enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+        [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+            if (asset) {
+                NSString * prop = [asset valueForProperty:@"ALAssetPropertyType"];
+                if(prop && [prop isEqualToString:@"ALAssetTypePhoto"]) {
+                    ALAssetRepresentation * rep = [asset representationForUTI:@"public.jpeg"];
+                    if (rep) {
+                        IAImage * image = [IAImage new];
+                        image.identifier = [NSNumber numberWithInt:i];
+                        [collector addObject:image];
+                        [dictionary setObject:asset forKey:image.identifier];
+                        i++;
+                    }
+                }
+            }  
+        }];
+        
+        self.images = collector;
+        self.idToImages = dictionary;
+        DDLogVerbose(@"Loaded images");
+    } failureBlock:^(NSError * error) {
+        DDLogError(@"Couldn't load assets: %@", error);
+    }];
+    
+}
+
+-(NSData *)imageAsData:(NSNumber*)identifier
+{
+    ALAsset * ass = [self.idToImages objectForKey:identifier];
+    
+    int byteArraySize = ass.defaultRepresentation.size;
+    
+    DDLogVerbose(@"Size of the image: %i", byteArraySize);
+    
+    NSMutableData* rawData = [[NSMutableData alloc]initWithCapacity:byteArraySize];
+    void* bufferPointer = [rawData mutableBytes];
+    
+    NSError* error=nil;
+    [ass.defaultRepresentation getBytes:bufferPointer fromOffset:0 length:byteArraySize error:&error];
+    if (error) {
+        DDLogError(@"Couldn't copy bytes: %@",error);
+    }
+    
+    rawData = [NSMutableData dataWithBytes:bufferPointer length:byteArraySize];
+    
+    return rawData;
+}
+
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -113,6 +234,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 
     if(![self.intAirAct isRunning]) {
+        [self loadImages];
         NSError * err;
         if(![self.intAirAct start:&err]) {
             DDLogError(@"%@: Error starting IntAirAct: %@", THIS_FILE, err);
