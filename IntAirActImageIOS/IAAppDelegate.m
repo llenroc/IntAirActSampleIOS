@@ -138,6 +138,29 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
             });
         }
     }];
+    
+    [self.intAirAct.httpServer put:@"/action/add" withBlock:^(RouteRequest * request, RouteResponse * response) {
+        DDLogVerbose(@"PUT /action/add");
+        
+        RKObjectMappingResult * result = [self.intAirAct deserializeObject:[request body]];
+        if(!result && [[result asObject] isKindOfClass:[IAAction class]]) {
+            DDLogError(@"Could not parse request body: %@", [request bodyAsString]);
+            response.statusCode = 500;
+        } else {
+            response.statusCode = 201;
+            IAAction * action = [result asObject];
+            
+            NSNumber * a = [action.parameters objectForKey:@"a"];
+            NSNumber * b = [action.parameters objectForKey:@"b"];
+            
+            NSNumber * result = [NSNumber numberWithInt:([a intValue] + [b intValue])];
+            
+            IAAction * r = [IAAction new];
+            r.parameters = [NSDictionary dictionaryWithKeysAndObjects:@"c", result, nil];
+            
+            [response respondWith:r withIntAirAct:self.intAirAct];
+        }
+    }];
 }
 
 -(void)loadImages
