@@ -1,13 +1,9 @@
 #import "IAAppDelegate.h"
 
 #import <AssetsLibrary/AssetsLibrary.h>
-#import <CocoaHTTPServer/HTTPLogging.h>
 #import <CocoaLumberjack/DDLog.h>
 #import <CocoaLumberjack/DDTTYLogger.h>
-#import <IntAirAct/IAAction.h>
-#import <IntAirAct/IAIntAirAct.h>
-#import <IntAirAct/IARouteRequest+BodyAsString.h>
-#import <IntAirAct/IARouteResponse+Serializer.h>
+#import <IntAirAct/IntAirAct.h>
 #import <RestKit/RestKit.h>
 #import <RoutingHTTPServer/RoutingHTTPServer.h>
 
