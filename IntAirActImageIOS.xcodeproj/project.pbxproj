@@ -7,32 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		270EAA821546170900880DFD /* IASwipeGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 270EAA811546170900880DFD /* IASwipeGestureRecognizer.m */; };
 		270EAA8815462B4900880DFD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270EAA8615462A5400880DFD /* CoreLocation.framework */; };
-		2719BE931518EDCF00B12461 /* IAImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BE921518EDCF00B12461 /* IAImage.m */; };
-		2719BE961518EEEA00B12461 /* IAImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BE951518EEEA00B12461 /* IAImageViewController.m */; };
-		2719BEA31518F14300B12461 /* IAImageProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BEA01518F14300B12461 /* IAImageProvider.m */; };
-		2719BEA41518F14300B12461 /* IAImageServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BEA21518F14300B12461 /* IAImageServer.m */; };
-		2719BEAE1518F53100B12461 /* IAImageClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2719BEAD1518F53100B12461 /* IAImageClient.m */; };
 		273166011517BD14005439AE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166001517BD14005439AE /* MobileCoreServices.framework */; };
 		273166031517BD1F005439AE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166021517BD1F005439AE /* SystemConfiguration.framework */; };
 		273166051517BD2F005439AE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166041517BD2F005439AE /* Security.framework */; };
-		2731662D1517CFF4005439AE /* IADeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2731662C1517CFF4005439AE /* IADeviceTableViewController.m */; };
-		273166301517D03C005439AE /* IAImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2731662F1517D03C005439AE /* IAImageTableViewController.m */; };
 		27442C38153CC65E0017C744 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27442C37153CC65E0017C744 /* AssetsLibrary.framework */; };
 		2779AAF61517A8B200AE4EE6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AAF51517A8B200AE4EE6 /* UIKit.framework */; };
 		2779AAF81517A8B200AE4EE6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AAF71517A8B200AE4EE6 /* Foundation.framework */; };
 		2779AAFA1517A8B200AE4EE6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AAF91517A8B200AE4EE6 /* CoreGraphics.framework */; };
-		2779AB001517A8B200AE4EE6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2779AAFE1517A8B200AE4EE6 /* InfoPlist.strings */; };
-		2779AB021517A8B200AE4EE6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2779AB011517A8B200AE4EE6 /* main.m */; };
-		2779AB061517A8B200AE4EE6 /* IAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2779AB051517A8B200AE4EE6 /* IAAppDelegate.m */; };
-		2779AB091517A8B200AE4EE6 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2779AB071517A8B200AE4EE6 /* MainStoryboard_iPhone.storyboard */; };
-		2779AB0C1517A8B200AE4EE6 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2779AB0A1517A8B200AE4EE6 /* MainStoryboard_iPad.storyboard */; };
 		2779AB721517A9AE00AE4EE6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */; };
 		2779AB9C1517ACDE00AE4EE6 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9B1517ACDE00AE4EE6 /* libxml2.dylib */; };
 		2779AB9E1517ACE400AE4EE6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9D1517ACE400AE4EE6 /* CoreData.framework */; };
-		27BB876C15240AF0002112F2 /* IAImages.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BB876B15240AF0002112F2 /* IAImages.m */; };
-		27BE7FAA154B509B00D8A193 /* IALocator.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BE7FA9154B509B00D8A193 /* IALocator.m */; };
 		27BFC74C1550BCF800799E34 /* libIntAirAct.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27BFC72C1550BB9B00799E34 /* libIntAirAct.a */; };
 		27BFC7531550BCF900799E34 /* libCocoaAsyncSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27BFC74D1550BCF800799E34 /* libCocoaAsyncSocket.a */; };
 		27BFC7541550BCF900799E34 /* libCocoaHTTPServer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27BFC74E1550BCF900799E34 /* libCocoaHTTPServer.a */; };
@@ -83,47 +68,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		270EAA801546170800880DFD /* IASwipeGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASwipeGestureRecognizer.h; sourceTree = "<group>"; };
-		270EAA811546170900880DFD /* IASwipeGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IASwipeGestureRecognizer.m; sourceTree = "<group>"; };
 		270EAA8615462A5400880DFD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		2719BE911518EDCF00B12461 /* IAImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImage.h; sourceTree = "<group>"; };
-		2719BE921518EDCF00B12461 /* IAImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImage.m; sourceTree = "<group>"; };
-		2719BE941518EEEA00B12461 /* IAImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageViewController.h; sourceTree = "<group>"; };
-		2719BE951518EEEA00B12461 /* IAImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageViewController.m; sourceTree = "<group>"; };
-		2719BE9F1518F14300B12461 /* IAImageProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageProvider.h; sourceTree = "<group>"; };
-		2719BEA01518F14300B12461 /* IAImageProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageProvider.m; sourceTree = "<group>"; };
-		2719BEA11518F14300B12461 /* IAImageServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageServer.h; sourceTree = "<group>"; };
-		2719BEA21518F14300B12461 /* IAImageServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageServer.m; sourceTree = "<group>"; };
-		2719BEAC1518F53100B12461 /* IAImageClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageClient.h; sourceTree = "<group>"; };
-		2719BEAD1518F53100B12461 /* IAImageClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageClient.m; sourceTree = "<group>"; };
 		273166001517BD14005439AE /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		273166021517BD1F005439AE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		273166041517BD2F005439AE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		2731662B1517CFF4005439AE /* IADeviceTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IADeviceTableViewController.h; sourceTree = "<group>"; };
-		2731662C1517CFF4005439AE /* IADeviceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IADeviceTableViewController.m; sourceTree = "<group>"; };
-		2731662E1517D03C005439AE /* IAImageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageTableViewController.h; sourceTree = "<group>"; };
-		2731662F1517D03C005439AE /* IAImageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageTableViewController.m; sourceTree = "<group>"; };
 		27442C37153CC65E0017C744 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		2779AAF11517A8B200AE4EE6 /* IntAirActImageIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntAirActImageIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2779AAF51517A8B200AE4EE6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2779AAF71517A8B200AE4EE6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2779AAF91517A8B200AE4EE6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		2779AAFD1517A8B200AE4EE6 /* IntAirActImageIOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IntAirActImageIOS-Info.plist"; sourceTree = "<group>"; };
-		2779AAFF1517A8B200AE4EE6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		2779AB011517A8B200AE4EE6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2779AB031517A8B200AE4EE6 /* IntAirActImageIOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IntAirActImageIOS-Prefix.pch"; sourceTree = "<group>"; };
-		2779AB041517A8B200AE4EE6 /* IAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IAAppDelegate.h; sourceTree = "<group>"; };
-		2779AB051517A8B200AE4EE6 /* IAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IAAppDelegate.m; sourceTree = "<group>"; };
-		2779AB081517A8B200AE4EE6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
-		2779AB0B1517A8B200AE4EE6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		2779AB161517A8B200AE4EE6 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		2779AB9B1517ACDE00AE4EE6 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		2779AB9D1517ACE400AE4EE6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		27BB876A15240AF0002112F2 /* IAImages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImages.h; sourceTree = "<group>"; };
-		27BB876B15240AF0002112F2 /* IAImages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImages.m; sourceTree = "<group>"; };
-		27BE7FA8154B509B00D8A193 /* IALocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IALocator.h; sourceTree = "<group>"; };
-		27BE7FA9154B509B00D8A193 /* IALocator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IALocator.m; sourceTree = "<group>"; };
 		27BFC71E1550BB9B00799E34 /* IntAirAct.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IntAirAct.xcodeproj; path = Frameworks/IntAirAct/IntAirAct.xcodeproj; sourceTree = "<group>"; };
 		27BFC74D1550BCF800799E34 /* libCocoaAsyncSocket.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCocoaAsyncSocket.a; path = "Frameworks/IntAirAct/Frameworks/RoutingHTTPServer/Frameworks/CocoaHTTPServer/Frameworks/CocoaAsyncSocket/build/Release-iphoneos/libCocoaAsyncSocket.a"; sourceTree = "<group>"; };
 		27BFC74E1550BCF900799E34 /* libCocoaHTTPServer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCocoaHTTPServer.a; path = "Frameworks/IntAirAct/Frameworks/RoutingHTTPServer/Frameworks/CocoaHTTPServer/build/Release-iphoneos/libCocoaHTTPServer.a"; sourceTree = "<group>"; };
@@ -166,53 +123,9 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2719BEA51518F18A00B12461 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				2719BE911518EDCF00B12461 /* IAImage.h */,
-				2719BE921518EDCF00B12461 /* IAImage.m */,
-				27BB876A15240AF0002112F2 /* IAImages.h */,
-				27BB876B15240AF0002112F2 /* IAImages.m */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		2719BEA61518F19F00B12461 /* Client */ = {
-			isa = PBXGroup;
-			children = (
-				2779AB071517A8B200AE4EE6 /* MainStoryboard_iPhone.storyboard */,
-				2779AB0A1517A8B200AE4EE6 /* MainStoryboard_iPad.storyboard */,
-				27BE7FA8154B509B00D8A193 /* IALocator.h */,
-				27BE7FA9154B509B00D8A193 /* IALocator.m */,
-				2731662B1517CFF4005439AE /* IADeviceTableViewController.h */,
-				2731662C1517CFF4005439AE /* IADeviceTableViewController.m */,
-				2731662E1517D03C005439AE /* IAImageTableViewController.h */,
-				2731662F1517D03C005439AE /* IAImageTableViewController.m */,
-				2719BE941518EEEA00B12461 /* IAImageViewController.h */,
-				2719BE951518EEEA00B12461 /* IAImageViewController.m */,
-				2719BEAC1518F53100B12461 /* IAImageClient.h */,
-				2719BEAD1518F53100B12461 /* IAImageClient.m */,
-				270EAA801546170800880DFD /* IASwipeGestureRecognizer.h */,
-				270EAA811546170900880DFD /* IASwipeGestureRecognizer.m */,
-			);
-			name = Client;
-			sourceTree = "<group>";
-		};
-		2719BEA71518F1AA00B12461 /* Server */ = {
-			isa = PBXGroup;
-			children = (
-				2719BE9F1518F14300B12461 /* IAImageProvider.h */,
-				2719BEA01518F14300B12461 /* IAImageProvider.m */,
-				2719BEA11518F14300B12461 /* IAImageServer.h */,
-				2719BEA21518F14300B12461 /* IAImageServer.m */,
-			);
-			name = Server;
-			sourceTree = "<group>";
-		};
 		2779AAE61517A8B200AE4EE6 = {
 			isa = PBXGroup;
 			children = (
-				2779AAFB1517A8B200AE4EE6 /* IntAirActImageIOS */,
 				2779AAF41517A8B200AE4EE6 /* Frameworks */,
 				2779AAF21517A8B200AE4EE6 /* Products */,
 			);
@@ -252,31 +165,6 @@
 				2779AAF51517A8B200AE4EE6 /* UIKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		2779AAFB1517A8B200AE4EE6 /* IntAirActImageIOS */ = {
-			isa = PBXGroup;
-			children = (
-				2719BEA61518F19F00B12461 /* Client */,
-				2719BEA71518F1AA00B12461 /* Server */,
-				2719BEA51518F18A00B12461 /* Model */,
-				2779AAFC1517A8B200AE4EE6 /* Supporting Files */,
-			);
-			name = IntAirActImageIOS;
-			path = Interact;
-			sourceTree = "<group>";
-		};
-		2779AAFC1517A8B200AE4EE6 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				2779AB031517A8B200AE4EE6 /* IntAirActImageIOS-Prefix.pch */,
-				2779AB041517A8B200AE4EE6 /* IAAppDelegate.h */,
-				2779AB051517A8B200AE4EE6 /* IAAppDelegate.m */,
-				2779AAFD1517A8B200AE4EE6 /* IntAirActImageIOS-Info.plist */,
-				2779AAFE1517A8B200AE4EE6 /* InfoPlist.strings */,
-				2779AB011517A8B200AE4EE6 /* main.m */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		27BFC71F1550BB9B00799E34 /* Products */ = {
@@ -380,9 +268,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2779AB001517A8B200AE4EE6 /* InfoPlist.strings in Resources */,
-				2779AB091517A8B200AE4EE6 /* MainStoryboard_iPhone.storyboard in Resources */,
-				2779AB0C1517A8B200AE4EE6 /* MainStoryboard_iPad.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,18 +278,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2779AB021517A8B200AE4EE6 /* main.m in Sources */,
-				2779AB061517A8B200AE4EE6 /* IAAppDelegate.m in Sources */,
-				2731662D1517CFF4005439AE /* IADeviceTableViewController.m in Sources */,
-				273166301517D03C005439AE /* IAImageTableViewController.m in Sources */,
-				2719BE931518EDCF00B12461 /* IAImage.m in Sources */,
-				2719BE961518EEEA00B12461 /* IAImageViewController.m in Sources */,
-				2719BEA31518F14300B12461 /* IAImageProvider.m in Sources */,
-				2719BEA41518F14300B12461 /* IAImageServer.m in Sources */,
-				2719BEAE1518F53100B12461 /* IAImageClient.m in Sources */,
-				27BB876C15240AF0002112F2 /* IAImages.m in Sources */,
-				270EAA821546170900880DFD /* IASwipeGestureRecognizer.m in Sources */,
-				27BE7FAA154B509B00D8A193 /* IALocator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,33 +290,6 @@
 			targetProxy = 27BFC7341550BBA700799E34 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		2779AAFE1517A8B200AE4EE6 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2779AAFF1517A8B200AE4EE6 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		2779AB071517A8B200AE4EE6 /* MainStoryboard_iPhone.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2779AB081517A8B200AE4EE6 /* en */,
-			);
-			name = MainStoryboard_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		2779AB0A1517A8B200AE4EE6 /* MainStoryboard_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2779AB0B1517A8B200AE4EE6 /* en */,
-			);
-			name = MainStoryboard_iPad.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		2779AB251517A8B200AE4EE6 /* Debug */ = {
