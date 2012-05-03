@@ -124,7 +124,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 -(void)loadImages
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    if(self.tableView.window && self.intAirAct && self.device) {
+    if(self.intAirAct && self.device) {
         [self.imageClient getImages:^(NSArray * images) {
             DDLogVerbose(@"Loaded images: %@ from device: %@", images, self.device);
             self.images = images;
