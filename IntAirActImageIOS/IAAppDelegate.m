@@ -10,6 +10,7 @@
 #import "IAImage.h"
 #import "IAImages.h"
 #import "IAImageClient.h"
+#import "IAImageTableViewController.h"
 #import "IAImageViewController.h"
 
 // Log levels : off, error, warn, info, verbose
@@ -129,12 +130,19 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
             
             // Show image
             UIStoryboard * storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"UIMainStoryboardFile"] bundle: nil];
-            IAImageViewController * t = [storyboard instantiateViewControllerWithIdentifier:@"ImageViewController"];
-            t.intAirAct = self.intAirAct;
-            t.image = [action.parameters objectForKey:@"image"];
-            t.device =[action.parameters objectForKey:@"device"];
+            
+            UIViewController * rootViewController = [self.navigationController.viewControllers objectAtIndex:0];
+            
+            IAImageTableViewController * imageTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"ImageTableViewController"];
+            imageTableViewController.intAirAct = self.intAirAct;
+            imageTableViewController.device = [action.parameters objectForKey:@"device"];
+            
+            IAImageViewController * imageViewController = [storyboard instantiateViewControllerWithIdentifier:@"ImageViewController"];
+            imageViewController.intAirAct = self.intAirAct;
+            imageViewController.image = [action.parameters objectForKey:@"image"];
+            imageViewController.device = [action.parameters objectForKey:@"device"];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.navigationController pushViewController:t animated:YES];
+                [self.navigationController setViewControllers:[NSArray arrayWithObjects:rootViewController, imageTableViewController, imageViewController, nil] animated:YES];
             });
         }
     }];

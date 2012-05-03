@@ -300,7 +300,7 @@
 			attributes = {
 				CLASSPREFIX = IA;
 				LastUpgradeCheck = 0430;
-				ORGANIZATIONNAME = "Fachhochschule Gelsenkirchen Abt. Bocholt";
+				ORGANIZATIONNAME = "";
 			};
 			buildConfigurationList = 2779AAEB1517A8B200AE4EE6 /* Build configuration list for PBXProject "IntAirActImageIOS" */;
 			compatibilityVersion = "Xcode 3.2";
