@@ -8,5 +8,5 @@ end
 
 desc "Pull all submodules"
 task :pull => :init do
-  system("git submodule foreach --recursive git pull origin master")
+  system("git submodule foreach --recursive git pull")
 end
