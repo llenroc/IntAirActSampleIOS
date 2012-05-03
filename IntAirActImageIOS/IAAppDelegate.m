@@ -229,6 +229,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 
     [self.intAirAct stop];
+    
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application

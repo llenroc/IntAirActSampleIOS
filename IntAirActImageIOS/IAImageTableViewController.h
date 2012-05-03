@@ -6,6 +6,6 @@
 @interface IAImageTableViewController : UITableViewController
 
 @property (nonatomic, strong) IADevice * device;
-@property (nonatomic, strong) IAIntAirAct * intAirAct;
+@property (nonatomic, weak) IAIntAirAct * intAirAct;
 
 @end
