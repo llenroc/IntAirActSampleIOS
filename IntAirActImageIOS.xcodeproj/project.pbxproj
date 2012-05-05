@@ -18,6 +18,7 @@
 		2779AB721517A9AE00AE4EE6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */; };
 		2779AB9C1517ACDE00AE4EE6 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9B1517ACDE00AE4EE6 /* libxml2.dylib */; };
 		2779AB9E1517ACE400AE4EE6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9D1517ACE400AE4EE6 /* CoreData.framework */; };
+		279CCBC2155491B500AC22C1 /* IAServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 279CCBC1155491B500AC22C1 /* IAServer.m */; };
 		27BFC74C1550BCF800799E34 /* libIntAirAct.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27BFC72C1550BB9B00799E34 /* libIntAirAct.a */; };
 		27BFC7531550BCF900799E34 /* libCocoaAsyncSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27BFC74D1550BCF800799E34 /* libCocoaAsyncSocket.a */; };
 		27BFC7541550BCF900799E34 /* libCocoaHTTPServer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27BFC74E1550BCF900799E34 /* libCocoaHTTPServer.a */; };
@@ -94,6 +95,8 @@
 		2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		2779AB9B1517ACDE00AE4EE6 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		2779AB9D1517ACE400AE4EE6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		279CCBC0155491B500AC22C1 /* IAServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAServer.h; sourceTree = "<group>"; };
+		279CCBC1155491B500AC22C1 /* IAServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAServer.m; sourceTree = "<group>"; };
 		27BFC71E1550BB9B00799E34 /* IntAirAct.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IntAirAct.xcodeproj; path = Frameworks/IntAirAct/IntAirAct.xcodeproj; sourceTree = "<group>"; };
 		27BFC74D1550BCF800799E34 /* libCocoaAsyncSocket.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCocoaAsyncSocket.a; path = "Frameworks/IntAirAct/Frameworks/RoutingHTTPServer/Frameworks/CocoaHTTPServer/Frameworks/CocoaAsyncSocket/build/Release-iphoneos/libCocoaAsyncSocket.a"; sourceTree = "<group>"; };
 		27BFC74E1550BCF900799E34 /* libCocoaHTTPServer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCocoaHTTPServer.a; path = "Frameworks/IntAirAct/Frameworks/RoutingHTTPServer/Frameworks/CocoaHTTPServer/build/Release-iphoneos/libCocoaHTTPServer.a"; sourceTree = "<group>"; };
@@ -235,6 +238,8 @@
 				27C49AE31550CD0E0044F61B /* IntAirActImageIOS-Info.plist */,
 				27C49AE41550CD0E0044F61B /* IntAirActImageIOS-Prefix.pch */,
 				27C49AE51550CD0E0044F61B /* main.m */,
+				279CCBC0155491B500AC22C1 /* IAServer.h */,
+				279CCBC1155491B500AC22C1 /* IAServer.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -384,6 +389,7 @@
 				27C49AF21550CD0E0044F61B /* IALocator.m in Sources */,
 				27C49AF31550CD0E0044F61B /* IASwipeGestureRecognizer.m in Sources */,
 				27C49AF51550CD0E0044F61B /* main.m in Sources */,
+				279CCBC2155491B500AC22C1 /* IAServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

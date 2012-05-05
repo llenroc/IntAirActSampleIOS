@@ -12,6 +12,7 @@
 #import "IAImageClient.h"
 #import "IAImageTableViewController.h"
 #import "IAImageViewController.h"
+#import "IAServer.h"
 
 // Log levels : off, error, warn, info, verbose
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
@@ -22,6 +23,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 @property (nonatomic, strong) NSArray * images;
 @property (nonatomic, strong) IAIntAirAct * intAirAct;
 @property (nonatomic, weak) UINavigationController * navigationController;
+@property (nonatomic, strong) IAServer * server;
 
 @end
 
@@ -29,10 +31,11 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 @synthesize window = _window;
 
-@synthesize idToImages = _idToImages;
-@synthesize images = _images;
+@synthesize idToImages;
+@synthesize images;
 @synthesize intAirAct = _intAirAct;
 @synthesize navigationController = _navigationController;
+@synthesize server;
 
 +(ALAssetsLibrary *)defaultAssetsLibrary
 {
@@ -55,13 +58,11 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     // create, setup and start IntAirAct
     self.intAirAct = [IAIntAirAct new];
+
+    self.server = [IAServer new];
+    self.server.intAirAct = self.intAirAct;
+
     [self setup];
-    
-    NSError * error;
-    if(![self.intAirAct start:&error]) {
-        DDLogError(@"%@: Error starting IntAirAct: %@", THIS_FILE, error);
-        return NO;
-    }
     
     self.navigationController = (UINavigationController*) self.window.rootViewController;
     
@@ -69,6 +70,14 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     UIViewController * firstViewController = [[self.navigationController viewControllers] objectAtIndex:0];
     if([firstViewController respondsToSelector:@selector(setIntAirAct:)]) {
         [firstViewController performSelector:@selector(setIntAirAct:) withObject:self.intAirAct];
+    }
+    
+    self.server.navigationController = self.navigationController;
+    
+    NSError * error;
+    if(![self.intAirAct start:&error]) {
+        DDLogError(@"%@: Error starting IntAirAct: %@", THIS_FILE, error);
+        return NO;
     }
     
     // Override point for customization after application launch.
@@ -97,9 +106,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     [self.intAirAct.httpServer get:@"/images" withBlock:^(RouteRequest * request, RouteResponse * response) {
         DDLogVerbose(@"GET /images");
         
-        IAImages * images = [IAImages new];
-        images.images = self.images;
-        [response respondWith:images withIntAirAct:self.intAirAct];
+        IAImages * imgs = [IAImages new];
+        imgs.images = self.images;
+        [response respondWith:imgs withIntAirAct:self.intAirAct];
     }];
     
     [self.intAirAct.httpServer get:@"/image/:id.jpg" withBlock:^(RouteRequest * request, RouteResponse * response) {
@@ -117,58 +126,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         }
     }];
     
-    [self.intAirAct.httpServer put:@"/action/displayImage" withBlock:^(RouteRequest * request, RouteResponse * response) {
-        DDLogVerbose(@"PUT /action/displayImage");
-        
-        RKObjectMappingResult * result = [self.intAirAct deserializeObject:[request body]];
-        if(!result && [[result asObject] isKindOfClass:[IAAction class]]) {
-            DDLogError(@"Could not parse request body: %@", [request bodyAsString]);
-            response.statusCode = 500;
-        } else {
-            response.statusCode = 201;
-            IAAction * action = [result asObject];
-            
-            // Show image
-            UIStoryboard * storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"UIMainStoryboardFile"] bundle: nil];
-            
-            UIViewController * rootViewController = [self.navigationController.viewControllers objectAtIndex:0];
-            
-            IAImageTableViewController * imageTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"ImageTableViewController"];
-            imageTableViewController.intAirAct = self.intAirAct;
-            imageTableViewController.device = [action.parameters objectForKey:@"device"];
-            
-            IAImageViewController * imageViewController = [storyboard instantiateViewControllerWithIdentifier:@"ImageViewController"];
-            imageViewController.intAirAct = self.intAirAct;
-            imageViewController.image = [action.parameters objectForKey:@"image"];
-            imageViewController.device = [action.parameters objectForKey:@"device"];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.navigationController setViewControllers:[NSArray arrayWithObjects:rootViewController, imageTableViewController, imageViewController, nil] animated:YES];
-            });
-        }
-    }];
-    
-    [self.intAirAct.httpServer put:@"/action/add" withBlock:^(RouteRequest * request, RouteResponse * response) {
-        DDLogVerbose(@"PUT /action/add");
-        
-        RKObjectMappingResult * result = [self.intAirAct deserializeObject:[request body]];
-        if(!result && [[result asObject] isKindOfClass:[IAAction class]]) {
-            DDLogError(@"Could not parse request body: %@", [request bodyAsString]);
-            response.statusCode = 500;
-        } else {
-            response.statusCode = 201;
-            IAAction * action = [result asObject];
-            
-            NSNumber * a = [action.parameters objectForKey:@"a"];
-            NSNumber * b = [action.parameters objectForKey:@"b"];
-            
-            NSNumber * result = [NSNumber numberWithInt:([a intValue] + [b intValue])];
-            
-            IAAction * r = [IAAction new];
-            r.parameters = [NSDictionary dictionaryWithKeysAndObjects:@"c", result, nil];
-            
-            [response respondWith:r withIntAirAct:self.intAirAct];
-        }
-    }];
+    [self.intAirAct addAction:@"displayImage" withSelector:@selector(displayImage:ofDevice:) andTarget:self.server];
+    [self.intAirAct addAction:@"add" withSelector:@selector(add:to:) andTarget:self.server];
 }
 
 -(void)loadImages

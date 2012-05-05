@@ -90,8 +90,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     DDLogVerbose(@"%@: %@, animated: %i", THIS_FILE, THIS_METHOD, animated);
     [super viewWillAppear:animated];
 
-    // Listens for DeviceUpdate notifications, IntAirAct calls this notification
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:@"DeviceUpdate" object:nil];
+    // Listens for IADeviceUpdate notifications, IntAirAct calls this notification
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:IADeviceUpdate object:nil];
 
     [self refresh:nil];
     [self.tableView reloadData];
