@@ -46,11 +46,18 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     return self;
 }
 
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 -(void)setup
 {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(loadImages)
-                                                 name:UIApplicationWillResignActiveNotification 
+                                                 name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
     
     [self.intAirAct addAction:@"displayImage" withSelector:@selector(displayImage:ofDevice:) andTarget:self];
@@ -123,6 +130,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 -(NSData *)imageAsData:(NSNumber*)identifier
 {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    
     ALAsset * ass = [self.idToImages objectForKey:identifier];
     
     int byteArraySize = ass.defaultRepresentation.size;
@@ -145,11 +154,15 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 -(NSNumber *)add:(NSNumber *)a to:(NSNumber *) b
 {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    
     return [NSNumber numberWithInt:([a intValue] + [b intValue])];
 }
 
 -(void)displayImage:(IAImage *)image ofDevice:(IADevice *)device
 {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"UIMainStoryboardFile"] bundle: nil];
     
     UIViewController * rootViewController = [self.navigationController.viewControllers objectAtIndex:0];
