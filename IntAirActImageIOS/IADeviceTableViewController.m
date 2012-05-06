@@ -1,8 +1,7 @@
 #import "IADeviceTableViewController.h"
 
 #import <CocoaLumberjack/DDLog.h>
-#import <IntAirAct/IADevice.h>
-#import <IntAirAct/IAIntAirAct.h>
+#import <IntAirAct/IntAirAct.h>
 
 // Log levels : off, error, warn, info, verbose
 static const int ddLogLevel = LOG_LEVEL_WARN;
@@ -15,9 +14,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @implementation IADeviceTableViewController
 
-@synthesize intAirAct = _intAirAct;
+@synthesize intAirAct;
 
-@synthesize devices = _devices;
+@synthesize devices;
 
 -(id)initWithStyle:(UITableViewStyle)style
 {
@@ -99,13 +98,15 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 -(void)refresh:(NSNotification *)note {
     DDLogVerbose(@"%@: %@, note: %@", THIS_FILE, THIS_METHOD, note);
-    self.devices = self.intAirAct.devices;
+    IACapability * imageCap = [IACapability new];
+    imageCap.capability = @"GET /images";
+    self.devices = [self.intAirAct devicesWithCapability:imageCap];
 }
 
--(void)setDevices:(NSArray *)devices
-{
-    if (_devices != devices) {
-        _devices = devices;
+-(void)setDevices:(NSArray *)value
+{    
+    if (devices != value) {
+        devices = value;
         // Model changed, so update our View (the table)
         if (self.tableView.window) [self.tableView reloadData];
     }

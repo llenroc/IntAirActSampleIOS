@@ -116,6 +116,14 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     [self.intAirAct addAction:@"displayImage" withSelector:@selector(displayImage:ofDevice:) andTarget:self.server];
     [self.intAirAct addAction:@"add" withSelector:@selector(add:to:) andTarget:self.server];
+    
+    IACapability * imagesCap = [IACapability new];
+    imagesCap.capability = @"GET /images";
+    [self.intAirAct.capabilities addObject:imagesCap];
+    
+    IACapability * imageCap = [IACapability new];
+    imageCap.capability = @"GET /images/:id.jpg";
+    [self.intAirAct.capabilities addObject:imageCap];
 }
 
 -(void)loadImages
