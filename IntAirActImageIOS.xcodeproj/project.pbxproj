@@ -163,6 +163,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2707EFD815561B8100F80BC8 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				279CCBC0155491B500AC22C1 /* IAServer.h */,
+				279CCBC1155491B500AC22C1 /* IAServer.m */,
+			);
+			name = Server;
+			sourceTree = "<group>";
+		};
 		2779AAE61517A8B200AE4EE6 = {
 			isa = PBXGroup;
 			children = (
@@ -222,9 +231,12 @@
 		27C49AC61550CD0E0044F61B /* IntAirActImageIOS */ = {
 			isa = PBXGroup;
 			children = (
+				2707EFD815561B8100F80BC8 /* Server */,
 				27C49AF71550CD280044F61B /* Client */,
 				27C49AF91550CD4B0044F61B /* Model */,
 				27C49AF61550CD190044F61B /* Supporting Files */,
+				27C49ACD1550CD0E0044F61B /* IAAppDelegate.h */,
+				27C49ACE1550CD0E0044F61B /* IAAppDelegate.m */,
 			);
 			path = IntAirActImageIOS;
 			sourceTree = "<group>";
@@ -232,14 +244,10 @@
 		27C49AF61550CD190044F61B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				27C49ACD1550CD0E0044F61B /* IAAppDelegate.h */,
-				27C49ACE1550CD0E0044F61B /* IAAppDelegate.m */,
 				27C49AC71550CD0E0044F61B /* InfoPlist.strings */,
 				27C49AE31550CD0E0044F61B /* IntAirActImageIOS-Info.plist */,
 				27C49AE41550CD0E0044F61B /* IntAirActImageIOS-Prefix.pch */,
 				27C49AE51550CD0E0044F61B /* main.m */,
-				279CCBC0155491B500AC22C1 /* IAServer.h */,
-				279CCBC1155491B500AC22C1 /* IAServer.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

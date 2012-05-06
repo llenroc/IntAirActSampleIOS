@@ -106,9 +106,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     [self.intAirAct.httpServer get:@"/images" withBlock:^(RouteRequest * request, RouteResponse * response) {
         DDLogVerbose(@"GET /images");
         
-        IAImages * imgs = [IAImages new];
-        imgs.images = self.images;
-        [response respondWith:imgs withIntAirAct:self.intAirAct];
+        [response respondWith:self.images withIntAirAct:self.intAirAct];
     }];
     
     [self.intAirAct.httpServer get:@"/image/:id.jpg" withBlock:^(RouteRequest * request, RouteResponse * response) {
