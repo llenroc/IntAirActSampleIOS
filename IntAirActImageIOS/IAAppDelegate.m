@@ -1,6 +1,5 @@
 #import "IAAppDelegate.h"
 
-#import <AssetsLibrary/AssetsLibrary.h>
 #import <CocoaLumberjack/DDLog.h>
 #import <CocoaLumberjack/DDTTYLogger.h>
 #import <IntAirAct/IntAirAct.h>
@@ -18,8 +17,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @interface IAAppDelegate ()
 
-@property (nonatomic, strong) NSDictionary * idToImages;
-@property (nonatomic, strong) NSArray * images;
 @property (nonatomic, strong) IAIntAirAct * intAirAct;
 @property (nonatomic, weak) UINavigationController * navigationController;
 @property (nonatomic, strong) IAServer * server;
@@ -28,23 +25,11 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @implementation IAAppDelegate
 
-@synthesize window = _window;
+@synthesize window;
 
-@synthesize idToImages;
-@synthesize images;
-@synthesize intAirAct = _intAirAct;
-@synthesize navigationController = _navigationController;
+@synthesize intAirAct;
+@synthesize navigationController;
 @synthesize server;
-
-+(ALAssetsLibrary *)defaultAssetsLibrary
-{
-    static dispatch_once_t pred = 0;
-    static ALAssetsLibrary * library = nil;
-    dispatch_once(&pred, ^{
-        library = [ALAssetsLibrary new];
-    });
-    return library; 
-}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -55,23 +40,21 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     // Configure RestKit logging framework
     //RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
     
+    self.navigationController = (UINavigationController*) self.window.rootViewController;
+    
     // create, setup and start IntAirAct
     self.intAirAct = [IAIntAirAct new];
 
-    self.server = [IAServer new];
-    self.server.intAirAct = self.intAirAct;
+    self.server = [[IAServer alloc] initWithIntAirAct:self.intAirAct];
+    self.server.navigationController = self.navigationController;
 
     [self setup];
-    
-    self.navigationController = (UINavigationController*) self.window.rootViewController;
     
     // set intAirAct property of the first active ViewController
     UIViewController * firstViewController = [[self.navigationController viewControllers] objectAtIndex:0];
     if([firstViewController respondsToSelector:@selector(setIntAirAct:)]) {
         [firstViewController performSelector:@selector(setIntAirAct:) withObject:self.intAirAct];
     }
-    
-    self.server.navigationController = self.navigationController;
     
     NSError * error;
     if(![self.intAirAct start:&error]) {
@@ -85,104 +68,12 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 -(void)setup
 {
-    [self loadImages];
-    
     // setup mappings for client and server side
     [self.intAirAct addMappingForClass:[IAImage class] withKeypath:@"images" withAttributes:@"identifier", nil];
     
     // setup routes
     [self.intAirAct.router routeClass:[IAImage class] toResourcePath:@"/image/:identifier"];
-    
-    [self.intAirAct.httpServer get:@"/images" withBlock:^(RouteRequest * request, RouteResponse * response) {
-        DDLogVerbose(@"GET /images");
-        
-        [response respondWith:self.images withIntAirAct:self.intAirAct];
-    }];
-    
-    [self.intAirAct.httpServer get:@"/image/:id.jpg" withBlock:^(RouteRequest * request, RouteResponse * response) {
-        DDLogVerbose(@"GET /image/%@.jpg", [request param:@"id"]);
-        
-        NSNumber * number = [NSNumber numberWithInt:[[request param:@"id"] intValue]];
-        NSData * data = [self imageAsData:number];
-        if (!data) {
-            DDLogError(@"An error ocurred.");
-            response.statusCode = 500;
-        } else {
-            response.statusCode = 200;
-            [response setHeader:@"Content-Type" value:@"image/jpeg"];
-            [response respondWithData:data];
-        }
-    }];
-    
-    [self.intAirAct addAction:@"displayImage" withSelector:@selector(displayImage:ofDevice:) andTarget:self.server];
-    [self.intAirAct addAction:@"add" withSelector:@selector(add:to:) andTarget:self.server];
-    
-    IACapability * imagesCap = [IACapability new];
-    imagesCap.capability = @"GET /images";
-    [self.intAirAct.capabilities addObject:imagesCap];
-    
-    IACapability * imageCap = [IACapability new];
-    imageCap.capability = @"GET /images/:id.jpg";
-    [self.intAirAct.capabilities addObject:imageCap];
 }
-
--(void)loadImages
-{
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    // collect the photos
-    NSMutableArray * collector = [[NSMutableArray alloc] initWithCapacity:0];
-    NSMutableDictionary * dictionary = [NSMutableDictionary new];
-    ALAssetsLibrary * al = [[self class] defaultAssetsLibrary];
-    
-    __block int i = 1;
-    [al enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-        [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
-            if (asset) {
-                NSString * prop = [asset valueForProperty:@"ALAssetPropertyType"];
-                if(prop && [prop isEqualToString:@"ALAssetTypePhoto"]) {
-                    ALAssetRepresentation * rep = [asset representationForUTI:@"public.jpeg"];
-                    if (rep) {
-                        IAImage * image = [IAImage new];
-                        image.identifier = [NSNumber numberWithInt:i];
-                        [collector addObject:image];
-                        [dictionary setObject:asset forKey:image.identifier];
-                        i++;
-                    }
-                }
-            }  
-        }];
-        
-        self.images = collector;
-        self.idToImages = dictionary;
-        DDLogVerbose(@"Loaded images");
-    } failureBlock:^(NSError * error) {
-        DDLogError(@"Couldn't load assets: %@", error);
-    }];
-    
-}
-
--(NSData *)imageAsData:(NSNumber*)identifier
-{
-    ALAsset * ass = [self.idToImages objectForKey:identifier];
-    
-    int byteArraySize = ass.defaultRepresentation.size;
-    
-    DDLogVerbose(@"Size of the image: %i", byteArraySize);
-    
-    NSMutableData* rawData = [[NSMutableData alloc]initWithCapacity:byteArraySize];
-    void* bufferPointer = [rawData mutableBytes];
-    
-    NSError* error=nil;
-    [ass.defaultRepresentation getBytes:bufferPointer fromOffset:0 length:byteArraySize error:&error];
-    if (error) {
-        DDLogError(@"Couldn't copy bytes: %@",error);
-    }
-    
-    rawData = [NSMutableData dataWithBytes:bufferPointer length:byteArraySize];
-    
-    return rawData;
-}
-
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -218,7 +109,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 
     if(![self.intAirAct isRunning]) {
-        [self loadImages];
         NSError * err;
         if(![self.intAirAct start:&err]) {
             DDLogError(@"%@: Error starting IntAirAct: %@", THIS_FILE, err);
