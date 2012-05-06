@@ -8,7 +8,6 @@
 #import <RoutingHTTPServer/RoutingHTTPServer.h>
 
 #import "IAImage.h"
-#import "IAImages.h"
 #import "IAImageClient.h"
 #import "IAImageTableViewController.h"
 #import "IAImageViewController.h"
@@ -90,15 +89,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     // setup mappings for client and server side
     [self.intAirAct addMappingForClass:[IAImage class] withKeypath:@"images" withAttributes:@"identifier", nil];
-
-    // This is a workaround for serializing arrays of images, see https://github.com/RestKit/RestKit/issues/398
-    RKObjectMapping * imageSerialization = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
-    imageSerialization.rootKeyPath = @"images";
-    [imageSerialization mapAttributes:@"identifier", nil];
-
-    RKObjectMapping * imagesSerialization = [RKObjectMapping mappingForClass:[NSMutableDictionary class]];
-    [imagesSerialization hasMany:@"images" withMapping:imageSerialization];
-    [self.intAirAct.objectMappingProvider setSerializationMapping:imagesSerialization forClass:[IAImages class]];
     
     // setup routes
     [self.intAirAct.router routeClass:[IAImage class] toResourcePath:@"/image/:identifier"];
