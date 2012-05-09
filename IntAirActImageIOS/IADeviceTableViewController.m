@@ -62,7 +62,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     // Configure the cell...
     IADevice * device = [self.devices objectAtIndex:indexPath.row];
     cell.textLabel.text = device.name;
-    cell.detailTextLabel.text = device.hostAndPort;
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"http://%@:%i/", device.host, device.port];
     
     return cell;
 }

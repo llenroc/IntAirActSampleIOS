@@ -54,7 +54,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     IAAction * action = [IAAction new];
     action.action = @"displayImage";
     action.parameters = [NSArray arrayWithObjects:image, source, nil];
-    [self.intAirAct callAction:action onDevice:target];
+    [self.intAirAct callAction:action onDevice:target withHandler:nil];
 }
 
 @end
