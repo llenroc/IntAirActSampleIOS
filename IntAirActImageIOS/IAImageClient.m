@@ -36,10 +36,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
     RKObjectManager * manager = [self.intAirAct objectManagerForDevice:device];
-    [manager loadObjectsAtResourcePath:@"/images" handler:^(RKObjectLoader *loader, NSError *error) {
+    [manager loadObjectsAtResourcePath:@"/images" handler:^(NSArray * objects, NSError * error) {
         if(!error) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                block([[loader result] asCollection]);
+                block(objects);
             });
         } else {
             DDLogError(@"%@: An error ocurred while getting images: %@", THIS_FILE, error);
