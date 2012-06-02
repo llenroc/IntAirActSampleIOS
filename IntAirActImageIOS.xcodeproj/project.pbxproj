@@ -16,6 +16,10 @@
 		275F445C157A9AA8001BEB61 /* Icon-114.png in Resources */ = {isa = PBXBuildFile; fileRef = 275F445B157A9AA8001BEB61 /* Icon-114.png */; };
 		275F445E157A9AAC001BEB61 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 275F445D157A9AAC001BEB61 /* Icon-72.png */; };
 		275F4460157A9AAE001BEB61 /* Icon-144.png in Resources */ = {isa = PBXBuildFile; fileRef = 275F445F157A9AAE001BEB61 /* Icon-144.png */; };
+		275F44FC157AA3DC001BEB61 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 275F44FB157AA3DC001BEB61 /* Default.png */; };
+		275F44FE157AA3DE001BEB61 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 275F44FD157AA3DE001BEB61 /* Default@2x.png */; };
+		275F4500157AA3E3001BEB61 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 275F44FF157AA3E3001BEB61 /* Default-Portrait~ipad.png */; };
+		275F4502157AA3E5001BEB61 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 275F4501157AA3E5001BEB61 /* Default-Portrait@2x~ipad.png */; };
 		2779AAF61517A8B200AE4EE6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AAF51517A8B200AE4EE6 /* UIKit.framework */; };
 		2779AAF81517A8B200AE4EE6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AAF71517A8B200AE4EE6 /* Foundation.framework */; };
 		2779AAFA1517A8B200AE4EE6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AAF91517A8B200AE4EE6 /* CoreGraphics.framework */; };
@@ -94,6 +98,10 @@
 		275F445B157A9AA8001BEB61 /* Icon-114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-114.png"; sourceTree = "<group>"; };
 		275F445D157A9AAC001BEB61 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		275F445F157A9AAE001BEB61 /* Icon-144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-144.png"; sourceTree = "<group>"; };
+		275F44FB157AA3DC001BEB61 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		275F44FD157AA3DE001BEB61 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		275F44FF157AA3E3001BEB61 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		275F4501157AA3E5001BEB61 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		2779AAF11517A8B200AE4EE6 /* IntAirActImageIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntAirActImageIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2779AAF51517A8B200AE4EE6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2779AAF71517A8B200AE4EE6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -180,6 +188,10 @@
 		272DDD59157A823E00A4D5BC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				275F4501157AA3E5001BEB61 /* Default-Portrait@2x~ipad.png */,
+				275F44FF157AA3E3001BEB61 /* Default-Portrait~ipad.png */,
+				275F44FD157AA3DE001BEB61 /* Default@2x.png */,
+				275F44FB157AA3DC001BEB61 /* Default.png */,
 				275F445F157A9AAE001BEB61 /* Icon-144.png */,
 				275F445D157A9AAC001BEB61 /* Icon-72.png */,
 				275F445B157A9AA8001BEB61 /* Icon-114.png */,
@@ -396,6 +408,10 @@
 				275F445C157A9AA8001BEB61 /* Icon-114.png in Resources */,
 				275F445E157A9AAC001BEB61 /* Icon-72.png in Resources */,
 				275F4460157A9AAE001BEB61 /* Icon-144.png in Resources */,
+				275F44FC157AA3DC001BEB61 /* Default.png in Resources */,
+				275F44FE157AA3DE001BEB61 /* Default@2x.png in Resources */,
+				275F4500157AA3E3001BEB61 /* Default-Portrait~ipad.png in Resources */,
+				275F4502157AA3E5001BEB61 /* Default-Portrait@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
