@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		270EAA8815462B4900880DFD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270EAA8615462A5400880DFD /* CoreLocation.framework */; };
+		272DDD52157A822200A4D5BC /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 272DDD51157A822200A4D5BC /* Icon.png */; };
+		272DDD54157A822700A4D5BC /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 272DDD53157A822700A4D5BC /* Icon@2x.png */; };
+		272DDD56157A823300A4D5BC /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 272DDD55157A823300A4D5BC /* Icon-72.png */; };
+		272DDD58157A823600A4D5BC /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 272DDD57157A823600A4D5BC /* Icon-72@2x.png */; };
 		273166011517BD14005439AE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166001517BD14005439AE /* MobileCoreServices.framework */; };
 		273166031517BD1F005439AE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166021517BD1F005439AE /* SystemConfiguration.framework */; };
 		273166051517BD2F005439AE /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166041517BD2F005439AE /* Security.framework */; };
@@ -82,6 +86,10 @@
 
 /* Begin PBXFileReference section */
 		270EAA8615462A5400880DFD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		272DDD51157A822200A4D5BC /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		272DDD53157A822700A4D5BC /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		272DDD55157A823300A4D5BC /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		272DDD57157A823600A4D5BC /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		273166001517BD14005439AE /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		273166021517BD1F005439AE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		273166041517BD2F005439AE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -169,11 +177,23 @@
 			name = Server;
 			sourceTree = "<group>";
 		};
+		272DDD59157A823E00A4D5BC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				272DDD57157A823600A4D5BC /* Icon-72@2x.png */,
+				272DDD55157A823300A4D5BC /* Icon-72.png */,
+				272DDD53157A822700A4D5BC /* Icon@2x.png */,
+				272DDD51157A822200A4D5BC /* Icon.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		2779AAE61517A8B200AE4EE6 = {
 			isa = PBXGroup;
 			children = (
 				27C49AC61550CD0E0044F61B /* IntAirActImageIOS */,
 				2779AAF41517A8B200AE4EE6 /* Frameworks */,
+				272DDD59157A823E00A4D5BC /* Resources */,
 				2779AAF21517A8B200AE4EE6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -372,6 +392,10 @@
 				27C49AE61550CD0E0044F61B /* InfoPlist.strings in Resources */,
 				27C49AE71550CD0E0044F61B /* MainStoryboard_iPad.storyboard in Resources */,
 				27C49AE81550CD0E0044F61B /* MainStoryboard_iPhone.storyboard in Resources */,
+				272DDD52157A822200A4D5BC /* Icon.png in Resources */,
+				272DDD54157A822700A4D5BC /* Icon@2x.png in Resources */,
+				272DDD56157A823300A4D5BC /* Icon-72.png in Resources */,
+				272DDD58157A823600A4D5BC /* Icon-72@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
