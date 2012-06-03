@@ -9,6 +9,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 @interface IADeviceTableViewController ()
 
 @property (nonatomic, strong) NSArray * devices;
+@property (nonatomic, strong) NSMutableArray * photos;
 
 @end
 
@@ -17,12 +18,13 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 @synthesize intAirAct;
 
 @synthesize devices;
+@synthesize photos;
 
 -(id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
+        //
     }
     return self;
 }
@@ -66,24 +68,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     return cell;
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    DDLogVerbose(@"%@: %@, segue: %@, sender: %@", THIS_FILE, THIS_METHOD, segue, sender);
-    
-    NSIndexPath * indexPath = [self.tableView indexPathForCell:sender];
-    IADevice * device = [self.devices objectAtIndex:indexPath.row];
-    
-    // be somewhat generic here (slightly advanced usage)
-    // we'll segue to ANY view controller that has a device @property
-    if ([segue.destinationViewController respondsToSelector:@selector(setIntAirAct:)]) {
-        // use performSelector:withObject: to send without compiler checking
-        // (which is acceptable here because we used introspection to be sure this is okay)
-        [segue.destinationViewController performSelector:@selector(setIntAirAct:) withObject:self.intAirAct];
-    }
-    if ([segue.destinationViewController respondsToSelector:@selector(setDevice:)]) {
-        [segue.destinationViewController performSelector:@selector(setDevice:) withObject:device];
-    }
-}
-
 -(void)viewWillAppear:(BOOL)animated {
     DDLogVerbose(@"%@: %@, animated: %i", THIS_FILE, THIS_METHOD, animated);
     [super viewWillAppear:animated];
@@ -109,7 +93,47 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
         // Model changed, so update our View (the table)
         if (self.tableView.window) [self.tableView reloadData];
     }
+}
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[self.photos removeAllObjects];
+    
+	// Browser
+    [self.photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm4.static.flickr.com/3567/3523321514_371d9ac42f_b.jpg"]]];
+    [self.photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm4.static.flickr.com/3629/3339128908_7aecabc34b_b.jpg"]]];
+    [self.photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm4.static.flickr.com/3364/3338617424_7ff836d55f_b.jpg"]]];
+    [self.photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm4.static.flickr.com/3590/3329114220_5fbc5bc92b_b.jpg"]]];
+	
+	// Create browser
+	MWPhotoBrowser * browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    browser.displayActionButton = YES;
+    //browser.wantsFullScreenLayout = NO;
+    //[browser setInitialPageIndex:2];
+    
+    [self.navigationController pushViewController:browser animated:YES];
+	
+	// Deselect
+	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - MWPhotoBrowserDelegate
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return self.photos.count;
+}
+
+- (MWPhoto *)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (index < self.photos.count)
+        return [self.photos objectAtIndex:index];
+    return nil;
+}
+
+-(NSMutableArray *)photos
+{
+    if(!photos) {
+        photos = [NSMutableArray new];
+    }
+    return photos;
 }
 
 @end

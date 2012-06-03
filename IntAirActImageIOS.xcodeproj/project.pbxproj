@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2706F678157C013500C3A484 /* libMWPhotoBrowser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2706F677157C00F100C3A484 /* libMWPhotoBrowser.a */; };
+		2706F67A157C016400C3A484 /* MWPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2706F679157C016400C3A484 /* MWPhotoBrowser.bundle */; };
+		2706F67C157C01AC00C3A484 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2706F67B157C01AC00C3A484 /* MessageUI.framework */; };
+		2706F67E157C01B300C3A484 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2706F67D157C01B300C3A484 /* ImageIO.framework */; };
+		2706F680157C02EA00C3A484 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2706F67F157C02EA00C3A484 /* MapKit.framework */; };
 		270EAA8815462B4900880DFD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270EAA8615462A5400880DFD /* CoreLocation.framework */; };
 		273166011517BD14005439AE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166001517BD14005439AE /* MobileCoreServices.framework */; };
 		273166031517BD1F005439AE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166021517BD1F005439AE /* SystemConfiguration.framework */; };
@@ -53,6 +58,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2706F676157C00F100C3A484 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2706F66F157C00F100C3A484 /* MWPhotoBrowser.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C6F96C414AF704100F8389A;
+			remoteInfo = MWPhotoBrowser;
+		};
 		27BFC72B1550BB9B00799E34 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 27BFC71E1550BB9B00799E34 /* IntAirAct.xcodeproj */;
@@ -91,6 +103,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2706F66F157C00F100C3A484 /* MWPhotoBrowser.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MWPhotoBrowser.xcodeproj; path = Frameworks/MWPhotoBrowser/MWPhotoBrowser/MWPhotoBrowser.xcodeproj; sourceTree = "<group>"; };
+		2706F679157C016400C3A484 /* MWPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MWPhotoBrowser.bundle; path = Frameworks/MWPhotoBrowser/MWPhotoBrowser/MWPhotoBrowser.bundle; sourceTree = "<group>"; };
+		2706F67B157C01AC00C3A484 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		2706F67D157C01B300C3A484 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		2706F67F157C02EA00C3A484 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		270EAA8615462A5400880DFD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		273166001517BD14005439AE /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		273166021517BD1F005439AE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -154,6 +171,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2706F680157C02EA00C3A484 /* MapKit.framework in Frameworks */,
+				2706F67E157C01B300C3A484 /* ImageIO.framework in Frameworks */,
+				2706F67C157C01AC00C3A484 /* MessageUI.framework in Frameworks */,
+				2706F678157C013500C3A484 /* libMWPhotoBrowser.a in Frameworks */,
 				27442C38153CC65E0017C744 /* AssetsLibrary.framework in Frameworks */,
 				2779AB721517A9AE00AE4EE6 /* CFNetwork.framework in Frameworks */,
 				2779AB9E1517ACE400AE4EE6 /* CoreData.framework in Frameworks */,
@@ -180,6 +201,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2706F670157C00F100C3A484 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2706F677157C00F100C3A484 /* libMWPhotoBrowser.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2707EFD815561B8100F80BC8 /* Server */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +231,7 @@
 				275F445D157A9AAC001BEB61 /* Icon-72.png */,
 				275F445B157A9AA8001BEB61 /* Icon-114.png */,
 				275F4459157A9AA0001BEB61 /* Icon-57.png */,
+				2706F679157C016400C3A484 /* MWPhotoBrowser.bundle */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -234,6 +264,7 @@
 				27BFC7501550BCF900799E34 /* libRestKit.a */,
 				27BFC7511550BCF900799E34 /* libRestKit+Blocks.a */,
 				27BFC7521550BCF900799E34 /* libRoutingHTTPServer.a */,
+				2706F66F157C00F100C3A484 /* MWPhotoBrowser.xcodeproj */,
 				27442C37153CC65E0017C744 /* AssetsLibrary.framework */,
 				2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */,
 				2779AB9D1517ACE400AE4EE6 /* CoreData.framework */,
@@ -241,7 +272,10 @@
 				270EAA8615462A5400880DFD /* CoreLocation.framework */,
 				27E468071546353A009B342E /* CoreMotion.framework */,
 				2779AAF71517A8B200AE4EE6 /* Foundation.framework */,
+				2706F67D157C01B300C3A484 /* ImageIO.framework */,
 				2779AB9B1517ACDE00AE4EE6 /* libxml2.dylib */,
+				2706F67F157C02EA00C3A484 /* MapKit.framework */,
+				2706F67B157C01AC00C3A484 /* MessageUI.framework */,
 				273166001517BD14005439AE /* MobileCoreServices.framework */,
 				27FCB5E3153CACD1004BBA84 /* QuartzCore.framework */,
 				273166041517BD2F005439AE /* Security.framework */,
@@ -363,6 +397,10 @@
 					ProductGroup = 27BFC71F1550BB9B00799E34 /* Products */;
 					ProjectRef = 27BFC71E1550BB9B00799E34 /* IntAirAct.xcodeproj */;
 				},
+				{
+					ProductGroup = 2706F670157C00F100C3A484 /* Products */;
+					ProjectRef = 2706F66F157C00F100C3A484 /* MWPhotoBrowser.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -372,6 +410,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		2706F677157C00F100C3A484 /* libMWPhotoBrowser.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libMWPhotoBrowser.a;
+			remoteRef = 2706F676157C00F100C3A484 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		27BFC72C1550BB9B00799E34 /* libIntAirAct.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -407,6 +452,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2706F67A157C016400C3A484 /* MWPhotoBrowser.bundle in Resources */,
 				27C49AE61550CD0E0044F61B /* InfoPlist.strings in Resources */,
 				27C49AE71550CD0E0044F61B /* MainStoryboard_iPad.storyboard in Resources */,
 				27C49AE81550CD0E0044F61B /* MainStoryboard_iPhone.storyboard in Resources */,
@@ -531,6 +577,7 @@
 		2779AB281517A8B200AE4EE6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
@@ -541,6 +588,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = IntAirActImageIOS;
+				USER_HEADER_SEARCH_PATHS = "Frameworks/MWPhotoBrowser/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -548,6 +596,7 @@
 		2779AB291517A8B200AE4EE6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
@@ -558,6 +607,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = IntAirActImageIOS;
+				USER_HEADER_SEARCH_PATHS = "Frameworks/MWPhotoBrowser/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

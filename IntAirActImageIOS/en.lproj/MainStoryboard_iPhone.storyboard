@@ -33,9 +33,6 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <connections>
-                                    <segue destination="3en-Sb-jKz" kind="push" identifier="fromDevice" id="pRT-D6-6jU"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -47,84 +44,6 @@
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="635" y="-109"/>
-        </scene>
-        <!--Image Table View Controller - Images-->
-        <scene sceneID="WRx-Nl-TVe">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JZU-26-4N0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController storyboardIdentifier="ImageTableViewController" id="3en-Sb-jKz" customClass="IAImageTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5NE-HD-2Hr">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Image" textLabel="NZm-uP-fEM" detailTextLabel="ZYV-9i-bcd" style="IBUITableViewCellStyleSubtitle" id="K1O-tn-7ze">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NZm-uP-fEM">
-                                            <rect key="frame" x="10" y="2" width="38" height="22"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZYV-9i-bcd">
-                                            <rect key="frame" x="10" y="24" width="47" height="18"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        </label>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <connections>
-                                    <segue destination="gN0-cx-H8O" kind="push" id="ooz-2e-I68"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="3en-Sb-jKz" id="5mu-6i-wvc"/>
-                            <outlet property="delegate" destination="3en-Sb-jKz" id="iT3-ev-pP0"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Images" id="Xh4-NZ-2T8"/>
-                </tableViewController>
-            </objects>
-            <point key="canvasLocation" x="1189" y="-109"/>
-        </scene>
-        <!--Image View Controller-->
-        <scene sceneID="op2-2Z-LsH">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="V82-W4-r3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController storyboardIdentifier="ImageViewController" id="gN0-cx-H8O" customClass="IAImageViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="WEV-dk-Q8a">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="Pr7-M5-8lf">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            </imageView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="gray" id="M4d-u1-2Se">
-                                <rect key="frame" x="150" y="198" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="166-y1-lyu"/>
-                    <connections>
-                        <outlet property="activity" destination="M4d-u1-2Se" id="PzJ-OG-cY5"/>
-                        <outlet property="imageView" destination="Pr7-M5-8lf" id="ehg-VU-Be3"/>
-                    </connections>
-                </viewController>
-            </objects>
-            <point key="canvasLocation" x="1657" y="-109"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pbb-06-cjA">
@@ -148,16 +67,6 @@
     <classes>
         <class className="IADeviceTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/IADeviceTableViewController.h"/>
-        </class>
-        <class className="IAImageTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IAImageTableViewController.h"/>
-        </class>
-        <class className="IAImageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/IAImageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="activity" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
