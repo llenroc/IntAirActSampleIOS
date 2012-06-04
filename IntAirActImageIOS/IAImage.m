@@ -13,7 +13,7 @@
 {
     if([object isKindOfClass:[self class]]) {
         IAImage * other = (IAImage *) object;
-        return self.identifier == other.identifier;
+        return [self.identifier isEqual:other.identifier];
     }
     return [super isEqual:object];
 }
