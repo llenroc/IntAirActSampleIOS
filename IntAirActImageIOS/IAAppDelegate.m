@@ -37,6 +37,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	[DDLog addLogger:[DDTTYLogger sharedInstance]];
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
+    if(getenv("NSZombieEnabled") || getenv("NSAutoreleaseFreedObjectCheckEnabled")) {
+        DDLogWarn(@"NSZombieEnabled/NSAutoreleaseFreedObjectCheckEnabled enabled!");
+    }
+    
     // Configure RestKit logging framework
     //RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
     
