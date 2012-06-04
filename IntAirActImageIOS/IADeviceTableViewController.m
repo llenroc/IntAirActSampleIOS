@@ -3,6 +3,8 @@
 #import <CocoaLumberjack/DDLog.h>
 #import <IntAirAct/IntAirAct.h>
 
+#import "IAPhotoBrowser.h"
+
 // Log levels : off, error, warn, info, verbose
 static const int ddLogLevel = LOG_LEVEL_WARN;
 
@@ -62,8 +64,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
-    IADevice * device = [self.devices objectAtIndex:indexPath.row];
-    cell.textLabel.text = device.name;
+    IADevice * dev = [self.devices objectAtIndex:indexPath.row];
+    cell.textLabel.text = dev.name;
     
     return cell;
 }
@@ -95,45 +97,15 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	[self.photos removeAllObjects];
-    
-	// Browser
-    [self.photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm4.static.flickr.com/3567/3523321514_371d9ac42f_b.jpg"]]];
-    [self.photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm4.static.flickr.com/3629/3339128908_7aecabc34b_b.jpg"]]];
-    [self.photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm4.static.flickr.com/3364/3338617424_7ff836d55f_b.jpg"]]];
-    [self.photos addObject:[MWPhoto photoWithURL:[NSURL URLWithString:@"http://farm4.static.flickr.com/3590/3329114220_5fbc5bc92b_b.jpg"]]];
-	
-	// Create browser
-	MWPhotoBrowser * browser = [[MWPhotoBrowser alloc] initWithDelegate:self];
-    browser.displayActionButton = YES;
-    //browser.wantsFullScreenLayout = NO;
-    //[browser setInitialPageIndex:2];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {    
+    IAPhotoBrowser * browser = [IAPhotoBrowser new];
+    browser.intAirAct = self.intAirAct;
+    browser.device = [self.devices objectAtIndex:indexPath.row];
     
     [self.navigationController pushViewController:browser animated:YES];
 	
 	// Deselect
 	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-#pragma mark - MWPhotoBrowserDelegate
-
-- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
-    return self.photos.count;
-}
-
-- (MWPhoto *)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
-    if (index < self.photos.count)
-        return [self.photos objectAtIndex:index];
-    return nil;
-}
-
--(NSMutableArray *)photos
-{
-    if(!photos) {
-        photos = [NSMutableArray new];
-    }
-    return photos;
 }
 
 @end

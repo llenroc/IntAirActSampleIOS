@@ -7,6 +7,7 @@
 #import "IAImage.h"
 #import "IAImageTableViewController.h"
 #import "IAImageViewController.h"
+#import "IAPhotoBrowser.h"
 
 // Log levels : off, error, warn, info, verbose
 static const int ddLogLevel = LOG_LEVEL_WARN;
@@ -163,20 +164,15 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
-    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"UIMainStoryboardFile"] bundle: nil];
-    
     UIViewController * rootViewController = [self.navigationController.viewControllers objectAtIndex:0];
     
-    IAImageTableViewController * imageTableViewController = [storyboard instantiateViewControllerWithIdentifier:@"ImageTableViewController"];
-    imageTableViewController.intAirAct = self.intAirAct;
-    imageTableViewController.device = device;
+    IAPhotoBrowser * browser = [IAPhotoBrowser new];
+    browser.intAirAct = self.intAirAct;
+    browser.device = device;
+    browser.image = image;
     
-    IAImageViewController * imageViewController = [storyboard instantiateViewControllerWithIdentifier:@"ImageViewController"];
-    imageViewController.intAirAct = self.intAirAct;
-    imageViewController.image = image;
-    imageViewController.device = device;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.navigationController setViewControllers:[NSArray arrayWithObjects:rootViewController, imageTableViewController, imageViewController, nil] animated:YES];
+        [self.navigationController setViewControllers:[NSArray arrayWithObjects:rootViewController, browser, nil] animated:YES];
     });
 }
 

@@ -1,10 +1,8 @@
 #import <UIKit/UIKit.h>
 
-#import "MWPhotoBrowser.h"
-
 @class IAIntAirAct;
 
-@interface IADeviceTableViewController : UITableViewController <MWPhotoBrowserDelegate>
+@interface IADeviceTableViewController : UITableViewController
 
 @property (nonatomic, strong) IAIntAirAct * intAirAct;
 
