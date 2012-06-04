@@ -1,4 +1,4 @@
-#import "MWPhotoBrowser.h"
+#import <MWPhotoBrowser/MWPhotoBrowser.h>
 
 @class IADevice;
 @class IAIntAirAct;

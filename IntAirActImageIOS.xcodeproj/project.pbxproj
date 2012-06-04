@@ -66,6 +66,13 @@
 			remoteGlobalIDString = 4C6F96C414AF704100F8389A;
 			remoteInfo = MWPhotoBrowser;
 		};
+		27884E6E157D0BAF0079BF3F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2706F66F157C00F100C3A484 /* MWPhotoBrowser.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C6F96C314AF704100F8389A;
+			remoteInfo = MWPhotoBrowser;
+		};
 		27BFC72B1550BB9B00799E34 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 27BFC71E1550BB9B00799E34 /* IntAirAct.xcodeproj */;
@@ -370,6 +377,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				27884E6F157D0BAF0079BF3F /* PBXTargetDependency */,
 				27BFC7351550BBA700799E34 /* PBXTargetDependency */,
 			);
 			name = IntAirActImageIOS;
@@ -498,6 +506,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		27884E6F157D0BAF0079BF3F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MWPhotoBrowser;
+			targetProxy = 27884E6E157D0BAF0079BF3F /* PBXContainerItemProxy */;
+		};
 		27BFC7351550BBA700799E34 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = IntAirActStaticIOS;
@@ -583,7 +596,6 @@
 		2779AB281517A8B200AE4EE6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
@@ -594,7 +606,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = IntAirActImageIOS;
-				USER_HEADER_SEARCH_PATHS = "Frameworks/MWPhotoBrowser/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -602,7 +613,6 @@
 		2779AB291517A8B200AE4EE6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks\"",
@@ -613,7 +623,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = IntAirActImageIOS;
-				USER_HEADER_SEARCH_PATHS = "Frameworks/MWPhotoBrowser/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

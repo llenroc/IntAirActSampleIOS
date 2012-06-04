@@ -2,7 +2,7 @@
 
 @implementation IAImage
 
-@synthesize identifier = _identifier;
+@synthesize identifier;
 
 -(NSString *)description
 {

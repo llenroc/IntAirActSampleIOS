@@ -73,8 +73,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     [self.intAirAct.httpServer get:@"/image/:id.jpg" withBlock:^(RouteRequest * request, RouteResponse * response) {
         DDLogVerbose(@"GET /image/%@.jpg", [request param:@"id"]);
         
-        NSNumber * number = [NSNumber numberWithInt:[[request param:@"id"] intValue]];
-        NSData * data = [self imageAsData:number];
+        NSData * data = [self imageAsData:[request param:@"id"]];
         if (!data) {
             DDLogError(@"An error ocurred.");
             response.statusCode = 500;
@@ -104,14 +103,24 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     
     __block int i = 1;
     [al enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-        [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+        [group enumerateAssetsUsingBlock:^(ALAsset * asset, NSUInteger index, BOOL *stop) {
             if (asset) {
                 NSString * prop = [asset valueForProperty:@"ALAssetPropertyType"];
                 if(prop && [prop isEqualToString:@"ALAssetTypePhoto"]) {
                     ALAssetRepresentation * rep = [asset representationForUTI:@"public.jpeg"];
                     if (rep) {
                         IAImage * image = [IAImage new];
-                        image.identifier = [NSNumber numberWithInt:i];
+                        
+                        NSArray * queryElements = [[rep.url query] componentsSeparatedByString:@"&"];
+                        for (NSString * element in queryElements) {
+                            NSArray * keyVal = [element componentsSeparatedByString:@"="];
+                            if (keyVal.count > 0) {
+                                NSString * variableKey = [keyVal objectAtIndex:0];
+                                if([variableKey isEqualToString:@"id"]) {
+                                    image.identifier = (keyVal.count == 2) ? [keyVal lastObject] : nil;
+                                }
+                            }
+                        }
                         [collector addObject:image];
                         [dictionary setObject:asset forKey:image.identifier];
                         i++;
