@@ -142,24 +142,14 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
-    ALAsset * ass = [self.idToImages objectForKey:identifier];
+    ALAsset * asset = [self.idToImages objectForKey:identifier];
     
-    int byteArraySize = ass.defaultRepresentation.size;
+    ALAssetRepresentation * representation = [asset representationForUTI:@"public.jpeg"];
     
-    DDLogVerbose(@"Size of the image: %i", byteArraySize);
+    UIImage * image = [UIImage imageWithCGImage:representation.fullScreenImage];
+    NSData * data = UIImageJPEGRepresentation(image, 0.8);
     
-    NSMutableData* rawData = [[NSMutableData alloc]initWithCapacity:byteArraySize];
-    void* bufferPointer = [rawData mutableBytes];
-    
-    NSError* error=nil;
-    [ass.defaultRepresentation getBytes:bufferPointer fromOffset:0 length:byteArraySize error:&error];
-    if (error) {
-        DDLogError(@"Couldn't copy bytes: %@",error);
-    }
-    
-    rawData = [NSMutableData dataWithBytes:bufferPointer length:byteArraySize];
-    
-    return rawData;
+    return data;
 }
 
 -(NSNumber *)add:(NSNumber *)a to:(NSNumber *) b
