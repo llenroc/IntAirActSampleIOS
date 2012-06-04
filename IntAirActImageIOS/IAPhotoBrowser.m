@@ -30,8 +30,8 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 {
     self = [super init];
     if (self) {
-        //self.delegate = self;
-#warning implement this
+        self.delegate = self;
+        self.displayActionButton = YES;
     }
     return self;
 }
@@ -114,9 +114,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 {
     DDLogInfo(@"Detected swipe");
     
-    //IAImage * img = [self.images objectAtIndex:self.index];
-#warning implement this
-    IAImage * img = [self.images objectAtIndex:0];
+    IAImage * img = [self.images objectAtIndex:self.index];
     
     IACapability * imageCap = [IACapability new];
     imageCap.capability = @"PUT /action/displayImage";
