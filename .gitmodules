@@ -3,4 +3,4 @@
 	url = https://github.com/ArloL/IntAirAct.git
 [submodule "Frameworks/MWPhotoBrowser"]
 	path = Frameworks/MWPhotoBrowser
-	url = https://github.com/mwaterfall/MWPhotoBrowser.git
+	url = https://github.com/ArloL/MWPhotoBrowser.git
