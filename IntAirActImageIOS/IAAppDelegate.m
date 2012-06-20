@@ -71,6 +71,32 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     [self.navigationController popToRootViewControllerAnimated:NO];
+    [self setControlsHidden:NO animated:NO];
+}
+
+// If permanent then we don't set timers to hide again
+- (void)setControlsHidden:(BOOL)hidden animated:(BOOL)animated {
+    // Status Bar
+    if ([UIApplication instancesRespondToSelector:@selector(setStatusBarHidden:withAnimation:)]) {
+        [[UIApplication sharedApplication] setStatusBarHidden:hidden withAnimation:animated?UIStatusBarAnimationFade:UIStatusBarAnimationNone];
+    } else {
+        [[UIApplication sharedApplication] setStatusBarHidden:hidden animated:animated];
+    }
+    
+    // Get status bar height if visible
+    CGFloat statusBarHeight = 0;
+    if (![UIApplication sharedApplication].statusBarHidden) {
+        CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
+        statusBarHeight = MIN(statusBarFrame.size.height, statusBarFrame.size.width);
+    }
+    
+    // Set navigation bar frame
+    CGRect navBarFrame = self.navigationController.navigationBar.frame;
+    navBarFrame.origin.y = statusBarHeight;
+    self.navigationController.navigationBar.frame = navBarFrame;
+	
+    CGFloat alpha = hidden ? 0 : 1;
+	[self.navigationController.navigationBar setAlpha:alpha];
 }
 
 @end
