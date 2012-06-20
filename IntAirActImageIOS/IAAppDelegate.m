@@ -77,11 +77,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 // If permanent then we don't set timers to hide again
 - (void)setControlsHidden:(BOOL)hidden animated:(BOOL)animated {
     // Status Bar
-    if ([UIApplication instancesRespondToSelector:@selector(setStatusBarHidden:withAnimation:)]) {
-        [[UIApplication sharedApplication] setStatusBarHidden:hidden withAnimation:animated?UIStatusBarAnimationFade:UIStatusBarAnimationNone];
-    } else {
-        [[UIApplication sharedApplication] setStatusBarHidden:hidden animated:animated];
-    }
+    [[UIApplication sharedApplication] setStatusBarHidden:hidden withAnimation:animated?UIStatusBarAnimationFade:UIStatusBarAnimationNone];
     
     // Get status bar height if visible
     CGFloat statusBarHeight = 0;
