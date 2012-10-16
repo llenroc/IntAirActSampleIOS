@@ -19,13 +19,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 @implementation IAPhotoBrowser
 
-@synthesize device;
-@synthesize intAirAct;
-@synthesize image;
-
-@synthesize imageClient;
-@synthesize images;
-
 - (id)init
 {
     self = [super init];
@@ -89,10 +82,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 -(IAImageClient *)imageClient
 {
-    if (!imageClient) {
-        imageClient = [[IAImageClient alloc] initWithIntAirAct:self.intAirAct];
+    if (!_imageClient) {
+        _imageClient = [[IAImageClient alloc] initWithIntAirAct:self.intAirAct];
     }
-    return imageClient;
+    return _imageClient;
 }
 
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
@@ -114,7 +107,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 {
     DDLogInfo(@"Detected swipe");
     
-    if([self.images count] == 0) {
+    if(self.images.count == 0 || self.index > self.images.count) {
         return;
     }
     
