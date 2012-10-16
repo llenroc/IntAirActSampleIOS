@@ -114,6 +114,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 {
     DDLogInfo(@"Detected swipe");
     
+    if([self.images count] == 0) {
+        return;
+    }
+    
     IAImage * img = [self.images objectAtIndex:self.index];
     
     IACapability * imageCap = [IACapability new];
