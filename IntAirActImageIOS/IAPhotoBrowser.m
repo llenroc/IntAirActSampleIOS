@@ -31,18 +31,21 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 - (void)viewDidLoad
 {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
 
 - (void)viewDidUnload
 {
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    DDLogVerbose(@"%@: %@, animated: %i", THIS_FILE, THIS_METHOD, animated);
     [super viewWillAppear:animated];
     
     int numberOfTouches = 1;
@@ -105,7 +108,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 -(IBAction)handleSwipe:(IASwipeGestureRecognizer *)sender
 {
-    DDLogInfo(@"Detected swipe");
+    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
     if(self.images.count == 0 || self.index > self.images.count) {
         return;
