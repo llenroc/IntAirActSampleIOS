@@ -2,8 +2,6 @@
 
 @implementation IAImage
 
-@synthesize identifier;
-
 -(NSString *)description
 {
     return [NSString stringWithFormat:@"IAImage[identifier: %@]", self.identifier];

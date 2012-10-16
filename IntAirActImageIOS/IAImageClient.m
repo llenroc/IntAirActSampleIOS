@@ -20,8 +20,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @implementation IAImageClient
 
-@synthesize intAirAct = _intAirAct;
-
 -(id)initWithIntAirAct:(IAIntAirAct *)intAirAct
 {
     self = [super init];

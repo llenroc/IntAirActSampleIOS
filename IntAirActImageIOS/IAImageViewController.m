@@ -22,14 +22,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @implementation IAImageViewController
 
-@synthesize device = _device;
-@synthesize image = _image;
-@synthesize imageClient = _imageClient;
-@synthesize intAirAct = _intAirAct;
-
-@synthesize activity = _activity;
-@synthesize imageView = _imageView;
-
 -(void)loadImage
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);

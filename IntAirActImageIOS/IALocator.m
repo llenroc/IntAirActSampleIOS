@@ -17,11 +17,6 @@ static const int intAirActLogLevel = IA_LOG_LEVEL_INFO; // | IA_LOG_FLAG_TRACE;
 
 @implementation IALocator
 
-@synthesize currentHeading = _currentHeading;
-@synthesize currentLocation = _currentLocation;
-@synthesize locManager = _locManager;
-@synthesize motManager = _motManager;
-
 - (void)startTracking
 {
     if (!self.locManager) {

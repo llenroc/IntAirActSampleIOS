@@ -18,12 +18,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @implementation IAImageTableViewController
 
-@synthesize device = _device;
-@synthesize intAirAct = _intAirAct;
-
-@synthesize imageClient = _imageClient;
-@synthesize images = _images;
-
 -(id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];

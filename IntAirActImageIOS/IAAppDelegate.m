@@ -25,12 +25,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @implementation IAAppDelegate
 
-@synthesize window;
-
-@synthesize intAirAct;
-@synthesize navigationController;
-@synthesize server;
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Configure logging framework to log to the Xcode console.

@@ -17,11 +17,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @implementation IADeviceTableViewController
 
-@synthesize intAirAct;
-
-@synthesize devices;
-@synthesize photos;
-
 -(id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -90,8 +85,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 -(void)setDevices:(NSArray *)value
 {    
-    if (devices != value) {
-        devices = value;
+    if (_devices != value) {
+        _devices = value;
         // Model changed, so update our View (the table)
         if (self.tableView.window) [self.tableView reloadData];
     }
