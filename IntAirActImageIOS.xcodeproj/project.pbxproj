@@ -137,7 +137,7 @@
 		275F4501157AA3E5001BEB61 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		275F4503157AA629001BEB61 /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
 		275F4505157AA62B001BEB61 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
-		2779AAF11517A8B200AE4EE6 /* IntAirActImageIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntAirActImageIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2779AAF11517A8B200AE4EE6 /* IntAirAct.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntAirAct.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2779AAF51517A8B200AE4EE6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2779AAF71517A8B200AE4EE6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2779AAF91517A8B200AE4EE6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -259,7 +259,7 @@
 		2779AAF21517A8B200AE4EE6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2779AAF11517A8B200AE4EE6 /* IntAirActImageIOS.app */,
+				2779AAF11517A8B200AE4EE6 /* IntAirAct.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -382,7 +382,7 @@
 			);
 			name = IntAirActImageIOS;
 			productName = Interact;
-			productReference = 2779AAF11517A8B200AE4EE6 /* IntAirActImageIOS.app */;
+			productReference = 2779AAF11517A8B200AE4EE6 /* IntAirAct.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -567,6 +567,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = IntAirAct;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -587,6 +589,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = IntAirAct;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -596,20 +600,9 @@
 		2779AB281517A8B200AE4EE6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Frameworks\"",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IntAirActImageIOS/IntAirActImageIOS-Prefix.pch";
 				INFOPLIST_FILE = "IntAirActImageIOS/IntAirActImageIOS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/IntAirActImageIOS-ekqpyboklshxbkbqioxncifskfqh/Build/Products/Debug-iphoneos\"",
-				);
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = IntAirActImageIOS;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -617,20 +610,9 @@
 		2779AB291517A8B200AE4EE6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/Frameworks\"",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IntAirActImageIOS/IntAirActImageIOS-Prefix.pch";
 				INFOPLIST_FILE = "IntAirActImageIOS/IntAirActImageIOS-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/IntAirActImageIOS-ekqpyboklshxbkbqioxncifskfqh/Build/Products/Debug-iphoneos\"",
-				);
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = IntAirActImageIOS;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
