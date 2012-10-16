@@ -21,12 +21,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @implementation IAServer
 
-@synthesize idToImages;
-@synthesize images;
-
-@synthesize intAirAct;
-@synthesize navigationController;
-
 +(ALAssetsLibrary *)defaultAssetsLibrary
 {
     static dispatch_once_t pred = 0;
@@ -41,7 +35,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 {
     self = [super init];
     if (self) {
-        intAirAct = value;
+        _intAirAct = value;
         [self setup];
     }
     return self;
@@ -163,15 +157,14 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
-    UIViewController * rootViewController = [self.navigationController.viewControllers objectAtIndex:0];
-    
     IAPhotoBrowser * browser = [IAPhotoBrowser new];
     browser.intAirAct = self.intAirAct;
     browser.device = device;
     browser.image = image;
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.navigationController setViewControllers:[NSArray arrayWithObjects:rootViewController, browser, nil] animated:YES];
+        [self.navigationController popToRootViewControllerAnimated:NO];
+        [self.navigationController pushViewController:browser animated:YES];
     });
 }
 
