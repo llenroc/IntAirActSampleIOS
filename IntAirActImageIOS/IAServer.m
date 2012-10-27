@@ -58,23 +58,23 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     [self.intAirAct addAction:@"displayImage" withSelector:@selector(displayImage:ofDevice:) andTarget:self];
     [self.intAirAct addAction:@"add" withSelector:@selector(add:to:) andTarget:self];
     
-    [self.intAirAct.httpServer get:@"/images" withBlock:^(RouteRequest * request, RouteResponse * response) {
+    [self.intAirAct route:[IARoute routeWithAction:@"GET" resource:@"/images"] withHandler:^(IARequest *request, IAResponse *response) {
         DDLogVerbose(@"GET /images");
-        
-        [response respondWith:self.images withIntAirAct:self.intAirAct];
+        //[response respondWith:self.images withIntAirAct:self.intAirAct];
     }];
     
-    [self.intAirAct.httpServer get:@"/image/:id.jpg" withBlock:^(RouteRequest * request, RouteResponse * response) {
-        DDLogVerbose(@"GET /image/%@.jpg", [request param:@"id"]);
+    [self.intAirAct route:[IARoute routeWithAction:@"GET" resource:@"/image/:id"] withHandler:^(IARequest *request, IAResponse *response) {
+        DDLogVerbose(@"GET /image/%@.jpg", request.parameters[@"id"]);
         
-        NSData * data = [self imageAsData:[request param:@"id"]];
+        
+        NSData * data = [self imageAsData: request.parameters[@"id"]];
         if (!data) {
             DDLogError(@"An error ocurred.");
-            response.statusCode = 500;
+            response.statusCode = @500;
         } else {
-            response.statusCode = 200;
-            [response setHeader:@"Content-Type" value:@"image/jpeg"];
-            [response respondWithData:data];
+            response.statusCode = @200;
+            response.metadata[@"Content-Type"] = @"image/jpeg";
+            response.body = data;
         }
     }];
     

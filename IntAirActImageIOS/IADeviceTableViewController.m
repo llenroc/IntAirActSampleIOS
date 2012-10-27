@@ -70,7 +70,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     [super viewWillAppear:animated];
 
     // Listens for IADeviceUpdate notifications, IntAirAct calls this notification
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:IADeviceUpdate object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:IADeviceFound object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:IADeviceLost object:nil];
 
     [self refresh:nil];
     [self.tableView reloadData];
