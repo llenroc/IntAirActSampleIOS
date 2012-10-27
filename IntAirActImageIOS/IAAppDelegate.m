@@ -3,8 +3,10 @@
 #import <CocoaLumberjack/DDLog.h>
 #import <CocoaLumberjack/DDTTYLogger.h>
 #import <IntAirAct/IntAirAct.h>
+#import <IntAirAct/IARoutingHTTPServerAdapter.h>
 #import <RestKit/RestKit.h>
 #import <RoutingHTTPServer/RoutingHTTPServer.h>
+#import <ServiceDiscovery/ServiceDiscovery.h>
 
 #import "IAImage.h"
 #import "IAImageClient.h"
@@ -38,8 +40,12 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     // Configure RestKit logging framework
     //RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
     
+    RoutingHTTPServer * routingHTTPServer = [RoutingHTTPServer new];
+    IARoutingHTTPServerAdapter * routingHTTPServerAdapter = [[IARoutingHTTPServerAdapter alloc] initWithRoutingHTTPServer:routingHTTPServer];
+    SDServiceDiscovery * serviceDiscovery = [SDServiceDiscovery new];
+    
     // create, setup and start IntAirAct
-    self.intAirAct = [IAIntAirAct new];
+    self.intAirAct = [[IAIntAirAct alloc] initWithServer:routingHTTPServerAdapter andServiceDiscovery:serviceDiscovery];
     [self.intAirAct addMappingForClass:[IAImage class] withKeypath:@"images" withAttributes:@"identifier", nil];
     [self.intAirAct.router routeClass:[IAImage class] toResourcePath:@"/image/:identifier"];
     
