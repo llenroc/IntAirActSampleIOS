@@ -12,12 +12,6 @@
 		2706F67C157C01AC00C3A484 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2706F67B157C01AC00C3A484 /* MessageUI.framework */; };
 		2706F67E157C01B300C3A484 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2706F67D157C01B300C3A484 /* ImageIO.framework */; };
 		2706F680157C02EA00C3A484 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2706F67F157C02EA00C3A484 /* MapKit.framework */; };
-		270BCEE1162DDC370080E51D /* libCocoaAsyncSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 270BCEDB162DDC370080E51D /* libCocoaAsyncSocket.a */; };
-		270BCEE2162DDC370080E51D /* libCocoaHTTPServer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 270BCEDC162DDC370080E51D /* libCocoaHTTPServer.a */; };
-		270BCEE3162DDC370080E51D /* libCocoaLumberjack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 270BCEDD162DDC370080E51D /* libCocoaLumberjack.a */; };
-		270BCEE4162DDC370080E51D /* libRestKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 270BCEDE162DDC370080E51D /* libRestKit.a */; };
-		270BCEE5162DDC370080E51D /* libRestKit+Blocks.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 270BCEDF162DDC370080E51D /* libRestKit+Blocks.a */; };
-		270BCEE6162DDC370080E51D /* libRoutingHTTPServer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 270BCEE0162DDC370080E51D /* libRoutingHTTPServer.a */; };
 		270EAA8815462B4900880DFD /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 270EAA8615462A5400880DFD /* CoreLocation.framework */; };
 		273166011517BD14005439AE /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166001517BD14005439AE /* MobileCoreServices.framework */; };
 		273166031517BD1F005439AE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273166021517BD1F005439AE /* SystemConfiguration.framework */; };
@@ -116,12 +110,6 @@
 		2706F67B157C01AC00C3A484 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		2706F67D157C01B300C3A484 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		2706F67F157C02EA00C3A484 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		270BCEDB162DDC370080E51D /* libCocoaAsyncSocket.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCocoaAsyncSocket.a; path = "../../../../Library/Developer/Xcode/DerivedData/IntAirActImageIOS-ekqpyboklshxbkbqioxncifskfqh/Build/Products/Debug-iphoneos/libCocoaAsyncSocket.a"; sourceTree = "<group>"; };
-		270BCEDC162DDC370080E51D /* libCocoaHTTPServer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCocoaHTTPServer.a; path = "../../../../Library/Developer/Xcode/DerivedData/IntAirActImageIOS-ekqpyboklshxbkbqioxncifskfqh/Build/Products/Debug-iphoneos/libCocoaHTTPServer.a"; sourceTree = "<group>"; };
-		270BCEDD162DDC370080E51D /* libCocoaLumberjack.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libCocoaLumberjack.a; path = "../../../../Library/Developer/Xcode/DerivedData/IntAirActImageIOS-ekqpyboklshxbkbqioxncifskfqh/Build/Products/Debug-iphoneos/libCocoaLumberjack.a"; sourceTree = "<group>"; };
-		270BCEDE162DDC370080E51D /* libRestKit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libRestKit.a; path = "../../../../Library/Developer/Xcode/DerivedData/IntAirActImageIOS-ekqpyboklshxbkbqioxncifskfqh/Build/Products/Debug-iphoneos/libRestKit.a"; sourceTree = "<group>"; };
-		270BCEDF162DDC370080E51D /* libRestKit+Blocks.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libRestKit+Blocks.a"; path = "../../../../Library/Developer/Xcode/DerivedData/IntAirActImageIOS-ekqpyboklshxbkbqioxncifskfqh/Build/Products/Debug-iphoneos/libRestKit+Blocks.a"; sourceTree = "<group>"; };
-		270BCEE0162DDC370080E51D /* libRoutingHTTPServer.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libRoutingHTTPServer.a; path = "../../../../Library/Developer/Xcode/DerivedData/IntAirActImageIOS-ekqpyboklshxbkbqioxncifskfqh/Build/Products/Debug-iphoneos/libRoutingHTTPServer.a"; sourceTree = "<group>"; };
 		270EAA8615462A5400880DFD /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		273166001517BD14005439AE /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		273166021517BD1F005439AE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -181,12 +169,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				270BCEE1162DDC370080E51D /* libCocoaAsyncSocket.a in Frameworks */,
-				270BCEE2162DDC370080E51D /* libCocoaHTTPServer.a in Frameworks */,
-				270BCEE3162DDC370080E51D /* libCocoaLumberjack.a in Frameworks */,
-				270BCEE4162DDC370080E51D /* libRestKit.a in Frameworks */,
-				270BCEE5162DDC370080E51D /* libRestKit+Blocks.a in Frameworks */,
-				270BCEE6162DDC370080E51D /* libRoutingHTTPServer.a in Frameworks */,
 				2706F680157C02EA00C3A484 /* MapKit.framework in Frameworks */,
 				2706F67E157C01B300C3A484 /* ImageIO.framework in Frameworks */,
 				2706F67C157C01AC00C3A484 /* MessageUI.framework in Frameworks */,
@@ -268,12 +250,6 @@
 			isa = PBXGroup;
 			children = (
 				27BFC71E1550BB9B00799E34 /* IntAirAct.xcodeproj */,
-				270BCEDB162DDC370080E51D /* libCocoaAsyncSocket.a */,
-				270BCEDC162DDC370080E51D /* libCocoaHTTPServer.a */,
-				270BCEDD162DDC370080E51D /* libCocoaLumberjack.a */,
-				270BCEDE162DDC370080E51D /* libRestKit.a */,
-				270BCEDF162DDC370080E51D /* libRestKit+Blocks.a */,
-				270BCEE0162DDC370080E51D /* libRoutingHTTPServer.a */,
 				2706F66F157C00F100C3A484 /* MWPhotoBrowser.xcodeproj */,
 				27442C37153CC65E0017C744 /* AssetsLibrary.framework */,
 				2779AB711517A9AE00AE4EE6 /* CFNetwork.framework */,
@@ -550,11 +526,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv7,
-					armv6,
-				);
+				"ARCHS[sdk=iphoneos*]" = armv7;
+				"ARCHS[sdk=iphonesimulator*]" = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -565,12 +540,12 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = DIntAirAct;
 				SDKROOT = iphoneos;
@@ -582,20 +557,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv7,
-					armv6,
-				);
+				"ARCHS[sdk=iphoneos*]" = armv7;
+				"ARCHS[sdk=iphonesimulator*]" = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = IntAirAct;
