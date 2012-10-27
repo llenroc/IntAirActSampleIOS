@@ -28,8 +28,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     if (self.imageView) {
         if (self.image && self.device) {
             [self.activity startAnimating];
-            dispatch_queue_t imageDownloadQ = dispatch_queue_create("IntAirAct Image Downloader", NULL);
-            dispatch_async(imageDownloadQ, ^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 RKObjectManager * om = [self.intAirAct objectManagerForDevice:self.device];
                 NSString * loc = [self.intAirAct resourcePathFor:self.image forObjectManager:om];
                 loc = [loc stringByAppendingString:@".jpg"];
@@ -40,7 +39,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
                     [self.activity stopAnimating];
                 });
             });
-            dispatch_release(imageDownloadQ);
         } else {
             self.imageView.image = nil;
         }
@@ -96,7 +94,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 -(IBAction)handleSwipe:(IASwipeGestureRecognizer *)sender
 {
     if([self.intAirAct.devices count] == 1) {
-        [self.imageClient displayImage:self.image ofDevice:self.device onDevice:[self.intAirAct.devices lastObject]];
+        [self.imageClient displayImage:self.image ofDevice:self.device onDevice:[self.intAirAct.devices anyObject]];
     } else {
         NSMutableArray * devices = [self.intAirAct.devices mutableCopy];
         [devices removeObject:self.intAirAct.ownDevice];
