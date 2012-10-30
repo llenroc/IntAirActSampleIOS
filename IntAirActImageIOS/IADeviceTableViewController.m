@@ -61,12 +61,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     DDLogVerbose(@"%@: %@, animated: %i", THIS_FILE, THIS_METHOD, animated);
     [super viewWillAppear:animated];
 
-    IACapability * imageCap = [IACapability new];
-    imageCap.capability = @"GET /images";
-
     self.deviceFoundObserver = [self.intAirAct addHandlerForDeviceFound:^(IADevice *device, BOOL ownDevice) {
         DDLogVerbose(@"%@: foundDevice: %@", THIS_FILE, device);
-        if ([device.capabilities containsObject:imageCap]) {
+        if ([device.capabilities containsObject:[IACapability capability:@"GET /images"]]) {
             [self.devices addObject:device];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.tableView reloadData];
