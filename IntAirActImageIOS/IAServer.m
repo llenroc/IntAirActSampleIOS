@@ -54,7 +54,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
                                                object:nil];
     
     [self.intAirAct addAction:@"displayImage" withSelector:@selector(displayImage:ofDevice:) andTarget:self];
-    [self.intAirAct addAction:@"add" withSelector:@selector(add:to:) andTarget:self];
     
     [self.intAirAct route:[IARoute routeWithAction:@"GET" resource:@"/images"] withHandler:^(IARequest *request, IAResponse *response) {
         DDLogVerbose(@"GET /images");
@@ -142,13 +141,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     NSData * data = UIImageJPEGRepresentation(image, 0.8);
     
     return data;
-}
-
--(NSNumber *)add:(NSNumber *)a to:(NSNumber *) b
-{
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    
-    return [NSNumber numberWithInt:([a intValue] + [b intValue])];
 }
 
 -(void)displayImage:(IAImage *)image ofDevice:(IADevice *)device
