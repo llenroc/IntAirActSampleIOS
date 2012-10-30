@@ -29,20 +29,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     return self;
 }
 
-- (void)viewDidLoad
-{
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-- (void)viewDidUnload
-{
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
-
 -(void)viewWillAppear:(BOOL)animated
 {
     DDLogVerbose(@"%@: %@, animated: %i", THIS_FILE, THIS_METHOD, animated);
@@ -76,7 +62,6 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
                 NSUInteger index = [imgs indexOfObject:self.image];
                 if(index != NSNotFound) {
                     [self setInitialPageIndex:index];
-                    
                 }
             }
         } fromDevice:self.device];
