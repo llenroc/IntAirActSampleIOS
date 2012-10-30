@@ -43,8 +43,6 @@
 		27C49AEA1550CD0E0044F61B /* IADeviceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C49AD01550CD0E0044F61B /* IADeviceTableViewController.m */; };
 		27C49AEB1550CD0E0044F61B /* IAImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C49AD21550CD0E0044F61B /* IAImage.m */; };
 		27C49AEC1550CD0E0044F61B /* IAImageClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C49AD41550CD0E0044F61B /* IAImageClient.m */; };
-		27C49AF01550CD0E0044F61B /* IAImageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C49ADC1550CD0E0044F61B /* IAImageTableViewController.m */; };
-		27C49AF11550CD0E0044F61B /* IAImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C49ADE1550CD0E0044F61B /* IAImageViewController.m */; };
 		27C49AF21550CD0E0044F61B /* IALocator.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C49AE01550CD0E0044F61B /* IALocator.m */; };
 		27C49AF31550CD0E0044F61B /* IASwipeGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C49AE21550CD0E0044F61B /* IASwipeGestureRecognizer.m */; };
 		27C49AF51550CD0E0044F61B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C49AE51550CD0E0044F61B /* main.m */; };
@@ -149,10 +147,6 @@
 		27C49AD21550CD0E0044F61B /* IAImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImage.m; sourceTree = "<group>"; };
 		27C49AD31550CD0E0044F61B /* IAImageClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageClient.h; sourceTree = "<group>"; };
 		27C49AD41550CD0E0044F61B /* IAImageClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageClient.m; sourceTree = "<group>"; };
-		27C49ADB1550CD0E0044F61B /* IAImageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageTableViewController.h; sourceTree = "<group>"; };
-		27C49ADC1550CD0E0044F61B /* IAImageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageTableViewController.m; sourceTree = "<group>"; };
-		27C49ADD1550CD0E0044F61B /* IAImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageViewController.h; sourceTree = "<group>"; };
-		27C49ADE1550CD0E0044F61B /* IAImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageViewController.m; sourceTree = "<group>"; };
 		27C49ADF1550CD0E0044F61B /* IALocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IALocator.h; sourceTree = "<group>"; };
 		27C49AE01550CD0E0044F61B /* IALocator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IALocator.m; sourceTree = "<group>"; };
 		27C49AE11550CD0E0044F61B /* IASwipeGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IASwipeGestureRecognizer.h; sourceTree = "<group>"; };
@@ -314,10 +308,6 @@
 				27C49AD01550CD0E0044F61B /* IADeviceTableViewController.m */,
 				27C49AD31550CD0E0044F61B /* IAImageClient.h */,
 				27C49AD41550CD0E0044F61B /* IAImageClient.m */,
-				27C49ADB1550CD0E0044F61B /* IAImageTableViewController.h */,
-				27C49ADC1550CD0E0044F61B /* IAImageTableViewController.m */,
-				27C49ADD1550CD0E0044F61B /* IAImageViewController.h */,
-				27C49ADE1550CD0E0044F61B /* IAImageViewController.m */,
 				27C49ADF1550CD0E0044F61B /* IALocator.h */,
 				27C49AE01550CD0E0044F61B /* IALocator.m */,
 				27884DFE157CFBC30079BF3F /* IAPhotoBrowser.h */,
@@ -469,8 +459,6 @@
 				27C49AEA1550CD0E0044F61B /* IADeviceTableViewController.m in Sources */,
 				27C49AEB1550CD0E0044F61B /* IAImage.m in Sources */,
 				27C49AEC1550CD0E0044F61B /* IAImageClient.m in Sources */,
-				27C49AF01550CD0E0044F61B /* IAImageTableViewController.m in Sources */,
-				27C49AF11550CD0E0044F61B /* IAImageViewController.m in Sources */,
 				27C49AF21550CD0E0044F61B /* IALocator.m in Sources */,
 				27C49AF31550CD0E0044F61B /* IASwipeGestureRecognizer.m in Sources */,
 				27C49AF51550CD0E0044F61B /* main.m in Sources */,
