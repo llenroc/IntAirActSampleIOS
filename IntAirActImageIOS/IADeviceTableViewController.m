@@ -22,12 +22,28 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 
-    [super viewDidLoad];
+    self.deviceFoundObserver = [self.intAirAct addHandlerForDeviceFound:^(IADevice *device, BOOL ownDevice) {
+        DDLogVerbose(@"%@: foundDevice: %@", THIS_FILE, device);
+        if ([device.capabilities containsObject:[IACapability capability:@"GET /images"]]) {
+            [self.devices addObject:device];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
+        }
+    }];
+
+    self.deviceLostObserver = [self.intAirAct addHandlerForDeviceLost:^(IADevice *device) {
+        [self.devices removeObject:device];
+        [self.tableView reloadData];
+    }];
 }
 
 -(void)viewDidUnload
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+
+    [self.intAirAct removeObserver:self.deviceFoundObserver];
+    [self.intAirAct removeObserver:self.deviceLostObserver];
 
     [super viewDidUnload];
 }
@@ -55,32 +71,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     cell.textLabel.text = dev.name;
     
     return cell;
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    DDLogVerbose(@"%@: %@, animated: %i", THIS_FILE, THIS_METHOD, animated);
-    [super viewWillAppear:animated];
-
-    self.deviceFoundObserver = [self.intAirAct addHandlerForDeviceFound:^(IADevice *device, BOOL ownDevice) {
-        DDLogVerbose(@"%@: foundDevice: %@", THIS_FILE, device);
-        if ([device.capabilities containsObject:[IACapability capability:@"GET /images"]]) {
-            [self.devices addObject:device];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
-        }
-    }];
-
-    self.deviceLostObserver = [self.intAirAct addHandlerForDeviceLost:^(IADevice *device) {
-        [self.devices removeObject:device];
-        [self.tableView reloadData];
-    }];
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    [self.intAirAct removeObserver:self.deviceFoundObserver];
-    [self.intAirAct removeObserver:self.deviceLostObserver];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {    
