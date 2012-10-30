@@ -27,9 +27,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
         DDLogVerbose(@"%@: foundDevice: %@", THIS_FILE, device);
         if ([device.capabilities containsObject:[IACapability capability:@"GET /images"]]) {
             [self.devices addObject:device];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
-            });
+            [self.tableView reloadData];
         }
     }];
 
