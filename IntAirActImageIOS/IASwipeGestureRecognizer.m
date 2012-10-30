@@ -52,7 +52,6 @@
     if (angle < 0) {
         angle += M_PI * 2;
     }
-    //DDLogVerbose(@"Angle: %f", angle);
 
     return angle;
 }
