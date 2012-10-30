@@ -33,7 +33,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     if (self.state ==  UIGestureRecognizerStateRecognized) {
         UITouch * touch = [touches anyObject];
         self.endPoint = [touch locationInView:touch.view];
-        [self touchAngle];
     }
 }
 
@@ -47,15 +46,36 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     [super touchesCancelled:touches withEvent:event];
 }
 
--(float)touchAngle
+-(float)swipeAngle
 {
     // this is the swipe direction, the result is between [-pi,pi]
     float angle = atan2(-(self.endPoint.y - self.startPoint.y), self.endPoint.x - self.startPoint.x);
-    
-    // change the angle to be between [0,2*pi]
-    if (angle < 0) {
+
+    // rotate it by 90 to the left so that a swipe up is 0
+    angle -= M_PI_2;
+
+    // account for device orientation
+    switch([UIApplication sharedApplication].statusBarOrientation) {
+        case UIInterfaceOrientationPortrait:
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+            // the device has been rotated to the right, thus the interface has been rotated to the left
+            angle -= M_PI_2 * 3;
+            break;
+        case UIInterfaceOrientationPortraitUpsideDown:
+            angle -= M_PI;
+            break;
+        case UIInterfaceOrientationLandscapeRight:
+            angle -= M_PI_2;
+            // the device has been rotated to the left, thus the interface has been rotated to the right
+            break;
+    }
+
+    while (angle < 0) {
         angle += M_PI * 2;
     }
+
+    DDLogVerbose(@"%@: You swiped at %f", THIS_FILE, angle * 180 / M_PI);
 
     return angle;
 }
