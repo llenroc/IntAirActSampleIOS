@@ -57,12 +57,11 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     
     [self.intAirAct route:[IARoute routeWithAction:@"GET" resource:@"/images"] withHandler:^(IARequest *request, IAResponse *response) {
         DDLogVerbose(@"GET /images");
-        //[response respondWith:self.images withIntAirAct:self.intAirAct];
+        [response respondWith:self.images withIntAirAct:self.intAirAct];
     }];
     
-    [self.intAirAct route:[IARoute routeWithAction:@"GET" resource:@"/image/:id"] withHandler:^(IARequest *request, IAResponse *response) {
+    [self.intAirAct route:[IARoute routeWithAction:@"GET" resource:@"/image/:id.jpg"] withHandler:^(IARequest *request, IAResponse *response) {
         DDLogVerbose(@"GET /image/%@.jpg", request.parameters[@"id"]);
-        
         
         NSData * data = [self imageAsData: request.parameters[@"id"]];
         if (!data) {
