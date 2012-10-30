@@ -226,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				27C49AC61550CD0E0044F61B /* IntAirActImageIOS */,
+				27C49AF61550CD190044F61B /* Supporting Files */,
 				272DDD59157A823E00A4D5BC /* Resources */,
 				2779AAF41517A8B200AE4EE6 /* Frameworks */,
 				2779AAF21517A8B200AE4EE6 /* Products */,
@@ -283,7 +284,6 @@
 				2707EFD815561B8100F80BC8 /* Server */,
 				27C49AF71550CD280044F61B /* Client */,
 				27C49AF91550CD4B0044F61B /* Model */,
-				27C49AF61550CD190044F61B /* Supporting Files */,
 				27C49ACD1550CD0E0044F61B /* IAAppDelegate.h */,
 				27C49ACE1550CD0E0044F61B /* IAAppDelegate.m */,
 			);
@@ -299,6 +299,7 @@
 				27C49AE51550CD0E0044F61B /* main.m */,
 			);
 			name = "Supporting Files";
+			path = IntAirActImageIOS;
 			sourceTree = "<group>";
 		};
 		27C49AF71550CD280044F61B /* Client */ = {
