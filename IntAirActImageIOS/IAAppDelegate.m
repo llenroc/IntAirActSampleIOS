@@ -31,6 +31,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 {
     // Configure logging framework to log to the Xcode console.
 	[DDLog addLogger:[DDTTYLogger sharedInstance]];
+    [[DDTTYLogger sharedInstance] setColorsEnabled:YES];
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
     if(getenv("NSZombieEnabled") || getenv("NSAutoreleaseFreedObjectCheckEnabled")) {
