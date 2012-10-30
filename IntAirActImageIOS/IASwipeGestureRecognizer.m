@@ -1,6 +1,10 @@
 #import "IASwipeGestureRecognizer.h"
 
 #import <UIKit/UIGestureRecognizerSubclass.h>
+#import <CocoaLumberjack/DDLog.h>
+
+// Log levels : off, error, warn, info, verbose
+static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @interface IASwipeGestureRecognizer ()
 
