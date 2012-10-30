@@ -10,21 +10,13 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @interface IADeviceTableViewController ()
 
-@property (nonatomic, strong) NSArray * devices;
-@property (nonatomic, strong) NSMutableArray * photos;
+@property (nonatomic, strong) NSMutableArray * devices;
+@property (nonatomic, strong) id deviceFoundObserver;
+@property (nonatomic, strong) id deviceLostObserver;
 
 @end
 
 @implementation IADeviceTableViewController
-
--(id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        //
-    }
-    return self;
-}
 
 -(void)viewDidLoad
 {
@@ -69,28 +61,29 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     DDLogVerbose(@"%@: %@, animated: %i", THIS_FILE, THIS_METHOD, animated);
     [super viewWillAppear:animated];
 
-    // Listens for IADeviceUpdate notifications, IntAirAct calls this notification
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:IADeviceFound object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:IADeviceLost object:nil];
-
-    [self refresh:nil];
-    [self.tableView reloadData];
-}
-
--(void)refresh:(NSNotification *)note {
-    DDLogVerbose(@"%@: %@, note: %@", THIS_FILE, THIS_METHOD, note);
     IACapability * imageCap = [IACapability new];
     imageCap.capability = @"GET /images";
-    self.devices = [self.intAirAct devicesWithCapability:imageCap];
+
+    self.deviceFoundObserver = [self.intAirAct addHandlerForDeviceFound:^(IADevice *device, BOOL ownDevice) {
+        DDLogVerbose(@"%@: foundDevice: %@", THIS_FILE, device);
+        if ([device.capabilities containsObject:imageCap]) {
+            [self.devices addObject:device];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
+        }
+    }];
+
+    self.deviceLostObserver = [self.intAirAct addHandlerForDeviceLost:^(IADevice *device) {
+        [self.devices removeObject:device];
+        [self.tableView reloadData];
+    }];
 }
 
--(void)setDevices:(NSArray *)value
-{    
-    if (_devices != value) {
-        _devices = value;
-        // Model changed, so update our View (the table)
-        if (self.tableView.window) [self.tableView reloadData];
-    }
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self.intAirAct removeObserver:self.deviceFoundObserver];
+    [self.intAirAct removeObserver:self.deviceLostObserver];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {    
@@ -102,6 +95,14 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 	
 	// Deselect
 	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+-(NSMutableArray *)devices
+{
+    if (!_devices) {
+        _devices = [NSMutableArray new];
+    }
+    return _devices;
 }
 
 @end
