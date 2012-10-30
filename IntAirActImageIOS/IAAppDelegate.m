@@ -66,11 +66,25 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     // Override point for customization after application launch.
     return YES;
 }
-							
+
+-(void)applicationWillEnterForeground:(UIApplication *)application
+{
+    NSError * error;
+    if(![self.intAirAct start:&error]) {
+        DDLogError(@"%@: Error starting IntAirAct: %@", THIS_FILE, error);
+    }
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     [self.navigationController popToRootViewControllerAnimated:NO];
     [self setControlsHidden:NO animated:NO];
+    [self.intAirAct stop];
+}
+
+-(void)applicationWillTerminate:(UIApplication *)application
+{
+    [self.intAirAct stop];
 }
 
 // If permanent then we don't set timers to hide again

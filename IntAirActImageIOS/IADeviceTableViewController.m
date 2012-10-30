@@ -13,6 +13,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 @property (nonatomic, strong) NSMutableArray * devices;
 @property (nonatomic, strong) id deviceFoundObserver;
 @property (nonatomic, strong) id deviceLostObserver;
+@property (nonatomic, strong) id applicationWillResignActiveObserver;
 
 @end
 
@@ -36,6 +37,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
         [self.devices removeObject:device];
         [self.tableView reloadData];
     }];
+
+    self.applicationWillResignActiveObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillResignActiveNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
+        [self.devices removeAllObjects];
+    }];
 }
 
 -(void)viewDidUnload
@@ -44,6 +49,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
     [self.intAirAct removeObserver:self.deviceFoundObserver];
     [self.intAirAct removeObserver:self.deviceLostObserver];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self.applicationWillResignActiveObserver];
 
     [super viewDidUnload];
 }
