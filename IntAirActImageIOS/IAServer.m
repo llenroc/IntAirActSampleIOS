@@ -5,8 +5,6 @@
 #import <IntAirAct/IntAirAct.h>
 
 #import "IAImage.h"
-#import "IAImageTableViewController.h"
-#import "IAImageViewController.h"
 #import "IAPhotoBrowser.h"
 
 // Log levels : off, error, warn, info, verbose

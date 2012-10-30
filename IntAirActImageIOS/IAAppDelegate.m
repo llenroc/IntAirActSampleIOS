@@ -10,8 +10,6 @@
 
 #import "IAImage.h"
 #import "IAImageClient.h"
-#import "IAImageTableViewController.h"
-#import "IAImageViewController.h"
 #import "IAServer.h"
 
 // Log levels : off, error, warn, info, verbose
