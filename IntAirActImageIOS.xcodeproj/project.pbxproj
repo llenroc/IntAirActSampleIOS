@@ -577,7 +577,6 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IntAirActImageIOS/IntAirActImageIOS-Prefix.pch";
-				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "IntAirActImageIOS/IntAirActImageIOS-Info.plist";
 				WRAPPER_EXTENSION = app;
 			};
@@ -588,7 +587,6 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IntAirActImageIOS/IntAirActImageIOS-Prefix.pch";
-				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "IntAirActImageIOS/IntAirActImageIOS-Info.plist";
 				WRAPPER_EXTENSION = app;
 			};
