@@ -38,6 +38,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
     self.applicationWillResignActiveObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillResignActiveNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
         [self.devices removeAllObjects];
+        [self.tableView reloadData];
     }];
 }
 
