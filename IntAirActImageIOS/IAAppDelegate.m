@@ -45,6 +45,12 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     
     // create, setup and start IntAirAct
     self.intAirAct = [[IAIntAirAct alloc] initWithServer:routingHTTPServerAdapter andServiceDiscovery:serviceDiscovery];
+
+#if DEBUG
+    [serviceDiscovery setLogLevel:SD_LOG_LEVEL_VERBOSE];
+    self.intAirAct.port = 12345;
+#endif
+
     [self.intAirAct addMappingForClass:[IAImage class] withKeypath:@"images" withAttributes:@"identifier", nil];
     [self.intAirAct.router routeClass:[IAImage class] toResourcePath:@"/image/:identifier"];
     
