@@ -1,9 +1,7 @@
 #import "IAImageClient.h"
 
 #import <CocoaLumberjack/DDLog.h>
-#import <IntAirAct/IAAction.h>
-#import <IntAirAct/IADevice.h>
-#import <IntAirAct/IAIntAirAct.h>
+#import <IntAirAct/IntAirAct.h>
 #import <RestKit/RestKit.h>
 #import <RestKit+Blocks/RKObjectManager+Blocks.h>
 
