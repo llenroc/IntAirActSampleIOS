@@ -74,13 +74,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
         }
     }];
     
-    IACapability * imagesCap = [IACapability new];
-    imagesCap.capability = @"GET /images";
-    [self.intAirAct.capabilities addObject:imagesCap];
+    [self.intAirAct.supportedRoutes addObject:[IARoute routeWithAction:@"GET" resource:@"/images"]];
     
-    IACapability * imageCap = [IACapability new];
-    imageCap.capability = @"GET /images/:id.jpg";
-    [self.intAirAct.capabilities addObject:imageCap];
+    [self.intAirAct.supportedRoutes addObject:[IARoute routeWithAction:@"GET" resource:@"/images/:id.jpg"]];
 }
 
 -(void)loadImages

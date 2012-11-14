@@ -101,12 +101,10 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     IAImage * img = [self.images objectAtIndex:self.index];
     
-    IACapability * imageCap = [IACapability new];
-    imageCap.capability = @"PUT /action/displayImage";
-    NSArray * devices = [self.intAirAct devicesWithCapability:imageCap];
+    NSArray * devices = [self.intAirAct devicesSupportingRoute:[IARoute routeWithAction:@"PUT" resource:@"/action/displayImage"]];
     
-    if([devices count] == 1) {
-        [self.imageClient displayImage:img ofDevice:self.device onDevice:[devices lastObject]];
+    if([devices count] == 0) {
+        [self.imageClient displayImage:img ofDevice:self.device onDevice:self.device];
     } else {
         NSMutableArray * devs = [devices mutableCopy];
         [devs removeObject:self.intAirAct.ownDevice];
