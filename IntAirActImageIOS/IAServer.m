@@ -53,9 +53,22 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
                                              selector:@selector(loadImages)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
-    
-    [self.intAirAct addAction:@"displayImage" withSelector:@selector(displayImage:ofDevice:) andTarget:self];
-    
+
+    [self.intAirAct route:[IARoute routeWithAction:@"PUT" resource:@"/views/image"] withHandler:^(IARequest *request, IAResponse *response) {
+        DDLogVerbose(@"PUT /views/image: %@", request);
+
+        DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+
+        IAPhotoBrowser * browser = [IAPhotoBrowser new];
+        browser.intAirAct = self.intAirAct;
+        browser.imageURLs = @[request.bodyAsString];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.navigationController popToRootViewControllerAnimated:NO];
+            [self.navigationController pushViewController:browser animated:YES];
+        });
+    }];
+
     [self.intAirAct route:[IARoute routeWithAction:@"GET" resource:@"/images"] withHandler:^(IARequest *request, IAResponse *response) {
         DDLogVerbose(@"GET /images");
         [response respondWith:self.images withIntAirAct:self.intAirAct];
@@ -133,21 +146,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     NSData * data = UIImageJPEGRepresentation(image, 0.8);
     
     return data;
-}
-
--(void)displayImage:(IAImage *)image ofDevice:(IADevice *)device
-{
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    
-    IAPhotoBrowser * browser = [IAPhotoBrowser new];
-    browser.intAirAct = self.intAirAct;
-    browser.device = device;
-    browser.image = image;
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.navigationController popToRootViewControllerAnimated:NO];
-        [self.navigationController pushViewController:browser animated:YES];
-    });
 }
 
 @end
