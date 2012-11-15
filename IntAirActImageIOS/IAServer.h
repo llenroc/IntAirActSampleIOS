@@ -7,10 +7,6 @@
 
 @interface IAServer : NSObject
 
-@property (nonatomic, weak) UINavigationController * navigationController;
-@property (nonatomic, weak, readonly) IAIntAirAct * intAirAct;
-
--(id)initWithIntAirAct:(IAIntAirAct *)value;
--(void)displayImage:(IAImage *)image ofDevice:(IADevice *)device;
++(IAServer*)serverWithIntAirAct:(IAIntAirAct *)value navigationController:(UINavigationController *)navigationController;
 
 @end

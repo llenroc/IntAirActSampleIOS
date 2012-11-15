@@ -14,6 +14,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @property (nonatomic, strong) NSDictionary * idToImages;
 @property (nonatomic, strong) NSArray * images;
+@property (nonatomic, weak) IAIntAirAct * intAirAct;
+@property (nonatomic, weak) UINavigationController * navigationController;
 
 @end
 
@@ -29,14 +31,13 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     return library; 
 }
 
--(id)initWithIntAirAct:(IAIntAirAct *)value
++(IAServer *)serverWithIntAirAct:(IAIntAirAct *)intAirAct navigationController:(UINavigationController *)navigationController
 {
-    self = [super init];
-    if (self) {
-        _intAirAct = value;
-        [self setup];
-    }
-    return self;
+    IAServer * server = [IAServer new];
+    server.intAirAct = intAirAct;
+    server.navigationController = navigationController;
+    [server setup];
+    return server;
 }
 
 -(void)dealloc
