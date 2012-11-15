@@ -6,8 +6,7 @@
 
 @interface IAPhotoBrowser : MWPhotoBrowser <MWPhotoBrowserDelegate>
 
-@property (nonatomic, strong) IADevice * device;
 @property (nonatomic, strong) IAIntAirAct * intAirAct;
-@property (nonatomic, strong) IAImage * image;
+@property (nonatomic, strong) NSArray * imageURLs;
 
 @end

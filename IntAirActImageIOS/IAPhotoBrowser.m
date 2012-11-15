@@ -4,18 +4,12 @@
 #import <IntAirAct/IntAirAct.h>
 #import <RestKit/RestKit.h>
 
+#import "IAImage.h"
 #import "IAImageClient.h"
 #import "IASwipeGestureRecognizer.h"
 
 // Log levels : off, error, warn, info, verbose
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
-
-@interface IAPhotoBrowser ()
-
-@property (nonatomic, strong) IAImageClient * imageClient;
-@property (nonatomic, strong) NSArray * images;
-
-@end
 
 @implementation IAPhotoBrowser
 
@@ -46,47 +40,15 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     [self.view addGestureRecognizer:swipeUp];
     [self.view addGestureRecognizer:swipeDown];
-    
-    [self loadImages];
-}
-
--(void)loadImages
-{
-    DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    if(self.intAirAct && self.device) {
-        [self.imageClient getImages:^(NSArray * imgs) {
-            DDLogVerbose(@"Loaded images: %@ from device: %@", imgs, self.device);
-            self.images = imgs;
-            [self reloadData];
-            if(self.image) {
-                NSUInteger index = [imgs indexOfObject:self.image];
-                if(index != NSNotFound) {
-                    [self setInitialPageIndex:index];
-                }
-            }
-        } fromDevice:self.device];
-    }
-}
-
--(IAImageClient *)imageClient
-{
-    if (!_imageClient) {
-        _imageClient = [[IAImageClient alloc] initWithIntAirAct:self.intAirAct];
-    }
-    return _imageClient;
 }
 
 - (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
-    return self.images.count;
+    return self.imageURLs.count;
 }
 
 - (MWPhoto *)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
-    if (index < self.images.count) {
-        RKObjectManager * om = [self.intAirAct objectManagerForDevice:self.device];
-        NSString * loc = [self.intAirAct resourcePathFor:[self.images objectAtIndex:index] forObjectManager:om];
-        loc = [loc stringByAppendingString:@".jpg"];
-        RKURL * url = [om.baseURL URLByAppendingResourcePath:loc];
-        return [MWPhoto photoWithURL:url];
+    if (index < self.imageURLs.count) {
+        return [MWPhoto photoWithURL:self.imageURLs[index]];
     }
     return nil;
 }
@@ -95,24 +57,23 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
-    if(self.images.count == 0 || self.index > self.images.count) {
+    if(self.imageURLs.count == 0 || self.index > self.imageURLs.count) {
         return;
     }
     
-    IAImage * img = [self.images objectAtIndex:self.index];
-    
+    NSString * url = [self.imageURLs objectAtIndex:self.index];
+
+    IARequest * request = [IARequest requestWithRoute:[IARoute routeWithAction:@"PUT" resource:@"/views/image"] metadata:nil parameters:nil origin:self.intAirAct.ownDevice body:[url dataUsingEncoding:NSUTF8StringEncoding]];
+
     NSArray * devices = [self.intAirAct devicesSupportingRoute:[IARoute routeWithAction:@"PUT" resource:@"/action/displayImage"]];
-    
     if([devices count] == 0) {
-        [self.imageClient displayImage:img ofDevice:self.device onDevice:self.device];
+        [self.intAirAct sendRequest:request toDevice:self.intAirAct.ownDevice];
     } else {
-        NSMutableArray * devs = [devices mutableCopy];
-        [devs removeObject:self.intAirAct.ownDevice];
-        
-        for(IADevice * dev in devs) {
-            [self.imageClient displayImage:img ofDevice:self.device onDevice:dev];
+        for(IADevice * dev in self.intAirAct.devices) {
+            [self.intAirAct sendRequest:request toDevice:dev];
         }
     }
+
 }
 
 @end

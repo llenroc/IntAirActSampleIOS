@@ -77,12 +77,25 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {    
     IAPhotoBrowser * browser = [IAPhotoBrowser new];
     browser.intAirAct = self.intAirAct;
-    browser.device = [self.devices objectAtIndex:indexPath.row];
-    
-    [self.navigationController pushViewController:browser animated:YES];
-	
-	// Deselect
-	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    IARequest * request = [IARequest requestWithRoute:[IARoute routeWithAction:@"GET" resource:@"/images"] metadata:nil parameters:nil origin:self.intAirAct.ownDevice body:nil];
+
+    IADevice * device = [self.devices objectAtIndex:indexPath.row];
+
+    [self.intAirAct sendRequest:request toDevice:device withHandler:^(IAResponse *response, NSError *error) {
+        if(!error) {
+            NSArray * imageURLs = @[@"http://ase.cpsc.ucalgary.ca/uploads/images/ase_logo.png", @"http://ase.cpsc.ucalgary.ca/uploads/images/GalleryThumbs/58-7.jpg"];
+            browser.imageURLs = imageURLs;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.navigationController pushViewController:browser animated:YES];
+
+                // Deselect
+                [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+            });
+        } else {
+            DDLogError(@"%@: An error ocurred while getting images: %@", THIS_FILE, error);
+        }
+    }];
 }
 
 -(NSMutableArray *)devices
