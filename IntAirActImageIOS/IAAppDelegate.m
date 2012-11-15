@@ -4,6 +4,7 @@
 #import <CocoaLumberjack/DDTTYLogger.h>
 #import <IntAirAct/IntAirAct.h>
 #import <IntAirAct/IARoutingHTTPServerAdapter.h>
+#import <IntAirAct/IANSURLAdapter.h>
 #import <RestKit/RestKit.h>
 #import <RoutingHTTPServer/RoutingHTTPServer.h>
 #import <ServiceDiscovery/ServiceDiscovery.h>
@@ -42,14 +43,19 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     RoutingHTTPServer * routingHTTPServer = [RoutingHTTPServer new];
     IARoutingHTTPServerAdapter * routingHTTPServerAdapter = [[IARoutingHTTPServerAdapter alloc] initWithRoutingHTTPServer:routingHTTPServer];
     SDServiceDiscovery * serviceDiscovery = [SDServiceDiscovery new];
+    IANSURLAdapter * nsURLAdapter = [IANSURLAdapter new];
     
     // create, setup and start IntAirAct
-    self.intAirAct = [[IAIntAirAct alloc] initWithServer:routingHTTPServerAdapter andServiceDiscovery:serviceDiscovery];
+    self.intAirAct = [[IAIntAirAct alloc] initWithServer:routingHTTPServerAdapter client:nsURLAdapter andServiceDiscovery:serviceDiscovery];
 
 #if DEBUG
     [serviceDiscovery setLogLevel:SD_LOG_LEVEL_VERBOSE];
     self.intAirAct.port = 12345;
 #endif
+
+    [self.intAirAct route:[IARoute routeWithAction:@"PUT" resource:@"/views/image"] withHandler:^(IARequest *request, IAResponse *response) {
+        DDLogVerbose(@"PUT /views/image");
+    }];
 
     [self.intAirAct addMappingForClass:[IAImage class] withKeypath:@"images" withAttributes:@"identifier", nil];
     [self.intAirAct.router routeClass:[IAImage class] toResourcePath:@"/image/:identifier"];
@@ -68,6 +74,15 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
         DDLogError(@"%@: Error starting IntAirAct: %@", THIS_FILE, error);
         return NO;
     }
+
+    [self.intAirAct addHandlerForDeviceFound:^(IADevice *device, BOOL ownDevice) {
+        if (ownDevice) {
+            IARequest * request = [IARequest requestWithRoute:[IARoute routeWithAction:@"PUT" resource:@"/views/image"] metadata:nil parameters:nil origin:self.intAirAct.ownDevice body:nil];
+            [self.intAirAct sendRequest:request toDevice:self.intAirAct.ownDevice withHandler:^(IAResponse *response, NSError * error) {
+                DDLogVerbose(@"Received response: %@", response);
+            }];
+        }
+    }];
     
     // Override point for customization after application launch.
     return YES;
