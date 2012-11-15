@@ -134,7 +134,6 @@
 		2779AB9D1517ACE400AE4EE6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		27884DFE157CFBC30079BF3F /* IAPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPhotoBrowser.h; sourceTree = "<group>"; };
 		27884DFF157CFBC30079BF3F /* IAPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPhotoBrowser.m; sourceTree = "<group>"; };
-		279CCBC0155491B500AC22C1 /* IAImageServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageServer.h; sourceTree = "<group>"; };
 		279CCBC1155491B500AC22C1 /* IAImageServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageServer.m; sourceTree = "<group>"; };
 		27BFC71E1550BB9B00799E34 /* IntAirAct.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IntAirAct.xcodeproj; path = Frameworks/IntAirAct/IntAirAct.xcodeproj; sourceTree = "<group>"; };
 		27C49AC81550CD0E0044F61B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -154,6 +153,7 @@
 		27C49AE41550CD0E0044F61B /* IntAirActImageIOS-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IntAirActImageIOS-Prefix.pch"; sourceTree = "<group>"; };
 		27C49AE51550CD0E0044F61B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		27E468071546353A009B342E /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		27E549FC165497C400EFD933 /* IAImageServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageServer.h; sourceTree = "<group>"; };
 		27FCB5E3153CACD1004BBA84 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -197,7 +197,7 @@
 		2707EFD815561B8100F80BC8 /* ImageServer */ = {
 			isa = PBXGroup;
 			children = (
-				279CCBC0155491B500AC22C1 /* IAImageServer.h */,
+				27E549FC165497C400EFD933 /* IAImageServer.h */,
 				279CCBC1155491B500AC22C1 /* IAImageServer.m */,
 			);
 			name = ImageServer;
