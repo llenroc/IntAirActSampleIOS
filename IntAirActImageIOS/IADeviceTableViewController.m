@@ -68,8 +68,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
-    IADevice * dev = [self.devices objectAtIndex:indexPath.row];
-    cell.textLabel.text = dev.name;
+    IADevice * device = [self.devices objectAtIndex:indexPath.row];
+    cell.textLabel.text = device.name;
     
     return cell;
 }
