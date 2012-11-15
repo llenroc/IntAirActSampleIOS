@@ -84,7 +84,11 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
     [self.intAirAct sendRequest:request toDevice:device withHandler:^(IAResponse *response, NSError *error) {
         if(!error) {
-            NSArray * imageURLs = @[@"http://ase.cpsc.ucalgary.ca/uploads/images/ase_logo.png", @"http://ase.cpsc.ucalgary.ca/uploads/images/GalleryThumbs/58-7.jpg"];
+            NSArray * images = [response bodyAs:[IAImage class]];
+            NSMutableArray * imageURLs = [NSMutableArray new];
+            for (IAImage * img  in images) {
+                [imageURLs addObject:[NSString stringWithFormat:@"http://%@:%d/image/%@", device.host, device.port, img.identifier]];
+            }
             browser.imageURLs = imageURLs;
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.navigationController pushViewController:browser animated:YES];

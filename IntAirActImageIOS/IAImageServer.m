@@ -71,7 +71,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
     [self.intAirAct route:[IARoute routeWithAction:@"GET" resource:@"/images"] withHandler:^(IARequest *request, IAResponse *response) {
         DDLogVerbose(@"GET /images");
-        [response respondWith:self.images withIntAirAct:self.intAirAct];
+        [response setBodyWith:self.images];
     }];
     
     [self.intAirAct route:[IARoute routeWithAction:@"GET" resource:@"/image/:id"] withHandler:^(IARequest *request, IAResponse *response) {
