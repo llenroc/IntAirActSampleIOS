@@ -3,6 +3,7 @@
 #import <CocoaLumberjack/DDLog.h>
 #import <IntAirAct/IntAirAct.h>
 
+#import "IAImage.h"
 #import "IAPhotoBrowser.h"
 
 // Log levels : off, error, warn, info, verbose
