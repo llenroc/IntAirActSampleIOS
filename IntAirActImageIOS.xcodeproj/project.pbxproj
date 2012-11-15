@@ -35,7 +35,7 @@
 		2779AB9C1517ACDE00AE4EE6 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9B1517ACDE00AE4EE6 /* libxml2.dylib */; };
 		2779AB9E1517ACE400AE4EE6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2779AB9D1517ACE400AE4EE6 /* CoreData.framework */; };
 		27884E00157CFBC30079BF3F /* IAPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 27884DFF157CFBC30079BF3F /* IAPhotoBrowser.m */; };
-		279CCBC2155491B500AC22C1 /* IAServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 279CCBC1155491B500AC22C1 /* IAServer.m */; };
+		279CCBC2155491B500AC22C1 /* IAImageServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 279CCBC1155491B500AC22C1 /* IAImageServer.m */; };
 		27BFC74C1550BCF800799E34 /* libIntAirAct.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27BFC72C1550BB9B00799E34 /* libIntAirAct.a */; };
 		27C49AE61550CD0E0044F61B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27C49AC71550CD0E0044F61B /* InfoPlist.strings */; };
 		27C49AE71550CD0E0044F61B /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27C49AC91550CD0E0044F61B /* MainStoryboard_iPad.storyboard */; };
@@ -134,8 +134,8 @@
 		2779AB9D1517ACE400AE4EE6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		27884DFE157CFBC30079BF3F /* IAPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPhotoBrowser.h; sourceTree = "<group>"; };
 		27884DFF157CFBC30079BF3F /* IAPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPhotoBrowser.m; sourceTree = "<group>"; };
-		279CCBC0155491B500AC22C1 /* IAServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAServer.h; sourceTree = "<group>"; };
-		279CCBC1155491B500AC22C1 /* IAServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAServer.m; sourceTree = "<group>"; };
+		279CCBC0155491B500AC22C1 /* IAImageServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAImageServer.h; sourceTree = "<group>"; };
+		279CCBC1155491B500AC22C1 /* IAImageServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAImageServer.m; sourceTree = "<group>"; };
 		27BFC71E1550BB9B00799E34 /* IntAirAct.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IntAirAct.xcodeproj; path = Frameworks/IntAirAct/IntAirAct.xcodeproj; sourceTree = "<group>"; };
 		27C49AC81550CD0E0044F61B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		27C49ACA1550CD0E0044F61B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
@@ -194,13 +194,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2707EFD815561B8100F80BC8 /* Server */ = {
+		2707EFD815561B8100F80BC8 /* ImageServer */ = {
 			isa = PBXGroup;
 			children = (
-				279CCBC0155491B500AC22C1 /* IAServer.h */,
-				279CCBC1155491B500AC22C1 /* IAServer.m */,
+				279CCBC0155491B500AC22C1 /* IAImageServer.h */,
+				279CCBC1155491B500AC22C1 /* IAImageServer.m */,
 			);
-			name = Server;
+			name = ImageServer;
 			sourceTree = "<group>";
 		};
 		272DDD59157A823E00A4D5BC /* Resources */ = {
@@ -293,8 +293,8 @@
 			isa = PBXGroup;
 			children = (
 				277BDD101654966C00A7AB46 /* SwipeGesture */,
-				2707EFD815561B8100F80BC8 /* Server */,
-				27C49AF71550CD280044F61B /* Client */,
+				2707EFD815561B8100F80BC8 /* ImageServer */,
+				27C49AF71550CD280044F61B /* Controllers */,
 				27C49AF91550CD4B0044F61B /* Model */,
 				27C49ACD1550CD0E0044F61B /* IAAppDelegate.h */,
 				27C49ACE1550CD0E0044F61B /* IAAppDelegate.m */,
@@ -314,7 +314,7 @@
 			path = IntAirActImageIOS;
 			sourceTree = "<group>";
 		};
-		27C49AF71550CD280044F61B /* Client */ = {
+		27C49AF71550CD280044F61B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				27C49ACF1550CD0E0044F61B /* IADeviceTableViewController.h */,
@@ -324,7 +324,7 @@
 				27C49AC91550CD0E0044F61B /* MainStoryboard_iPad.storyboard */,
 				27C49ACB1550CD0E0044F61B /* MainStoryboard_iPhone.storyboard */,
 			);
-			name = Client;
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		27C49AF91550CD4B0044F61B /* Model */ = {
@@ -469,7 +469,7 @@
 				27C49AF21550CD0E0044F61B /* IALocator.m in Sources */,
 				27C49AF31550CD0E0044F61B /* IASwipeGestureRecognizer.m in Sources */,
 				27C49AF51550CD0E0044F61B /* main.m in Sources */,
-				279CCBC2155491B500AC22C1 /* IAServer.m in Sources */,
+				279CCBC2155491B500AC22C1 /* IAImageServer.m in Sources */,
 				27884E00157CFBC30079BF3F /* IAPhotoBrowser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

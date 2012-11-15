@@ -9,7 +9,7 @@
 #import <ServiceDiscovery/ServiceDiscovery.h>
 
 #import "IAImage.h"
-#import "IAServer.h"
+#import "IAImageServer.h"
 
 // Log levels : off, error, warn, info, verbose
 static const int ddLogLevel = LOG_LEVEL_WARN;
@@ -18,7 +18,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @property (nonatomic, strong) IAIntAirAct * intAirAct;
 @property (nonatomic, weak) UINavigationController * navigationController;
-@property (nonatomic, strong) IAServer * server;
+@property (nonatomic, strong) IAImageServer * server;
 
 @end
 
@@ -62,7 +62,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     }
 
     // moved all server code into one class
-    self.server = [IAServer serverWithIntAirAct:self.intAirAct navigationController:self.navigationController];
+    self.server = [IAImageServer serverWithIntAirAct:self.intAirAct navigationController:self.navigationController];
 
     // test code that sends a request to self as soon as it is discovered
     [self.intAirAct addHandlerForDeviceFound:^(IADevice *device, BOOL ownDevice) {

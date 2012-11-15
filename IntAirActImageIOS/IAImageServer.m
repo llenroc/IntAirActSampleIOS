@@ -1,4 +1,4 @@
-#import "IAServer.h"
+#import "IAImageServer.h"
 
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <CocoaLumberjack/DDLog.h>
@@ -10,7 +10,7 @@
 // Log levels : off, error, warn, info, verbose
 static const int ddLogLevel = LOG_LEVEL_WARN;
 
-@interface IAServer ()
+@interface IAImageServer ()
 
 @property (nonatomic, strong) NSDictionary * idToImages;
 @property (nonatomic, strong) NSArray * images;
@@ -19,7 +19,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
 @end
 
-@implementation IAServer
+@implementation IAImageServer
 
 +(ALAssetsLibrary *)defaultAssetsLibrary
 {
@@ -31,9 +31,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     return library; 
 }
 
-+(IAServer *)serverWithIntAirAct:(IAIntAirAct *)intAirAct navigationController:(UINavigationController *)navigationController
++(IAImageServer *)serverWithIntAirAct:(IAIntAirAct *)intAirAct navigationController:(UINavigationController *)navigationController
 {
-    IAServer * server = [IAServer new];
+    IAImageServer * server = [IAImageServer new];
     server.intAirAct = intAirAct;
     server.navigationController = navigationController;
     [server setup];
