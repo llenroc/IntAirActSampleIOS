@@ -267,6 +267,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		277BDD101654966C00A7AB46 /* SwipeGesture */ = {
+			isa = PBXGroup;
+			children = (
+				27C49ADF1550CD0E0044F61B /* IALocator.h */,
+				27C49AE01550CD0E0044F61B /* IALocator.m */,
+				27C49AE11550CD0E0044F61B /* IASwipeGestureRecognizer.h */,
+				27C49AE21550CD0E0044F61B /* IASwipeGestureRecognizer.m */,
+			);
+			name = SwipeGesture;
+			sourceTree = "<group>";
+		};
 		27BFC71F1550BB9B00799E34 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +292,7 @@
 		27C49AC61550CD0E0044F61B /* IntAirActImageIOS */ = {
 			isa = PBXGroup;
 			children = (
+				277BDD101654966C00A7AB46 /* SwipeGesture */,
 				2707EFD815561B8100F80BC8 /* Server */,
 				27C49AF71550CD280044F61B /* Client */,
 				27C49AF91550CD4B0044F61B /* Model */,
@@ -307,12 +319,8 @@
 			children = (
 				27C49ACF1550CD0E0044F61B /* IADeviceTableViewController.h */,
 				27C49AD01550CD0E0044F61B /* IADeviceTableViewController.m */,
-				27C49ADF1550CD0E0044F61B /* IALocator.h */,
-				27C49AE01550CD0E0044F61B /* IALocator.m */,
 				27884DFE157CFBC30079BF3F /* IAPhotoBrowser.h */,
 				27884DFF157CFBC30079BF3F /* IAPhotoBrowser.m */,
-				27C49AE11550CD0E0044F61B /* IASwipeGestureRecognizer.h */,
-				27C49AE21550CD0E0044F61B /* IASwipeGestureRecognizer.m */,
 				27C49AC91550CD0E0044F61B /* MainStoryboard_iPad.storyboard */,
 				27C49ACB1550CD0E0044F61B /* MainStoryboard_iPhone.storyboard */,
 			);
