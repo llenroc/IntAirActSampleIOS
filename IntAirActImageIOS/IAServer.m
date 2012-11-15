@@ -74,10 +74,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
             response.body = data;
         }
     }];
-    
-    [self.intAirAct.supportedRoutes addObject:[IARoute routeWithAction:@"GET" resource:@"/images"]];
-    
-    [self.intAirAct.supportedRoutes addObject:[IARoute routeWithAction:@"GET" resource:@"/images/:id.jpg"]];
 }
 
 -(void)loadImages
