@@ -2,7 +2,6 @@
 
 #import <CocoaLumberjack/DDLog.h>
 #import <IntAirAct/IntAirAct.h>
-#import <RestKit/RestKit.h>
 
 #import "IAImage.h"
 #import "IASwipeGestureRecognizer.h"
