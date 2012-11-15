@@ -5,7 +5,6 @@
 #import <RestKit/RestKit.h>
 
 #import "IAImage.h"
-#import "IAImageClient.h"
 #import "IASwipeGestureRecognizer.h"
 
 // Log levels : off, error, warn, info, verbose
