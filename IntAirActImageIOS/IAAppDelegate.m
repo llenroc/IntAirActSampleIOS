@@ -3,10 +3,6 @@
 #import <CocoaLumberjack/DDLog.h>
 #import <CocoaLumberjack/DDTTYLogger.h>
 #import <IntAirAct/IntAirAct.h>
-#import <IntAirAct/IARoutingHTTPServerAdapter.h>
-#import <IntAirAct/IANSURLAdapter.h>
-#import <RoutingHTTPServer/RoutingHTTPServer.h>
-#import <ServiceDiscovery/ServiceDiscovery.h>
 
 #import "IAImage.h"
 #import "IAImageServer.h"
@@ -38,19 +34,10 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     // Configure RestKit logging framework
     //RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
     
-    RoutingHTTPServer * routingHTTPServer = [RoutingHTTPServer new];
-    IARoutingHTTPServerAdapter * routingHTTPServerAdapter = [[IARoutingHTTPServerAdapter alloc] initWithRoutingHTTPServer:routingHTTPServer];
-    SDServiceDiscovery * serviceDiscovery = [SDServiceDiscovery new];
-    IANSURLAdapter * nsURLAdapter = [IANSURLAdapter new];
-    
     // create, setup and start IntAirAct
-    self.intAirAct = [[IAIntAirAct alloc] initWithServer:routingHTTPServerAdapter client:nsURLAdapter andServiceDiscovery:serviceDiscovery];
-
-    // necessary to set the origin on incoming requests
-    routingHTTPServerAdapter.intAirAct = self.intAirAct;
+    self.intAirAct = [IAIntAirAct instance];
 
 #if DEBUG
-    [serviceDiscovery setLogLevel:SD_LOG_LEVEL_VERBOSE];
     self.intAirAct.port = 12345;
 #endif
 
@@ -74,12 +61,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
         }
     }];
     
-    NSError * error;
-    if(![self.intAirAct start:&error]) {
-        DDLogError(@"%@: Error starting IntAirAct: %@", THIS_FILE, error);
-        return NO;
-    }
-    
     // Override point for customization after application launch.
     return YES;
 }
@@ -98,13 +79,11 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     [self.navigationController popToRootViewControllerAnimated:NO];
     [self setControlsHidden:NO animated:NO];
-    [self.intAirAct stop];
 }
 
 -(void)applicationWillTerminate:(UIApplication *)application
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
-    [self.intAirAct stop];
 }
 
 - (void)setControlsHidden:(BOOL)hidden animated:(BOOL)animated {
