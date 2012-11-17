@@ -54,7 +54,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
 
-    [self.intAirAct route:[IARoute routeWithAction:@"PUT" resource:@"/views/image"] withHandler:^(IARequest *request, IAResponse *response) {
+    [self.intAirAct route:[IARoute routeWithAction:@"PUT" resource:@"/image"] withHandler:^(IARequest *request, IAResponse *response) {
         DDLogVerbose(@"PUT /views/image: %@", request);
 
         DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
