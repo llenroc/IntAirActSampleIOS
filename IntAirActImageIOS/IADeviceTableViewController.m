@@ -28,19 +28,25 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
         DDLogVerbose(@"%@: foundDevice: %@", THIS_FILE, device);
         if ([device.supportedRoutes containsObject:[IARoute get:@"/images"]]) {
             [self.devices addObject:device];
-            [self.tableView reloadData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.tableView reloadData];
+            });
         }
     }];
 
     self.deviceLostObserver = [self.intAirAct addHandlerForDeviceLost:^(IADevice *device) {
         DDLogVerbose(@"%@: removeDevice: %@", THIS_FILE, device);
         [self.devices removeObject:device];
-        [self.tableView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
     }];
 
     self.applicationWillResignActiveObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillResignActiveNotification object:nil queue:nil usingBlock:^(NSNotification *note) {
         [self.devices removeAllObjects];
-        [self.tableView reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
     }];
 }
 
