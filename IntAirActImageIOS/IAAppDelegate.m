@@ -50,16 +50,6 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
     // moved all server code into one class
     self.server = [IAImageServer serverWithIntAirAct:self.intAirAct navigationController:self.navigationController];
-
-    // test code that sends a request to self as soon as it is discovered
-    [self.intAirAct addHandlerForDeviceFound:^(IADevice *device, BOOL ownDevice) {
-        if (ownDevice) {
-            IARequest * request = [IARequest requestWithRoute:[IARoute routeWithAction:@"PUT" resource:@"/views/image"] metadata:nil parameters:nil origin:self.intAirAct.ownDevice body:[@"http://ase.cpsc.ucalgary.ca/uploads/images/GalleryThumbs/58-7.jpg" dataUsingEncoding:NSUTF8StringEncoding]];
-            [self.intAirAct sendRequest:request toDevice:self.intAirAct.ownDevice withHandler:^(IAResponse *response, NSError * error) {
-                DDLogVerbose(@"Received response: %@", response);
-            }];
-        }
-    }];
     
     // Override point for customization after application launch.
     return YES;
