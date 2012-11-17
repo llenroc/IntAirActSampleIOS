@@ -35,7 +35,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     //RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
     
     // create, setup and start IntAirAct
-    self.intAirAct = [IAIntAirAct instance];
+    self.intAirAct = [IAIntAirAct new];
 
 #if DEBUG
     self.intAirAct.port = 12345;
