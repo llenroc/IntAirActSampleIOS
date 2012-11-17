@@ -33,6 +33,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     }];
 
     self.deviceLostObserver = [self.intAirAct addHandlerForDeviceLost:^(IADevice *device) {
+        DDLogVerbose(@"%@: removeDevice: %@", THIS_FILE, device);
         [self.devices removeObject:device];
         [self.tableView reloadData];
     }];
