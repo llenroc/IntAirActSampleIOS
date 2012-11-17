@@ -26,7 +26,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 
     self.deviceFoundObserver = [self.intAirAct addHandlerForDeviceFound:^(IADevice *device, BOOL ownDevice) {
         DDLogVerbose(@"%@: foundDevice: %@", THIS_FILE, device);
-        if ([device.supportedRoutes containsObject:[IARoute routeWithAction:@"GET" resource:@"/images"]]) {
+        if ([device.supportedRoutes containsObject:[IARoute get:@"/images"]]) {
             [self.devices addObject:device];
             [self.tableView reloadData];
         }
