@@ -36,10 +36,7 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
     
     // create, setup and start IntAirAct
     self.intAirAct = [IAIntAirAct new];
-
-#if DEBUG
     self.intAirAct.port = 12345;
-#endif
 
     // inject intairact into first viewcontroller
     self.navigationController = (UINavigationController *) self.window.rootViewController;
