@@ -23,22 +23,24 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 -(void)viewDidLoad
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
+    
+    __weak IADeviceTableViewController * myself = self;
 
     self.deviceFoundObserver = [self.intAirAct addHandlerForDeviceFound:^(IADevice *device, BOOL ownDevice) {
         DDLogVerbose(@"%@: foundDevice: %@", THIS_FILE, device);
         if ([device.supportedRoutes containsObject:[IARoute get:@"/images"]]) {
-            [self.devices addObject:device];
+            [myself.devices addObject:device];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.tableView reloadData];
+                [myself.tableView reloadData];
             });
         }
     }];
 
     self.deviceLostObserver = [self.intAirAct addHandlerForDeviceLost:^(IADevice *device) {
         DDLogVerbose(@"%@: removeDevice: %@", THIS_FILE, device);
-        [self.devices removeObject:device];
+        [myself.devices removeObject:device];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
+            [myself.tableView reloadData];
         });
     }];
 
