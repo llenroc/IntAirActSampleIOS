@@ -56,8 +56,8 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
 
-    [self.intAirAct removeObserver:self.deviceFoundObserver];
-    [self.intAirAct removeObserver:self.deviceLostObserver];
+    [self.intAirAct removeHandler:self.deviceFoundObserver];
+    [self.intAirAct removeHandler:self.deviceLostObserver];
 
     [[NSNotificationCenter defaultCenter] removeObserver:self.applicationWillResignActiveObserver];
 
