@@ -44,12 +44,12 @@ namespace :ios do
   task :clean => [:init, :remove_build_dir, :load_project] do
     $ios.clean
   end
-  
+
   desc 'Build for iOS'
   task :build => [:init, :load_project] do
     $ios.build
   end
-  
+
   desc 'Test for iOS'
   task :test => [:init] do
     puts('Tests for iOS are not implemented - hopefully (!) - yet.')
