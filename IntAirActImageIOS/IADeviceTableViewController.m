@@ -97,7 +97,9 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
             NSArray * images = [response bodyAs:[IAImage class]];
             NSMutableArray * imageURLs = [NSMutableArray new];
             for (IAImage * img  in images) {
-                [imageURLs addObject:[NSString stringWithFormat:@"http://%@:%d/image/%@", device.host, device.port, img.identifier]];
+                NSString * imgUrlString = [NSString stringWithFormat:@"http://%@:%d/image/%@", device.host, device.port, img.identifier];
+                NSURL * imgUrl = [NSURL URLWithString:imgUrlString];
+                [imageURLs addObject:imgUrl];
             }
             browser.imageURLs = imageURLs;
             dispatch_async(dispatch_get_main_queue(), ^{
