@@ -55,11 +55,11 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
 {
     DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
     
-    if(self.imageURLs.count == 0 || self.index > self.imageURLs.count) {
+    if(self.imageURLs.count == 0 || self.currentIndex > self.imageURLs.count) {
         return;
     }
     
-    NSString * url = [self.imageURLs objectAtIndex:self.index];
+    NSString * url = [self.imageURLs objectAtIndex:self.currentIndex];
 
     IARoute * route = [IARoute put:@"/image"];
     IARequest * request = [IARequest requestWithRoute:route metadata:nil parameters:nil origin:self.intAirAct.ownDevice body:nil];
