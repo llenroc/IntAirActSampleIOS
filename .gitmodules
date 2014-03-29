@@ -1,6 +1,0 @@
-[submodule "Frameworks/IntAirAct"]
-	path = Frameworks/IntAirAct
-	url = https://github.com/ase-lab/IntAirAct.git
-[submodule "Frameworks/MWPhotoBrowser"]
-	path = Frameworks/MWPhotoBrowser
-	url = https://github.com/ArloL/MWPhotoBrowser.git
