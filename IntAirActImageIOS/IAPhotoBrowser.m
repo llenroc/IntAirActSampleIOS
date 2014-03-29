@@ -59,11 +59,11 @@ static const int ddLogLevel = LOG_LEVEL_WARN;
         return;
     }
     
-    NSString * url = [self.imageURLs objectAtIndex:self.currentIndex];
+    NSURL * url = [self.imageURLs objectAtIndex:self.currentIndex];
 
     IARoute * route = [IARoute put:@"/image"];
     IARequest * request = [IARequest requestWithRoute:route metadata:nil parameters:nil origin:self.intAirAct.ownDevice body:nil];
-    [request setBodyWithString:url];
+    [request setBodyWithString:[url absoluteString]];
 
     NSArray * devices = [self.intAirAct devicesSupportingRoute:route];
     if([devices count] == 0) {
